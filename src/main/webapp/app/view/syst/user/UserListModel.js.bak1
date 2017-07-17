@@ -1,0 +1,19 @@
+Ext.define('fframe.view.syst.user.UserListModel', {
+    extend: 'Ext.app.ViewModel',
+    alias: 'viewmodel.UserList',
+    stores : {
+    	UserList : {
+    		fields : ['USER_ID','USER_NM'],
+        	data : [{
+        		USER_NM : '홍길동',
+        		USER_ID : '0001'
+        	},{
+        		USER_NM : '김철수',
+        		USER_ID: '0002'
+        	},{
+        		USER_NM : '김영희',
+        		USER_ID: '0003'
+        	}]
+        }
+    }
+});

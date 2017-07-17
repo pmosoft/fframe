@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.pmosoft.fframe.syst.user.UserDao">
+
+<select id="selectUserList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	SELECT   
+	         USER_ID
+			,USER_EMAIL
+			,USER_PW
+			,USER_NM
+			,USER_AGE
+			,USE_YN
+			,TO_CHAR(REG_DT,'YYYY.MM.DD HH24:MI:SS') AS REG_DT
+			,REG_USER_ID
+			,TO_CHAR(UPD_DT,'YYYY.MM.DD HH24:MI:SS') AS UPD_DT
+			,UPD_USER_ID 
+	FROM   TSYUR0001
+    WHERE 1=1
+    AND  (
+          (#{searchKeyCombo} = 'USER_ID' AND TRIM(#{searchValue}) IS NOT NULL AND USER_ID LIKE '%'||#{searchValue}||'%')
+	       OR   
+	      (#{searchKeyCombo} = 'USER_NM' AND TRIM(#{searchValue}) IS NOT NULL AND USER_NM LIKE '%'||#{searchValue}||'%')
+	     ) 
+	ORDER BY USER_ID 		  	
+</select>
+
+<insert id="insertUser" parameterType="java.util.HashMap">
+
+	INSERT INTO TSYUR0001 VALUES
+		(
+		#{item.fileName},
+		#{item.filePathName},
+		#{item.kind},
+		#{item.pos},
+		#{item.pos},
+		#{item.pos},
+		#{item.parseResult}
+		);
+	         USER_ID
+			,USER_EMAIL
+			,USER_PW
+			,USER_NM
+			,USER_AGE
+			,USE_YN
+			,TO_CHAR(REG_DT,'YYYY.MM.DD HH24:MI:SS') AS REG_DT
+			,REG_USER_ID
+			,TO_CHAR(UPD_DT,'YYYY.MM.DD HH24:MI:SS') AS UPD_DT
+			,UPD_USER_ID 
+	)
+		  	
+</insert>
+	
+</mapper>

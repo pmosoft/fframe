@@ -1,0 +1,11 @@
+Ext.define('fframe.view.syst.user.UserListModel', {
+    extend: 'Ext.app.ViewModel',
+    alias: 'viewmodel.UserList',
+    stores : {
+    	UserList : {
+    		type : 'UserList'    		
+        }
+    } 
+});
+    
+    
