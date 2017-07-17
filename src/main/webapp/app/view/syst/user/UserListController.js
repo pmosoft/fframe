@@ -13,15 +13,16 @@ Ext.define('fframe.view.syst.user.UserListController', {
     	});
     },	
     
+    
     setGridHeight : function(obj){ 
     	obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
     },
     
     insBtn : function(btn) {
 
-    	console.log("data4="+btn.up("toolbar").down("combo").valueField);
-    	//var userReg = Ext.create("fframe.view.syst.user.UserRegView");
-    	//userReg.show();
+    	//console.log("data4="+btn.up("toolbar").down("combo").valueField);
+    	var userReg = Ext.create("fframe.view.syst.user.UserRegView");
+    	userReg.show();
     },
     
     delBtn : function(btn) {

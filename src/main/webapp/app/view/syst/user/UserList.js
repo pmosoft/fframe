@@ -4,9 +4,18 @@ Ext.define('fframe.view.syst.user.UserList', {
     controller: 'UserList',
     viewModel: 'UserList',    
     title : '사용자 조회',
+    
+    
     listeners : {
-    	//boxready : 'onLoadData',
-    	resize : 'setGridHeight' 
+    	// boxready : 'onLoadData',
+    	resize : 'setGridHeight'
+//    	,
+//        keypress : function(textfield,eo){
+//            if (eo.getCharCode() == Ext.EventObject.ENTER) {
+//                //enter is pressed call the next buttons handler function here.
+//                this.up('panel').down('button').handler
+//            }
+//        }    	
 	},
     items : [{
     	xtype : 'toolbar',
@@ -17,12 +26,12 @@ Ext.define('fframe.view.syst.user.UserList', {
     		displayField : 'key',
     		valueField : 'value',
     		queryMode : 'local',
-    		//value : 'USER_NM',
+    		// value : 'USER_NM',
     	    bind : {
     	    	value : '{searchKeyCombo}'
     	    },
     		store : {
-    			fields : ['key','value'],
+    			fields : ['key','value'], 
     			data : [{
     				key : '이름',
     				value : 'USER_NM'
@@ -35,10 +44,26 @@ Ext.define('fframe.view.syst.user.UserList', {
     		xtype : 'textfield',
     		name : 'searchValue',
     	    emptyText : '검색어를 입력하세요',
-    	    //value : 'aaaa',
+    	    // value : 'aaaa',
     	    bind : {
     	    	value : '{searchValue}'
     	    }
+    	    
+    	    ,listeners: {
+              specialkey: function(f,e){
+                if (e.getKey() == e.ENTER) {
+                	//this.getController('user.UserListController').selBtn(e);
+                	//fframe.app.getController('view.syst.user.UserListController').selBtn(this);
+                	//var ctrl = new fframe.view.syst.user.UserListController();
+                	//controller.selBtn();
+                	
+                	//f.up('form').getForm().submit();
+                	 //var selBtn = f.up('toolbar').down('button#selBtn');
+        			//selBtn.fireEvent('click', selBtn, event, options);
+                	
+                }
+              }
+            }
     	    
     	},'->',
     	{
@@ -52,9 +77,9 @@ Ext.define('fframe.view.syst.user.UserList', {
 		},{
 			xtype : 'button',
 			text : '조회',
-   			handler : 'selBtn' 
+   			handler : 'selBtn'
 		}] 
-    },{
+    },{ 
     	xtype : 'grid',
     	height : 150,
     	border : true,

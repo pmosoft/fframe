@@ -18,11 +18,11 @@
 			,TO_CHAR(UPD_DT,'YYYY.MM.DD HH24:MI:SS') AS UPD_DT
 			,UPD_USER_ID 
 	FROM   TSYUR0001
-    WHERE 1=1
+    WHERE 1=1 
     AND  (
-          (#{searchKeyCombo} = 'USER_ID' AND TRIM(#{searchValue}) IS NOT NULL AND USER_ID LIKE '%'||#{searchValue}||'%')
+          (#{searchKeyCombo} = 'USER_ID' AND USER_ID LIKE '%'||#{searchValue}||'%')
 	       OR   
-	      (#{searchKeyCombo} = 'USER_NM' AND TRIM(#{searchValue}) IS NOT NULL AND USER_NM LIKE '%'||#{searchValue}||'%')
+	      (#{searchKeyCombo} = 'USER_NM' AND USER_NM LIKE '%'||#{searchValue}||'%')
 	     ) 
 	ORDER BY USER_ID 		  	
 </select>
