@@ -18,7 +18,7 @@
 			,TO_CHAR(UPD_DT,'YYYY.MM.DD HH24:MI:SS') AS UPD_DT
 			,UPD_USER_ID 
 	FROM   TSYUR0001
-    WHERE 1=1 
+    WHERE 22=22 
     AND  (
           (#{searchKeyCombo} = 'USER_ID' AND USER_ID LIKE '%'||#{searchValue}||'%')
 	       OR   

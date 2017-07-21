@@ -26,4 +26,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>sample</name>
+			<type>2</type>
+			<location>C:/fframe/sample</location>
+		</link>
+	</linkedResources>
 </projectDescription>

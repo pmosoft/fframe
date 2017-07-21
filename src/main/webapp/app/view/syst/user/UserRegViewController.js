@@ -6,20 +6,45 @@ Ext.define('fframe.view.syst.user.UserRegViewController', {
     	var view = this.getView();
     	var viewModel = view.getViewModel();
     	var store = viewModel.getStore(view['xtype']);
-    	console.log("store");
     	store.load({
     		callback : function(data){
     			console.log(data);
     		}
     	});
     },	
-    
-    setGridHeight : function(obj){ 
-    	obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
+
+    initBtn : function(btn) {
+    	btn.up("window").down("[name=USER_EMAIL]").setValue("");
+    	btn.up("window").down("[name=USER_PW]").setValue("");
+    	btn.up("window").down("[name=USER_PW2]").setValue("");
+    	btn.up("window").down("[name=USER_NM]").setValue("");
+    	btn.up("window").down("[name=USER_AGE]").setValue("");
+    	btn.up("window").down("[name=USE_YN]").setValue(true);
     },
     
+    
     saveBtn : function(btn) {
-		Ext.Msg.alert("알림","저장");
+    	var USER_EMAIL= btn.up("window").down("[name=USER_EMAIL]").getValue();
+    	var USER_PW   = btn.up("window").down("[name=USER_PW]").getValue();
+    	var USER_PW2  = btn.up("window").down("[name=USER_PW2]").getValue();
+    	var USER_NM   = btn.up("window").down("[name=USER_NM]").getValue();
+    	var USER_AGE  = btn.up("window").down("[name=USER_AGE]").getValue();
+    	var USE_YN    = btn.up("window").down("[name=USE_YN]").getValue();
+    	
+    	Ext.Ajax.request({
+    		url : '',
+    		method : '',
+    		success : function(res){
+    			var result = Ext.decode(res.responseText);
+    			if(result['code'] == 200){
+    				Ext.Msg.alert("알림"),"aaaa");
+    			} else {
+    				Ext.Msg.alert("알림"),result['msg']);
+    				return;
+    			}
+    			
+    		}
+    	})
     },
     
     delBtn : function(btn) {
