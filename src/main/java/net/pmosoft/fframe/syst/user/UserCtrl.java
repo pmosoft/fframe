@@ -19,8 +19,8 @@ public class UserCtrl {
 //	public Map<String, Object> selectUserList(@RequestParam("searchCondition") String searchCondition) {
 	public Map<String, Object> selectUserList(@RequestParam Map<String,String> params) {
 		
-		System.out.println("params11 searchKeyCombo="+params.get("searchKeyCombo"));
-		System.out.println("params22 searchValue="+params.get("searchValue"));
+		System.out.println("params111 searchKeyCombo="+params.get("searchKeyCombo"));
+		System.out.println("params221 searchValue="+params.get("searchValue"));
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		List<Map<String,Object>> list = null;

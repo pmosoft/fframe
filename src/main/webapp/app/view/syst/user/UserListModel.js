@@ -3,7 +3,7 @@ Ext.define('fframe.view.syst.user.UserListModel', {
     alias: 'viewmodel.UserList',
     data : {
     	searchKeyCombo : 'USER_NM',
-    	searchValue : ''
+    	searchValue : '',
     },
     stores : {
     	UserList : {

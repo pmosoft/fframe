@@ -7,7 +7,9 @@ Ext.define('fframe.view.syst.user.UserRegView', {
     controller: 'UserRegView',
     viewModel: 'UserRegView',    
     title : '사용자 등록',
-    
+    listeners : {
+    	boxready : 'onLoadData'
+	},  
     frame: true,
     width: 400,
     bodyPadding: 10,
@@ -56,7 +58,7 @@ Ext.define('fframe.view.syst.user.UserRegView', {
         maxValue: 100
     }, {
         xtype: 'checkboxfield',
-        name: 'USE_YN',
+        name: 'USE_YN', 
         fieldLabel: '사용여부',
         boxLabel: '',
         checked: true
