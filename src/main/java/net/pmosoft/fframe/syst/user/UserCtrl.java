@@ -80,7 +80,7 @@ public class UserCtrl {
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		return result;
+		return result; 
 	}	
 
 	@RequestMapping(value = "/usr/updateUser")
