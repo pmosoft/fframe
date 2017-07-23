@@ -17,4 +17,21 @@ public class UserSrv {
 		System.out.println("start UserSrv selectUserList");
 		return userDao.selectUserList(params);
 	}
+
+	public void saveUser(Map<String,String> params){
+		userDao.insertUser(params);
+	}
+	
+	public void insertUser(Map<String,String> params){
+		userDao.insertUser(params);
+	}
+
+	public void deleteUser(Map<String,String> params){
+		userDao.deleteUser(params);
+	}
+
+	public void updateUser(Map<String,String> params){
+		userDao.updateUser(params);
+	}
+	
 }

@@ -33,6 +33,72 @@ public class UserCtrl {
 		return result;
 	}
 
+	
+	@RequestMapping(value = "/usr/saveUser")
+	public Map<String, Object> saveUser(@RequestParam Map<String,String> params) {
+		
+		System.out.println("insertUser USER_ID="+params.get("USER_ID"));
+		System.out.println("insertUser USER_EMAIL="+params.get("USER_EMAIL"));
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Map<String,Object>> list = null;
+		try{
+			//userSrv.saveUser(params);
+			result.put("data", list);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}	
+	
+
+	@RequestMapping(value = "/usr/insertUser")
+	public Map<String, Object> insertUser(@RequestParam Map<String,String> params) {
+		
+		System.out.println("insertUser USER_ID="+params.get("USER_ID"));
+		System.out.println("insertUser USER_EMAIL="+params.get("USER_EMAIL"));
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Map<String,Object>> list = null;
+		try{
+			userSrv.insertUser(params);
+			result.put("data", list);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}	
+
+	@RequestMapping(value = "/usr/deleteUser")
+	public Map<String, Object> deleteUser(@RequestParam Map<String,String> params) {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Map<String,Object>> list = null;
+		try{
+			userSrv.deleteUser(params);
+			result.put("data", list);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}	
+
+	@RequestMapping(value = "/usr/updateUser")
+	public Map<String, Object> updateUser(@RequestParam Map<String,String> params) {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Map<String,Object>> list = null;
+		try{
+			userSrv.updateUser(params);
+			result.put("data", list);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}	
+	
+	
+	
 	@RequestMapping(value = "/test")
 	public Map<String, Object> test() {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -41,4 +107,7 @@ public class UserCtrl {
 		result.put("age", 50);
 		return result;
 	}
+	
+	
+	
 }

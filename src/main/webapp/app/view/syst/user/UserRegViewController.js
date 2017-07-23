@@ -14,17 +14,39 @@ Ext.define('fframe.view.syst.user.UserRegViewController', {
     },	
 
     initBtn : function(btn) {
-    	btn.up("window").down("[name=USER_EMAIL]").setValue("");
-    	btn.up("window").down("[name=USER_PW]").setValue("");
-    	btn.up("window").down("[name=USER_PW2]").setValue("");
-    	btn.up("window").down("[name=USER_NM]").setValue("");
-    	btn.up("window").down("[name=USER_AGE]").setValue("");
-    	btn.up("window").down("[name=USE_YN]").setValue(true);
+    	var view = this.getView(); var viewModel = view.getViewModel();
+    	viewModel.set("USER_ID"   ,"aaa");
+    	viewModel.set("USER_EMAIL","");
+    	viewModel.set("USER_PW"   ,"");
+    	viewModel.set("USER_PW2"  ,"");
+    	viewModel.set("USER_NM"   ,"");
+    	viewModel.set("USER_AGE"  ,"40");
+    	viewModel.set("USE_YN"    ,true);
+    	viewModel.set("UPD_DT"    ,"<span style='color:green;'>2017.07.03 16:40:20</span>");
+    	viewModel.set("UPD_USER"  ,"<span style='color:green;'>admin</span>");
     },
     
     
     saveBtn : function(btn) {
-		Ext.Msg.alert("알림","저장");
+    	var view = this.getView(); var viewModel = view.getViewModel();
+    	var params = viewModel.getData();
+    	console.log(params);
+    	
+    	Ext.Ajax.request({
+    		url : '/usr/saveUser',
+    		method : 'post',
+    		params : params,
+    		success : function(res){
+    			var result = Ext.decode(res.responseText);
+    			if(result['code'] == 200){
+    				//Ext.Msg.alert("알림"),"aaaa");
+    			} else {
+    				//Ext.Msg.alert("알림"),result['msg']);
+    				return;
+    			}
+    			
+    		}
+    	})
     },
     
     delBtn : function(btn) {
