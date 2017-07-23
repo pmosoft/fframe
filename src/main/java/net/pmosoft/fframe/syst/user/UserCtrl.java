@@ -41,12 +41,13 @@ public class UserCtrl {
 		System.out.println("insertUser USER_EMAIL="+params.get("USER_EMAIL"));
 		
 		Map<String, Object> result = new HashMap<String, Object>();
-		List<Map<String,Object>> list = null;
 		try{
 			//userSrv.saveUser(params);
-			result.put("data", list);
+			result.put("isSuccess", true);
+			result.put("msg", "저장 되었습니다");
 		} catch (Exception e){
 			e.printStackTrace();
+			result.put("errMsg", e.toString());
 		}
 		return result;
 	}	
