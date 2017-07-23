@@ -67,7 +67,7 @@ public class UserCtrl {
 			e.printStackTrace();
 		}
 		return result;
-	}	
+	}	  
 
 	@RequestMapping(value = "/usr/deleteUser")
 	public Map<String, Object> deleteUser(@RequestParam Map<String,String> params) {
