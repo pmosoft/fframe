@@ -14,7 +14,7 @@ public class UserCtrl {
 
 	@Autowired
 	private UserSrv userSrv;
-
+ 
 	@RequestMapping(value = "/usr/selectUserList")
 //	public Map<String, Object> selectUserList(@RequestParam("searchCondition") String searchCondition) {
 	public Map<String, Object> selectUserList(@RequestParam Map<String,String> params) {
