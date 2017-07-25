@@ -42,7 +42,8 @@ Ext.define('fframe.view.syst.user.UserRegViewController', {
     				//Ext.Msg.alert("알림",result['msg']);
     				Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
     			} else {
-    				Ext.Msg.alert("알림",result['errMsg']);
+    				Ext.Msg.alert("알림",result['errUserMsg']);
+    				Ext.Msg.alert("알림",result['errSysMsg']);
     				return;
     			}
     			

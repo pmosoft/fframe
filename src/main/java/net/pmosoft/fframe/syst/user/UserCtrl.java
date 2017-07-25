@@ -4,7 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,35 +29,57 @@ public class UserCtrl {
 		System.out.println("params221 searchValue="+params.get("searchValue"));
 		
 		Map<String, Object> result = new HashMap<String, Object>();
+
 		List<Map<String,Object>> list = null;
 		try{
 			list = userSrv.selectUserList(params);
+			result.put("isSuccess", true);
 			result.put("data", list);
 		} catch (Exception e){
+			result.put("isSuccess", false);
+			result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+			result.put("errSysrMsg", e.getMessage());
 			e.printStackTrace();
 		}
-		return result; 
+		return result;
+		
 	}
 
 	
 	@RequestMapping(value = "/usr/saveUser")
 	public Map<String, Object> saveUser(@RequestParam Map<String,String> params) {
+	//public Map<String, Object> saveUser(@RequestParam @Valid Map<String,String> params,BindingResult bindingResult) {
 		
 		System.out.println("insertUser USER_ID="+params.get("USER_ID"));
 		System.out.println("insertUser USER_EMAIL="+params.get("USER_EMAIL"));
-		
+
 		Map<String, Object> result = new HashMap<String, Object>();
-		try{
-			//userSrv.saveUser(params);
-			result.put("isSuccess", true);
-			result.put("msg", "저장 되었습니다");
-		} catch (Exception e){
-			e.printStackTrace();
-			result.put("errMsg", e.toString());
-		}
-		return result;
+
+		Map<String, String> errors = new HashMap<String, String>();
+		errors = new UserValidator().validate(params);
+		if(errors.size()>0){
+			//model.addAttribute("tbUser", tbUser);
+			result.put("isSuccess", false);
+			result.put("errUserMsg", "입력값을 확인해 주시기 바랍니다.");
+			return result;
+		} else {	 
+			try{
+				//userSrv.saveUser(params);
+				result.put("isSuccess", true);
+				result.put("msg", "저장 되었습니다");
+			} catch (Exception e){
+				e.printStackTrace();
+				result.put("errSysMsg", e.toString());
+			}
+			return result;
+		}	
 	}	
 	
+/*	@InitBinder
+	protected void initBinder(WebDataBinder binder){
+		binder.setValidator(new UserValidator());
+	}
+*/	
 
 	@RequestMapping(value = "/usr/insertUser")
 	public Map<String, Object> insertUser(@RequestParam Map<String,String> params) {
