@@ -24,55 +24,14 @@ public class UserCtrl {
 	@RequestMapping(value = "/usr/selectUserList")
 //	public Map<String, Object> selectUserList(@RequestParam("searchCondition") String searchCondition) {
 	public Map<String, Object> selectUserList(@RequestParam Map<String,String> params) {
-		
-		System.out.println("params111 searchKeyCombo="+params.get("searchKeyCombo"));
-		System.out.println("params221 searchValue="+params.get("searchValue"));
-		
-		Map<String, Object> result = new HashMap<String, Object>();
-
-		List<Map<String,Object>> list = null;
-		try{
-			list = userSrv.selectUserList(params);
-			result.put("isSuccess", true);
-			result.put("data", list);
-		} catch (Exception e){
-			result.put("isSuccess", false);
-			result.put("errUserMsg", "시스템 장애가 발생하였습니다");
-			result.put("errSysrMsg", e.getMessage());
-			e.printStackTrace();
-		}
-		return result;
-		
+		return userSrv.selectUserList(params);
 	}
-
 	
 	@RequestMapping(value = "/usr/saveUser")
 	public Map<String, Object> saveUser(@RequestParam Map<String,String> params) {
-	//public Map<String, Object> saveUser(@RequestParam @Valid Map<String,String> params,BindingResult bindingResult) {
-		
 		System.out.println("insertUser USER_ID="+params.get("USER_ID"));
 		System.out.println("insertUser USER_EMAIL="+params.get("USER_EMAIL"));
-
-		Map<String, Object> result = new HashMap<String, Object>();
-
-		Map<String, String> errors = new HashMap<String, String>();
-		errors = new UserValidator().validate(params);
-		if(errors.size()>0){
-			//model.addAttribute("tbUser", tbUser);
-			result.put("isSuccess", false);
-			result.put("errUserMsg", "입력값을 확인해 주시기 바랍니다.");
-			return result;
-		} else {	 
-			try{
-				//userSrv.saveUser(params);
-				result.put("isSuccess", true);
-				result.put("msg", "저장 되었습니다");
-			} catch (Exception e){
-				e.printStackTrace();
-				result.put("errSysMsg", e.toString());
-			}
-			return result;
-		}	
+		return userSrv.saveUser(params);
 	}	
 	
 /*	@InitBinder
