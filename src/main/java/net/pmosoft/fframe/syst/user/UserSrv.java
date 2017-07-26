@@ -38,6 +38,9 @@ public class UserSrv {
 
 	public Map<String, Object> saveUser(Map<String,String> params){
 
+		
+		System.out.println(userDao.selectUserCnt(params));		
+		
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
@@ -45,7 +48,7 @@ public class UserSrv {
 		if(errors.size()>0){
 			//model.addAttribute("tbUser", tbUser);
 			result.put("isSuccess", false);
-			result.put("errUserMsg", "입력값을 확인해 주시기 바랍니다.");
+			result.put("errUserMsg", errors.get("errUserMsg"));
 			return result;
 		} else {	 
 			try{
@@ -54,14 +57,11 @@ public class UserSrv {
 				result.put("msg", "저장 되었습니다");
 			} catch (Exception e){
 				e.printStackTrace();
-				result.put("errSysMsg", e.toString());
+				result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+				//result.put("errSysMsg", e.toString());
 			}
 			return result;
 		}	
-		
-		
-		
-		
 	}
 	
 	public void insertUser(Map<String,String> params){

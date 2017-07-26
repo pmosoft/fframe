@@ -29,6 +29,14 @@
 	ORDER BY USER_ID 		  	
 </select>
 
+<select id="selectUserCnt" parameterType="java.util.HashMap" resultType="int">
+	-- UserDao.selectUserCnt
+	SELECT COUNT(*) CNT 
+	FROM   TSYUR0001
+    WHERE  USER_ID = #{USER_ID}
+</select>
+
+
 <insert id="insertUser" parameterType="java.util.HashMap">
 
 	-- UserDao.insertUser

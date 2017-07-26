@@ -48,13 +48,36 @@ public class UserTest extends AbstractTest {
 		userDao.selectUserList(params);
 	}
 	
-	@Test
+	@Test @Ignore
 	public void testUserList() { 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");		
 		params.put("searchKeyCombo", "USER_ID"); params.put("searchValue", "");
 		userSrv.selectUserList(params);
 	}
+
+	@Test
+	public void testSaveUser() {
+		
+		Map<String, String> params = new HashMap<String, String>();
+		//params.put("searchKeyCombo", ""); params.put("searchValue", "");		
+		params.put("USER_ID"    , "test1"); 
+		params.put("USER_EMAIL" , "test1@pmosoft.net"); 
+		params.put("USER_PW"    , "test1"); 
+		params.put("USER_NM"    , "test1"); 
+		params.put("USER_AGE"   , "40");  
+		params.put("USE_YN"     , "Y"); 
+		params.put("REG_USER_ID", "admin"); 
+		params.put("UPD_USER_ID", "admin");
+		
+		//userSrv.deleteUser(params);
+
+		Map<String, Object> result = userSrv.saveUser(params);
+
+		System.out.println(result);
+		//testUserList();
+	}
+	
 	
 	@Test @Ignore
 	public void testInsertUser() {
