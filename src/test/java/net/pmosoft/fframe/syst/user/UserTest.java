@@ -52,7 +52,7 @@ public class UserTest extends AbstractTest {
 	public void testUserList() { 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");		
-		params.put("searchKeyCombo", "USER_ID"); params.put("searchValue", "");
+		params.put("searchKeyCombo", "USER_ID"); params.put("searchValue", ""); 
 		userSrv.selectUserList(params);
 	}
 

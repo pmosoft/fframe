@@ -13,7 +13,10 @@ public class UserSrv {
 	
 	@Autowired
 	private UserDao userDao;
-		
+
+	@Autowired
+	private UserValidatorSrv userValidatorSrv;
+	
 	public Map<String, Object> selectUserList(Map<String,String> params){
 		System.out.println("start UserSrv selectUserList");
 		
@@ -44,7 +47,7 @@ public class UserSrv {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = new UserValidator().validate(params);
+		errors = userValidatorSrv.validate(params);
 		if(errors.size()>0){
 			//model.addAttribute("tbUser", tbUser);
 			result.put("isSuccess", false);

@@ -3,29 +3,29 @@ package net.pmosoft.fframe.syst.user;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 //@SpringBootConfiguration
 //(classes=net.pmosoft.fframe.FframeApplication.class)
 @WebAppConfiguration // 웹 컨텍스트 테스트 활성화
-public class UserValidator {
 
-	//@Autowired
-	//private UserDao userDao;
+@Service
+public class UserValidatorSrv {
+
+	@Autowired
+	private UserDao userDao;
 
 	//String configLocation = "classpath:springJdbcOracle.xml"; // src/main/resources/springJdbcOracle.xml
 	//AbstractApplicationContext ctx = new GenericXmlApplicationContext(configLocation);
 	//WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(((HttpServletRequest) request).getSession().getServletContext());	
 	//UserDao userDao = ctx.getBean("UserDao",UserDao.class);
-    @Autowired
-    private WebApplicationContext webContext; // WebApplicationContext 주입
+    //@Autowired
+    //private WebApplicationContext webContext; // WebApplicationContext 주입
  	
-    UserDao userDao = webContext.getBean("UserDao",UserDao.class);
+    //UserDao userDao = webContext.getBean("UserDao",UserDao.class);
 	
 	public Map<String, String> validate(Map<String, String> target) {
 
