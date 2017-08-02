@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Administrator
+ *
+ */
 @RestController
 public class UserCtrl {
 
@@ -29,8 +33,6 @@ public class UserCtrl {
 	
 	@RequestMapping(value = "/usr/saveUser")
 	public Map<String, Object> saveUser(@RequestParam Map<String,String> params) {
-		System.out.println("insertUser USER_ID="+params.get("USER_ID"));
-		System.out.println("insertUser USER_EMAIL="+params.get("USER_EMAIL"));
 		return userSrv.saveUser(params);
 	}	
 	 
@@ -48,7 +50,6 @@ public class UserCtrl {
 	@RequestMapping(value = "/test")
 	public Map<String, Object> test() {
 		Map<String, Object> result = new HashMap<String, Object>();
-
 		result.put("name", "피승현");
 		result.put("age", 50);
 		return result;
