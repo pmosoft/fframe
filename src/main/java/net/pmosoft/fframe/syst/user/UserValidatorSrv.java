@@ -27,14 +27,12 @@ public class UserValidatorSrv {
  	
     //UserDao userDao = webContext.getBean("UserDao",UserDao.class);
 	
-	public Map<String, String> validate(Map<String, String> target) {
+	public Map<String, String> validateSaveUser(Map<String, String> target) {
 
 		
 		Map<String, String> errors = new HashMap<String, String>();
 		if (target.get("USER_ID").length() < 5 || target.get("USER_ID").length() > 15) {
-			errors.put("errUserMsg", "유저아이디는 5자리에서 14자리로 입력해 주시기 바랍니다.");
-		} else if  (userDao.selectUserCnt(target)>0) {
-			errors.put("errUserMsg", "이미 존재하는 아이디가 있습니다.");
+			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 		} else if  (target.get("USER_EMAIL").length() < 5 || target.get("USER_EMAIL").length() > 15) {
 			errors.put("errUserMsg", "이메일 형식이 아닙니다.");
 		} else if  (target.get("USER_PW").length() < 5 || target.get("USER_PW").length() > 15) {
@@ -46,4 +44,18 @@ public class UserValidatorSrv {
 		}
 		return errors;
 	}
+	
+	
+	public Map<String, String> validateDeleteUser(Map<String, String> target) {
+		
+		Map<String, String> errors = new HashMap<String, String>();
+		if (target.get("USER_ID").length() < 5 || target.get("USER_ID").length() > 15) {
+			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+		} else if  (userDao.selectUserCnt(target)==0) {
+			errors.put("errUserMsg", "아이디가 미존재합니다.");
+		}	
+			
+		return errors;
+	}
+	
 }

@@ -87,8 +87,15 @@ Ext.define('fframe.view.syst.user.UserList', {
     	listeners : {
     		//cellclick : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts){
     		celldblclick : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts){
-    			console.log(record.getData());
-    			console.log(record.get("USER_ID"));    			
+    			
+    	    	var userReg = Ext.create("fframe.view.syst.user.UserRegView");
+    	    	var viewModel = userReg.getViewModel();
+
+    	    	viewModel.set("USER_ID",record.get("USER_ID"));
+    	    	
+    	    	userReg.show();
+    			//console.log(record.getData());
+    			//console.log(record.get("USER_ID"));    			
     		},
     		itemcontextmenu : function( obj, record, item, index, e, eOpts){
     			console.log(record.get("USER_NM"));

@@ -93,9 +93,9 @@ public class UserTest extends AbstractTest {
 		params.put("REG_USER_ID", "admin"); 
 		params.put("UPD_USER_ID", "admin");
 		
-		userSrv.deleteUser(params);
+		userDao.deleteUser(params);
 
-		userSrv.insertUser(params);
+		userDao.insertUser(params);
 
 		testUserList();
 	}
@@ -113,7 +113,7 @@ public class UserTest extends AbstractTest {
 		params.put("USE_YN"     , "Y"); 
 		params.put("UPD_USER_ID", "admin");
 		
-		userSrv.updateUser(params);
+		userDao.updateUser(params);
 
 		testUserList();
 	}

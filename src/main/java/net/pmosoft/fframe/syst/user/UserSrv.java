@@ -47,7 +47,7 @@ public class UserSrv {
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = userValidatorSrv.validate(params);
+		errors = userValidatorSrv.validateSaveUser(params);
 		if(errors.size()>0){
 			//model.addAttribute("tbUser", tbUser);
 			result.put("isSuccess", false);
@@ -55,9 +55,15 @@ public class UserSrv {
 			return result;
 		} else {	 
 			try{
-				//userDao.insertUser(params);
-				result.put("isSuccess", true);
-				result.put("msg", "저장 되었습니다");
+		    	result.put("isSuccess", true);
+				
+			    if  (userDao.selectUserCnt(params)==0) {
+			    	userDao.insertUser(params);
+			    	result.put("msg", "입력 되었습니다");
+			    } else {
+			    	userDao.updateUser(params);
+			    	result.put("msg", "갱신 되었습니다");
+			    }	
 			} catch (Exception e){
 				e.printStackTrace();
 				result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
@@ -66,17 +72,25 @@ public class UserSrv {
 			return result;
 		}	
 	}
-	
-	public void insertUser(Map<String,String> params){
-		userDao.insertUser(params);
-	}
 
-	public void deleteUser(Map<String,String> params){
-		userDao.deleteUser(params);
-	}
+	public Map<String, Object> deleteUser(Map<String,String> params){
+		
+		Map<String, Object> result = new HashMap<String, Object>();
 
-	public void updateUser(Map<String,String> params){
-		userDao.updateUser(params);
+		Map<String, String> errors = new HashMap<String, String>();
+		errors = userValidatorSrv.validateDeleteUser(params);
+		if(errors.size()>0){
+			//model.addAttribute("tbUser", tbUser);
+			result.put("isSuccess", false);
+			result.put("errUserMsg", errors.get("errUserMsg"));
+			System.out.println(result);
+			return result;
+		} else {	 
+			userDao.deleteUser(params);
+			result.put("isSuccess", true);
+			result.put("msg", "삭제 되었습니다");
+			return result;			
+		}	
 	}
 	
 }

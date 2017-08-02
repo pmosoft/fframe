@@ -15,7 +15,7 @@ Ext.define('fframe.view.syst.user.UserRegViewController', {
 
     initBtn : function(btn) {
     	var view = this.getView(); var viewModel = view.getViewModel();
-    	viewModel.set("USER_ID"   ,"aaa");
+    	viewModel.set("USER_ID"   ,"");
     	viewModel.set("USER_EMAIL","");
     	viewModel.set("USER_PW"   ,"");
     	viewModel.set("USER_PW2"  ,"");
@@ -30,7 +30,7 @@ Ext.define('fframe.view.syst.user.UserRegViewController', {
     saveBtn : function(btn) {
     	var view = this.getView(); var viewModel = view.getViewModel();
     	var params = viewModel.getData();
-    	//console.log(params);
+    	console.log(params);
     	
     	Ext.Ajax.request({
     		url : '/usr/saveUser',
@@ -52,7 +52,32 @@ Ext.define('fframe.view.syst.user.UserRegViewController', {
     },
     
     delBtn : function(btn) {
-		this.getView().close();
+
+    	var view = this.getView(); var viewModel = view.getViewModel();
+    	var params = viewModel.getData();
+    	//console.log(params);
+    	
+    	Ext.Ajax.request({
+    		url : '/usr/deleteUser',
+    		method : 'post',
+    		params : params,
+    		success : function(res){
+    			var result = Ext.decode(res.responseText);
+    			if(result['isSuccess']){
+    				//Ext.Msg.alert("알림",result['msg']);
+    				Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+    				
+    				this.getView().close();
+    			} else {
+    				Ext.Msg.alert("알림",result['errUserMsg']);
+    				//Ext.Msg.alert("알림",result['errSysMsg']);
+    				return;
+    			}
+    			
+    		}
+    	})
+    	
+		
     },    
 
     closeBtn : function(btn) {

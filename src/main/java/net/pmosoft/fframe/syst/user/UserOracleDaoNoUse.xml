@@ -15,9 +15,9 @@
 			,USER_NM
 			,USER_AGE
 			,USE_YN
-			,TO_CHAR(REG_DT,'YYYY.MM.DD HH24:MI:SS') AS REG_DT
+			,date_format(REG_DT,'%Y.%m.%d %H:%i:%S') AS REG_DT
 			,REG_USER_ID
-			,TO_CHAR(UPD_DT,'YYYY.MM.DD HH24:MI:SS') AS UPD_DT
+			,date_format(UPD_DT,'%Y.%m.%d %H:%i:%S') AS UPD_DT
 			,UPD_USER_ID 
 	FROM   TSYUR0001
     WHERE 22=22 
