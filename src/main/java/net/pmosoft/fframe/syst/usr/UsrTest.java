@@ -1,4 +1,4 @@
-package net.pmosoft.fframe.syst.user;
+package net.pmosoft.fframe.syst.usr;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = FframeApplication.class)
-public class UserTest {
+public class UsrTest {
 
 //	@Autowired
 //	private WebApplicationContext webApplicationContext;
@@ -30,7 +30,7 @@ public class UserTest {
 //		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();		
 //	}
 //	@Test
-//	public void testUserListCtrl() throws Exception { 
+//	public void testUsrListCtrl() throws Exception { 
 //		 this.mockMvc.perform(get("/"))
 //		 .andDo(print())
 //		 .andExpect(status().isOk())
@@ -39,88 +39,88 @@ public class UserTest {
 //	}
 	
 	@Autowired
-	private UserSrv userSrv;
+	private UsrSrv UsrSrv;
 	
 	@Autowired
-	private UserDao userDao;
+	private UsrDao UsrDao;
 
 	
 	@Test @Ignore
-	public void testUserListDao() { 
+	public void testUsrListDao() { 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");		
-		params.put("searchKeyCombo", "USER_ID"); params.put("searchValue", "admin");
-		userDao.selectUserList(params);
+		params.put("searchKeyCombo", "Usr_ID"); params.put("searchValue", "admin");
+		UsrDao.selectUsrList(params);
 	}
 	
 	@Test @Ignore
-	public void testUserList() { 
+	public void testUsrList() { 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");		
-		params.put("searchKeyCombo", "USER_ID"); params.put("searchValue", ""); 
-		userSrv.selectUserList(params);
+		params.put("searchKeyCombo", "Usr_ID"); params.put("searchValue", ""); 
+		UsrSrv.selectUsrList(params);
 	}
 
 	@Test
-	public void testSaveUser() {
+	public void testSaveUsr() {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");		
-		params.put("USER_ID"    , "test1"); 
-		params.put("USER_EMAIL" , "test1@pmosoft.net"); 
-		params.put("USER_PW"    , "test1"); 
-		params.put("USER_NM"    , "test1"); 
-		params.put("USER_AGE"   , "40");  
+		params.put("Usr_ID"    , "test1"); 
+		params.put("Usr_EMAIL" , "test1@pmosoft.net"); 
+		params.put("Usr_PW"    , "test1"); 
+		params.put("Usr_NM"    , "test1"); 
+		params.put("Usr_AGE"   , "40");  
 		params.put("USE_YN"     , "Y"); 
-		params.put("REG_USER_ID", "admin"); 
-		params.put("UPD_USER_ID", "admin");
+		params.put("REG_Usr_ID", "admin"); 
+		params.put("UPD_Usr_ID", "admin");
 		
-		//userSrv.deleteUser(params);
+		//UsrSrv.deleteUsr(params);
 
-		Map<String, Object> result = userSrv.saveUser(params);
+		Map<String, Object> result = UsrSrv.saveUsr(params);
 
 		System.out.println(result);
-		//testUserList();
+		//testUsrList();
 	}
 	
 	
 	@Test @Ignore
-	public void testInsertUser() {
+	public void testInsertUsr() {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");		
-		params.put("USER_ID"    , "test1"); 
-		params.put("USER_EMAIL" , "test1@pmosoft.net"); 
-		params.put("USER_PW"    , "test1"); 
-		params.put("USER_NM"    , "test1"); 
-		params.put("USER_AGE"   , "40"); 
+		params.put("Usr_ID"    , "test1"); 
+		params.put("Usr_EMAIL" , "test1@pmosoft.net"); 
+		params.put("Usr_PW"    , "test1"); 
+		params.put("Usr_NM"    , "test1"); 
+		params.put("Usr_AGE"   , "40"); 
 		params.put("USE_YN"     , "Y"); 
-		params.put("REG_USER_ID", "admin"); 
-		params.put("UPD_USER_ID", "admin");
+		params.put("REG_Usr_ID", "admin"); 
+		params.put("UPD_Usr_ID", "admin");
 		
-		userDao.deleteUser(params);
+		UsrDao.deleteUsr(params);
 
-		userDao.insertUser(params);
+		UsrDao.insertUsr(params);
 
-		testUserList();
+		testUsrList();
 	}
 
 	@Test @Ignore 
-	public void testUpdateUser() {
+	public void testUpdateUsr() {
 		
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");		
-		params.put("USER_ID"    , "test1"); 
-		params.put("USER_EMAIL" , "test1@pmosoft.net"); 
-		params.put("USER_PW"    , "test11"); 
-		params.put("USER_NM"    , "test11"); 
-		params.put("USER_AGE"    , "40"); 
+		params.put("Usr_ID"    , "test1"); 
+		params.put("Usr_EMAIL" , "test1@pmosoft.net"); 
+		params.put("Usr_PW"    , "test11"); 
+		params.put("Usr_NM"    , "test11"); 
+		params.put("Usr_AGE"    , "40"); 
 		params.put("USE_YN"     , "Y"); 
-		params.put("UPD_USER_ID", "admin");
+		params.put("UPD_Usr_ID", "admin");
 		
-		userDao.updateUser(params);
+		UsrDao.updateUsr(params);
 
-		testUserList();
+		testUsrList();
 	}
 }
 

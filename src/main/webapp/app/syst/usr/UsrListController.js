@@ -1,6 +1,6 @@
-Ext.define('fframe.syst.user.UserListController', {
+Ext.define('fframe.syst.usr.UsrListController', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.UserList',
+    alias: 'controller.UsrList',
     onLoadData : function(obj){
     	console.log("store");
     	var view = this.getView();
@@ -21,8 +21,8 @@ Ext.define('fframe.syst.user.UserListController', {
     insBtn : function(btn) {
 
     	//console.log("data4="+btn.up("toolbar").down("combo").valueField);
-    	var userReg = Ext.create("fframe.syst.user.UserRegView");
-    	userReg.show();
+    	var UsrReg = Ext.create("fframe.syst.usr.UsrRegView");
+    	UsrReg.show();
     },
     
     delBtn : function(btn) {
@@ -32,8 +32,7 @@ Ext.define('fframe.syst.user.UserListController', {
     
     selBtn : function(btn) {
     	console.log("store");
-    	var view = this.getView();
-    	var viewModel = view.getViewModel();
+    	var view = this.getView(); var viewModel = view.getViewModel();
     	var store = viewModel.getStore(view['xtype']);
 
 //    	console.log("data="+btn.up("toolbar").down("combo").value);

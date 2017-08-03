@@ -1,8 +1,8 @@
-Ext.define('fframe.syst.dams.PackInfoList', {
+Ext.define('fframe.syst.usr.UsrListView', {
     extend: 'Ext.form.Panel',
-    xtype: 'PackInfoList',
-    controller: 'PackInfoList',
-    viewModel: 'PackInfoList',    
+    xtype: 'UsrList',
+    controller: 'UsrList',
+    viewModel: 'UsrList',    
     title : '사용자 조회',
     
     
@@ -26,7 +26,7 @@ Ext.define('fframe.syst.dams.PackInfoList', {
     		displayField : 'key',
     		valueField : 'value',
     		queryMode : 'local',
-    		// value : 'USER_NM',
+    		// value : 'USR_NM',
     	    bind : {
     	    	value : '{searchKeyCombo}'
     	    },
@@ -34,10 +34,10 @@ Ext.define('fframe.syst.dams.PackInfoList', {
     			fields : ['key','value'], 
     			data : [{
     				key : '이름',
-    				value : 'USER_NM'
+    				value : 'USR_NM'
     			},{
     				key : '아이디',
-    				value : 'USER_ID'
+    				value : 'USR_ID'
     			}]
     		}
     	},{
@@ -52,9 +52,9 @@ Ext.define('fframe.syst.dams.PackInfoList', {
     	    ,listeners: {
               specialkey: function(f,e){
                 if (e.getKey() == e.ENTER) {
-                	//this.getController('user.UserListController').selBtn(e);
-                	//fframe.app.getController('view.syst.user.UserListController').selBtn(this);
-                	//var ctrl = new fframe.syst.user.UserListController();
+                	//this.getController('Usr.UsrListController').selBtn(e);
+                	//fframe.app.getController('view.syst.Usr.UsrListController').selBtn(this);
+                	//var ctrl = new fframe.syst.usr.UsrListController();
                 	//controller.selBtn();
                 	
                 	//f.up('form').getForm().submit();
@@ -87,28 +87,28 @@ Ext.define('fframe.syst.dams.PackInfoList', {
     	listeners : {
     		celldblclick : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts){
     			
-    	    	var userReg = Ext.create("fframe.syst.user.UserRegView");
-    	    	var viewModel = userReg.getViewModel();
+    	    	var UsrReg = Ext.create("fframe.syst.usr.UsrRegView");
+    	    	var viewModel = UsrReg.getViewModel();
     	    	
     	    	var USE_YN = record.get("USE_YN");
     	    	(USE_YN="Y")?USE_YN=true:USE_YN=false;
 
-    	    	viewModel.set("USER_ID",record.get("USER_ID"));
-    	    	viewModel.set("USER_EMAIL",record.get("USER_EMAIL"));
-    	    	viewModel.set("USER_NM",record.get("USER_NM"));
-    	    	viewModel.set("USER_AGE",record.get("USER_AGE"));
+    	    	viewModel.set("USR_ID",record.get("USR_ID"));
+    	    	viewModel.set("USR_EMAIL",record.get("USR_EMAIL"));
+    	    	viewModel.set("USR_NM",record.get("USR_NM"));
+    	    	viewModel.set("USR_AGE",record.get("USR_AGE"));
     	    	viewModel.set("USE_YN",USE_YN);
     	    	viewModel.set("REG_DT",record.get("REG_DT"));
-    	    	viewModel.set("REG_USER_ID",record.get("REG_USER_ID"));
+    	    	viewModel.set("REG_USR_ID",record.get("REG_USR_ID"));
     	    	viewModel.set("UPD_DT",record.get("UPD_DT"));
-    	    	viewModel.set("UPD_USER_ID",record.get("UPD_USER_ID"));
+    	    	viewModel.set("UPD_USR_ID",record.get("UPD_USR_ID"));
     	    	
-    	    	userReg.show();
+    	    	UsrReg.show();
     			//console.log(record.getData());
-    			//console.log(record.get("USER_ID"));    			
+    			//console.log(record.get("USR_ID"));    			
     		},
     		itemcontextmenu : function( obj, record, item, index, e, eOpts){
-    			console.log(record.get("USER_NM"));
+    			console.log(record.get("USR_NM"));
     		}
     	},
         columns : [{
@@ -117,27 +117,27 @@ Ext.define('fframe.syst.dams.PackInfoList', {
         	text : '아이디',
         	style : 'text-align:center',
         	flex : 1,
-        	dataIndex : 'USER_ID'
+        	dataIndex : 'USR_ID'
         },{
         	text : '이메일',
         	style : 'text-align:center',
         	flex : 1,
-        	dataIndex : 'USER_EMAIL'
+        	dataIndex : 'USR_EMAIL'
         },{
         	text : '암호',
         	style : 'text-align:center',
         	flex : 1,
-        	dataIndex : 'USER_PW'
+        	dataIndex : 'USR_PW'
         },{
         	text : '이름',
         	style : 'text-align:center',
         	flex : 1,
-        	dataIndex : 'USER_NM'
+        	dataIndex : 'USR_NM'
         },{
         	text : '나이',
         	style : 'text-align:center',
         	flex : 1,
-        	dataIndex : 'USER_AGE'
+        	dataIndex : 'USR_AGE'
         },{
         	text : '사용여부',
         	style : 'text-align:center',
@@ -152,10 +152,10 @@ Ext.define('fframe.syst.dams.PackInfoList', {
         	text : '변경자',
         	style : 'text-align:center',
         	flex : 1,
-        	dataIndex : 'UPD_USER_ID'
+        	dataIndex : 'UPD_USR_ID'
         }],
         bind : {
-        	store : '{UserList}'
+        	store : '{UsrList}'
         },
 	    bbar : {
 	    	xtype : 'pagingtoolbar',

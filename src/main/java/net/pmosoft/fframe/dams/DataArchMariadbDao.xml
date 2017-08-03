@@ -19,7 +19,7 @@
 			,REG_USR_ID
 			,date_format(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
 			,UPD_USR_ID
-	FROM    TDACM0001
+	FROM    TDACM00010
     WHERE   PKG2_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
     OR      PKG3_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
     OR      PKG4_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
@@ -32,14 +32,14 @@
 <select id="selectPackInfoCnt" parameterType="java.util.HashMap" resultType="int">
 	-- DataArchDao.selectPackInfoCnt
 	SELECT COUNT(*) CNT
-	FROM   TDACM0001
+	FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
 </select>
 
 <insert id="insertPackInfo" parameterType="java.util.HashMap">
 
 	-- DataArchDao.insertPackInfo
-	INSERT INTO TDACM0001
+	INSERT INTO TDACM00010
 	(
 	     PKG_FUL_NM
 		,PKG2_NM
@@ -71,13 +71,13 @@
 
 <delete id="deletePackInfo" parameterType="java.util.HashMap">
 	-- DataArchDao.deletePackInfo
-	DELETE FROM TDACM0001 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
+	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
 </delete>
 
 <update id="updatePackInfo" parameterType="java.util.HashMap">
 
 	-- DataArchDao.updatePackInfo
-	UPDATE TDACM0001
+	UPDATE TDACM00010
 	SET  PKG2_NM      = #{PKG2_NM}
 		,PKG3_NM      = #{PKG3_NM}
 		,PKG4_NM      = #{PKG4_NM}

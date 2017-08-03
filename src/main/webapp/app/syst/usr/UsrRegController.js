@@ -1,6 +1,6 @@
-Ext.define('fframe.syst.user.UserRegViewController', {
+Ext.define('fframe.syst.usr.UsrRegController', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.UserRegView',
+    alias: 'controller.UsrReg',
     onLoadData : function(obj){
     	console.log("store");
     	var view = this.getView();
@@ -15,15 +15,15 @@ Ext.define('fframe.syst.user.UserRegViewController', {
 
     initBtn : function(btn) {
     	var view = this.getView(); var viewModel = view.getViewModel();
-    	viewModel.set("USER_ID"   ,"");
-    	viewModel.set("USER_EMAIL","");
-    	viewModel.set("USER_PW"   ,"");
-    	viewModel.set("USER_PW2"  ,"");
-    	viewModel.set("USER_NM"   ,"");
-    	viewModel.set("USER_AGE"  ,"40");
+    	viewModel.set("USR_ID"   ,"");
+    	viewModel.set("USR_EMAIL","");
+    	viewModel.set("USR_PW"   ,"");
+    	viewModel.set("USR_PW2"  ,"");
+    	viewModel.set("USR_NM"   ,"");
+    	viewModel.set("USR_AGE"  ,"40");
     	viewModel.set("USE_YN"    ,true);
     	viewModel.set("UPD_DT"    ,"<span style='color:green;'>2017.07.03 16:40:20</span>");
-    	viewModel.set("UPD_USER"  ,"<span style='color:green;'>admin</span>");
+    	viewModel.set("UPD_Usr"  ,"<span style='color:green;'>admin</span>");
     },
     
     
@@ -33,7 +33,7 @@ Ext.define('fframe.syst.user.UserRegViewController', {
     	console.log(params);
     	
     	Ext.Ajax.request({
-    		url : '/usr/saveUser',
+    		url : '/usr/saveUsr',
     		method : 'post',
     		params : params,
     		success : function(res){
@@ -42,7 +42,7 @@ Ext.define('fframe.syst.user.UserRegViewController', {
     				//Ext.Msg.alert("알림",result['msg']);
     				Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
     			} else {
-    				Ext.Msg.alert("알림",result['errUserMsg']);
+    				Ext.Msg.alert("알림",result['errUsrMsg']);
     				//Ext.Msg.alert("알림",result['errSysMsg']);
     				return;
     			}
@@ -53,12 +53,11 @@ Ext.define('fframe.syst.user.UserRegViewController', {
     
     delBtn : function(btn) {
 
-    	var view = this.getView(); var viewModel = view.getViewModel();
-    	var params = viewModel.getData();
+    	var params = this.getView().getViewModel().getData();
     	//console.log(params);
     	
     	Ext.Ajax.request({
-    		url : '/usr/deleteUser',
+    		url : '/usr/deleteUsr',
     		method : 'post',
     		params : params,
     		success : function(res){
@@ -69,7 +68,7 @@ Ext.define('fframe.syst.user.UserRegViewController', {
     				
     				this.getView().close();
     			} else {
-    				Ext.Msg.alert("알림",result['errUserMsg']);
+    				Ext.Msg.alert("알림",result['errUsrMsg']);
     				//Ext.Msg.alert("알림",result['errSysMsg']);
     				return;
     			}

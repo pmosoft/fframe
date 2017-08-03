@@ -1,4 +1,4 @@
-package net.pmosoft.fframe.syst.user;
+package net.pmosoft.fframe.syst.usr;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserSrv {
+public class UsrSrv {
 	
 	@Autowired
-	private UserDao userDao;
+	private UsrDao UsrDao;
 
 	@Autowired
-	private UserValidatorSrv userValidatorSrv;
+	private UsrValidatorSrv UsrValidatorSrv;
 	
-	public Map<String, Object> selectUserList(Map<String,String> params){
-		System.out.println("start UserSrv selectUserList");
+	public Map<String, Object> selectUsrList(Map<String,String> params){
+		System.out.println("start UsrSrv selectUsrList");
 		
 		System.out.println("params111 searchKeyCombo="+params.get("searchKeyCombo"));
 		System.out.println("params221 searchValue="+params.get("searchValue"));
@@ -27,66 +27,66 @@ public class UserSrv {
 
 		List<Map<String,Object>> list = null;
 		try{
-			list = userDao.selectUserList(params);;
+			list = UsrDao.selectUsrList(params);;
 			result.put("isSuccess", true);
 			result.put("data", list);
 		} catch (Exception e){
 			result.put("isSuccess", false);
-			result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+			result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
 			result.put("errSysrMsg", e.getMessage());
 			e.printStackTrace();
 		}
 		return result;		
 	}
 
-	public Map<String, Object> saveUser(Map<String,String> params){
+	public Map<String, Object> saveUsr(Map<String,String> params){
 
 		
-		System.out.println(userDao.selectUserCnt(params));		
+		System.out.println(UsrDao.selectUsrCnt(params));		
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = userValidatorSrv.validateSaveUser(params);
+		errors = UsrValidatorSrv.validateSaveUsr(params);
 		if(errors.size()>0){
-			//model.addAttribute("tbUser", tbUser);
+			//model.addAttribute("tbUsr", tbUsr);
 			result.put("isSuccess", false);
-			result.put("errUserMsg", errors.get("errUserMsg"));
+			result.put("errUsrMsg", errors.get("errUsrMsg"));
 			return result;
 		} else {	 
 			try{
 		    	result.put("isSuccess", true);
 				
-			    if  (userDao.selectUserCnt(params)==0) {
-			    	userDao.insertUser(params);
+			    if  (UsrDao.selectUsrCnt(params)==0) {
+			    	UsrDao.insertUsr(params);
 			    	result.put("msg", "입력 되었습니다");
 			    } else {
-			    	userDao.updateUser(params);
+			    	UsrDao.updateUsr(params);
 			    	result.put("msg", "갱신 되었습니다");
 			    }	
 			} catch (Exception e){
 				e.printStackTrace();
-				result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+				result.put("errUsrMsg", "시스템 장애가 발생되었습니다.");
 				//result.put("errSysMsg", e.toString());
 			}
 			return result;
 		}	
 	}
 
-	public Map<String, Object> deleteUser(Map<String,String> params){
+	public Map<String, Object> deleteUsr(Map<String,String> params){
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = userValidatorSrv.validateDeleteUser(params);
+		errors = UsrValidatorSrv.validateDeleteUsr(params);
 		if(errors.size()>0){
-			//model.addAttribute("tbUser", tbUser);
+			//model.addAttribute("tbUsr", tbUsr);
 			result.put("isSuccess", false);
-			result.put("errUserMsg", errors.get("errUserMsg"));
+			result.put("errUsrMsg", errors.get("errUsrMsg"));
 			System.out.println(result);
 			return result;
 		} else {	 
-			userDao.deleteUser(params);
+			UsrDao.deleteUsr(params);
 			result.put("isSuccess", true);
 			result.put("msg", "삭제 되었습니다");
 			return result;			

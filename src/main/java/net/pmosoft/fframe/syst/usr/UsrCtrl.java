@@ -1,4 +1,4 @@
-package net.pmosoft.fframe.syst.user;
+package net.pmosoft.fframe.syst.usr;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,37 +14,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+ 
 /**
  * @author Administrator
  *
  */
 @RestController
-public class UserCtrl {
+public class UsrCtrl {
 
 	@Autowired
-	private UserSrv userSrv;
+	private UsrSrv UsrSrv;
  
-	@RequestMapping(value = "/usr/selectUserList")
-//	public Map<String, Object> selectUserList(@RequestParam("searchCondition") String searchCondition) {
-	public Map<String, Object> selectUserList(@RequestParam Map<String,String> params) {
-		return userSrv.selectUserList(params);
+	@RequestMapping(value = "/usr/selectUsrList")
+//	public Map<String, Object> selectUsrList(@RequestParam("searchCondition") String searchCondition) {
+	public Map<String, Object> selectUsrList(@RequestParam Map<String,String> params) {
+		return UsrSrv.selectUsrList(params);
 	}
 	
-	@RequestMapping(value = "/usr/saveUser")
-	public Map<String, Object> saveUser(@RequestParam Map<String,String> params) {
-		return userSrv.saveUser(params);
+	@RequestMapping(value = "/usr/saveUsr")
+	public Map<String, Object> saveUsr(@RequestParam Map<String,String> params) {
+		return UsrSrv.saveUsr(params);
 	}	
 	 
 /*	@InitBinder
 	protected void initBinder(WebDataBinder binder){
-		binder.setValidator(new UserValidator());
+		binder.setValidator(new UsrValidator());
 	}
 */	
 
-	@RequestMapping(value = "/usr/deleteUser")
-	public Map<String, Object> deleteUser(@RequestParam Map<String,String> params) {
-		return userSrv.deleteUser(params);
+	@RequestMapping(value = "/usr/deleteUsr")
+	public Map<String, Object> deleteUsr(@RequestParam Map<String,String> params) {
+		return UsrSrv.deleteUsr(params);
 	}	
 	
 	@RequestMapping(value = "/test")

@@ -1,6 +1,6 @@
 Ext.define('fframe.main.MainFrameView', {  
 	extend : 'Ext.container.Viewport',
-	xtype : 'MainFrameView',
+	xtype : 'MainFrame',
 	layout : 'border',
 	items :
 	//-----------------------------	
@@ -62,7 +62,7 @@ Ext.define('fframe.main.MainFrameView', {
 						selectable : false,
 						children : [ {
 							text : '유저목록',
-							page : 'UserList',
+							page : 'UsrList',
 							leaf : true
 						} ]
 					}, {
@@ -71,6 +71,10 @@ Ext.define('fframe.main.MainFrameView', {
 						expanded : true,
 						selectable : false,
 						children : [ {
+							text : '패키지목록',
+							page : 'PackInfoList',
+							leaf : true
+						},{
 							text : '약어목록',
 							page : 'AbbrList',
 							leaf : true

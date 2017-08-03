@@ -1,4 +1,4 @@
-Ext.define('fframe.syst.user.Test01', {
+Ext.define('fframe.syst.test.Test01', {
 	xtype: 'Test01',    
    controller: 'Test01',
 
