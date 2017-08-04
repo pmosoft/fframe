@@ -1,7 +1,9 @@
 ﻿------------------------------
 -- 패키지 정보
 ------------------------------
-DROP TABLE TDACM00010;
+
+drop table TDACM00010
+;
 
 CREATE TABLE TDACM00010 (
  PKG_FUL_NM VARCHAR(20)      NULL COMMENT '패키지풀명'
