@@ -66,17 +66,37 @@ Ext.define('fframe.main.MainFrameView', {
 							leaf : true
 						} ]
 					}, {
+						text : '메타',
+						iconCls : 'x-fa fa-gift',
+						expanded : true,
+						selectable : false,
+						children : [ 
+			            {
+							text : '표준용어',
+							page : 'TermList',
+							leaf : true
+						},{
+							text : '약어',
+							page : 'AbbrList',
+							leaf : true
+						},{
+							text : '인포타입',
+							page : 'InfotypeList',
+							leaf : true
+						} ]
+					}, {
 						text : '테이블',
 						iconCls : 'x-fa fa-gift',
 						expanded : true,
 						selectable : false,
-						children : [ {
-							text : '패키지목록',
-							page : 'PackInfoList',
+						children : [ 
+			            {
+							text : '테이블컬럼목록',
+							page : 'TabColList',
 							leaf : true
 						},{
-							text : '약어목록',
-							page : 'AbbrList',
+							text : '테이블목록',
+							page : 'TabList',
 							leaf : true
 						} ]
 					}, {
