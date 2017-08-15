@@ -9,16 +9,31 @@ import org.apache.ibatis.annotations.Mapper;
 public interface TableDao {
 
 
+    /**********************************************************************************
+     *
+     *                                  TabColInfo
+     *
+     **********************************************************************************/
+    List<Map<String, Object>> selectTabColInfoList(Map<String,String> params);
+    int selectTabColInfoCnt(Map<String,String> params);
+    void insertTabColInfo(Map<String,String> params);
+    void deleteTabColInfo(Map<String,String> params);
+    void updateTabColInfo(Map<String,String> params);
+
+    List<Map<String, Object>> selectMetaTabColInfoList(Map<String,String> params);
+    
 	/**********************************************************************************
 	 *
-	 *                                  TableInfo
+	 *                                  TabInfo
 	 *
 	 **********************************************************************************/
-	List<Map<String, Object>> selectTableInfoList(Map<String,String> params);
-	int selectTableInfoCnt(Map<String,String> params);
-	void insertTableInfo(Map<String,String> params);
-	void deleteTableInfo(Map<String,String> params);
-	void updateTableInfo(Map<String,String> params);
+	List<Map<String, Object>> selectTabInfoList(Map<String,String> params);
+	int selectTabInfoCnt(Map<String,String> params);
+	void insertTabInfo(Map<String,String> params);
+	void deleteTabInfo(Map<String,String> params);
+	void updateTabInfo(Map<String,String> params);
 
+    List<Map<String, Object>> selectMetaTabInfoList(Map<String,String> params);
+	
 }
 

@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = FframeApplication.class)
-public class TableTest {
+public class TabInfoTest {
 
 	@Autowired
 	private TableSrv tableSrv;
@@ -29,25 +29,25 @@ public class TableTest {
 
 
 	@Test @Ignore
-	public void testTableInfoCnt() {
+	public void testTabInfoCnt() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
 		params.put("PKG_FUL_NM", "user");
-		tableDao.selectTableInfoCnt(params);
+		tableDao.selectTabInfoCnt(params);
 	}
 
 	@Test @Ignore
-	public void testTableInfoList() {
+	public void testTabInfoList() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchValue", "us");
 		//params.put("searchValue", "유저");
 		params.put("searchValue", "");
-		tableSrv.selectTableInfoList(params);
-		//TermDao.selectTableInfoList(params);
+		tableSrv.selectTabInfoList(params);
+		//TermDao.selectTabInfoList(params);
 	}
 
 	@Test @Ignore
-	public void testSaveTableInfo() {
+	public void testSaveTabInfo() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
@@ -62,21 +62,21 @@ public class TableTest {
 
 		//TermDao.deleteUser(params);
 
-		Map<String, Object> result = tableSrv.saveTableInfo(params);
+		Map<String, Object> result = tableSrv.saveTabInfo(params);
 
 		System.out.println(result);
-		testTableInfoList();
+		testTabInfoList();
 	}
 
 	@Test
-	public void testDeleteTableInfo() {
+	public void testDeleteTabInfo() {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
-		tableSrv.deleteTableInfo(params);
+		tableSrv.deleteTabInfo(params);
 	}
 
 	@Test @Ignore
-	public void testInsertTableInfo() {
+	public void testInsertTabInfo() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -90,15 +90,15 @@ public class TableTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		tableDao.deleteTableInfo(params);
+		tableDao.deleteTabInfo(params);
 
-		tableDao.insertTableInfo(params);
+		tableDao.insertTabInfo(params);
 
-		testTableInfoList();
+		testTabInfoList();
 	}
 
 	@Test @Ignore
-	public void testUpdateTableInfo() {
+	public void testUpdateTabInfo() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -112,9 +112,9 @@ public class TableTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		tableDao.updateTableInfo(params);
+		tableDao.updateTabInfo(params);
 
-		testTableInfoList();
+		testTabInfoList();
 	}
 
 

@@ -96,11 +96,15 @@ Ext.define('fframe.main.MainFrameView', {
 						children : [ 
 			            {
 							text : '테이블컬럼목록',
-							page : 'TabColList',
+							page : 'TabColInfoList',
 							leaf : true
 						},{
 							text : '테이블목록',
-							page : 'TabList',
+							page : 'TabInfoList',
+							leaf : true
+						},{
+							text : '테이블정보추출',
+							page : 'ExtractTabColList',
 							leaf : true
 						} ]
 					}, {

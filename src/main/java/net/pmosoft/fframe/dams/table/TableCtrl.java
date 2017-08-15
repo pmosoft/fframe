@@ -15,34 +15,91 @@ public class TableCtrl {
 	@Autowired
 	private TableSrv tableSrv;
 
+	
+    /**********************************************************************************
+    *
+    *                                ExtractTabInfo
+    *
+    **********************************************************************************/
+
+   /**
+    * selectMetaTabInfoList
+    */
+   @RequestMapping(value = "/dams/table/selectMetaTabInfoList")
+   public Map<String, Object> selectMetaTabInfoList(@RequestParam Map<String,String> params) { 
+       return tableSrv.selectMetaTabInfoList(params);
+   }
+	
+   /**
+    * selectMetaTabColInfoList
+    */
+   @RequestMapping(value = "/dams/table/selectMetaTabColInfoList")
+   public Map<String, Object> selectMetaTabColInfoList(@RequestParam Map<String,String> params) { 
+       return tableSrv.selectMetaTabColInfoList(params);
+   }
+
+   
+   
+	
+    /**********************************************************************************
+    *
+    *                                  TabColInfo
+    *
+    **********************************************************************************/
+
+   /**
+    * selectcTabColInfoList
+    */
+   @RequestMapping(value = "/dams/table/selectTabColInfoList")
+   public Map<String, Object> selectTabColInfoList(@RequestParam Map<String,String> params) { 
+       return tableSrv.selectTabColInfoList(params);
+   }
+
+   /**
+    * saveTabColInfo
+    */
+   @RequestMapping(value = "/dams/table/saveTabColInfo")
+   public Map<String, Object> saveTabColInfo(@RequestParam Map<String,String> params) {
+       return tableSrv.saveTabColInfo(params);
+   }
+
+   /**
+    * deleteTabColInfo
+    */
+   @RequestMapping(value = "/dams/table/deleteTabColInfo")
+   public Map<String, Object> deleteTabColInfo(@RequestParam Map<String,String> params) {
+       return tableSrv.deleteTabColInfo(params);
+   }
+	
+	
 	/**********************************************************************************
 	 *
-	 *                                  TableInfo
+	 *                                  TabInfo
 	 *
 	 **********************************************************************************/
 
 	/**
-	 * selectcTableInfoList
+	 * selectcTabInfoList
 	 */
-	@RequestMapping(value = "/dams/table/selectTableInfoList")
-	public Map<String, Object> selectTableInfoList(@RequestParam Map<String,String> params) { 
-		return tableSrv.selectTableInfoList(params);
+	@RequestMapping(value = "/dams/table/selectTabInfoList")
+	public Map<String, Object> selectTabInfoList(@RequestParam Map<String,String> params) { 
+		return tableSrv.selectTabInfoList(params);
 	}
 
 	/**
-	 * saveTableInfo
+	 * saveTabInfo
 	 */
-	@RequestMapping(value = "/dams/table/saveTableInfo")
-	public Map<String, Object> saveTableInfo(@RequestParam Map<String,String> params) {
-		return tableSrv.saveTableInfo(params);
+	@RequestMapping(value = "/dams/table/saveTabInfo")
+	public Map<String, Object> saveTabInfo(@RequestParam Map<String,String> params) {
+		return tableSrv.saveTabInfo(params);
 	}
 
 	/**
-	 * deleteTableInfo
+	 * deleteTabInfo
 	 */
-	@RequestMapping(value = "/dams/table/deleteTableInfo")
-	public Map<String, Object> deleteTableInfo(@RequestParam Map<String,String> params) {
-		return tableSrv.deleteTableInfo(params);
+	@RequestMapping(value = "/dams/table/deleteTabInfo")
+	public Map<String, Object> deleteTabInfo(@RequestParam Map<String,String> params) {
+		return tableSrv.deleteTabInfo(params);
 	}
 
 }

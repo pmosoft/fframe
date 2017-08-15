@@ -5,9 +5,104 @@
 
 <mapper namespace="net.pmosoft.fframe.dams.table.TableDao">
 
-<select id="selectTableInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
-	-- TermDao.selectTableInfoList
+<!--******************************************************** 
+**
+**                        TablColInfo
+**
+*********************************************************-->
+
+<select id="selectTabColInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    -- TermDao.selectTabColInfoList
+    SELECT   DB_NM
+            ,OWNER
+            ,TAB_NM
+            ,COL_NM
+            ,COL_HNM
+            ,COL_DESC
+            ,DATA_TYPE_NM
+            ,LEN
+            ,DECIMAL_CNT
+            ,DATA_TYPE_DESC
+            ,date_format(REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,REG_USR_ID
+            ,date_format(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,UPD_USR_ID
+    FROM    TDACM00080
+    ORDER BY DB_NM,OWNER,TAB_NM,COL_NM
+</select>
+
+<select id="selectTabColInfoCnt" parameterType="java.util.HashMap" resultType="int">
+    -- TermDao.selectTabColInfoCnt
+    SELECT COUNT(*) CNT
+    FROM   TDACM00010
+    WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
+</select>
+
+<insert id="insertTabColInfo" parameterType="java.util.HashMap">
+
+    -- TermDao.insertTabColInfo
+    INSERT INTO TDACM00010
+    (
+         PKG_FUL_NM
+        ,PKG2_NM
+        ,PKG3_NM
+        ,PKG4_NM
+        ,PKG_HNM
+        ,PKG_DESC
+        ,USE_YN
+        ,REG_DTM
+        ,REG_USR_ID
+        ,UPD_DTM
+        ,UPD_USR_ID
+    ) VALUES (
+         #{PKG_FUL_NM}
+        ,#{PKG2_NM}
+        ,#{PKG3_NM}
+        ,#{PKG4_NM}
+        ,#{PKG_HNM}
+        ,#{PKG_DESC}
+        ,CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
+        ,curdate()
+        ,#{REG_USR_ID}
+        ,curdate()
+        ,#{UPD_USR_ID}
+    )
+
+</insert>
+
+
+<delete id="deleteTabColInfo" parameterType="java.util.HashMap">
+    -- TermDao.deleteTabColInfo
+    DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
+</delete>
+
+<update id="updateTabColInfo" parameterType="java.util.HashMap">
+
+    -- TermDao.updateTabColInfo
+    UPDATE TDACM00010
+    SET  PKG2_NM      = #{PKG2_NM}
+        ,PKG3_NM      = #{PKG3_NM}
+        ,PKG4_NM      = #{PKG4_NM}
+        ,PKG_HNM      = #{PKG_HNM}
+        ,PKG_DESC     = #{PKG_DESC}
+        ,USE_YN       = CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
+        ,UPD_DTM      = curdate()
+        ,UPD_USR_ID  = #{UPD_USR_ID}
+    WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
+
+</update>
+
+
+<!-- 
+
+                              TableInfo
+
+ -->
+
+<select id="selectTabInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+
+	-- TermDao.selectTabInfoList
 	SELECT   PKG_FUL_NM
 			,PKG2_NM
 			,PKG3_NM
@@ -29,16 +124,16 @@
 	ORDER BY PKG_FUL_NM
 </select>
 
-<select id="selectTableInfoCnt" parameterType="java.util.HashMap" resultType="int">
-	-- TermDao.selectTableInfoCnt
+<select id="selectTabInfoCnt" parameterType="java.util.HashMap" resultType="int">
+	-- TermDao.selectTabInfoCnt
 	SELECT COUNT(*) CNT
 	FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
 </select>
 
-<insert id="insertTableInfo" parameterType="java.util.HashMap">
+<insert id="insertTabInfo" parameterType="java.util.HashMap">
 
-	-- TermDao.insertTableInfo
+	-- TermDao.insertTabInfo
 	INSERT INTO TDACM00010
 	(
 	     PKG_FUL_NM
@@ -69,14 +164,14 @@
 </insert>
 
 
-<delete id="deleteTableInfo" parameterType="java.util.HashMap">
-	-- TermDao.deleteTableInfo
+<delete id="deleteTabInfo" parameterType="java.util.HashMap">
+	-- TermDao.deleteTabInfo
 	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
 </delete>
 
-<update id="updateTableInfo" parameterType="java.util.HashMap">
+<update id="updateTabInfo" parameterType="java.util.HashMap">
 
-	-- TermDao.updateTableInfo
+	-- TermDao.updateTabInfo
 	UPDATE TDACM00010
 	SET  PKG2_NM      = #{PKG2_NM}
 		,PKG3_NM      = #{PKG3_NM}
