@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.pmosoft.fframe.dams.table.TableDao">
+
+<select id="selectTableInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+
+	-- TermDao.selectTableInfoList
+	SELECT   PKG_FUL_NM
+			,PKG2_NM
+			,PKG3_NM
+			,PKG4_NM
+			,PKG_HNM
+			,PKG_DESC
+			,USE_YN
+			,date_format(REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+			,REG_USR_ID
+			,date_format(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+			,UPD_USR_ID
+	FROM    TDACM00010
+    WHERE   PKG2_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      PKG3_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      PKG4_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      PKG_FUL_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      PKG_HNM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      PKG_DESC LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+	ORDER BY PKG_FUL_NM
+</select>
+
+<select id="selectTableInfoCnt" parameterType="java.util.HashMap" resultType="int">
+	-- TermDao.selectTableInfoCnt
+	SELECT COUNT(*) CNT
+	FROM   TDACM00010
+    WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
+</select>
+
+<insert id="insertTableInfo" parameterType="java.util.HashMap">
+
+	-- TermDao.insertTableInfo
+	INSERT INTO TDACM00010
+	(
+	     PKG_FUL_NM
+		,PKG2_NM
+		,PKG3_NM
+		,PKG4_NM
+		,PKG_HNM
+		,PKG_DESC
+		,USE_YN
+		,REG_DTM
+		,REG_USR_ID
+		,UPD_DTM
+		,UPD_USR_ID
+	) VALUES (
+         #{PKG_FUL_NM}
+		,#{PKG2_NM}
+		,#{PKG3_NM}
+		,#{PKG4_NM}
+		,#{PKG_HNM}
+		,#{PKG_DESC}
+		,CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
+		,curdate()
+		,#{REG_USR_ID}
+		,curdate()
+		,#{UPD_USR_ID}
+	)
+
+</insert>
+
+
+<delete id="deleteTableInfo" parameterType="java.util.HashMap">
+	-- TermDao.deleteTableInfo
+	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
+</delete>
+
+<update id="updateTableInfo" parameterType="java.util.HashMap">
+
+	-- TermDao.updateTableInfo
+	UPDATE TDACM00010
+	SET  PKG2_NM      = #{PKG2_NM}
+		,PKG3_NM      = #{PKG3_NM}
+		,PKG4_NM      = #{PKG4_NM}
+		,PKG_HNM      = #{PKG_HNM}
+		,PKG_DESC     = #{PKG_DESC}
+		,USE_YN       = CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
+		,UPD_DTM      = curdate()
+		,UPD_USR_ID  = #{UPD_USR_ID}
+	WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
+
+</update>
+
+
+</mapper>
