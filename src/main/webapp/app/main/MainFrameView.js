@@ -83,7 +83,11 @@ Ext.define('fframe.main.MainFrameView', {
 							text : '인포타입',
 							page : 'InfotypeList',
 							leaf : true
-						} ]
+						},{
+							text : '패키지',
+							page : 'PackInfoList',
+							leaf : true
+						}]
 					}, {
 						text : '테이블',
 						iconCls : 'x-fa fa-gift',

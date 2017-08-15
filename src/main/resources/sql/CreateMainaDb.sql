@@ -6,6 +6,11 @@ create database fframe;
 ---------------------------------
 -- 유저 생성
 ---------------------------------
+
+-- 모든 ip 허용
+create user 'fframe'@'%' identified by 'f1234';
+grant all privileges on fframe.* to 'fframe'@'%';
+
 create user 'fframe'@'localhost' identified by 'f1234';
 create user 'fframe'@'pmosoft.net' identified by 'f1234';
 create user 'fframe'@'182.228.242.133' identified by 'f1234'; -- cafe24 보안서버
