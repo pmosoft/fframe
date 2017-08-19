@@ -46,6 +46,7 @@ Ext.define('fframe.dams.table.ExtractTabColListView', {
                      viewModel.set("DB_NM"         ,record.get("DB_NM"         ));
                      viewModel.set("OWNER"         ,record.get("OWNER"         ));
                      viewModel.set("TAB_NM"        ,record.get("TAB_NM"        ));
+                     viewModel.set("COL_ID"        ,record.get("COL_ID"        ));
                      viewModel.set("COL_NM"        ,record.get("COL_NM"        ));
                      viewModel.set("COL_HNM"       ,record.get("COL_HNM"       ));
                      viewModel.set("COL_DESC"      ,record.get("COL_DESC"      ));
@@ -71,6 +72,7 @@ Ext.define('fframe.dams.table.ExtractTabColListView', {
              ,{text:'DB명'           , dataIndex:'DB_NM'          , style:'text-align:center' , flex:1}
              ,{text:'소유자'         , dataIndex:'OWNER'          , style:'text-align:center' , flex:1}
              ,{text:'테이블명'       , dataIndex:'TAB_NM'         , style:'text-align:center' , flex:1}
+             ,{text:'컬럼아이디'         , dataIndex:'COL_ID'         , style:'text-align:center' , flex:1}
              ,{text:'컬럼명'         , dataIndex:'COL_NM'         , style:'text-align:center' , flex:1}
              ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'        , style:'text-align:center' , flex:1}
              ,{text:'컬럼설명'       , dataIndex:'COL_DESC'       , style:'text-align:center' , flex:1}
@@ -83,7 +85,7 @@ Ext.define('fframe.dams.table.ExtractTabColListView', {
              ,{text:'변경일시'       , dataIndex:'UPD_DTM'        , style:'text-align:center' , flex:1}
              ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     , style:'text-align:center' , flex:1}
              ]
-            ,bind:{store:'{TabInfoList}'}
+            ,bind:{store:'{ExtractTabColList}'}
             ,bbar:{xtype:'pagingtoolbar' , plugins:'ux-progressbarpager' , displayInfo:true}
             // plugins : 'ux-slidingpager',
          }

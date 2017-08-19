@@ -26,7 +26,8 @@ public class TableCtrl {
     * selectMetaTabInfoList
     */
    @RequestMapping(value = "/dams/table/selectMetaTabInfoList")
-   public Map<String, Object> selectMetaTabInfoList(@RequestParam Map<String,String> params) { 
+   public Map<String, Object> selectMetaTabInfoList(@RequestParam Map<String,String> params) {
+       System.out.println("selectMetaTabInfoList");
        return tableSrv.selectMetaTabInfoList(params);
    }
 	
@@ -35,6 +36,7 @@ public class TableCtrl {
     */
    @RequestMapping(value = "/dams/table/selectMetaTabColInfoList")
    public Map<String, Object> selectMetaTabColInfoList(@RequestParam Map<String,String> params) { 
+       System.out.println("selectMetaTabColInfoList");
        return tableSrv.selectMetaTabColInfoList(params);
    }
 

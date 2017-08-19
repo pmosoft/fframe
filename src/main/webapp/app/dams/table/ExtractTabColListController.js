@@ -8,7 +8,11 @@ Ext.define('fframe.dams.table.ExtractTabColListController', {
     	var view = this.getView(); var viewModel = view.getViewModel();
         var store = viewModel.getStore(view['xtype']);
     	store.getProxy().setExtraParam("step","1");
-    	store.load();
+        store.load({
+            callback : function(data){
+                console.log(data);
+            }
+        });
      }
     ,cmpBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel();

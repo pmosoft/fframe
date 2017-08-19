@@ -1,5 +1,8 @@
 Ext.define('fframe.dams.pack.PackInfoRegView', {
-     extend:'Ext.window.Window' , xtype:'PackInfoReg' , controller:'PackInfoReg' , viewModel:'PackInfoReg'    
+     extend:'Ext.window.Window' 
+    ,xtype:'PackInfoReg' 
+    ,controller:'PackInfoReg' 
+    ,viewModel:'PackInfoReg'    
     ,layout : 'form'
     ,modal : true 
     ,frame : true

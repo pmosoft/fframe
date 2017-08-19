@@ -1,5 +1,6 @@
 Ext.define('fframe.dams.pack.PackInfoRegController', {
-     extend:'Ext.app.ViewController' , alias:'controller.PackInfoReg'
+     extend:'Ext.app.ViewController' 
+    ,alias:'controller.PackInfoReg'
     ,onLoadData : function(obj){
          var view = this.getView(); var viewModel = view.getViewModel();
          var store = viewModel.getStore(view['xtype']);

@@ -8,12 +8,47 @@
 
 <!--******************************************************** 
 **
+**                      MetaTablColInfo
+**
+*********************************************************-->
+
+<select id="selectMetaTabColInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    -- TableDao.selectMetaTabColInfoList
+    SELECT 
+           '추출'               AS STS_NM
+           ,'MARIADB'          AS DB_NM
+           ,A.TABLE_SCHEMA     AS OWNER
+           ,A.TABLE_NAME       AS TAB_NM
+           ,A.ORDINAL_POSITION AS COL_ID
+           ,A.COLUMN_NAME      AS COL_NM
+           ,A.COLUMN_COMMENT   AS COL_HNM
+           ,' '                AS COL_DESC
+           ,A.DATA_TYPE        AS DATA_TYPE_NM
+           ,CASE WHEN A.DATA_TYPE IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH
+                 WHEN A.DATA_TYPE IN ('INT','NUMERIC') THEN A.NUMERIC_PRECISION
+            END                AS LEN
+           ,A.NUMERIC_SCALE    AS DECIMAL_CNT 
+           ,A.COLUMN_TYPE      AS DATA_TYPE_DESC
+           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS REG_DTM
+           ,''                 AS REG_USR_ID
+           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS UPD_DTM
+           ,''                 AS UPD_USR_ID
+    FROM   INFORMATION_SCHEMA.COLUMNS A 
+    WHERE  1=1
+    AND    TABLE_NAME LIKE 'TD%'
+    AND    COLUMN_NAME LIKE '%'
+    ORDER BY A.TABLE_NAME,A.ORDINAL_POSITION    
+</select>
+
+
+<!--******************************************************** 
+**
 **                        TablColInfo
 **
 *********************************************************-->
 
 <select id="selectTabColInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    -- TermDao.selectTabColInfoList
+    -- TableDao.selectTabColInfoList
     SELECT   DB_NM
             ,OWNER
             ,TAB_NM
@@ -33,7 +68,7 @@
 </select>
 
 <select id="selectTabColInfoCnt" parameterType="java.util.HashMap" resultType="int">
-    -- TermDao.selectTabColInfoCnt
+    -- TableDao.selectTabColInfoCnt
     SELECT COUNT(*) CNT
     FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
@@ -41,7 +76,7 @@
 
 <insert id="insertTabColInfo" parameterType="java.util.HashMap">
 
-    -- TermDao.insertTabColInfo
+    -- TableDao.insertTabColInfo
     INSERT INTO TDACM00010
     (
          PKG_FUL_NM
@@ -73,13 +108,13 @@
 
 
 <delete id="deleteTabColInfo" parameterType="java.util.HashMap">
-    -- TermDao.deleteTabColInfo
+    -- TableDao.deleteTabColInfo
     DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
 </delete>
 
 <update id="updateTabColInfo" parameterType="java.util.HashMap">
 
-    -- TermDao.updateTabColInfo
+    -- TableDao.updateTabColInfo
     UPDATE TDACM00010
     SET  PKG2_NM      = #{PKG2_NM}
         ,PKG3_NM      = #{PKG3_NM}
@@ -102,7 +137,7 @@
 
 <select id="selectTabInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
-	-- TermDao.selectTabInfoList
+	-- TableDao.selectTabInfoList
 	SELECT   PKG_FUL_NM
 			,PKG2_NM
 			,PKG3_NM
@@ -125,7 +160,7 @@
 </select>
 
 <select id="selectTabInfoCnt" parameterType="java.util.HashMap" resultType="int">
-	-- TermDao.selectTabInfoCnt
+	-- TableDao.selectTabInfoCnt
 	SELECT COUNT(*) CNT
 	FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
@@ -133,7 +168,7 @@
 
 <insert id="insertTabInfo" parameterType="java.util.HashMap">
 
-	-- TermDao.insertTabInfo
+	-- TableDao.insertTabInfo
 	INSERT INTO TDACM00010
 	(
 	     PKG_FUL_NM
@@ -165,13 +200,13 @@
 
 
 <delete id="deleteTabInfo" parameterType="java.util.HashMap">
-	-- TermDao.deleteTabInfo
+	-- TableDao.deleteTabInfo
 	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
 </delete>
 
 <update id="updateTabInfo" parameterType="java.util.HashMap">
 
-	-- TermDao.updateTabInfo
+	-- TableDao.updateTabInfo
 	UPDATE TDACM00010
 	SET  PKG2_NM      = #{PKG2_NM}
 		,PKG3_NM      = #{PKG3_NM}

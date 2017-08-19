@@ -43,10 +43,12 @@ public class TableSrv {
 	
    public Map<String, Object> selectMetaTabColInfoList(Map<String,String> params){
 
+       System.out.println("SRV selectMetaTabColInfoList");
+       
        Map<String, Object> result = new HashMap<String, Object>();
        List<Map<String,Object>> list = null;
        try{
-           list = tableDao.selectMetaTabInfoList(params);;
+           list = tableDao.selectMetaTabColInfoList(params);;
            result.put("isSuccess", true);
            result.put("data", list);
        } catch (Exception e){

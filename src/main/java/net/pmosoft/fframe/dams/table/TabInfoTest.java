@@ -27,6 +27,17 @@ public class TabInfoTest {
 	@Autowired
 	private TableDao tableDao;
 
+    @Test
+    public void testTabInfoProcess() {
+        selectMetaTabColInfoList();
+    }
+	
+    @Test @Ignore
+    public void selectMetaTabColInfoList() {
+        Map<String, String> params = new HashMap<String, String>();
+        //tableDao.selectMetaTabColInfoList(params);
+        tableSrv.selectMetaTabColInfoList(params);
+    }
 
 	@Test @Ignore
 	public void testTabInfoCnt() {

@@ -1,5 +1,6 @@
 Ext.define('fframe.dams.table.TabColInfoRegController', {
-     extend:'Ext.app.ViewController' , alias:'controller.TabColInfoReg'
+     extend:'Ext.app.ViewController' 
+    ,alias:'controller.TabColInfoReg'
     ,onLoadData : function(obj){
          var view = this.getView(); var viewModel = view.getViewModel();
          var store = viewModel.getStore(view['xtype']);

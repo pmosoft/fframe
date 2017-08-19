@@ -1,13 +1,14 @@
 Ext.define('fframe.dams.table.ExtractTabColListStore', {
      extend: 'Ext.data.BufferedStore'
     ,alias: 'store.ExtractTabColList'
-    ,storedId : 'ExtractMetaTabInfo'
+    ,storedId : 'ExtractTabColList'
     ,autoLoad : false
     ,fields : [
                'STS_NM'
               ,'DB_NM'
               ,'OWNER'
               ,'TAB_NM'
+              ,'COL_ID'
               ,'COL_NM'
               ,'COL_HNM'
               ,'COL_DESC'
@@ -22,10 +23,11 @@ Ext.define('fframe.dams.table.ExtractTabColListStore', {
               ]
     ,proxy : {
          type : 'ajax'
-        ,url : '/dams/table/selectMetaTabInfo'
+        ,url : '/dams/table/selectMetaTabColInfoList'
         ,reader : {
-             type : 'json'
+             type : 'json' 
             ,rootProperty : 'data'
         }
     }
 });
+    

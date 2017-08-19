@@ -10,3 +10,5 @@ Ext.define('fframe.dams.table.ExtractTabColListModel', {
         }
      }
 });
+
+

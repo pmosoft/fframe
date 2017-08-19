@@ -1,5 +1,8 @@
 Ext.define('fframe.dams.table.TabColInfoRegView', {
-     extend:'Ext.window.Window' , xtype:'TabColInfoReg' , controller:'TabColInfoReg' , viewModel:'TabColInfoReg'
+     extend:'Ext.window.Window' 
+    ,xtype:'TabColInfoReg' 
+    ,controller:'TabColInfoReg' 
+    ,viewModel:'TabColInfoReg'
     ,layout : 'form'
     ,modal : true
     ,frame : true
