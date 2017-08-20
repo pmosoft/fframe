@@ -25,6 +25,7 @@ Ext.define('fframe.dams.table.TabColInfoListStore', {
         ,reader : {
              type : 'json'
             ,rootProperty : 'data'
+            .totalProperty : 'total'    
         }
     }
 });

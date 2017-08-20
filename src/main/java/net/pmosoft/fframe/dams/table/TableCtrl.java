@@ -32,7 +32,8 @@ public class TableCtrl {
    }
 	
    /**
-    * selectMetaTabColInfoList
+    * 메타테이블정보를 읽어서 메타임시테이블에 저장하고 메타임시테이블을 조회한다.
+    * step 1
     */
    @RequestMapping(value = "/dams/table/selectMetaTabColInfoList")
    public Map<String, Object> selectMetaTabColInfoList(@RequestParam Map<String,String> params) { 
@@ -40,7 +41,23 @@ public class TableCtrl {
        return tableSrv.selectMetaTabColInfoList(params);
    }
 
+   /**
+    * 메타임시테이블과 컬럼정보 테이블과 비교한 정보를 조회한다.
+    * extjs에서 store분리 방법 미파악으로 selectMetaTabColInfoList으로 임시적으로 처리
+    * step 2
+    */
+   @RequestMapping(value = "/dams/table/selectCmpTabColInfoList")
+   public Map<String, Object> selectCmpTabColInfoList(@RequestParam Map<String,String> params) { 
+       System.out.println("selectMetaTabColInfoList");
+       return tableSrv.selectMetaTabColInfoList(params);
+   }
    
+
+   @RequestMapping(value = "/dams/table/insertCmpTabColInfoList")
+   public Map<String, Object> insertCmpTabColInfoList(@RequestParam Map<String,String> params) { 
+       return tableSrv.insertCmpTabColInfoList(params);
+   }
+      
    
 	
     /**********************************************************************************

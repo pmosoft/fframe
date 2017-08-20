@@ -10,6 +10,19 @@ public interface TableDao {
 
 
     /**********************************************************************************
+    *
+    *                                  MetaTabColInfo
+    *
+    **********************************************************************************/
+    void deleteMetaTabColInfo(Map<String,String> params);
+    void insertMetaTabColInfoList(Map<String,String> params);
+    List<Map<String, Object>> selectMetaTabColInfoList(Map<String,String> params);
+    List<Map<String, Object>> selectCmpTabColInfoList(Map<String,String> params);
+
+    List<Map<String, Object>> selectMetaTabInfoList(Map<String,String> params);
+    void insertCmpTabColInfoList(Map<String,String> params);
+    
+    /**********************************************************************************
      *
      *                                  TabColInfo
      *
@@ -20,8 +33,6 @@ public interface TableDao {
     void deleteTabColInfo(Map<String,String> params);
     void updateTabColInfo(Map<String,String> params);
 
-    List<Map<String, Object>> selectMetaTabColInfoList(Map<String,String> params);
-    
 	/**********************************************************************************
 	 *
 	 *                                  TabInfo
@@ -33,7 +44,6 @@ public interface TableDao {
 	void deleteTabInfo(Map<String,String> params);
 	void updateTabInfo(Map<String,String> params);
 
-    List<Map<String, Object>> selectMetaTabInfoList(Map<String,String> params);
 	
 }
 

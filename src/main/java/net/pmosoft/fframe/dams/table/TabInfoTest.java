@@ -29,14 +29,26 @@ public class TabInfoTest {
 
     @Test
     public void testTabInfoProcess() {
+        Map<String, String> params = new HashMap<String, String>();
+        //tableDao.deleteMetaTabColInfo(params);        
+        //tableDao.insertMetaTabColInfoList(params);        
+
+        //tableDao.selectCmpTabColInfoList(params);        
+        //tableSrv.selectCmpTabColInfoList(params);
         selectMetaTabColInfoList();
+        //tableSrv.insertCmpTabColInfoList(params);
+
     }
 	
     @Test @Ignore
     public void selectMetaTabColInfoList() {
         Map<String, String> params = new HashMap<String, String>();
-        //tableDao.selectMetaTabColInfoList(params);
+        params.put("step", "1");
         tableSrv.selectMetaTabColInfoList(params);
+        
+        //tableDao.deleteMetaTabColInfo(params);        
+        //tableDao.insertMetaTabColInfoList(params);        
+        //tableDao.selectMetaTabColInfoList(params);        
     }
 
 	@Test @Ignore
@@ -79,7 +91,7 @@ public class TabInfoTest {
 		testTabInfoList();
 	}
 
-	@Test
+	@Test @Ignore
 	public void testDeleteTabInfo() {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");

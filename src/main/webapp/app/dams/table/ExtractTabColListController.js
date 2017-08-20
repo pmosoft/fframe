@@ -7,6 +7,8 @@ Ext.define('fframe.dams.table.ExtractTabColListController', {
     ,extBtn : function(btn) {
     	var view = this.getView(); var viewModel = view.getViewModel();
         var store = viewModel.getStore(view['xtype']);
+        console.log("view['xtype']="+view['xtype']);
+
     	store.getProxy().setExtraParam("step","1");
         store.load({
             callback : function(data){
@@ -15,13 +17,31 @@ Ext.define('fframe.dams.table.ExtractTabColListController', {
         });
      }
     ,cmpBtn : function(btn) {
-        var view = this.getView(); var viewModel = view.getViewModel();
+        var view = this.getView(); 
+        var viewModel = view.getViewModel();
         var store = viewModel.getStore(view['xtype']);
         store.getProxy().setExtraParam("step","2");
         store.load();
      }
     ,insBtn : function(btn) {
-    	var userReg = Ext.create("fframe.dams.table.TabColInfoRegView");
-    	userReg.show();
-     }
+        var view = this.getView(); var viewModel = view.getViewModel();
+        var params = viewModel.getData();
+        
+        Ext.Ajax.request({
+            url : '/dams/table/insertCmpTabColInfoList',
+            method : 'post',
+            params : params,
+            success : function(res){
+                var result = Ext.decode(res.responseText);
+                if(result['isSuccess']){
+                    //Ext.Msg.alert("알림",result['msg']);
+                    Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                } else {
+                    Ext.Msg.alert("알림",result['errUsrMsg']);
+                    //Ext.Msg.alert("알림",result['errSysMsg']);
+                    return;
+                }
+                
+            }
+        })     }
 });

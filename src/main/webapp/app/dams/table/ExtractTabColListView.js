@@ -72,7 +72,7 @@ Ext.define('fframe.dams.table.ExtractTabColListView', {
              ,{text:'DB명'           , dataIndex:'DB_NM'          , style:'text-align:center' , flex:1}
              ,{text:'소유자'         , dataIndex:'OWNER'          , style:'text-align:center' , flex:1}
              ,{text:'테이블명'       , dataIndex:'TAB_NM'         , style:'text-align:center' , flex:1}
-             ,{text:'컬럼아이디'         , dataIndex:'COL_ID'         , style:'text-align:center' , flex:1}
+             ,{text:'컬럼아이디'     , dataIndex:'COL_ID'         , style:'text-align:center' , flex:1}
              ,{text:'컬럼명'         , dataIndex:'COL_NM'         , style:'text-align:center' , flex:1}
              ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'        , style:'text-align:center' , flex:1}
              ,{text:'컬럼설명'       , dataIndex:'COL_DESC'       , style:'text-align:center' , flex:1}
@@ -86,8 +86,12 @@ Ext.define('fframe.dams.table.ExtractTabColListView', {
              ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     , style:'text-align:center' , flex:1}
              ]
             ,bind:{store:'{ExtractTabColList}'}
-            ,bbar:{xtype:'pagingtoolbar' , plugins:'ux-progressbarpager' , displayInfo:true}
-            // plugins : 'ux-slidingpager',
+            //,bbar : {
+            //     xtype : 'pagingtoolbar'
+            //    ,plugins : 'ux-progressbarpager'
+            //    //,plugins : 'ux-slidingpager',
+            //    ,displayInfo : true
+            // }
          }
      ]
 });

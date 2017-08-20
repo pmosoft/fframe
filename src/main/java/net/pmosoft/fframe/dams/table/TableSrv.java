@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Service
@@ -47,9 +48,19 @@ public class TableSrv {
        
        Map<String, Object> result = new HashMap<String, Object>();
        List<Map<String,Object>> list = null;
+       
+       String step = params.get("step");
+
+       
        try{
-           list = tableDao.selectMetaTabColInfoList(params);;
-           result.put("isSuccess", true);
+           if(step.equals("1")) {
+               tableDao.deleteMetaTabColInfo(params);
+               tableDao.insertMetaTabColInfoList(params);
+               list = tableDao.selectMetaTabColInfoList(params);;
+           } else if(step.equals("2")){
+               list = tableDao.selectCmpTabColInfoList(params);;
+           }    
+           result.put("isSuccess", true);           
            result.put("data", list);
        } catch (Exception e){
            result.put("isSuccess", false);
@@ -59,7 +70,40 @@ public class TableSrv {
        }
        return result;
    }	
-    
+   
+   public Map<String, Object> selectCmpTabColInfoList(@RequestParam Map<String,String> params) {
+
+       Map<String, Object> result = new HashMap<String, Object>();
+       List<Map<String,Object>> list = null;
+       try{
+           list = tableDao.selectCmpTabColInfoList(params);;
+           result.put("isSuccess", true);
+           result.put("data", list);
+       } catch (Exception e){
+           result.put("isSuccess", false);
+           result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+           result.put("errSysrMsg", e.getMessage());
+           e.printStackTrace();
+       }
+       return result;
+   }    
+
+   public Map<String, Object> insertCmpTabColInfoList(Map<String,String> params){
+
+       Map<String, Object> result = new HashMap<String, Object>();
+       
+       try{
+           tableDao.insertCmpTabColInfoList(params);
+           result.put("isSuccess", true);
+           result.put("msg", "입력 되었습니다");
+       } catch (Exception e){
+           e.printStackTrace();
+           result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+           //result.put("errSysMsg", e.toString());
+       }
+       return result;
+   }   
+   
     /**********************************************************************************
      *
      *                                  TabColInfo
@@ -69,7 +113,7 @@ public class TableSrv {
     public Map<String, Object> selectTabColInfoList(Map<String,String> params){
         System.out.println("start TabColInfoSrv selectTabColInfoList");
 
-        System.out.println("params221 searchValue="+params.get("searchValue"));
+        System.out.println("params433355 searchValue="+params.get("searchValue"));
 
         Map<String, Object> result = new HashMap<String, Object>();
 

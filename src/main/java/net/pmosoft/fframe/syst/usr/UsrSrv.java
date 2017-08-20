@@ -30,6 +30,7 @@ public class UsrSrv {
 			list = UsrDao.selectUsrList(params);;
 			result.put("isSuccess", true);
 			result.put("data", list);
+            result.put("total", list.size());			
 		} catch (Exception e){
 			result.put("isSuccess", false);
 			result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
@@ -38,7 +39,8 @@ public class UsrSrv {
 		}
 		return result;		
 	}
-
+ 
+	
 	public Map<String, Object> saveUsr(Map<String,String> params){
 
 		
