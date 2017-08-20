@@ -29,25 +29,25 @@ public class TermTest {
 
 
 	@Test @Ignore
-	public void testPackInfoCnt() {
+	public void testPackCnt() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
 		params.put("PKG_FUL_NM", "user");
-		termDao.selectPackInfoCnt(params);
+		termDao.selectPackCnt(params);
 	}
 
 	@Test @Ignore
-	public void testPackInfoList() {
+	public void testPackList() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchValue", "us");
 		//params.put("searchValue", "유저");
 		params.put("searchValue", "");
-		termSrv.selectPackInfoList(params);
-		//TermDao.selectPackInfoList(params);
+		termSrv.selectPackList(params);
+		//TermDao.selectPackList(params);
 	}
 
 	@Test @Ignore
-	public void testSavePackInfo() {
+	public void testSavePack() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
@@ -62,21 +62,21 @@ public class TermTest {
 
 		//TermDao.deleteUser(params);
 
-		Map<String, Object> result = termSrv.savePackInfo(params);
+		Map<String, Object> result = termSrv.savePack(params);
 
 		System.out.println(result);
-		testPackInfoList();
+		testPackList();
 	}
 
 	@Test
-	public void testDeletePackInfo() {
+	public void testDeletePack() {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
-		termSrv.deletePackInfo(params);
+		termSrv.deletePack(params);
 	}
 
 	@Test @Ignore
-	public void testInsertPackInfo() {
+	public void testInsertPack() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -90,15 +90,15 @@ public class TermTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		termDao.deletePackInfo(params);
+		termDao.deletePack(params);
 
-		termDao.insertPackInfo(params);
+		termDao.insertPack(params);
 
-		testPackInfoList();
+		testPackList();
 	}
 
 	@Test @Ignore
-	public void testUpdatePackInfo() {
+	public void testUpdatePack() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -112,9 +112,9 @@ public class TermTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		termDao.updatePackInfo(params);
+		termDao.updatePack(params);
 
-		testPackInfoList();
+		testPackList();
 	}
 
 

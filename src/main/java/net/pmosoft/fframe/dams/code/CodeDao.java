@@ -11,14 +11,14 @@ public interface CodeDao {
 
 	/**********************************************************************************
 	 *
-	 *                                  CodeInfo
+	 *                                  Code
 	 *
 	 **********************************************************************************/
-	List<Map<String, Object>> selectCodeInfoList(Map<String,String> params);
-	int selectCodeInfoCnt(Map<String,String> params);
-	void insertCodeInfo(Map<String,String> params);
-	void deleteCodeInfo(Map<String,String> params);
-	void updateCodeInfo(Map<String,String> params);
+	List<Map<String, Object>> selectCodeList(Map<String,String> params);
+	int selectCodeCnt(Map<String,String> params);
+	void insertCode(Map<String,String> params);
+	void deleteCode(Map<String,String> params);
+	void updateCode(Map<String,String> params);
 
 }
 

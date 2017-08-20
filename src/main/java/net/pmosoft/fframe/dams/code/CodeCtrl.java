@@ -17,32 +17,32 @@ public class CodeCtrl {
 
 	/**********************************************************************************
 	 *
-	 *                                  CodeInfo
+	 *                                  Code
 	 *
 	 **********************************************************************************/
 
 	/**
-	 * selectcCodeInfoList
+	 * selectcCodeList
 	 */
-	@RequestMapping(value = "/dams/code/selectCodeInfoList")
-	public Map<String, Object> selectCodeInfoList(@RequestParam Map<String,String> params) {
-		return codeSrv.selectCodeInfoList(params);
+	@RequestMapping(value = "/dams/code/selectCodeList")
+	public Map<String, Object> selectCodeList(@RequestParam Map<String,String> params) {
+		return codeSrv.selectCodeList(params);
 	}
 
 	/**
-	 * saveCodeInfo
+	 * saveCode
 	 */
-	@RequestMapping(value = "/dams/code/saveCodeInfo")
-	public Map<String, Object> saveCodeInfo(@RequestParam Map<String,String> params) {
-		return codeSrv.saveCodeInfo(params);
+	@RequestMapping(value = "/dams/code/saveCode")
+	public Map<String, Object> saveCode(@RequestParam Map<String,String> params) {
+		return codeSrv.saveCode(params);
 	}
 
 	/**
-	 * deleteCodeInfo
+	 * deleteCode
 	 */
-	@RequestMapping(value = "/dams/code/deleteCodeInfo")
-	public Map<String, Object> deleteCodeInfo(@RequestParam Map<String,String> params) {
-		return codeSrv.deleteCodeInfo(params);
+	@RequestMapping(value = "/dams/code/deleteCode")
+	public Map<String, Object> deleteCode(@RequestParam Map<String,String> params) {
+		return codeSrv.deleteCode(params);
 	}
 
 }

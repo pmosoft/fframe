@@ -161,7 +161,7 @@ Ext.define('fframe.syst.usr.UsrListView', {
 	    	xtype : 'pagingtoolbar',
 	    	plugins : 'ux-progressbarpager',
 	    	// plugins : 'ux-slidingpager',
-	    	displayInfo : true
+	    	display : true
 	    }    
     }]
 });

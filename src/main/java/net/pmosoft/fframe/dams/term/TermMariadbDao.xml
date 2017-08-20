@@ -5,9 +5,9 @@
 
 <mapper namespace="net.pmosoft.fframe.dams.term.TermDao">
 
-<select id="selectPackInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+<select id="selectPackList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
-	-- TermDao.selectPackInfoList
+	-- TermDao.selectPackList
 	SELECT   PKG_FUL_NM
 			,PKG2_NM
 			,PKG3_NM
@@ -29,16 +29,16 @@
 	ORDER BY PKG_FUL_NM
 </select>
 
-<select id="selectPackInfoCnt" parameterType="java.util.HashMap" resultType="int">
-	-- TermDao.selectPackInfoCnt
+<select id="selectPackCnt" parameterType="java.util.HashMap" resultType="int">
+	-- TermDao.selectPackCnt
 	SELECT COUNT(*) CNT
 	FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
 </select>
 
-<insert id="insertPackInfo" parameterType="java.util.HashMap">
+<insert id="insertPack" parameterType="java.util.HashMap">
 
-	-- TermDao.insertPackInfo
+	-- TermDao.insertPack
 	INSERT INTO TDACM00010
 	(
 	     PKG_FUL_NM
@@ -69,14 +69,14 @@
 </insert>
 
 
-<delete id="deletePackInfo" parameterType="java.util.HashMap">
-	-- TermDao.deletePackInfo
+<delete id="deletePack" parameterType="java.util.HashMap">
+	-- TermDao.deletePack
 	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
 </delete>
 
-<update id="updatePackInfo" parameterType="java.util.HashMap">
+<update id="updatePack" parameterType="java.util.HashMap">
 
-	-- TermDao.updatePackInfo
+	-- TermDao.updatePack
 	UPDATE TDACM00010
 	SET  PKG2_NM      = #{PKG2_NM}
 		,PKG3_NM      = #{PKG3_NM}

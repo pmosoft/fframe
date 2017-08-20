@@ -10,27 +10,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Service
-public class TableSrv {
+public class TabSrv {
 
 	@Autowired
-	private TableDao tableDao;
+	private TabDao tabDao;
 
 	@Autowired
-	private TableValidatorSrv tableValidatorSrv;
+	private TabValidatorSrv tabValidatorSrv;
 
 
     /**********************************************************************************
     *
-    *                                ExtractMetaTabInfo
+    *                                ExtractMetaTab
     *
     **********************************************************************************/
 
-   public Map<String, Object> selectMetaTabInfoList(Map<String,String> params){
+   public Map<String, Object> selectMetaTabList(Map<String,String> params){
 
        Map<String, Object> result = new HashMap<String, Object>();
        List<Map<String,Object>> list = null;
        try{
-           list = tableDao.selectMetaTabInfoList(params);;
+           list = tabDao.selectMetaTabList(params);;
            result.put("isSuccess", true);
            result.put("data", list);
        } catch (Exception e){
@@ -42,9 +42,9 @@ public class TableSrv {
        return result;
    }
 	
-   public Map<String, Object> selectMetaTabColInfoList(Map<String,String> params){
+   public Map<String, Object> selectMetaTabColList(Map<String,String> params){
 
-       System.out.println("SRV selectMetaTabColInfoList");
+       System.out.println("SRV selectMetaTabColList");
        
        Map<String, Object> result = new HashMap<String, Object>();
        List<Map<String,Object>> list = null;
@@ -54,11 +54,11 @@ public class TableSrv {
        
        try{
            if(step.equals("1")) {
-               tableDao.deleteMetaTabColInfo(params);
-               tableDao.insertMetaTabColInfoList(params);
-               list = tableDao.selectMetaTabColInfoList(params);;
+               tabDao.deleteMetaTabCol(params);
+               tabDao.insertMetaTabColList(params);
+               list = tabDao.selectMetaTabColList(params);;
            } else if(step.equals("2")){
-               list = tableDao.selectCmpTabColInfoList(params);;
+               list = tabDao.selectCmpTabColList(params);;
            }    
            result.put("isSuccess", true);           
            result.put("data", list);
@@ -71,12 +71,12 @@ public class TableSrv {
        return result;
    }	
    
-   public Map<String, Object> selectCmpTabColInfoList(@RequestParam Map<String,String> params) {
+   public Map<String, Object> selectCmpTabColList(@RequestParam Map<String,String> params) {
 
        Map<String, Object> result = new HashMap<String, Object>();
        List<Map<String,Object>> list = null;
        try{
-           list = tableDao.selectCmpTabColInfoList(params);;
+           list = tabDao.selectCmpTabColList(params);;
            result.put("isSuccess", true);
            result.put("data", list);
        } catch (Exception e){
@@ -88,12 +88,12 @@ public class TableSrv {
        return result;
    }    
 
-   public Map<String, Object> insertCmpTabColInfoList(Map<String,String> params){
+   public Map<String, Object> insertCmpTabColList(Map<String,String> params){
 
        Map<String, Object> result = new HashMap<String, Object>();
        
        try{
-           tableDao.insertCmpTabColInfoList(params);
+           tabDao.insertCmpTabColList(params);
            result.put("isSuccess", true);
            result.put("msg", "입력 되었습니다");
        } catch (Exception e){
@@ -106,12 +106,12 @@ public class TableSrv {
    
     /**********************************************************************************
      *
-     *                                  TabColInfo
+     *                                  TabCol
      *
      **********************************************************************************/
 
-    public Map<String, Object> selectTabColInfoList(Map<String,String> params){
-        System.out.println("start TabColInfoSrv selectTabColInfoList");
+    public Map<String, Object> selectTabColList(Map<String,String> params){
+        System.out.println("start TabColSrv selectTabColList");
 
         System.out.println("params433355 searchValue="+params.get("searchValue"));
 
@@ -119,7 +119,7 @@ public class TableSrv {
 
         List<Map<String,Object>> list = null;
         try{
-            list = tableDao.selectTabColInfoList(params);;
+            list = tabDao.selectTabColList(params);;
             result.put("isSuccess", true);
             result.put("data", list);
         } catch (Exception e){
@@ -131,21 +131,21 @@ public class TableSrv {
         return result;
     }
 
-    public Map<String, Object> saveTabColInfo(Map<String,String> params){
+    public Map<String, Object> saveTabCol(Map<String,String> params){
 
 
-        System.out.println(tableDao.selectTabColInfoCnt(params));
+        System.out.println(tabDao.selectTabColCnt(params));
 
         Map<String, Object> result = new HashMap<String, Object>();
 
         Map<String, String> errors = new HashMap<String, String>();
-        errors = tableValidatorSrv.validateSaveTabColInfo(params);
+        errors = tabValidatorSrv.validateSaveTabCol(params);
 
         System.out.println("11");
         if(errors.size()>0){
             System.out.println("22");
 
-            //model.addAttribute("tbTabColInfo", tbTabColInfo);
+            //model.addAttribute("tbTabCol", tbTabCol);
             result.put("isSuccess", false);
             result.put("errUserMsg", errors.get("errUserMsg"));
             return result;
@@ -155,11 +155,11 @@ public class TableSrv {
             try{
                 result.put("isSuccess", true);
 
-                if  (tableDao.selectTabColInfoCnt(params)==0) {
-                    tableDao.insertTabColInfo(params);
+                if  (tabDao.selectTabColCnt(params)==0) {
+                    tabDao.insertTabCol(params);
                     result.put("msg", "입력 되었습니다");
                 } else {
-                    tableDao.updateTabColInfo(params);
+                    tabDao.updateTabCol(params);
                     result.put("msg", "갱신 되었습니다");
                 }
             } catch (Exception e){
@@ -171,20 +171,20 @@ public class TableSrv {
         }
     }
 
-    public Map<String, Object> deleteTabColInfo(Map<String,String> params){
+    public Map<String, Object> deleteTabCol(Map<String,String> params){
 
         Map<String, Object> result = new HashMap<String, Object>();
 
         Map<String, String> errors = new HashMap<String, String>();
-        errors = tableValidatorSrv.validateDeleteTabColInfo(params);
+        errors = tabValidatorSrv.validateDeleteTabCol(params);
         if(errors.size()>0){
-            //model.addAttribute("tbTabColInfo", tbTabColInfo);
+            //model.addAttribute("tbTabCol", tbTabCol);
             result.put("isSuccess", false);
             result.put("errUserMsg", errors.get("errUserMsg"));
             System.out.println(result);
             return result;
         } else {
-            tableDao.deleteTabColInfo(params);
+            tabDao.deleteTabCol(params);
             result.put("isSuccess", true);
             result.put("msg", "삭제 되었습니다");
             return result;
@@ -194,12 +194,12 @@ public class TableSrv {
 	
 	/**********************************************************************************
 	 *
-	 *                                  TabInfo
+	 *                                  Tab
 	 *
 	 **********************************************************************************/
 
-	public Map<String, Object> selectTabInfoList(Map<String,String> params){
-		System.out.println("start TabInfoSrv selectTabInfoList");
+	public Map<String, Object> selectTabList(Map<String,String> params){
+		System.out.println("start TabSrv selectTabList");
 
 		System.out.println("params221 searchValue="+params.get("searchValue"));
 
@@ -207,7 +207,7 @@ public class TableSrv {
 
 		List<Map<String,Object>> list = null;
 		try{
-			list = tableDao.selectTabInfoList(params);;
+			list = tabDao.selectTabList(params);;
 			result.put("isSuccess", true);
 			result.put("data", list);
 		} catch (Exception e){
@@ -219,21 +219,21 @@ public class TableSrv {
 		return result;
 	}
 
-	public Map<String, Object> saveTabInfo(Map<String,String> params){
+	public Map<String, Object> saveTab(Map<String,String> params){
 
 
-		System.out.println(tableDao.selectTabInfoCnt(params));
+		System.out.println(tabDao.selectTabCnt(params));
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = tableValidatorSrv.validateSaveTabInfo(params);
+		errors = tabValidatorSrv.validateSaveTab(params);
 
 		System.out.println("11");
 		if(errors.size()>0){
 			System.out.println("22");
 
-			//model.addAttribute("tbTabInfo", tbTabInfo);
+			//model.addAttribute("tbTab", tbTab);
 			result.put("isSuccess", false);
 			result.put("errUserMsg", errors.get("errUserMsg"));
 			return result;
@@ -243,11 +243,11 @@ public class TableSrv {
 			try{
 		    	result.put("isSuccess", true);
 
-			    if  (tableDao.selectTabInfoCnt(params)==0) {
-			    	tableDao.insertTabInfo(params);
+			    if  (tabDao.selectTabCnt(params)==0) {
+			    	tabDao.insertTab(params);
 			    	result.put("msg", "입력 되었습니다");
 			    } else {
-			    	tableDao.updateTabInfo(params);
+			    	tabDao.updateTab(params);
 			    	result.put("msg", "갱신 되었습니다");
 			    }
 			} catch (Exception e){
@@ -259,20 +259,20 @@ public class TableSrv {
 		}
 	}
 
-	public Map<String, Object> deleteTabInfo(Map<String,String> params){
+	public Map<String, Object> deleteTab(Map<String,String> params){
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = tableValidatorSrv.validateDeleteTabInfo(params);
+		errors = tabValidatorSrv.validateDeleteTab(params);
 		if(errors.size()>0){
-			//model.addAttribute("tbTabInfo", tbTabInfo);
+			//model.addAttribute("tbTab", tbTab);
 			result.put("isSuccess", false);
 			result.put("errUserMsg", errors.get("errUserMsg"));
 			System.out.println(result);
 			return result;
 		} else {
-			tableDao.deleteTabInfo(params);
+			tabDao.deleteTab(params);
 			result.put("isSuccess", true);
 			result.put("msg", "삭제 되었습니다");
 			return result;

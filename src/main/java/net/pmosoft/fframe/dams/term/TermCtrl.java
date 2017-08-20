@@ -17,32 +17,32 @@ public class TermCtrl {
 
 	/**********************************************************************************
 	 *
-	 *                                  PackInfo
+	 *                                  Pack
 	 *
 	 **********************************************************************************/
 
 	/**
-	 * selectcPackInfoList
+	 * selectcPackList
 	 */
-	@RequestMapping(value = "/dams/pack/selectPackInfoList")
-	public Map<String, Object> selectPackInfoList(@RequestParam Map<String,String> params) {
-		return termSrv.selectPackInfoList(params);
+	@RequestMapping(value = "/dams/pack/selectPackList")
+	public Map<String, Object> selectPackList(@RequestParam Map<String,String> params) {
+		return termSrv.selectPackList(params);
 	}
 
 	/**
-	 * savePackInfo
+	 * savePack
 	 */
-	@RequestMapping(value = "/dams/pack/savePackInfo")
-	public Map<String, Object> savePackInfo(@RequestParam Map<String,String> params) {
-		return termSrv.savePackInfo(params);
+	@RequestMapping(value = "/dams/pack/savePack")
+	public Map<String, Object> savePack(@RequestParam Map<String,String> params) {
+		return termSrv.savePack(params);
 	}
 
 	/**
-	 * deletePackInfo
+	 * deletePack
 	 */
-	@RequestMapping(value = "/dams/pack/deletePackInfo")
-	public Map<String, Object> deletePackInfo(@RequestParam Map<String,String> params) {
-		return termSrv.deletePackInfo(params);
+	@RequestMapping(value = "/dams/pack/deletePack")
+	public Map<String, Object> deletePack(@RequestParam Map<String,String> params) {
+		return termSrv.deletePack(params);
 	}
 
 }

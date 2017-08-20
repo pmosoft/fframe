@@ -1,11 +1,11 @@
-Ext.define('fframe.dams.table.ExtractTabColListModel', {
+Ext.define('fframe.dams.table.ExtMetaTabColListModel', {
      extend: 'Ext.app.ViewModel'
-    ,alias: 'viewmodel.ExtractTabColList'
+    ,alias: 'viewmodel.ExtMetaTabColList'
     ,data : {
     	searchValue : ''
      }
     ,stores : {
-        ExtractTabColList : {
+        ExtMetaTabColList : {
              fields : [
                        'STS_NM'
                       ,'DB_NM'
@@ -26,7 +26,7 @@ Ext.define('fframe.dams.table.ExtractTabColListModel', {
                       ]
             ,proxy : {
                  type : 'ajax'
-                ,url : '/dams/table/selectMetaTabColInfoList'
+                ,url : '/dams/table/selectMetaTabColList'
                 ,reader : {
                      type : 'json' 
                     ,rootProperty : 'data'

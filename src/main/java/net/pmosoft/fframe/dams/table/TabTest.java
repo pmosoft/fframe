@@ -19,35 +19,58 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = FframeApplication.class)
-public class TabColInfoTest {
+public class TabTest {
 
 	@Autowired
-	private TableSrv tableSrv;
+	private TabSrv tabSrv;
 
 	@Autowired
-	private TableDao tableDao;
+	private TabDao tabDao;
 
+    @Test
+    public void testTabProcess() {
+        Map<String, String> params = new HashMap<String, String>();
+        //tableDao.deleteMetaTabCol(params);        
+        //tableDao.insertMetaTabColList(params);        
+
+        //tableDao.selectCmpTabColList(params);        
+        //tableSrv.selectCmpTabColList(params);
+        selectMetaTabColList();
+        //tableSrv.insertCmpTabColList(params);
+
+    }
+	
+    @Test @Ignore
+    public void selectMetaTabColList() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("step", "1");
+        tabSrv.selectMetaTabColList(params);
+        
+        //tableDao.deleteMetaTabCol(params);        
+        //tableDao.insertMetaTabColList(params);        
+        //tableDao.selectMetaTabColList(params);        
+    }
 
 	@Test @Ignore
-	public void testTabInfoCnt() {
+	public void testTabCnt() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
 		params.put("PKG_FUL_NM", "user");
-		tableDao.selectTabInfoCnt(params);
+		tabDao.selectTabCnt(params);
 	}
 
-	@Test
-	public void testTabInfoList() {
+	@Test @Ignore
+	public void testTabList() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchValue", "us");
 		//params.put("searchValue", "유저");
 		params.put("searchValue", "");
-		tableSrv.selectTabColInfoList(params);
-		//TermDao.selectTabInfoList(params);
+		tabSrv.selectTabList(params);
+		//TermDao.selectTabList(params);
 	}
 
 	@Test @Ignore
-	public void testSaveTabInfo() {
+	public void testSaveTab() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
@@ -62,21 +85,21 @@ public class TabColInfoTest {
 
 		//TermDao.deleteUser(params);
 
-		Map<String, Object> result = tableSrv.saveTabInfo(params);
+		Map<String, Object> result = tabSrv.saveTab(params);
 
 		System.out.println(result);
-		testTabInfoList();
+		testTabList();
 	}
 
 	@Test @Ignore
-	public void testDeleteTabInfo() {
+	public void testDeleteTab() {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
-		tableSrv.deleteTabInfo(params);
+		tabSrv.deleteTab(params);
 	}
 
 	@Test @Ignore
-	public void testInsertTabInfo() {
+	public void testInsertTab() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -90,15 +113,15 @@ public class TabColInfoTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		tableDao.deleteTabInfo(params);
+		tabDao.deleteTab(params);
 
-		tableDao.insertTabInfo(params);
+		tabDao.insertTab(params);
 
-		testTabInfoList();
+		testTabList();
 	}
 
 	@Test @Ignore
-	public void testUpdateTabInfo() {
+	public void testUpdateTab() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -112,9 +135,9 @@ public class TabColInfoTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		tableDao.updateTabInfo(params);
+		tabDao.updateTab(params);
 
-		testTabInfoList();
+		testTabList();
 	}
 
 

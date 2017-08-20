@@ -19,12 +19,12 @@ public class TermSrv {
 
 	/**********************************************************************************
 	 *
-	 *                                  PackInfo
+	 *                                  Pack
 	 *
 	 **********************************************************************************/
 
-	public Map<String, Object> selectPackInfoList(Map<String,String> params){
-		System.out.println("start PackInfoSrv selectPackInfoList");
+	public Map<String, Object> selectPackList(Map<String,String> params){
+		System.out.println("start PackSrv selectPackList");
 
 		System.out.println("params221 searchValue="+params.get("searchValue"));
 
@@ -32,7 +32,7 @@ public class TermSrv {
 
 		List<Map<String,Object>> list = null;
 		try{
-			list = termDao.selectPackInfoList(params);;
+			list = termDao.selectPackList(params);;
 			result.put("isSuccess", true);
 			result.put("data", list);
 		} catch (Exception e){
@@ -44,21 +44,21 @@ public class TermSrv {
 		return result;
 	}
 
-	public Map<String, Object> savePackInfo(Map<String,String> params){
+	public Map<String, Object> savePack(Map<String,String> params){
 
 
-		System.out.println(termDao.selectPackInfoCnt(params));
+		System.out.println(termDao.selectPackCnt(params));
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = termValidatorSrv.validateSavePackInfo(params);
+		errors = termValidatorSrv.validateSavePack(params);
 
 		System.out.println("11");
 		if(errors.size()>0){
 			System.out.println("22");
 
-			//model.addAttribute("tbPackInfo", tbPackInfo);
+			//model.addAttribute("tbPack", tbPack);
 			result.put("isSuccess", false);
 			result.put("errUserMsg", errors.get("errUserMsg"));
 			return result;
@@ -68,11 +68,11 @@ public class TermSrv {
 			try{
 		    	result.put("isSuccess", true);
 
-			    if  (termDao.selectPackInfoCnt(params)==0) {
-			    	termDao.insertPackInfo(params);
+			    if  (termDao.selectPackCnt(params)==0) {
+			    	termDao.insertPack(params);
 			    	result.put("msg", "입력 되었습니다");
 			    } else {
-			    	termDao.updatePackInfo(params);
+			    	termDao.updatePack(params);
 			    	result.put("msg", "갱신 되었습니다");
 			    }
 			} catch (Exception e){
@@ -84,20 +84,20 @@ public class TermSrv {
 		}
 	}
 
-	public Map<String, Object> deletePackInfo(Map<String,String> params){
+	public Map<String, Object> deletePack(Map<String,String> params){
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = termValidatorSrv.validateDeletePackInfo(params);
+		errors = termValidatorSrv.validateDeletePack(params);
 		if(errors.size()>0){
-			//model.addAttribute("tbPackInfo", tbPackInfo);
+			//model.addAttribute("tbPack", tbPack);
 			result.put("isSuccess", false);
 			result.put("errUserMsg", errors.get("errUserMsg"));
 			System.out.println(result);
 			return result;
 		} else {
-			termDao.deletePackInfo(params);
+			termDao.deletePack(params);
 			result.put("isSuccess", true);
 			result.put("msg", "삭제 되었습니다");
 			return result;

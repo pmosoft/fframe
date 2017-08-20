@@ -1,8 +1,8 @@
-Ext.define('fframe.dams.table.ExtractTabColListView', {
+Ext.define('fframe.dams.table.ExtMetaTabColListView', {
      extend: 'Ext.form.Panel'
-    ,xtype: 'ExtractTabColList'
-    ,controller: 'ExtractTabColList'
-    ,viewModel: 'ExtractTabColList'
+    ,xtype: 'ExtMetaTabColList'
+    ,controller: 'ExtMetaTabColList'
+    ,viewModel: 'ExtMetaTabColList'
     ,listeners : {
         resize : 'setGridHeight'
     }
@@ -36,7 +36,7 @@ Ext.define('fframe.dams.table.ExtractTabColListView', {
             ,columnLines : true
             ,listeners : {
                  celldblclick : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts){
-                     var userReg = Ext.create("fframe.dams.table.TabInfoRegView");
+                     var userReg = Ext.create("fframe.dams.table.TabRegView");
                      var viewModel = userReg.getViewModel();
 
                      var USE_YN = record.get("USE_YN");
@@ -85,12 +85,12 @@ Ext.define('fframe.dams.table.ExtractTabColListView', {
              ,{text:'변경일시'       , dataIndex:'UPD_DTM'        , style:'text-align:center' , flex:1}
              ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     , style:'text-align:center' , flex:1}
              ]
-            ,bind:{store:'{ExtractTabColList}'}
+            ,bind:{store:'{ExtMetaTabColList}'}
             //,bbar : {
             //     xtype : 'pagingtoolbar'
             //    ,plugins : 'ux-progressbarpager'
             //    //,plugins : 'ux-slidingpager',
-            //    ,displayInfo : true
+            //    ,display : true
             // }
          }
      ]

@@ -81,11 +81,11 @@ Ext.define('fframe.main.MainFrameView', {
 							leaf : true
 						},{
 							text : '인포타입',
-							page : 'InfotypeList',
+							page : 'typeList',
 							leaf : true
 						},{
 							text : '패키지',
-							page : 'PackInfoList',
+							page : 'PackList',
 							leaf : true
 						}]
 					}, {
@@ -96,15 +96,15 @@ Ext.define('fframe.main.MainFrameView', {
 						children : [ 
 			            {
 							text : '테이블컬럼목록',
-							page : 'TabColInfoList',
+							page : 'TabColList',
 							leaf : true
 						},{
 							text : '테이블목록',
-							page : 'TabInfoList',
+							page : 'TabList',
 							leaf : true
 						},{
 							text : '테이블정보추출',
-							page : 'ExtractTabColList',
+							page : 'ExtMetaTabColList',
 							leaf : true
 						} ]
 					}, {

@@ -29,25 +29,25 @@ public class CodeTest {
 
 
 	@Test @Ignore
-	public void testCodeInfoCnt() {
+	public void testCodeCnt() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
 		params.put("PKG_FUL_NM", "user");
-		codeDao.selectCodeInfoCnt(params);
+		codeDao.selectCodeCnt(params);
 	}
 
 	@Test @Ignore
-	public void testCodeInfoList() {
+	public void testCodeList() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchValue", "us");
 		//params.put("searchValue", "유저");
 		params.put("searchValue", "");
-		codeSrv.selectCodeInfoList(params);
-		//TermDao.selectCodeInfoList(params);
+		codeSrv.selectCodeList(params);
+		//TermDao.selectCodeList(params);
 	}
 
 	@Test @Ignore
-	public void testSaveCodeInfo() {
+	public void testSaveCode() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
@@ -62,21 +62,21 @@ public class CodeTest {
 
 		//TermDao.deleteUser(params);
 
-		Map<String, Object> result = codeSrv.saveCodeInfo(params);
+		Map<String, Object> result = codeSrv.saveCode(params);
 
 		System.out.println(result);
-		testCodeInfoList();
+		testCodeList();
 	}
 
 	@Test
-	public void testDeleteCodeInfo() {
+	public void testDeleteCode() {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
-		codeSrv.deleteCodeInfo(params);
+		codeSrv.deleteCode(params);
 	}
 
 	@Test @Ignore
-	public void testInsertCodeInfo() {
+	public void testInsertCode() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -90,15 +90,15 @@ public class CodeTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		codeDao.deleteCodeInfo(params);
+		codeDao.deleteCode(params);
 
-		codeDao.insertCodeInfo(params);
+		codeDao.insertCode(params);
 
-		testCodeInfoList();
+		testCodeList();
 	}
 
 	@Test @Ignore
-	public void testUpdateCodeInfo() {
+	public void testUpdateCode() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -112,9 +112,9 @@ public class CodeTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		codeDao.updateCodeInfo(params);
+		codeDao.updateCode(params);
 
-		testCodeInfoList();
+		testCodeList();
 	}
 
 

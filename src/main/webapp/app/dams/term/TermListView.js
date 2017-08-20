@@ -75,7 +75,7 @@ Ext.define('fframe.dams.term.TermListView', {
              ,{text:'변경자'       , dataIndex:'UPD_USR_ID' , style:'text-align:center' , flex:1}
              ]
             ,bind:{store:'{TermList}'}
-            ,bbar:{xtype:'pagingtoolbar' , plugins:'ux-progressbarpager' , displayInfo:true}
+            ,bbar:{xtype:'pagingtoolbar' , plugins:'ux-progressbarpager' , display:true}
             // plugins : 'ux-slidingpager',
          }
      ]

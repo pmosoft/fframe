@@ -1,6 +1,6 @@
-Ext.define('fframe.dams.pack.PackInfoListController', {
+Ext.define('fframe.dams.pack.PackListController', {
      extend : 'Ext.app.ViewController'
-    ,alias : 'controller.PackInfoList'
+    ,alias : 'controller.PackList'
     ,setGridHeight : function(obj){ 
          obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
      }
@@ -17,7 +17,7 @@ Ext.define('fframe.dams.pack.PackInfoListController', {
     	});
      }
     ,insBtn : function(btn) {
-    	var userReg = Ext.create("fframe.dams.pack.PackInfoRegView");
+    	var userReg = Ext.create("fframe.dams.pack.PackRegView");
     	userReg.show();
      }
     ,delBtn : function(btn) {

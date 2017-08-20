@@ -1,7 +1,7 @@
-Ext.define('fframe.dams.table.ExtractTabColListStore', {
+Ext.define('fframe.dams.table.ExtMetaTabColListStore', {
      extend: 'Ext.data.BufferedStore'
-    ,alias: 'store.ExtractTabColList'
-    ,storedId : 'ExtractTabColList'
+    ,alias: 'store.ExtMetaTabColList'
+    ,storedId : 'ExtMetaTabColList'
     ,autoLoad : false
     ,fields : [
                'STS_NM'
@@ -23,7 +23,7 @@ Ext.define('fframe.dams.table.ExtractTabColListStore', {
               ]
     ,proxy : {
          type : 'ajax'
-        ,url : '/dams/table/selectMetaTabColInfoList'
+        ,url : '/dams/table/selectMetaTabColList'
         ,reader : {
              type : 'json' 
             ,rootProperty : 'data'

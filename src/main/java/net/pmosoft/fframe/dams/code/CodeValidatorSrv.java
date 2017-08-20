@@ -18,42 +18,42 @@ public class CodeValidatorSrv {
 	//String configLocation = "classpath:springJdbcOracle.xml"; // src/main/resources/springJdbcOracle.xml
 	//AbstractApplicationContext ctx = new GenericXmlApplicationContext(configLocation);
 	//WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(((HttpServletRequest) request).getSession().getServletContext());
-	//CodeInfoDao CodeInfoDao = ctx.getBean("CodeInfoDao",CodeInfoDao.class);
+	//CodeDao CodeDao = ctx.getBean("CodeDao",CodeDao.class);
     //@Autowired
     //private WebApplicationContext webContext; // WebApplicationContext 주입
 
-    //CodeInfoDao CodeInfoDao = webContext.getBean("CodeInfoDao",CodeInfoDao.class);
+    //CodeDao CodeDao = webContext.getBean("CodeDao",CodeDao.class);
 
-	public Map<String, String> validateSaveCodeInfo(Map<String, String> target) {
+	public Map<String, String> validateSaveCode(Map<String, String> target) {
 
-		System.out.println("validateSaveCodeInfo");
+		System.out.println("validateSaveCode");
 
 		Map<String, String> errors = new HashMap<String, String>();
-		System.out.println("validateSaveCodeInfo11");
+		System.out.println("validateSaveCode11");
 
-//		if (target.get("CodeInfo_ID").length() < 5 || target.get("CodeInfo_ID").length() > 15) {
+//		if (target.get("Code_ID").length() < 5 || target.get("Code_ID").length() > 15) {
 //			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
-//		} else if  (target.get("CodeInfo_EMAIL").length() < 5 || target.get("CodeInfo_EMAIL").length() > 15) {
+//		} else if  (target.get("Code_EMAIL").length() < 5 || target.get("Code_EMAIL").length() > 15) {
 //			errors.put("errUserMsg", "이메일 형식이 아닙니다.");
-//		} else if  (target.get("CodeInfo_PW").length() < 5 || target.get("CodeInfo_PW").length() > 15) {
+//		} else if  (target.get("Code_PW").length() < 5 || target.get("Code_PW").length() > 15) {
 //			errors.put("errUserMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
-//		} else if  (!target.get("CodeInfo_PW").equals(target.get("CodeInfo_PW2"))) {
+//		} else if  (!target.get("Code_PW").equals(target.get("Code_PW2"))) {
 //			errors.put("errUserMsg", "암호와 암호확인을 일치시켜 주십시요.");
-//		} else if  (target.get("CodeInfo_NM").length() < 5 || target.get("CodeInfo_NM").length() > 15) {
+//		} else if  (target.get("Code_NM").length() < 5 || target.get("Code_NM").length() > 15) {
 //			errors.put("errUserMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		}
-		System.out.println("validateSaveCodeInfo55");
+		System.out.println("validateSaveCode55");
 
 		return errors;
 	}
 
 
-	public Map<String, String> validateDeleteCodeInfo(Map<String, String> target) {
+	public Map<String, String> validateDeleteCode(Map<String, String> target) {
 
 		Map<String, String> errors = new HashMap<String, String>();
-//		if (target.get("CodeInfo_ID").length() < 5 || target.get("CodeInfo_ID").length() > 15) {
+//		if (target.get("Code_ID").length() < 5 || target.get("Code_ID").length() > 15) {
 //			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
-//		} else if  (CodeInfoDao.selectCodeInfoCnt(target)==0) {
+//		} else if  (CodeDao.selectCodeCnt(target)==0) {
 //			errors.put("errUserMsg", "아이디가 미존재합니다.");
 //		}
 

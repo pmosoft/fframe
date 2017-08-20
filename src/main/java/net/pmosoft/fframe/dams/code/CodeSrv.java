@@ -19,12 +19,12 @@ public class CodeSrv {
 
 	/**********************************************************************************
 	 *
-	 *                                  CodeInfo
+	 *                                  Code
 	 *
 	 **********************************************************************************/
 
-	public Map<String, Object> selectCodeInfoList(Map<String,String> params){
-		System.out.println("start CodeInfoSrv selectCodeInfoList");
+	public Map<String, Object> selectCodeList(Map<String,String> params){
+		System.out.println("start CodeSrv selectCodeList");
 
 		System.out.println("params221 searchValue="+params.get("searchValue"));
 
@@ -32,7 +32,7 @@ public class CodeSrv {
 
 		List<Map<String,Object>> list = null;
 		try{
-			list = codeDao.selectCodeInfoList(params);;
+			list = codeDao.selectCodeList(params);;
 			result.put("isSuccess", true);
 			result.put("data", list);
 		} catch (Exception e){
@@ -44,21 +44,21 @@ public class CodeSrv {
 		return result;
 	}
 
-	public Map<String, Object> saveCodeInfo(Map<String,String> params){
+	public Map<String, Object> saveCode(Map<String,String> params){
 
 
-		System.out.println(codeDao.selectCodeInfoCnt(params));
+		System.out.println(codeDao.selectCodeCnt(params));
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = codeValidatorSrv.validateSaveCodeInfo(params);
+		errors = codeValidatorSrv.validateSaveCode(params);
 
 		System.out.println("11");
 		if(errors.size()>0){
 			System.out.println("22");
 
-			//model.addAttribute("tbCodeInfo", tbCodeInfo);
+			//model.addAttribute("tbCode", tbCode);
 			result.put("isSuccess", false);
 			result.put("errUserMsg", errors.get("errUserMsg"));
 			return result;
@@ -68,11 +68,11 @@ public class CodeSrv {
 			try{
 		    	result.put("isSuccess", true);
 
-			    if  (codeDao.selectCodeInfoCnt(params)==0) {
-			    	codeDao.insertCodeInfo(params);
+			    if  (codeDao.selectCodeCnt(params)==0) {
+			    	codeDao.insertCode(params);
 			    	result.put("msg", "입력 되었습니다");
 			    } else {
-			    	codeDao.updateCodeInfo(params);
+			    	codeDao.updateCode(params);
 			    	result.put("msg", "갱신 되었습니다");
 			    }
 			} catch (Exception e){
@@ -84,20 +84,20 @@ public class CodeSrv {
 		}
 	}
 
-	public Map<String, Object> deleteCodeInfo(Map<String,String> params){
+	public Map<String, Object> deleteCode(Map<String,String> params){
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
 		Map<String, String> errors = new HashMap<String, String>();
-		errors = codeValidatorSrv.validateDeleteCodeInfo(params);
+		errors = codeValidatorSrv.validateDeleteCode(params);
 		if(errors.size()>0){
-			//model.addAttribute("tbCodeInfo", tbCodeInfo);
+			//model.addAttribute("tbCode", tbCode);
 			result.put("isSuccess", false);
 			result.put("errUserMsg", errors.get("errUserMsg"));
 			System.out.println(result);
 			return result;
 		} else {
-			codeDao.deleteCodeInfo(params);
+			codeDao.deleteCode(params);
 			result.put("isSuccess", true);
 			result.put("msg", "삭제 되었습니다");
 			return result;

@@ -3,22 +3,22 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="net.pmosoft.fframe.dams.table.TableDao">
+<mapper namespace="net.pmosoft.fframe.dams.table.TabDao">
 
 
 <!--******************************************************** 
 **
-**                      MetaTablColInfo
+**                      MetaTablCol
 **
 *********************************************************-->
  
-<delete id="deleteMetaTabColInfo" parameterType="java.util.HashMap">
-    -- TableDao.deleteMetaTabColInfo
+<delete id="deleteMetaTabCol" parameterType="java.util.HashMap">
+    -- TableDao.deleteMetaTabCol
     DELETE FROM TDACM00081
 </delete>
 
-<insert id="insertMetaTabColInfoList" parameterType="java.util.HashMap">
-    -- TableDao.insertMetaTabColInfo
+<insert id="insertMetaTabColList" parameterType="java.util.HashMap">
+    -- TableDao.insertMetaTabCol
     INSERT INTO TDACM00081 
     SELECT 
            'MARIADB'              AS DB_NM
@@ -45,16 +45,16 @@
     ORDER BY A.TABLE_NAME,A.ORDINAL_POSITION    
 </insert>
 
-<select id="selectMetaTabColInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    -- TableDao.selectMetaTabColInfoList
+<select id="selectMetaTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    -- TableDao.selectMetaTabColList
     SELECT  '추출'               AS STS_NM
            ,A.*
     FROM TDACM00081 A 
     ORDER BY A.TAB_NM,A.COL_ID    
 </select>
 
-<select id="selectCmpTabColInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    -- TableDao.selectCmpTabColInfoList
+<select id="selectCmpTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    -- TableDao.selectCmpTabColList
     SELECT '신규' AS STS_NM,A.*
     FROM   TDACM00081 A
            LEFT OUTER JOIN TDACM00080 B
@@ -68,8 +68,8 @@
 </select>
 
 
-<insert id="insertCmpTabColInfoList" parameterType="java.util.HashMap">
-    -- TableDao.insertMetaTabColInfo
+<insert id="insertCmpTabColList" parameterType="java.util.HashMap">
+    -- TableDao.insertMetaTabCol
     INSERT INTO TDACM00080 
     SELECT A.*
     FROM   TDACM00081 A
@@ -87,12 +87,12 @@
  
 <!--******************************************************** 
 **
-**                        TablColInfo
+**                        TablCol
 **
 *********************************************************-->
 
-<select id="selectTabColInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    -- TableDao.selectTabColInfoList 22
+<select id="selectTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    -- TableDao.selectTabColList 22
     SELECT   DB_NM
             ,OWNER
             ,TAB_NM
@@ -112,16 +112,16 @@
     ORDER BY DB_NM,OWNER,TAB_NM,COL_NM
 </select>
  
-<select id="selectTabColInfoCnt" parameterType="java.util.HashMap" resultType="int">
-    -- TableDao.selectTabColInfoCnt
+<select id="selectTabColCnt" parameterType="java.util.HashMap" resultType="int">
+    -- TableDao.selectTabColCnt
     SELECT COUNT(*) CNT
     FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
 </select>
 
-<insert id="insertTabColInfo" parameterType="java.util.HashMap">
+<insert id="insertTabCol" parameterType="java.util.HashMap">
 
-    -- TableDao.insertTabColInfo
+    -- TableDao.insertTabCol
     INSERT INTO TDACM00010
     (
          PKG_FUL_NM
@@ -151,14 +151,14 @@
 
 </insert>
 
-<delete id="deleteTabColInfo" parameterType="java.util.HashMap">
-    -- TableDao.deleteTabColInfo
+<delete id="deleteTabCol" parameterType="java.util.HashMap">
+    -- TableDao.deleteTabCol
     DELETE FROM TDACM00080
 </delete>
 
-<update id="updateTabColInfo" parameterType="java.util.HashMap">
+<update id="updateTabCol" parameterType="java.util.HashMap">
 
-    -- TableDao.updateTabColInfo
+    -- TableDao.updateTabCol
     UPDATE TDACM00010
     SET  PKG2_NM      = #{PKG2_NM}
         ,PKG3_NM      = #{PKG3_NM}
@@ -175,13 +175,13 @@
 
 <!-- 
 
-                              TableInfo
+                              Table
 
  -->
 
-<select id="selectTabInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+<select id="selectTabList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
-	-- TableDao.selectTabInfoList
+	-- TableDao.selectTabList
 	SELECT   PKG_FUL_NM
 			,PKG2_NM
 			,PKG3_NM
@@ -203,16 +203,16 @@
 	ORDER BY PKG_FUL_NM
 </select>
 
-<select id="selectTabInfoCnt" parameterType="java.util.HashMap" resultType="int">
-	-- TableDao.selectTabInfoCnt
+<select id="selectTabCnt" parameterType="java.util.HashMap" resultType="int">
+	-- TableDao.selectTabCnt
 	SELECT COUNT(*) CNT
 	FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
 </select>
 
-<insert id="insertTabInfo" parameterType="java.util.HashMap">
+<insert id="insertTab" parameterType="java.util.HashMap">
 
-	-- TableDao.insertTabInfo
+	-- TableDao.insertTab
 	INSERT INTO TDACM00010
 	(
 	     PKG_FUL_NM
@@ -243,14 +243,14 @@
 </insert>
 
 
-<delete id="deleteTabInfo" parameterType="java.util.HashMap">
-	-- TableDao.deleteTabInfo
+<delete id="deleteTab" parameterType="java.util.HashMap">
+	-- TableDao.deleteTab
 	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
 </delete>
 
-<update id="updateTabInfo" parameterType="java.util.HashMap">
+<update id="updateTab" parameterType="java.util.HashMap">
 
-	-- TableDao.updateTabInfo
+	-- TableDao.updateTab
 	UPDATE TDACM00010
 	SET  PKG2_NM      = #{PKG2_NM}
 		,PKG3_NM      = #{PKG3_NM}

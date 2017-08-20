@@ -1,6 +1,6 @@
-Ext.define('fframe.dams.table.ExtractTabColListController', {
+Ext.define('fframe.dams.table.ExtMetaTabColListController', {
      extend : 'Ext.app.ViewController'
-    ,alias : 'controller.ExtractTabColList'
+    ,alias : 'controller.ExtMetaTabColList'
     ,setGridHeight : function(obj){
          obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
      }
@@ -28,7 +28,7 @@ Ext.define('fframe.dams.table.ExtractTabColListController', {
         var params = viewModel.getData();
         
         Ext.Ajax.request({
-            url : '/dams/table/insertCmpTabColInfoList',
+            url : '/dams/table/insertCmpTabColList',
             method : 'post',
             params : params,
             success : function(res){

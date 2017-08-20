@@ -5,9 +5,9 @@
 
 <mapper namespace="net.pmosoft.fframe.dams.code.CodeDao">
 
-<select id="selectCodeInfoList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+<select id="selectCodeList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
-	-- TermDao.selectCodeInfoList
+	-- TermDao.selectCodeList
 	SELECT   PKG_FUL_NM
 			,PKG2_NM
 			,PKG3_NM
@@ -29,16 +29,16 @@
 	ORDER BY PKG_FUL_NM
 </select>
 
-<select id="selectCodeInfoCnt" parameterType="java.util.HashMap" resultType="int">
-	-- TermDao.selectCodeInfoCnt
+<select id="selectCodeCnt" parameterType="java.util.HashMap" resultType="int">
+	-- TermDao.selectCodeCnt
 	SELECT COUNT(*) CNT
 	FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
 </select>
 
-<insert id="insertCodeInfo" parameterType="java.util.HashMap">
+<insert id="insertCode" parameterType="java.util.HashMap">
 
-	-- TermDao.insertCodeInfo
+	-- TermDao.insertCode
 	INSERT INTO TDACM00010
 	(
 	     PKG_FUL_NM
@@ -69,14 +69,14 @@
 </insert>
 
 
-<delete id="deleteCodeInfo" parameterType="java.util.HashMap">
-	-- TermDao.deleteCodeInfo
+<delete id="deleteCode" parameterType="java.util.HashMap">
+	-- TermDao.deleteCode
 	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
 </delete>
 
-<update id="updateCodeInfo" parameterType="java.util.HashMap">
+<update id="updateCode" parameterType="java.util.HashMap">
 
-	-- TermDao.updateCodeInfo
+	-- TermDao.updateCode
 	UPDATE TDACM00010
 	SET  PKG2_NM      = #{PKG2_NM}
 		,PKG3_NM      = #{PKG3_NM}
