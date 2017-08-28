@@ -11,14 +11,15 @@ public interface TermDao {
 
 	/**********************************************************************************
 	 *
-	 *                                  Pack
+	 *                                  Term
 	 *
 	 **********************************************************************************/
-	List<Map<String, Object>> selectPackList(Map<String,String> params);
-	int selectPackCnt(Map<String,String> params);
-	void insertPack(Map<String,String> params);
-	void deletePack(Map<String,String> params);
-	void updatePack(Map<String,String> params);
+    List<Map<String, Object>> selectExtTermList(Map<String,String> params);
+	List<Map<String, Object>> selectTermList(Map<String,String> params);
+	int selectTermCnt(Map<String,String> params);
+	void insertTerm(Map<String,String> params);
+	void deleteTerm(Map<String,String> params);
+	void updateTerm(Map<String,String> params);
 
 }
 

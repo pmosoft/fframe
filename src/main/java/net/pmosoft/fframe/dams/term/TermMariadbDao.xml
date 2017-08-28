@@ -5,9 +5,42 @@
 
 <mapper namespace="net.pmosoft.fframe.dams.term.TermDao">
 
-<select id="selectPackList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
-	-- TermDao.selectPackList
+
+
+<select id="selectExtTermList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+
+    -- TermDao.selectExtTermList
+    SELECT A.COL_NM
+          ,A.COL_HNM
+          ,'' AS COL_DESC
+          ,'' AS COL_ABBR_HNM
+          ,A.DATA_TYPE_DESC
+          ,'01' AS COL_STS_CD
+          ,'요청' AS COL_STS_NM
+          ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%S') AS REG_DTM
+          ,'' REG_USR_ID
+          ,DATE_FORMAT(NOW(),'%Y%m%d%H%i%S') AS UPD_DTM
+          ,'' UPD_USR_ID
+    FROM 
+           (
+            SELECT COL_NM
+                  ,COL_HNM
+                  ,DATA_TYPE_DESC
+            FROM   TDACM00080
+            GROUP BY COL_NM,COL_HNM
+            ) A
+            LEFT OUTER JOIN TDACM00040 B
+            ON A.COL_NM = B.COL_NM
+    WHERE   B.COL_NM IS NULL
+
+</select>
+
+
+
+<select id="selectTermList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+
+	-- TermDao.selectTermList
 	SELECT   PKG_FUL_NM
 			,PKG2_NM
 			,PKG3_NM
@@ -29,16 +62,16 @@
 	ORDER BY PKG_FUL_NM
 </select>
 
-<select id="selectPackCnt" parameterType="java.util.HashMap" resultType="int">
-	-- TermDao.selectPackCnt
+<select id="selectTermCnt" parameterType="java.util.HashMap" resultType="int">
+	-- TermDao.selectTermCnt
 	SELECT COUNT(*) CNT
 	FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
 </select>
 
-<insert id="insertPack" parameterType="java.util.HashMap">
+<insert id="insertTerm" parameterType="java.util.HashMap">
 
-	-- TermDao.insertPack
+	-- TermDao.insertTerm
 	INSERT INTO TDACM00010
 	(
 	     PKG_FUL_NM
@@ -69,14 +102,14 @@
 </insert>
 
 
-<delete id="deletePack" parameterType="java.util.HashMap">
-	-- TermDao.deletePack
-	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
+<delete id="deleteTerm" parameterType="java.util.HashMap">
+	-- TermDao.deleteTerm
+	DELETE FROM TDACM00040 WHERE COL_STS_CD = #{COL_STS_CD}
 </delete>
 
-<update id="updatePack" parameterType="java.util.HashMap">
+<update id="updateTerm" parameterType="java.util.HashMap">
 
-	-- TermDao.updatePack
+	-- TermDao.updateTerm
 	UPDATE TDACM00010
 	SET  PKG2_NM      = #{PKG2_NM}
 		,PKG3_NM      = #{PKG3_NM}

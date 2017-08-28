@@ -2,7 +2,16 @@ Ext.define('fframe.dams.term.TermListController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.TermList'
     ,setGridHeight : function(obj){ 
-         obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
+         obj.down("grid").setHeight(Ext.Element.getViewportHeight()-180);
+     }
+    ,extBtn : function(btn) {
+        var view = this.getView(); var viewModel = view.getViewModel();
+        var store = viewModel.getStore(view['xtype']);
+        store.load({
+            callback : function(data){
+                console.log(data);
+            }
+        });
      }
     ,selBtn : function(btn) {
     	var view = this.getView(); var viewModel = view.getViewModel();

@@ -17,32 +17,41 @@ public class TermCtrl {
 
 	/**********************************************************************************
 	 *
-	 *                                  Pack
+	 *                                  Term
 	 *
 	 **********************************************************************************/
 
+    /**
+     * selectExtTermList
+     */
+    @RequestMapping(value = "/dams/term/selectExtTermList")
+    public Map<String, Object> selectExtTermList(@RequestParam Map<String,String> params) {
+        return termSrv.selectExtTermList(params);
+    }
+	
 	/**
-	 * selectcPackList
+	 * selectcTermList
 	 */
-	@RequestMapping(value = "/dams/pack/selectPackList")
-	public Map<String, Object> selectPackList(@RequestParam Map<String,String> params) {
-		return termSrv.selectPackList(params);
+	@RequestMapping(value = "/dams/pack/selectTermList")
+	public Map<String, Object> selectTermList(@RequestParam Map<String,String> params) {
+		return termSrv.selectTermList(params);
+	}
+	
+
+	/**
+	 * saveTerm
+	 */
+	@RequestMapping(value = "/dams/pack/saveTerm")
+	public Map<String, Object> saveTerm(@RequestParam Map<String,String> params) {
+		return termSrv.saveTerm(params);
 	}
 
 	/**
-	 * savePack
+	 * deleteTerm
 	 */
-	@RequestMapping(value = "/dams/pack/savePack")
-	public Map<String, Object> savePack(@RequestParam Map<String,String> params) {
-		return termSrv.savePack(params);
-	}
-
-	/**
-	 * deletePack
-	 */
-	@RequestMapping(value = "/dams/pack/deletePack")
-	public Map<String, Object> deletePack(@RequestParam Map<String,String> params) {
-		return termSrv.deletePack(params);
+	@RequestMapping(value = "/dams/pack/deleteTerm")
+	public Map<String, Object> deleteTerm(@RequestParam Map<String,String> params) {
+		return termSrv.deleteTerm(params);
 	}
 
 }

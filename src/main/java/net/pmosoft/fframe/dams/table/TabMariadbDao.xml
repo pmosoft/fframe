@@ -29,11 +29,13 @@
            ,A.COLUMN_COMMENT      AS COL_HNM
            ,' '                   AS COL_DESC
            ,UPPER(A.DATA_TYPE)    AS DATA_TYPE_NM
-           ,CASE WHEN A.DATA_TYPE IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH
-                 WHEN A.DATA_TYPE IN ('INT','NUMERIC') THEN A.NUMERIC_PRECISION
+           ,CASE WHEN UPPER(A.DATA_TYPE) IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH
+                 WHEN UPPER(A.DATA_TYPE) IN ('INT','NUMERIC') THEN A.NUMERIC_PRECISION
             END                   AS LEN
            ,A.NUMERIC_SCALE       AS DECIMAL_CNT 
-           ,UPPER(A.COLUMN_TYPE)  AS DATA_TYPE_DESC
+           ,CASE WHEN UPPER(A.DATA_TYPE) = 'INT' THEN UPPER(A.DATA_TYPE)
+                 ELSE UPPER(A.COLUMN_TYPE)
+            END                   AS DATA_TYPE_DESC
            ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS REG_DTM
            ,''                    AS REG_USR_ID
            ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS UPD_DTM

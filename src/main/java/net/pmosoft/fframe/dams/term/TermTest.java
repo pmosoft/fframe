@@ -28,26 +28,33 @@ public class TermTest {
 	private TermDao termDao;
 
 
+    @Test
+    public void testTermProcess() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("PKG_FUL_NM", "user");
+        termDao.selectExtTermList(params);
+    }	
+	
 	@Test @Ignore
-	public void testPackCnt() {
+	public void testTermCnt() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
 		params.put("PKG_FUL_NM", "user");
-		termDao.selectPackCnt(params);
+		termDao.selectTermCnt(params);
 	}
 
 	@Test @Ignore
-	public void testPackList() {
+	public void testTermList() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchValue", "us");
 		//params.put("searchValue", "유저");
 		params.put("searchValue", "");
-		termSrv.selectPackList(params);
-		//TermDao.selectPackList(params);
+		termSrv.selectTermList(params);
+		//TermDao.selectTermList(params);
 	}
 
 	@Test @Ignore
-	public void testSavePack() {
+	public void testSaveTerm() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
@@ -62,21 +69,21 @@ public class TermTest {
 
 		//TermDao.deleteUser(params);
 
-		Map<String, Object> result = termSrv.savePack(params);
+		Map<String, Object> result = termSrv.saveTerm(params);
 
 		System.out.println(result);
-		testPackList();
-	}
-
-	@Test
-	public void testDeletePack() {
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("PKG_FUL_NM", "package1");
-		termSrv.deletePack(params);
+		testTermList();
 	}
 
 	@Test @Ignore
-	public void testInsertPack() {
+	public void testDeleteTerm() {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("PKG_FUL_NM", "package1");
+		termSrv.deleteTerm(params);
+	}
+
+	@Test @Ignore
+	public void testInsertTerm() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -90,15 +97,15 @@ public class TermTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		termDao.deletePack(params);
+		termDao.deleteTerm(params);
 
-		termDao.insertPack(params);
+		termDao.insertTerm(params);
 
-		testPackList();
+		testTermList();
 	}
 
 	@Test @Ignore
-	public void testUpdatePack() {
+	public void testUpdateTerm() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -112,9 +119,9 @@ public class TermTest {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		termDao.updatePack(params);
+		termDao.updateTerm(params);
 
-		testPackList();
+		testTermList();
 	}
 
 
