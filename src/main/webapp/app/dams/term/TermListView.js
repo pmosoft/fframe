@@ -27,7 +27,6 @@ Ext.define('fframe.dams.term.TermListView', {
         ]        
     ,listeners: {
          selectionchange: 'onSelectionChange'
-        //,resize : 'setGridHeight'
      }      
     ,tools: [{
          type: 'refresh'
@@ -125,8 +124,7 @@ Ext.define('fframe.dams.term.TermListView', {
      ]         
     ,columns :
      [
-      {xtype:'rownumberer'}
-     ,{text:'컬럼명'         , dataIndex:'COL_NM'       , style:'text-align:center' , flex:1, align:'left'}
+      {text:'컬럼명'         , dataIndex:'COL_NM'       , style:'text-align:center' , flex:1, align:'left'}
      ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'      , style:'text-align:center' , flex:1, align:'left'}
      ,{text:'컬럼설명'       , dataIndex:'COL_DESC'     , style:'text-align:center' , flex:1, align:'left'}
      ,{text:'컬럼약어한글명' , dataIndex:'COL_ABBR_HNM' , style:'text-align:center' , flex:1, align:'left'}
