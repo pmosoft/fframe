@@ -80,6 +80,7 @@
            AND  A.OWNER = B.OWNER
            AND  A.TAB_NM = B.TAB_NM
            AND  A.COL_NM = B.COL_NM
+           AND  A.COL_HNM = B.COL_HNM
            AND  A.DATA_TYPE_DESC = B.DATA_TYPE_DESC
     WHERE  B.COL_NM IS NULL           
     ORDER BY A.TAB_NM,A.COL_ID    
@@ -94,7 +95,7 @@
 *********************************************************-->
 
 <select id="selectTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    -- TableDao.selectTabColList 22
+    -- TableDao.selectTabColList
     SELECT   DB_NM
             ,OWNER
             ,TAB_NM
@@ -111,7 +112,21 @@
             ,date_format(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
             ,UPD_USR_ID
     FROM    TDACM00080
-    ORDER BY DB_NM,OWNER,TAB_NM,COL_NM
+    WHERE 1=1 
+    AND  (
+          (#{searchKeyCombo} = 'DB_NM'        AND DB_NM        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+           OR   
+          (#{searchKeyCombo} = 'OWNER'        AND OWNER        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+           OR   
+          (#{searchKeyCombo} = 'TAB_NM'       AND TAB_NM       LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+           OR   
+          (#{searchKeyCombo} = 'COL_NM'       AND COL_NM       LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+           OR   
+          (#{searchKeyCombo} = 'COL_HNM'      AND COL_HNM      LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+           OR   
+          (#{searchKeyCombo} = 'DATA_TYPE_NM' AND DATA_TYPE_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+         ) 
+    ORDER BY DB_NM,OWNER,TAB_NM,COL_ID
 </select>
  
 <select id="selectTabColCnt" parameterType="java.util.HashMap" resultType="int">

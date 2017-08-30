@@ -20,7 +20,7 @@
 			,date_format(UPD_DT,'%Y.%m.%d %H:%i:%S') AS UPD_DT
 			,UPD_USR_ID 
 	FROM   TSYUR00010
-    WHERE 22=22 
+    WHERE 1=1 
     AND  (
           (#{searchKeyCombo} = 'USR_ID' AND USR_ID LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
 	       OR   

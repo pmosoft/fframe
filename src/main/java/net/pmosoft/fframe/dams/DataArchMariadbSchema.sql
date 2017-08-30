@@ -39,7 +39,7 @@ CREATE TABLE TDACM00010 (
 ,PKG4_NM    CHAR(4)          NULL COMMENT '패키지4자리명'
 ,PKG_HNM    VARCHAR(10)      NULL COMMENT '패키지한글명'
 ,PKG_DESC   VARCHAR(200)     NULL COMMENT '패키지설명'
-,USE_YN     CHAR(1)          NULL COMMENT '사용유무'
+,USE_YN     CHAR(1)          NULL COMMENT '사용여부'
 ,REG_DTM    VARCHAR(14)      NULL COMMENT '등록일시'
 ,REG_USR_ID VARCHAR(20)      NULL COMMENT '등록자'
 ,UPD_DTM    VARCHAR(14)      NULL COMMENT '변경일시'
@@ -386,3 +386,15 @@ INSERT INTO TDACM00080 SELECT * FROM TDACM00081
     ;
 
 
+    SELECT A.*
+    FROM   TDACM00081 A
+           LEFT OUTER JOIN TDACM00080 B
+           ON   A.DB_NM = B.DB_NM
+           AND  A.OWNER = B.OWNER
+           AND  A.TAB_NM = B.TAB_NM
+           AND  A.COL_NM = B.COL_NM
+           AND  A.COL_HNM = B.COL_HNM
+           AND  A.DATA_TYPE_DESC = B.DATA_TYPE_DESC
+    WHERE  B.COL_NM IS NULL           
+    ORDER BY A.TAB_NM,A.COL_ID  
+    ;
