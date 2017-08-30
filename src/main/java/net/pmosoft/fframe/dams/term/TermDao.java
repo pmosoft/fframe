@@ -20,6 +20,20 @@ public interface TermDao {
 	void insertTerm(Map<String,String> params);
 	void deleteTerm(Map<String,String> params);
 	void updateTerm(Map<String,String> params);
+	
+	
+    
+    /**********************************************************************************
+     *                                  
+     *                                  Pack
+     *                                  
+     **********************************************************************************/
+    List<Map<String, Object>> selectPackInfoList(Map<String,String> params);
+    int selectPackInfoCnt(Map<String,String> params);
+    void insertPackInfo(Map<String,String> params);
+    void deletePackInfo(Map<String,String> params);
+    void updatePackInfo(Map<String,String> params);
+	
 
 }
 
