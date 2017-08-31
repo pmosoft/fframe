@@ -1,6 +1,8 @@
 Ext.define('fframe.syst.usr.UsrListView', {
      extend : 'Ext.form.Panel' 
-    ,xtype:'UsrList'  , controller : 'UsrList' , viewModel : 'UsrList'    
+    ,xtype:'UsrList'  
+    ,controller: 'UsrList' 
+    ,viewModel: 'UsrList'    
     ,listeners : {
         // boxready : 'onLoadData',
         resize : 'setGridHeight'
@@ -24,6 +26,7 @@ Ext.define('fframe.syst.usr.UsrListView', {
        //-------------------------------------------
        {
           xtype : 'toolbar'
+         ,height : 50           
          ,items : 
           [
             {
@@ -111,14 +114,14 @@ Ext.define('fframe.syst.usr.UsrListView', {
            ,columns : 
             [
               {xtype : 'rownumberer'}
-              ,{dataIndex:'USR_ID'     , text:'아이디'   , style:'text-align:center' , flex:1}
-              ,{dataIndex:'USR_EMAIL'  , text:'이메일'   , style:'text-align:center' , flex:1}
-              ,{dataIndex:'USR_PW'     , text:'암호'     , style:'text-align:center' , flex:1}
-              ,{dataIndex:'USR_NM'     , text:'이름'     , style:'text-align:center' , flex:1}
-              ,{dataIndex:'USR_AGE'    , text:'나이'     , style:'text-align:center' , flex:1}
-              ,{dataIndex:'USE_YN'     , text:'사용여부' , style:'text-align:center' , flex:1}
-              ,{dataIndex:'UPD_DT'     , text:'변경일시' , style:'text-align:center' , flex:1}
-              ,{dataIndex:'UPD_USR_ID' , text:'변경자'   , style:'text-align:center' , flex:1}
+              ,{dataIndex:'USR_ID'     , text:'아이디'   , style:'text-align:center' , flex:1, align:'left'}
+              ,{dataIndex:'USR_EMAIL'  , text:'이메일'   , style:'text-align:center' , flex:1, align:'left'}
+              ,{dataIndex:'USR_PW'     , text:'암호'     , style:'text-align:center' , flex:1, align:'left', hidden:true}
+              ,{dataIndex:'USR_NM'     , text:'이름'     , style:'text-align:center' , flex:1, align:'left'}
+              ,{dataIndex:'USR_AGE'    , text:'나이'     , style:'text-align:center' , flex:1, align:'left'}
+              ,{dataIndex:'USE_YN'     , text:'사용여부' , style:'text-align:center' , flex:1, align:'left'}
+              ,{dataIndex:'UPD_DT'     , text:'변경일시' , style:'text-align:center' , flex:1, align:'left', hidden:true}
+              ,{dataIndex:'UPD_USR_ID' , text:'변경자'   , style:'text-align:center' , flex:1, align:'left', hidden:true}
             ]
            ,bind : { store : '{UsrList}'}
            ,bbar : {

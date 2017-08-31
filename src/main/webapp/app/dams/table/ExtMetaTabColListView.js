@@ -68,7 +68,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
             ,columns :
              [
               {xtype:'rownumberer'}
-             ,{text:'상태'           , dataIndex:'STS_NM'          , style:'text-align:center' , flex:1}
+             ,{text:'상태'           , dataIndex:'STS_NM'         , style:'text-align:center' , flex:1}
              ,{text:'DB명'           , dataIndex:'DB_NM'          , style:'text-align:center' , flex:1}
              ,{text:'소유자'         , dataIndex:'OWNER'          , style:'text-align:center' , flex:1}
              ,{text:'테이블명'       , dataIndex:'TAB_NM'         , style:'text-align:center' , flex:1}
@@ -80,10 +80,10 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
              ,{text:'길이'           , dataIndex:'LEN'            , style:'text-align:center' , flex:1}
              ,{text:'소수점수'       , dataIndex:'DECIMAL_CNT'    , style:'text-align:center' , flex:1}
              ,{text:'데이터타입설명' , dataIndex:'DATA_TYPE_DESC' , style:'text-align:center' , flex:1}
-             ,{text:'등록일시'       , dataIndex:'REG_DTM'        , style:'text-align:center' , flex:1}
-             ,{text:'등록자'         , dataIndex:'REG_USR_ID'     , style:'text-align:center' , flex:1}
-             ,{text:'변경일시'       , dataIndex:'UPD_DTM'        , style:'text-align:center' , flex:1}
-             ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     , style:'text-align:center' , flex:1}
+             ,{text:'등록일시'       , dataIndex:'REG_DTM'        , style:'text-align:center' , flex:1, hidden:true}
+             ,{text:'등록자'         , dataIndex:'REG_USR_ID'     , style:'text-align:center' , flex:1, hidden:true}
+             ,{text:'변경일시'       , dataIndex:'UPD_DTM'        , style:'text-align:center' , flex:1, hidden:true}
+             ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     , style:'text-align:center' , flex:1, hidden:true}
              ]
             ,bind:{store:'{ExtMetaTabColList}'}
             //,bbar : {

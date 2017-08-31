@@ -15,7 +15,7 @@ Ext.define('fframe.syst.usr.UsrListController', {
     
     
     setGridHeight : function(obj){ 
-    	obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
+    	obj.down("grid").setHeight(Ext.Element.getViewportHeight()-180);
     },
     
     insBtn : function(btn) {

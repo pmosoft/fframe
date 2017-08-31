@@ -72,7 +72,7 @@ Ext.define('fframe.dams.term.TermListView', {
                    ,'상태'
                    ,'&nbsp;&nbsp;'
                   ]
-           }
+           } 
           ,{
               xtype : 'combo'
              //,fieldLabel:'상태'
@@ -95,9 +95,9 @@ Ext.define('fframe.dams.term.TermListView', {
                   ]
               }
           }
-         ,{text:'Rows'    , enableToggle:true , toggleHandler:'toggleRowSelect'    , pressed:true}
+         ,{text:'Rows'    , enableToggle:true , toggleHandler:'toggleRowSelect'    , pressed:false}
          ,{text:'Cells'   , enableToggle:true , toggleHandler:'toggleCellSelect'   , pressed:true}
-         ,{text:'Columns' , enableToggle:true , toggleHandler:'toggleColumnSelect' , pressed:true}          
+         ,{text:'Columns' , enableToggle:true , toggleHandler:'toggleColumnSelect' , pressed:false}          
          ,'->'
          ,{xtype:'button' , text:'추출' , handler:'extBtn'}
          ,{xtype:'button' , text:'비교' , handler:'insBtn'}
