@@ -398,3 +398,51 @@ INSERT INTO TDACM00080 SELECT * FROM TDACM00081
     WHERE  B.COL_NM IS NULL           
     ORDER BY A.TAB_NM,A.COL_ID  
     ;
+    
+    
+    SELECT   A.DB_NM
+            ,A.OWNER
+            ,A.TAB_NM
+            ,B.TAB_HNM
+            ,A.COL_ID
+            ,A.COL_NM
+            ,A.COL_HNM
+            ,A.COL_DESC
+            ,A.DATA_TYPE_NM
+            ,A.LEN
+            ,A.DECIMAL_CNT
+            ,A.DATA_TYPE_DESC
+            ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00080 A
+            LEFT JOIN TDACM00070 B
+            ON  A.DB_NM = B.DB_NM
+            AND A.OWNER = B.OWNER
+            AND A.TAB_NM = B.TAB_NM
+    WHERE   1=1
+    ;
+    
+    
+SELECT * FROM TDACM00070
+;
+
+
+
+    INSERT INTO TDACM00070 
+    SELECT 
+           'MARIADB'               AS DB_NM
+           ,UPPER(A.TABLE_SCHEMA)  AS OWNER
+           ,UPPER(A.TABLE_NAME)    AS TAB_NM
+           ,UPPER(A.TABLE_COMMENT) AS TAB_HNM
+           ,''                     AS TAB_DESC
+           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS REG_DTM
+           ,''                    AS REG_USR_ID
+           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS UPD_DTM
+           ,''                    AS UPD_USR_ID
+    FROM   INFORMATION_SCHEMA.TABLES A 
+    WHERE  1=1
+    AND    TABLE_NAME LIKE 'TD%'
+;
+

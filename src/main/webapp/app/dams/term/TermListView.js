@@ -59,7 +59,10 @@ Ext.define('fframe.dams.term.TermListView', {
                        //controller.selBtn();
 
                        //f.up('form').getForm().submit();
-                       //var selBtn = f.up('toolbar').down('button#selBtn');
+                         //
+                       var selBtn = f.up('toolbar').down('combo');
+                       Ext.Msg.alert("알림",selBtn);
+                       
                        //selBtn.fireEvent('click', selBtn, event, options);
                            
                        }

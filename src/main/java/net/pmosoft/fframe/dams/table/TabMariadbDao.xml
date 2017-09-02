@@ -47,6 +47,27 @@
     ORDER BY A.TABLE_NAME,A.ORDINAL_POSITION    
 </insert>
 
+<insert id="insertMetaTab" parameterType="java.util.HashMap">
+    -- TableDao.insertMetaTab
+    INSERT INTO TDACM00070 
+    SELECT 
+           'MARIADB'               AS DB_NM
+           ,UPPER(A.TABLE_SCHEMA)  AS OWNER
+           ,UPPER(A.TABLE_NAME)    AS TAB_NM
+           ,UPPER(A.TABLE_COMMENT) AS TAB_HNM
+           ,''                     AS TAB_DESC
+           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS REG_DTM
+           ,''                    AS REG_USR_ID
+           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS UPD_DTM
+           ,''                    AS UPD_USR_ID
+    FROM   INFORMATION_SCHEMA.TABLES A 
+    WHERE  1=1
+    AND    TABLE_NAME LIKE 'TD%'
+    ORDER BY A.TABLE_SCHEMA, A.TABLE_NAME    
+</insert>
+
+
+
 <select id="selectMetaTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
     -- TableDao.selectMetaTabColList
     SELECT  '추출'               AS STS_NM
@@ -96,37 +117,42 @@
 
 <select id="selectTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
     -- TableDao.selectTabColList
-    SELECT   DB_NM
-            ,OWNER
-            ,TAB_NM
-            ,COL_ID
-            ,COL_NM
-            ,COL_HNM
-            ,COL_DESC
-            ,DATA_TYPE_NM
-            ,LEN
-            ,DECIMAL_CNT
-            ,DATA_TYPE_DESC
-            ,date_format(REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
-            ,REG_USR_ID
-            ,date_format(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
-            ,UPD_USR_ID
-    FROM    TDACM00080
-    WHERE 1=1 
+    SELECT   A.DB_NM
+            ,A.OWNER
+            ,A.TAB_NM
+            ,B.TAB_HNM
+            ,A.COL_ID
+            ,A.COL_NM
+            ,A.COL_HNM
+            ,TRIM(A.COL_DESC) AS COL_DESC
+            ,A.DATA_TYPE_NM
+            ,A.LEN
+            ,A.DECIMAL_CNT
+            ,A.DATA_TYPE_DESC
+            ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00080 A 
+            LEFT JOIN TDACM00070 B
+            ON  A.DB_NM = B.DB_NM
+            AND A.OWNER = B.OWNER
+            AND A.TAB_NM = B.TAB_NM
+    WHERE   1=1
     AND  (
-          (#{searchKeyCombo} = 'DB_NM'        AND DB_NM        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+          (#{searchKeyCombo} = 'DB_NM'        AND A.DB_NM        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
            OR   
-          (#{searchKeyCombo} = 'OWNER'        AND OWNER        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+          (#{searchKeyCombo} = 'OWNER'        AND A.OWNER        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
            OR   
-          (#{searchKeyCombo} = 'TAB_NM'       AND TAB_NM       LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+          (#{searchKeyCombo} = 'TAB_NM'       AND A.TAB_NM       LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
            OR   
-          (#{searchKeyCombo} = 'COL_NM'       AND COL_NM       LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+          (#{searchKeyCombo} = 'COL_NM'       AND A.COL_NM       LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
            OR   
-          (#{searchKeyCombo} = 'COL_HNM'      AND COL_HNM      LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+          (#{searchKeyCombo} = 'COL_HNM'      AND A.COL_HNM      LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
            OR   
-          (#{searchKeyCombo} = 'DATA_TYPE_NM' AND DATA_TYPE_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+          (#{searchKeyCombo} = 'DATA_TYPE_NM' AND A.DATA_TYPE_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
          ) 
-    ORDER BY DB_NM,OWNER,TAB_NM,COL_ID
+    ORDER BY A.DB_NM,OWNER,A.TAB_NM,A.COL_ID
 </select>
  
 <select id="selectTabColCnt" parameterType="java.util.HashMap" resultType="int">
@@ -172,6 +198,12 @@
     -- TableDao.deleteTabCol
     DELETE FROM TDACM00080
 </delete>
+
+<delete id="deleteTab" parameterType="java.util.HashMap">
+    -- TableDao.deleteTab
+    DELETE FROM TDACM00070
+</delete>
+
 
 <update id="updateTabCol" parameterType="java.util.HashMap">
 
