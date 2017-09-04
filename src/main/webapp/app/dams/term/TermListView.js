@@ -131,7 +131,7 @@ Ext.define('fframe.dams.term.TermListView', {
              checkboxSelect: true,
              pruneRemoved: false,
              extensible: 'y'
-         }         
+          }         
          ,plugins: 
           [
               'clipboard'

@@ -183,7 +183,8 @@ DROP TABLE TDACM00050;
 CREATE TABLE TDACM00050 (
  CD_ID_GRP_NM   VARCHAR(10)  NOT NULL COMMENT '코드아이디그룹명'
 ,CD_ID_GRP_HNM  VARCHAR(10)      NULL COMMENT '코드아이디그룹한글명'
-,CD_ID_GRP_DESC VARCHAR(50)      NULL COMMENT '코드아이디그룹설명'
+,CD_ID_GRP_DESC VARCHAR(200)      NULL COMMENT '코드아이디그룹설명'
+,CD_STS_CD      CHAR(2)          NULL COMMENT '코드상태코드'
 ,REG_DTM        VARCHAR(14)      NULL COMMENT '등록일시'
 ,REG_USR_ID     VARCHAR(20)      NULL COMMENT '등록자'
 ,UPD_DTM        VARCHAR(14)      NULL COMMENT '변경일시'
@@ -201,17 +202,48 @@ CREATE TABLE TDACM00060 (
  CD_ID_NM       VARCHAR(20)  NOT NULL COMMENT '코드아이디명'     -- BIZ_CD
 ,CD_ID_HNM      VARCHAR(20)      NULL COMMENT '코드아이디한글명' -- 업무구분코드
 ,CD_ID_GRP_NM   VARCHAR(20)      NULL COMMENT '코드아이디그룹명' -- AML
-,CD             VARCHAR(20)      NULL COMMENT '코드'             -- 01
+,CD             VARCHAR(20)  NOT NULL COMMENT '코드'             -- 01
 ,CD_NM          VARCHAR(20)      NULL COMMENT '코드명'           -- DEPOSIT
 ,CD_HNM         VARCHAR(20)      NULL COMMENT '코드한글명'       -- 수신
+,CD_DESC        VARCHAR(200)     NULL COMMENT '코드설명'
+,CD_STS_CD      CHAR(2)          NULL COMMENT '코드상태코드'
 ,REG_DTM        VARCHAR(14)      NULL COMMENT '등록일시'
 ,REG_USR_ID     VARCHAR(20)      NULL COMMENT '등록자'
 ,UPD_DTM        VARCHAR(14)      NULL COMMENT '변경일시'
 ,UPD_USR_ID     VARCHAR(20)      NULL COMMENT '변경자'
-,PRIMARY KEY(COL_ID_NM)
+,PRIMARY KEY(CD_ID_NM,CD)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8 COMMENT='코드'
 ;
 
+SELECT * FROM TDACM00060
+;
+
+
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','01','REQUEST','요청','','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','02','REQUEST','반려','','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','03','REQUEST','승인','','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','04','REQUEST','승인취소','','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+
+
+
+ SELECT   A.CD_ID_NM    
+            ,A.CD_ID_HNM   
+            ,A.CD_ID_GRP_NM
+            ,A.CD          
+            ,A.CD_NM       
+            ,A.CD_HNM      
+            ,A.CD_DESC      
+            ,A.CD_STS_CD   
+            ,B.CD_HNM AS CD_STS_CD_NM   
+            ,date_format(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,date_format(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00060 A
+            LEFT JOIN TDACM00060 B
+            ON  A.CD_ID_NM = B.CD_ID_NM
+            AND A.CD = B.CD
+;
 
 ------------------------------
 -- 테이블정보

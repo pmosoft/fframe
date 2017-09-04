@@ -291,12 +291,6 @@
 
 </insert>
 
-
-<delete id="deleteTab" parameterType="java.util.HashMap">
-	-- TableDao.deleteTab
-	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
-</delete>
-
 <update id="updateTab" parameterType="java.util.HashMap">
 
 	-- TableDao.updateTab

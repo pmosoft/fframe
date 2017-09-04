@@ -88,23 +88,38 @@ Ext.define('fframe.main.MainFrameView', {
 							page : 'PackList',
 							leaf : true
 						}]
+                    }, {
+                        text : '테이블',
+                        iconCls : 'x-fa fa-gift',
+                        expanded : true,
+                        selectable : false,
+                        children : [ 
+                        {
+                            text : '테이블컬럼목록',
+                            page : 'TabColList',
+                            leaf : true
+                        },{
+                            text : '테이블목록',
+                            page : 'TabList',
+                            leaf : true
+                        },{
+                            text : '테이블정보추출',
+                            page : 'ExtMetaTabColList',
+                            leaf : true
+                        } ]
 					}, {
-						text : '테이블',
+						text : '코드',
 						iconCls : 'x-fa fa-gift',
 						expanded : true,
 						selectable : false,
 						children : [ 
 			            {
-							text : '테이블컬럼목록',
-							page : 'TabColList',
+							text : '코드목록',
+							page : 'CodeList',
 							leaf : true
 						},{
-							text : '테이블목록',
-							page : 'TabList',
-							leaf : true
-						},{
-							text : '테이블정보추출',
-							page : 'ExtMetaTabColList',
+							text : '코드그룹목록',
+							page : 'CodeGrpList',
 							leaf : true
 						} ]
 					}, {
