@@ -1,13 +1,13 @@
-Ext.define('fframe.dams.table.TabColListView', {
-     extend : 'Ext.form.Panel' , xtype : 'TabColList' 
-    ,controller : 'TabColList' , viewModel:'TabColList'
+Ext.define('fframe.dams.table.CodeListView', {
+     extend : 'Ext.form.Panel' , xtype : 'CodeList' 
+    ,controller : 'CodeList' , viewModel:'CodeList'
     ,listeners : { 
         resize : 'setGridHeight'
      }
     //-------------------------------------------
     // titletoolbar
     //-------------------------------------------
-    ,title : '테이블컬럼 조회'
+    ,title : '코드 조회'
     ,items :
      [
       //-------------------------------------------
@@ -31,8 +31,13 @@ Ext.define('fframe.dams.table.TabColListView', {
                    fields : ['key','value'] 
                   ,data : 
                    [
-                     {key : '컬럼한글명' , value : 'COL_HNM'}
-                    ,{key : '컬럼명'     , value : 'COL_NM'}
+                     {key : '코드ID명'     , value : 'CD_ID_NM'    }
+                    ,{key : '코드ID한글명' , value : 'CD_ID_HNM'   }
+                    ,{key : '코드ID그룹명' , value : 'CD_ID_GRP_NM'}
+                    ,{key : '코드'         , value : 'CD'          }
+                    ,{key : '코드명'       , value : 'CD_NM'       }
+                    ,{key : '코드한글명'   , value : 'CD_HNM'      }
+                    ,{key : '코드설명'     , value : 'CD_DESC'     }
                    ]
                }
            }
@@ -47,32 +52,11 @@ Ext.define('fframe.dams.table.TabColListView', {
               ,listeners: {
                    specialkey: function(f,e,op) {
                        if (e.getKey() == e.ENTER) {
-                           //Ext.Msg.alert("알림","222");
-                          // this.up('toolbar').down('button').handler
-                         //  var selBtn = field.up('researchLinkForm').down('button#save');
-                           
-                           //var ctrl = this.getController();
-                           //ctrl.selBtn(this);
-                       //fframe.app.getController('view.syst.Usr.UsrListController').selBtn(this);
-                       //var ctrl = new fframe.syst.usr.UsrListController();
-                       //controller.selBtn();
-                       //var ControllerRef  =   this.getController('fframe.dams.table.TabColListController');
-                       //ControllerRef.selBtn(this);
-                           
-                       var button = Ext.getCmp('selBtn'); 
-                       button.fireEvent('click', button,e,op);
-                           
-                       //f.up('form').getForm().submit();
-                       var selBtn = f.up('toolbar').down('button#selBtn');
-                       //field.up('form').getForm().submit(); 
-                       selBtn.fireEvent('selBtn', selBtn, e,op);
-                           
                        }
                    }
                }
            }
           ,{ xtype:'component' , anchor:'100%'
-            //,html:['&nbsp;&nbsp;상태&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;']
             ,html:[ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
                    ,'상태'
                    ,'&nbsp;&nbsp;'
@@ -80,15 +64,13 @@ Ext.define('fframe.dams.table.TabColListView', {
            }
           ,{
               xtype : 'combo'
-             //,fieldLabel:'상태'
-             //,anchor: '-150'
              ,width : 90     
-             ,name : 'termStatus'
+             ,name : 'codeStatus'
              ,editable : false
              ,displayField : 'key'
              ,valueField : 'value'
              ,queryMode : 'local'
-             ,bind : { value : '{termStsCd}'}
+             ,bind : { value : '{cdStsCd}'}
              ,store : {
                   fields : ['key','value'] 
                  ,data : 
@@ -105,6 +87,9 @@ Ext.define('fframe.dams.table.TabColListView', {
          ,{text:'Cells'   , enableToggle:true , toggleHandler:'toggleCellSelect'   , pressed:true}
          ,{text:'Columns' , enableToggle:true , toggleHandler:'toggleColumnSelect' , pressed:false}          
          ,'->'
+         ,{xtype:'button' , text:'신규' , handler:'initBtn', iconCls:'x-fa fa-gift'}
+         ,{xtype:'button' , text:'저장' , handler:'saveBtn', iconCls:'x-fa fa-gift'}
+         ,{xtype:'button' , text:'삭제' , handler:'delBtn', iconCls:'x-fa fa-gift'}
          ,{xtype:'button' , text:'조회' ,id : 'selBtn', handler:'selBtn' , iconCls:'x-fa fa-gift'}
         ] 
       }
@@ -143,31 +128,22 @@ Ext.define('fframe.dams.table.TabColListView', {
           }
          ,columns :
           [
-           {xtype:'rownumberer'}
-          ,{text:'DB명'           , dataIndex:'DB_NM'          , style:'text-align:center' , align:'center', width:90}
-          ,{text:'소유자'         , dataIndex:'OWNER'          , style:'text-align:center' , align:'center', width:100}
-          ,{text:'테이블명'       , dataIndex:'TAB_NM'         , style:'text-align:center' , align:'center', width:120}
-          ,{text:'ID'             , dataIndex:'COL_ID'         , style:'text-align:center' , align:'center', width:60}
-          ,{text:'컬럼명'         , dataIndex:'COL_NM'         , style:'text-align:center' , align:'left'  , flex:1}
-          ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'        , style:'text-align:center' , align:'left'  , flex:1}
-          ,{text:'데이터타입설명' , dataIndex:'DATA_TYPE_DESC' , style:'text-align:center' , align:'left'  , flex:1}
-          ,{text:'컬럼설명'       , dataIndex:'COL_DESC'       , style:'text-align:center' , align:'left'  , flex:1}
-          ,{text:'데이터타입명'   , dataIndex:'DATA_TYPE_NM'   , style:'text-align:center' , align:'left'  , flex:1, hidden:true}
-          ,{text:'길이'           , dataIndex:'LEN'            , style:'text-align:center' , align:'left'  , flex:1, hidden:true}
-          ,{text:'소수점수'       , dataIndex:'DECIMAL_CNT'    , style:'text-align:center' , align:'left'  , flex:1, hidden:true}
-          ,{text:'등록일시'       , dataIndex:'REG_DTM'        , style:'text-align:center' , flex:1, hidden:true}
-          ,{text:'등록자'         , dataIndex:'REG_USR_ID'     , style:'text-align:center' , flex:1, hidden:true}
-          ,{text:'변경일시'       , dataIndex:'UPD_DTM'        , style:'text-align:center' , flex:1, hidden:true}
-          ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     , style:'text-align:center' , flex:1, hidden:true}
+            {text:'코드ID명'     , dataIndex:'CD_ID_NM'     , style:'text-align:center' , align:'center', width:90}
+           ,{text:'코드ID한글명' , dataIndex:'CD_ID_HNM'    , style:'text-align:center' , align:'center', width:100}
+           ,{text:'코드ID그룹명' , dataIndex:'CD_ID_GRP_NM' , style:'text-align:center' , align:'center', width:120}
+           ,{text:'코드'         , dataIndex:'CD'           , style:'text-align:center' , align:'center', width:60}
+           ,{text:'코드명'       , dataIndex:'CD_NM'        , style:'text-align:center' , align:'left'  , flex:1}
+           ,{text:'코드한글명'   , dataIndex:'CD_HNM'       , style:'text-align:center' , align:'left'  , flex:1}
+           ,{text:'코드설명'     , dataIndex:'CD_DESC'      , style:'text-align:center' , align:'left'  , flex:1}
+           ,{text:'코드상태코드' , dataIndex:'CD_STS_CD'    , style:'text-align:center' , align:'left'  , hidden:true}
+           ,{text:'코드상태'     , dataIndex:'CD_STS_CD_NM' , style:'text-align:center' , align:'left'  , flex:1}
+           ,{text:'등록일시'     , dataIndex:'REG_DTM'      , style:'text-align:center' , flex:1, hidden:true}
+           ,{text:'등록자'       , dataIndex:'REG_USR_ID'   , style:'text-align:center' , flex:1, hidden:true}
+           ,{text:'변경일시'     , dataIndex:'UPD_DTM'      , style:'text-align:center' , flex:1, hidden:true}
+           ,{text:'변경자'       , dataIndex:'UPD_USR_ID'   , style:'text-align:center' , flex:1, hidden:true}
           ]
          ,forceFit: true           
-         ,bind:{store:'{TabColList}'}
-        //,bbar : {
-        //     xtype : 'pagingtoolbar'
-        //    ,plugins : 'ux-progressbarpager'
-        //    //,plugins : 'ux-slidingpager',
-        //    ,display : true
-        // }
+         ,bind:{store:'{CodeList}'}
     }
-     ]
+   ]
 });

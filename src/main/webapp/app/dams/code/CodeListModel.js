@@ -2,27 +2,26 @@ Ext.define('fframe.dams.table.CodeListModel', {
      extend: 'Ext.app.ViewModel'
     ,alias: 'viewmodel.CodeList'
     ,data : {
-        searchKeyCombo : 'COL_HNM'
+        searchKeyCombo : 'CD_ID_HNM'
        ,searchValue : ''
-       ,termStsCd : '99'    
+       ,cdStsCd : '99'    
      }
     ,stores : {
         CodeList : {
              fields : [
-                       'DB_NM'
-                      ,'OWNER'
-                      ,'TAB_NM'
-                      ,'COL_NM'
-                      ,'COL_HNM'
-                      ,'COL_DESC'
-                      ,'DATA_TYPE_NM'
-                      ,'LEN'
-                      ,'DECIMAL_CNT'
-                      ,'DATA_TYPE_DESC'
-                      ,'REG_DTM'
-                      ,'REG_USR_ID'
-                      ,'UPD_DTM'
-                      ,'UPD_USR_ID'
+                        'CD_ID_NM'
+                       ,'CD_ID_HNM'
+                       ,'CD_ID_GRP_NM'
+                       ,'CD'
+                       ,'CD_NM'
+                       ,'CD_HNM'
+                       ,'CD_DESC'
+                       ,'CD_STS_CD'
+                       ,'CD_STS_CD_NM'
+                       ,'REG_DTM'
+                       ,'REG_USR_ID'
+                       ,'UPD_DTM'
+                       ,'UPD_USR_ID'
                       ]
             ,proxy : {
                  type : 'ajax'
