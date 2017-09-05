@@ -7,33 +7,29 @@
 
 <select id="selectCodeList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
-	-- TermDao.selectCodeList
-	SELECT   PKG_FUL_NM
-			,PKG2_NM
-			,PKG3_NM
-			,PKG4_NM
-			,PKG_HNM
-			,PKG_DESC
-			,USE_YN
-			,date_format(REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
-			,REG_USR_ID
-			,date_format(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
-			,UPD_USR_ID
-	FROM    TDACM00010
-    WHERE   PKG2_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG3_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG4_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG_FUL_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG_HNM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG_DESC LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-	ORDER BY PKG_FUL_NM
-</select>
-
-<select id="selectCodeCnt" parameterType="java.util.HashMap" resultType="int">
-	-- TermDao.selectCodeCnt
-	SELECT COUNT(*) CNT
-	FROM   TDACM00010
-    WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
+    -- TermDao.selectCodeList
+    SELECT   A.CD_ID_NM    
+            ,A.CD_ID_HNM   
+            ,A.CD_ID_GRP_NM
+            ,A.CD          
+            ,A.CD_NM       
+            ,A.CD_HNM      
+            ,A.CD_DESC      
+            ,A.CD_STS_CD   
+            ,B.CD_HNM AS CD_STS_CD_NM   
+            ,date_format(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,date_format(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00060 A
+            LEFT JOIN TDACM00060 B
+            ON  A.CD_ID_NM = B.CD_ID_NM
+            AND A.CD = B.CD
+    WHERE   A.CD_ID_HNM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      A.CD LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      A.CD_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      A.CD_HNM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    ORDER BY A.CD_ID_NM, A.CD
 </select>
 
 <insert id="insertCode" parameterType="java.util.HashMap">
