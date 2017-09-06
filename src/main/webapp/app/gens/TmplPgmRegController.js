@@ -1,4 +1,4 @@
-Ext.define('fframe.tmpl.TmplPgmRegController', {
+Ext.define('fframe.gens.TmplPgmRegController', {
      extend: 'Ext.app.ViewController'
     ,alias: 'controller.TmplPgmReg'
     ,saveBtn : function(btn) {
