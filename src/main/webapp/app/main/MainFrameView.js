@@ -132,6 +132,21 @@ Ext.define('fframe.main.MainFrameView', {
 							page : 'UserRegView',
 							leaf : true
 						} ]
+                    }, {
+                        text : '탬플릿',
+                        iconCls : 'x-fa fa-shopping-cart',
+                        expanded : true,
+                        selectable : false,
+                        children : [ 
+                        {
+                            text : '탬플릿생성',
+                            page : 'TmplPgmReg',
+                            leaf : true
+                        },{
+                            text : '탬플릿결과',
+                            page : 'TmplPgmReg',
+                            leaf : true
+                        } ]
 					}, {
 						text : '로그',
 						 iconCls : 'x-fa  fa-users',
