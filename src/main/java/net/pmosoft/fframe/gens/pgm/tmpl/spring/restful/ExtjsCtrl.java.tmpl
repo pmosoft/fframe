@@ -1,0 +1,40 @@
+package $packageName$;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class $FileName$Ctrl {
+
+	@Autowired
+	private $FileName$Srv $fileName$Srv;
+	
+	/**
+	 * select $FileName$List
+	 */
+	@RequestMapping(value = "/$webappPackageName$/$fileName$/select$FileName$List")
+	public Map<String, Object> select$FileName$List(@RequestParam Map<String,String> params) {
+		return $fileName$Srv.select$FileName$List(params);
+	}
+
+	/**
+	 * save$FileName$
+	 */
+	@RequestMapping(value = "/$webappPackageName$/$fileName$/save$FileName$")
+	public Map<String, Object> save$FileName$(@RequestParam Map<String,String> params) {
+		return $fileName$Srv.save$FileName$(params);
+	}
+
+	/**
+	 * delete$FileName$
+	 */
+	@RequestMapping(value = "/$webappPackageName$/$fileName$/delete$FileName$")
+	public Map<String, Object> delete$FileName$(@RequestParam Map<String,String> params) {
+		return $fileName$Srv.delete$FileName$(params);
+	}
+
+}
