@@ -3,32 +3,27 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="$packNm$.$FileName$Dao">
+<mapper namespace="$packNm$.$PgmNm$Dao">
 
-<select id="select$FileName$List" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+<select id="select$PgmNm$List" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
-	-- $FileName$Dao.select$FileName$List
-	SELECT   '제목'    AS TITLE
-			,'내용'    AS CONTENT
-			,DATE_FORMAT(REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
-			,'ADMIN'   AS REG_USR_ID
-			,DATE_FORMAT(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
-			,''        ASUPD_USR_ID
-	--FROM    DUAL
-    --WHERE   PKG2_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    --OR      PKG3_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-	--ORDER BY PKG_FUL_NM
+	-- $PgmNm$Dao.select$PgmNm$List
+    SELECT '제목1' AS TITLE ,'내용1' AS CONTENT ,'' AS REG_DTM ,'ADMIN' AS REG_USR_ID ,'' AS UPD_DTM ,'' AS UPD_USR_ID UNION ALL            
+    SELECT '제목2' AS TITLE ,'내용2' AS CONTENT ,'' AS REG_DTM ,'ADMIN' AS REG_USR_ID ,'' AS UPD_DTM ,'' AS UPD_USR_ID UNION ALL
+    SELECT '제목3' AS TITLE ,'내용3' AS CONTENT ,'' AS REG_DTM ,'ADMIN' AS REG_USR_ID ,'' AS UPD_DTM ,'' AS UPD_USR_ID UNION ALL
+    SELECT '제목4' AS TITLE ,'내용4' AS CONTENT ,'' AS REG_DTM ,'ADMIN' AS REG_USR_ID ,'' AS UPD_DTM ,'' AS UPD_USR_ID    
+			
 </select>
 
-<select id="select$FileName$Cnt" parameterType="java.util.HashMap" resultType="int">
-	-- $FileName$Dao.select$FileName$Cnt
+<select id="select$PgmNm$Cnt" parameterType="java.util.HashMap" resultType="int">
+	-- $PgmNm$Dao.select$PgmNm$Cnt
 	SELECT COUNT(*) CNT
 	FROM   DUAL
 </select>
 
-<insert id="insert$FileName$" parameterType="java.util.HashMap">
+<insert id="insert$PgmNm$" parameterType="java.util.HashMap">
 
-	-- $FileName$Dao.insert$FileName$
+	-- $PgmNm$Dao.insert$PgmNm$
 	INSERT INTO TDACM00010
 	(
 	     PKG_FUL_NM
@@ -48,14 +43,14 @@
 
 </insert>
 
-<delete id="delete$FileName$" parameterType="java.util.HashMap">
-	-- $FileName$Dao.delete$FileName$
+<delete id="delete$PgmNm$" parameterType="java.util.HashMap">
+	-- $PgmNm$Dao.delete$PgmNm$
 	DELETE FROM TDACM00040 WHERE COL_STS_CD = #{COL_STS_CD}
 </delete>
 
-<update id="update$FileName$" parameterType="java.util.HashMap">
+<update id="update$PgmNm$" parameterType="java.util.HashMap">
 
-	-- $FileName$Dao.update$FileName$
+	-- $PgmNm$Dao.update$PgmNm$
 	UPDATE TDACM00010
 	SET  PKG2_NM      = #{PKG2_NM}
 		,PKG3_NM      = #{PKG3_NM}

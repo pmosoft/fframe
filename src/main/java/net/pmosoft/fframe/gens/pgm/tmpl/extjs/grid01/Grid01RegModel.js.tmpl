@@ -1,6 +1,6 @@
-Ext.define('$extjsPackNm$.$FileNm$RegModel', {
+Ext.define('$extjsPackNm$.$PgmNm$RegModel', {
     extend: 'Ext.app.ViewModel',
-    alias: 'viewmodel.$FileNm$Reg',
+    alias: 'viewmodel.$PgmNm$Reg',
     data : {
 		TITLE      : "" 
 	   ,CONTENT    : ""
@@ -10,7 +10,7 @@ Ext.define('$extjsPackNm$.$FileNm$RegModel', {
 	   ,UPD_USR_ID : ""
     },    
     stores : {
-    	$FileNm$Reg : {
+    	$PgmNm$Reg : {
     	}
     }
 });

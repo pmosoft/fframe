@@ -1,15 +1,15 @@
-Ext.define('$extjsPackNm$.$FileNm$ListModel', {
+Ext.define('$extjsPackNm$.$PgmNm$ListModel', {
      extend: 'Ext.app.ViewModel'
-    ,alias: 'viewmodel.$FileNm$List'
+    ,alias: 'viewmodel.$PgmNm$List'
     ,data : {
     	searchValue : ''
      }
     ,stores : {
-        $FileNm$List : {
+        $PgmNm$List : {
              fields : ['TITLE','CONTENT','REG_DTM','REG_USR_ID','UPD_DTM','UPD_USR_ID']
             ,proxy : {
                  type : 'ajax'              
-                ,url : '$restfulPathName$/select$FileNm$List'
+                ,url : '/$restfulPathName$/select$PgmNm$List'
                 ,reader : {
                      type : 'json'
                     ,rootProperty : 'data'  

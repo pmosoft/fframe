@@ -1,4 +1,3 @@
-
 Ext.define('fframe.gens.TmplPgmRegController', {
      extend: 'Ext.app.ViewController'
     ,alias: 'controller.TmplPgmReg'
@@ -8,20 +7,17 @@ Ext.define('fframe.gens.TmplPgmRegController', {
         console.log(params);
         
         Ext.Ajax.request({
-            url : '/usr/saveUsr',
+            url : '/gens/pgm/genPgm',
             method : 'post',
             params : params,
             success : function(res){
                 var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
-                    //Ext.Msg.alert("알림",result['msg']);
-                    Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    Ext.toast({  html:result['userMsg'],title:'알림',width: 200,align:'t',timeout: 500});
                 } else {
                     Ext.Msg.alert("알림",result['errUsrMsg']);
-                    //Ext.Msg.alert("알림",result['errSysMsg']);
                     return;
                 }
-                
             }
         })
      }    

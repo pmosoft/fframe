@@ -18,6 +18,4 @@ public class GensPgmCtrl {
         return gensPgmSrv.genPgm(params);
     }
     
-
-    
 }

@@ -22,12 +22,14 @@ Ext.define('fframe.gens.TmplPgmRegView', {
           xtype      : 'textfield'
          ,emptyText  : '패키지명을 입력하세요'
          ,fieldLabel : '패키지명'
-         ,name       : 'pkgNm'
+         ,name       : 'packNm'
+         ,bind       : {value:'{packNm}'}
       },{
           xtype      : 'textfield' 
          ,emptyText  : '프로그램명을 입력하세요'
          ,fieldLabel : '프로그램명'
-         ,name       : 'pgmNm' 
+         ,name       : 'pgmNm'
+         ,bind       : {value:'{pgmNm}'}             
       },{
           xtype : 'fieldcontainer'
          ,combineErrors: true
@@ -48,7 +50,7 @@ Ext.define('fframe.gens.TmplPgmRegView', {
                ,displayField : 'key'
                ,valueField : 'value'
                ,queryMode : 'local'
-               ,bind : { value:'{tmplTypeCombo}' }
+               ,bind : { value:'{tmplCd}' }
                ,store : {
                     fields : ['key','value'] 
                    ,data : [

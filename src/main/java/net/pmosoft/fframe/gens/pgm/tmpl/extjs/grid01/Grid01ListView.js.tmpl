@@ -1,8 +1,8 @@
-Ext.define('$extjsPackNm$.$FileNm$ListView', {
+Ext.define('$extjsPackNm$.$PgmNm$ListView', {
      extend: 'Ext.form.Panel'
-    ,xtype: '$FileNm$List'
-    ,controller: '$FileNm$List'
-    ,viewModel: '$FileNm$List'
+    ,xtype: '$PgmNm$List'
+    ,controller: '$PgmNm$List'
+    ,viewModel: '$PgmNm$List'
     ,listeners : {
         resize : 'setGridHeight'
     }
@@ -37,7 +37,7 @@ Ext.define('$extjsPackNm$.$FileNm$ListView', {
             ,columnLines : true
             ,listeners : {
                  celldblclick : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts){
-                	 var userReg = Ext.create("$extjsPackNm$.$FileNm$RegView");
+                	 var userReg = Ext.create("$extjsPackNm$.$PgmNm$RegView");
                      var viewModel = userReg.getViewModel();
         
                      var USE_YN = record.get("USE_YN");
@@ -71,7 +71,7 @@ Ext.define('$extjsPackNm$.$FileNm$ListView', {
              ,{text:'변경일시'      , dataIndex:'UPD_DTM'    , style:'text-align:center' , flex:1, hidden:true}
              ,{text:'변경자'        , dataIndex:'UPD_USR_ID' , style:'text-align:center' , flex:1, hidden:true}
              ]
-            ,bind:{store:'{$FileNm$List}'}
+            ,bind:{store:'{$PgmNm$List}'}
             ,bbar:{xtype:'pagingtoolbar' , plugins:'ux-progressbarpager' , display:true}
             // plugins : 'ux-slidingpager',
          }

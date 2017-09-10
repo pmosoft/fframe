@@ -1,6 +1,6 @@
-Ext.define('$extjsPackNm$.$FileNm$RegController', {
+Ext.define('$extjsPackNm$.$PgmNm$RegController', {
      extend:'Ext.app.ViewController' 
-    ,alias:'controller.$FileNm$Reg'
+    ,alias:'controller.$PgmNm$Reg'
     ,onLoadData : function(obj){
          var view = this.getView(); var viewModel = view.getViewModel();
          var store = viewModel.getStore(view['xtype']);
@@ -33,7 +33,7 @@ Ext.define('$extjsPackNm$.$FileNm$RegController', {
          var params = viewModel.getData();
 
          Ext.Ajax.request({
-             url : '$restfulPackageName/save$FileNm$',
+             url : '$restfulPackageName/save$PgmNm$',
              method : 'post',
              params : params,
              success : function(res){
@@ -53,7 +53,7 @@ Ext.define('$extjsPackNm$.$FileNm$RegController', {
         var params = this.getView().getViewModel().getData();
 
         Ext.Ajax.request({
-            url : '$restfulPackageName/delete$FileNm$',
+            url : '$restfulPackageName/delete$PgmNm$',
             method : 'post',
             params : params,
             success : function(res){

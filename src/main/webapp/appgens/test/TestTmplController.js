@@ -1,6 +1,6 @@
-Ext.define('$extjsPackNm$.$FileNm$ListController', {
+Ext.define('$extjsPackNm$.$PgmNm$ListController', {
      extend : 'Ext.app.ViewController'
-    ,alias : 'controller.$FileNm$List'
+    ,alias : 'controller.$PgmNm$List'
     ,setGridHeight : function(obj){ 
          obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
      }
@@ -17,7 +17,7 @@ Ext.define('$extjsPackNm$.$FileNm$ListController', {
     	});
      }
     ,insBtn : function(btn) {
-    	var userReg = Ext.create("$extjsPackNm$.$FileNm$RegView");
+    	var userReg = Ext.create("$extjsPackNm$.$PgmNm$RegView");
     	userReg.show();
      }
     ,delBtn : function(btn) {

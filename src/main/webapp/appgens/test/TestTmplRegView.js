@@ -1,8 +1,8 @@
-Ext.define('$extjsPackNm$.$FileNm$RegView', {
+Ext.define('$extjsPackNm$.$PgmNm$RegView', {
      extend:'Ext.window.Window' 
-    ,xtype:'$FileNm$Reg' 
-    ,controller:'$FileNm$Reg' 
-    ,viewModel:'$FileNm$Reg'    
+    ,xtype:'$PgmNm$Reg' 
+    ,controller:'$PgmNm$Reg' 
+    ,viewModel:'$PgmNm$Reg'    
     ,layout : 'form'
     ,modal : true 
     ,frame : true
