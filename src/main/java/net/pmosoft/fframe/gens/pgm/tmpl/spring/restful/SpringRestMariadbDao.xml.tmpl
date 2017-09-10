@@ -3,37 +3,27 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="$packageName$.$FileName$Dao">
+<mapper namespace="$packNm$.$FileName$Dao">
 
 <select id="select$FileName$List" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
 	-- $FileName$Dao.select$FileName$List
-	SELECT   PKG_FUL_NM
-			,PKG2_NM
-			,PKG3_NM
-			,PKG4_NM
-			,PKG_HNM
-			,PKG_DESC
-			,USE_YN
-			,date_format(REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
-			,REG_USR_ID
-			,date_format(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
-			,UPD_USR_ID
-	FROM    TDACM00010
-    WHERE   PKG2_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG3_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG4_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG_FUL_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG_HNM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG_DESC LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-	ORDER BY PKG_FUL_NM
+	SELECT   '제목'    AS TITLE
+			,'내용'    AS CONTENT
+			,DATE_FORMAT(REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+			,'ADMIN'   AS REG_USR_ID
+			,DATE_FORMAT(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+			,''        ASUPD_USR_ID
+	--FROM    DUAL
+    --WHERE   PKG2_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    --OR      PKG3_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+	--ORDER BY PKG_FUL_NM
 </select>
 
 <select id="select$FileName$Cnt" parameterType="java.util.HashMap" resultType="int">
 	-- $FileName$Dao.select$FileName$Cnt
 	SELECT COUNT(*) CNT
-	FROM   TDACM00010
-    WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
+	FROM   DUAL
 </select>
 
 <insert id="insert$FileName$" parameterType="java.util.HashMap">
@@ -43,11 +33,6 @@
 	(
 	     PKG_FUL_NM
 		,PKG2_NM
-		,PKG3_NM
-		,PKG4_NM
-		,PKG_HNM
-		,PKG_DESC
-		,USE_YN
 		,REG_DTM
 		,REG_USR_ID
 		,UPD_DTM
@@ -55,11 +40,6 @@
 	) VALUES (
          #{PKG_FUL_NM}
 		,#{PKG2_NM}
-		,#{PKG3_NM}
-		,#{PKG4_NM}
-		,#{PKG_HNM}
-		,#{PKG_DESC}
-		,CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
 		,curdate()
 		,#{REG_USR_ID}
 		,curdate()

@@ -17,6 +17,7 @@ Ext.define('fframe.gens.TmplPgmRegView', {
      }    
     ,listeners   : {
      }
+    
     ,items:[{
           xtype      : 'textfield'
          ,emptyText  : '패키지명을 입력하세요'
