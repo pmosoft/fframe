@@ -1,4 +1,4 @@
-package $packageName$;
+package $packNm$;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,42 +19,43 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = FframeApplication.class)
-public class $FileName$Test {
+public class $PgmNm$Test {
 
 	@Autowired
-	private $FileName$Srv $fileName$Srv;
+	private $PgmNm$Srv $pgmNm$Srv;
 
 	@Autowired
-	private $FileName$Dao $fileName$Dao;
+	private $PgmNm$Dao $pgmNm$Dao;
 
 
     @Test
-    public void test$FileName$Process() {
+    public void test$PgmNm$Process() {
         Map<String, String> params = new HashMap<String, String>();
         params.put("PKG_FUL_NM", "user");
-        $fileName$Dao.selectExt$FileName$List(params);
+        $pgmNm$Dao.select$PgmNm$List(params);
+        $pgmNm$Srv.select$PgmNm$List(params);
     }	
 	
 	@Test @Ignore
-	public void test$FileName$Cnt() {
+	public void test$PgmNm$Cnt() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
 		params.put("PKG_FUL_NM", "user");
-		$fileName$Dao.select$FileName$Cnt(params);
+		$pgmNm$Dao.select$PgmNm$Cnt(params);
 	}
 
 	@Test @Ignore
-	public void test$FileName$List() {
+	public void test$PgmNm$List() {
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchValue", "us");
 		//params.put("searchValue", "유저");
 		params.put("searchValue", "");
-		$fileName$Srv.select$FileName$List(params);
-		//$FileName$Dao.select$FileName$List(params);
+		$pgmNm$Srv.select$PgmNm$List(params);
+		//$PgmNm$Dao.select$PgmNm$List(params);
 	}
 
 	@Test @Ignore
-	public void testSave$FileName$() {
+	public void testSave$PgmNm$() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
@@ -67,23 +68,23 @@ public class $FileName$Test {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		//$FileName$Dao.deleteUser(params);
+		//$PgmNm$Dao.deleteUser(params);
 
-		Map<String, Object> result = $fileName$Srv.save$FileName$(params);
+		Map<String, Object> result = $pgmNm$Srv.save$PgmNm$(params);
 
 		System.out.println(result);
-		test$FileName$List();
+		test$PgmNm$List();
 	}
 
 	@Test @Ignore
-	public void testDelete$FileName$() {
+	public void testDelete$PgmNm$() {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
-		$fileName$Srv.delete$FileName$(params);
+		$pgmNm$Srv.delete$PgmNm$(params);
 	}
 
 	@Test @Ignore
-	public void testInsert$FileName$() {
+	public void testInsert$PgmNm$() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -97,15 +98,15 @@ public class $FileName$Test {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		$fileName$Dao.delete$FileName$(params);
+		$pgmNm$Dao.delete$PgmNm$(params);
 
-		$fileName$Dao.insert$FileName$(params);
+		$pgmNm$Dao.insert$PgmNm$(params);
 
-		test$FileName$List();
+		test$PgmNm$List();
 	}
 
 	@Test @Ignore
-	public void testUpdate$FileName$() {
+	public void testUpdate$PgmNm$() {
 
 		Map<String, String> params = new HashMap<String, String>();
 		//params.put("searchKeyCombo", ""); params.put("searchValue", "");
@@ -119,11 +120,10 @@ public class $FileName$Test {
 		params.put("REG_USR_ID", "admin");
 		params.put("UPD_USR_ID", "admin");
 
-		$fileName$Dao.update$FileName$(params);
+		$pgmNm$Dao.update$PgmNm$(params);
 
-		test$FileName$List();
+		test$PgmNm$List();
 	}
-
 
 }
 

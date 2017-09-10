@@ -146,7 +146,11 @@ Ext.define('fframe.main.MainFrameView', {
                             text : '탬플릿결과',
                             page : 'TmplPgmReg',
                             leaf : true
-                        } ]
+                        },{
+                            text : '테스트탬플릿',
+                            page : 'TestTmplList',
+                            leaf : true
+                        }]
 					}, {
 						text : '로그',
 						 iconCls : 'x-fa  fa-users',
