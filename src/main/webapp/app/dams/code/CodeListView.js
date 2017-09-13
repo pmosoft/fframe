@@ -1,8 +1,10 @@
 Ext.define('fframe.dams.table.CodeListView', {
-     extend : 'Ext.form.Panel' , xtype : 'CodeList' 
-    ,controller : 'CodeList' , viewModel:'CodeList'
-    ,listeners : { 
-        resize : 'setGridHeight'
+     extend     : 'Ext.form.Panel' 
+    ,xtype      : 'CodeList' 
+    ,controller : 'CodeList' 
+    ,viewModel  : 'CodeList'
+    ,listeners  : { 
+         resize : 'setGridHeight'
      }
     //-------------------------------------------
     // titletoolbar
