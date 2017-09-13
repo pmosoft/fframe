@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -131,49 +135,81 @@ public class TabSrv {
         return result;
     }
 
-    public Map<String, Object> saveTabCol(Map<String,String> params){
+    public Map<String, Object> saveTabCol(String params){
 
 
-        System.out.println(tabDao.selectTabColCnt(params));
+        System.out.println("params="+params);
 
         Map<String, Object> result = new HashMap<String, Object>();
 
-        Map<String, String> errors = new HashMap<String, String>();
-        errors = tabValidatorSrv.validateSaveTabCol(params);
-
-        System.out.println("11");
-        if(errors.size()>0){
-            System.out.println("22");
-
-            //model.addAttribute("tbTabCol", tbTabCol);
-            result.put("isSuccess", false);
-            result.put("errUserMsg", errors.get("errUserMsg"));
-            return result;
-        } else {
-            System.out.println("33");
-
-            try{
-                result.put("isSuccess", true);
-
-                if  (tabDao.selectTabColCnt(params)==0) {
-                    tabDao.insertTabCol(params);
-                    result.put("msg", "입력 되었습니다");
-                } else {
-                    tabDao.updateTabCol(params);
-                    result.put("msg", "갱신 되었습니다");
-                }
-            } catch (Exception e){
-                e.printStackTrace();
-                result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
-                //result.put("errSysMsg", e.toString());
-            }
-            return result;
-        }
+//        Map<String, String> errors = new HashMap<String, String>();
+//        errors = tabValidatorSrv.validateSaveTabCol(params);
+//
+//        System.out.println("11");
+//        if(errors.size()>0){
+//            System.out.println("22");
+//
+//            //model.addAttribute("tbTabCol", tbTabCol);
+//            result.put("isSuccess", false);
+//            result.put("errUserMsg", errors.get("errUserMsg"));
+//            return result;
+//        } else {
+//            System.out.println("33");
+//
+//            try{
+//                result.put("isSuccess", true);
+//
+//                if  (tabDao.selectTabColCnt(params)==0) {
+//                    tabDao.insertTabCol(params);
+//                    result.put("msg", "입력 되었습니다");
+//                } else {
+//                    tabDao.updateTabCol(params);
+//                    result.put("msg", "갱신 되었습니다");
+//                }
+//            } catch (Exception e){
+//                e.printStackTrace();
+//                result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+//                //result.put("errSysMsg", e.toString());
+//            }
+//            return result;
+//        }
+        
+        return result;
+        
     }
 
-    public Map<String, Object> deleteTabCol(Map<String,String> params){
+    public Map<String, Object> deleteTabCol(Map<String,Object> params){
 
         System.out.println("params="+params);
+        System.out.println("params433355 searchValue="+params.get("data"));
+        
+        String data = (String )params.get("data");
+        JSONParser jsonParser = null;
+        JSONArray jsonArr = null;
+        JSONObject jsonObj = null;
+        if(data.substring(0,1).equals("[")){
+            try {
+                jsonParser = new JSONParser();
+                jsonArr = (JSONArray) jsonParser.parse(data);
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } else if(data.substring(0,1).equals("{")){
+            try {
+                jsonParser = new JSONParser();
+                jsonObj = (JSONObject) jsonParser.parse(data);
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        
+        System.out.println("jsonArr"+jsonArr.size());
+        
+        JSONObject jo1 = (JSONObject)jsonArr.get(0);
+        System.out.println("jsonArr"+jo1.get("TAB_NM"));
+        
         
         
         Map<String, Object> result = new HashMap<String, Object>();

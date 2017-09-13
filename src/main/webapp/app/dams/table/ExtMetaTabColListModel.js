@@ -34,5 +34,25 @@ Ext.define('fframe.dams.table.ExtMetaTabColListModel', {
                 }
             }
         }
+       ,DelTabColList : {
+        fields : [
+                  'DB_NM'
+                 ,'OWNER'
+                 ,'TAB_NM'
+                 ]
+       ,proxy : {
+            type : 'ajax'
+           ,url : '/dams/table/deleteTabCol'
+                //,api : {destroy : '/dams/table/deleteTabCol'}
+           ,reader : {
+                type : 'json'
+               ,rootProperty : 'data'    
+           }
+           ,writer : {
+               type : 'json'
+              ,rootProperty : 'data'    
+          }
+       }
+   }    
      }
 });

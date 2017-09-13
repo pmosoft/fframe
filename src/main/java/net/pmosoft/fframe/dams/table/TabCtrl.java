@@ -78,7 +78,7 @@ public class TabCtrl {
     * saveTabCol
     */
    @RequestMapping(value = "/dams/table/saveTabCol")
-   public Map<String, Object> saveTabCol(@RequestParam Map<String,String> params) {
+   public Map<String, Object> saveTabCol(@RequestParam String params) {
        return tabSrv.saveTabCol(params);
    }
 
@@ -86,7 +86,7 @@ public class TabCtrl {
     * deleteTabCol
     */
    @RequestMapping(value = "/dams/table/deleteTabCol")
-   public Map<String, Object> deleteTabCol(@RequestParam Map<String,String> params) {
+   public Map<String, Object> deleteTabCol(@RequestParam Map<String,Object> params) {
        return tabSrv.deleteTabCol(params);
    }
 	

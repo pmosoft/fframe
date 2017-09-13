@@ -57,8 +57,18 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
         var sel = new Array();
         var records = grid.getSelectionModel().getSelection();
         console.log("records="+records.length);
+
+        var datar = new Array();
+        var jsonDataEncode = "";
+        for (var i = 0; i < records.length; i++) {
+            datar.push(records[i].data);
+        }
+        jsonDataEncode = Ext.util.JSON.encode(datar);
+
+        console.log("jsonDataEncode="+jsonDataEncode);
         
-        console.log("records 1="+records[1].get('TAB_NM'));
+        
+        //console.log("records 1="+records[1].get('TAB_NM'));
         
         //for(int i = 0; i < records.length; i++){
         //  sel.push(records[i].data.id);
@@ -73,6 +83,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
         console.log("record.data.TAB_NM="+record.data.TAB_NM);
         console.log("record.get="+record.get('TAB_NM'));
         
+        console.log("record.data="+record.data);
         
         //console.log("fieldName="+fieldName);
         //console.log("data="+data);
@@ -89,7 +100,9 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
         Ext.Ajax.request({
              url : '/dams/table/deleteTabCol'
             ,method : 'post'
-            ,params : {  gridData: Ext.util.JSON.encode(records) }
+            //,params : { data:"[{aa:11,bb:22},{aa:1,bb:22}]"}
+            ,params : { data:jsonDataEncode}
+            //,params : { aa:record.data,bb:"22"}                    
             ,success : function(res){
                 var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
@@ -103,9 +116,14 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
                 
             }
         })     
+
         
-        
-        
+//        var view = this.getView(); 
+//        var viewModel = view.getViewModel();
+//        //var store = viewModel.getStore('DelTabColList');
+//        var store = viewModel.getStore('ExtMetaTabColList');
+//        //store.load();
+//        store.sync();        
      
      }
     ,insBtn : function(btn) {
