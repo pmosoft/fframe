@@ -21,7 +21,7 @@ Ext.define('fframe.dams.table.CodeListView', {
            {
                xtype : 'combo'
               ,name : 'searchCondition'
-              ,width : 120     
+              ,width : 150     
               ,editable : false
               ,displayField : 'key'
               ,valueField : 'value'
@@ -103,7 +103,7 @@ Ext.define('fframe.dams.table.CodeListView', {
           [
               'Ext.grid.selection.SpreadsheetModel'
              ,'Ext.grid.plugin.Clipboard'
-          ]         
+          ]
          ,height : 150
          ,frame: true         
          ,columnLines : true
@@ -119,6 +119,7 @@ Ext.define('fframe.dams.table.CodeListView', {
           [
               'clipboard'
              ,'selectionreplicator'
+             ,'cellediting'
           ]         
           //,plugins : {ptype:'cellediting',clicksToEdit:2}                
          ,viewConfig: {
@@ -128,14 +129,14 @@ Ext.define('fframe.dams.table.CodeListView', {
           }
          ,columns :
           [
-            {text:'코드ID명'     , dataIndex:'CD_ID_NM'     , style:'text-align:center' , align:'center', width:90}
-           ,{text:'코드ID한글명' , dataIndex:'CD_ID_HNM'    , style:'text-align:center' , align:'center', width:100}
-           ,{text:'코드ID그룹명' , dataIndex:'CD_ID_GRP_NM' , style:'text-align:center' , align:'center', width:120}
-           ,{text:'코드'         , dataIndex:'CD'           , style:'text-align:center' , align:'center', width:60}
-           ,{text:'코드명'       , dataIndex:'CD_NM'        , style:'text-align:center' , align:'left'  , flex:1}
-           ,{text:'코드한글명'   , dataIndex:'CD_HNM'       , style:'text-align:center' , align:'left'  , flex:1}
-           ,{text:'코드설명'     , dataIndex:'CD_DESC'      , style:'text-align:center' , align:'left'  , flex:1}
-           ,{text:'코드상태코드' , dataIndex:'CD_STS_CD'    , style:'text-align:center' , align:'left'  , hidden:true}
+            {text:'코드그룹'     , dataIndex:'CD_ID_GRP_NM' , style:'text-align:center' , align:'center', width:100, editor:{xtype:'textfield'}}
+           ,{text:'코드ID명'     , dataIndex:'CD_ID_NM'     , style:'text-align:center' , align:'center', width:90 , editor:{xtype:'textfield'}}
+           ,{text:'코드ID한글명' , dataIndex:'CD_ID_HNM'    , style:'text-align:center' , align:'center', width:100, editor:{xtype:'textfield'}}
+           ,{text:'코드'         , dataIndex:'CD'           , style:'text-align:center' , align:'center', width:60 , editor:{xtype:'textfield'}}
+           ,{text:'코드명'       , dataIndex:'CD_NM'        , style:'text-align:center' , align:'left'  , flex:1   , editor:{xtype:'textfield'}}
+           ,{text:'코드한글명'   , dataIndex:'CD_HNM'       , style:'text-align:center' , align:'left'  , flex:1   , editor:{xtype:'textfield'}}
+           ,{text:'코드설명'     , dataIndex:'CD_DESC'      , style:'text-align:center' , align:'left'  , flex:1   , editor:{xtype:'textfield'}}
+           ,{text:'코드상태코드' , dataIndex:'CD_STS_CD'    , style:'text-align:center' , align:'left'  , editor:{xtype:'textfield'}}
            ,{text:'코드상태'     , dataIndex:'CD_STS_CD_NM' , style:'text-align:center' , align:'left'  , flex:1}
            ,{text:'등록일시'     , dataIndex:'REG_DTM'      , style:'text-align:center' , flex:1, hidden:true}
            ,{text:'등록자'       , dataIndex:'REG_USR_ID'   , style:'text-align:center' , flex:1, hidden:true}

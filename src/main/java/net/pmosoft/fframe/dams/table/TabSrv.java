@@ -173,22 +173,28 @@ public class TabSrv {
 
     public Map<String, Object> deleteTabCol(Map<String,String> params){
 
+        System.out.println("params="+params);
+        
+        
         Map<String, Object> result = new HashMap<String, Object>();
 
-        Map<String, String> errors = new HashMap<String, String>();
-        errors = tabValidatorSrv.validateDeleteTabCol(params);
-        if(errors.size()>0){
-            //model.addAttribute("tbTabCol", tbTabCol);
-            result.put("isSuccess", false);
-            result.put("errUserMsg", errors.get("errUserMsg"));
-            System.out.println(result);
-            return result;
-        } else {
-            tabDao.deleteTabCol(params);
-            result.put("isSuccess", true);
-            result.put("msg", "삭제 되었습니다");
-            return result;
-        }
+//        Map<String, String> errors = new HashMap<String, String>();
+//        errors = tabValidatorSrv.validateDeleteTabCol(params);
+//        if(errors.size()>0){
+//            //model.addAttribute("tbTabCol", tbTabCol);
+//            result.put("isSuccess", false);
+//            result.put("errUserMsg", errors.get("errUserMsg"));
+//            System.out.println(result);
+//            return result;
+//        } else {
+//            tabDao.deleteTabCol(params);
+//            result.put("isSuccess", true);
+//            result.put("msg", "삭제 되었습니다");
+//            return result;
+//        }
+        
+        return result;
+
     }
 	
 	

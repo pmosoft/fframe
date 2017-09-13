@@ -31,8 +31,10 @@ Ext.define('fframe.dams.table.TabColListView', {
                    fields : ['key','value'] 
                   ,data : 
                    [
-                     {key : '컬럼한글명' , value : 'COL_HNM'}
-                    ,{key : '컬럼명'     , value : 'COL_NM'}
+                     {key : '테이블한글명', value : 'TAB_HNM'}
+                    ,{key : '테이블명'    , value : 'TAB_NM'}
+                    ,{key : '컬럼한글명'  , value : 'COL_HNM'}
+                    ,{key : '컬럼명'      , value : 'COL_NM'}
                    ]
                }
            }

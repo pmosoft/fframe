@@ -2,7 +2,7 @@ Ext.define('fframe.dams.table.TabColListModel', {
      extend: 'Ext.app.ViewModel'
     ,alias: 'viewmodel.TabColList'
     ,data : {
-        searchKeyCombo : 'COL_HNM'
+        searchKeyCombo : 'TAB_HNM'
        ,searchValue : ''
        ,termStsCd : '99'    
      }

@@ -23,12 +23,13 @@
             ,A.UPD_USR_ID
     FROM    TDACM00060 A
             LEFT JOIN TDACM00060 B
-            ON  A.CD_ID_NM = B.CD_ID_NM
-            AND A.CD = B.CD
+            ON  B.CD_ID_NM = 'CD_STS_CD'
+            AND B.CD = A.CD_STS_CD
     WHERE   A.CD_ID_HNM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
     OR      A.CD LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
     OR      A.CD_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
     OR      A.CD_HNM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      A.CD_ID_GRP_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
     ORDER BY A.CD_ID_NM, A.CD
 </select>
 

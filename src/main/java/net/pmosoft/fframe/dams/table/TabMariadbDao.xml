@@ -146,6 +146,8 @@
            OR   
           (#{searchKeyCombo} = 'TAB_NM'       AND A.TAB_NM       LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
            OR   
+          (#{searchKeyCombo} = 'TAB_HNM'      AND B.TAB_HNM      LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+           OR   
           (#{searchKeyCombo} = 'COL_NM'       AND A.COL_NM       LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
            OR   
           (#{searchKeyCombo} = 'COL_HNM'      AND A.COL_HNM      LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
