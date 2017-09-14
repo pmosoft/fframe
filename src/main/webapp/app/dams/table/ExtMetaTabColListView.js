@@ -25,7 +25,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
             ,'->'
             ,{xtype:'button' ,text:'추출'       , handler:'extBtn'}
             ,{xtype:'button' ,text:'비교'       , handler:'cmpBtn'}
-            ,{xtype:'button' ,text:'테이블삭제' , handler:'tabDelBtn'}
+            ,{xtype:'button' ,text:'테이블정보삭제' , handler:'tabDelBtn'}
             ,{xtype:'button' ,text:'반영'       , handler:'insBtn'}
            ]
       }

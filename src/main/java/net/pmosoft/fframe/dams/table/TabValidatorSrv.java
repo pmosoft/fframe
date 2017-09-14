@@ -1,6 +1,7 @@
 package net.pmosoft.fframe.dams.table;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,20 +33,20 @@ public class TabValidatorSrv {
     public Map<String, String> validateSaveTabCol(Map<String, String> target) {
 
         System.out.println("validateSaveTabCol");
-
+ 
         Map<String, String> errors = new HashMap<String, String>();
         System.out.println("validateSaveTabCol11");
 
 //      if (target.get("TabCol_ID").length() < 5 || target.get("TabCol_ID").length() > 15) {
-//          errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//          errors.put("errUsrMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //      } else if  (target.get("TabCol_EMAIL").length() < 5 || target.get("TabCol_EMAIL").length() > 15) {
-//          errors.put("errUserMsg", "이메일 형식이 아닙니다.");
+//          errors.put("errUsrMsg", "이메일 형식이 아닙니다.");
 //      } else if  (target.get("TabCol_PW").length() < 5 || target.get("TabCol_PW").length() > 15) {
-//          errors.put("errUserMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//          errors.put("errUsrMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //      } else if  (!target.get("TabCol_PW").equals(target.get("TabCol_PW2"))) {
-//          errors.put("errUserMsg", "암호와 암호확인을 일치시켜 주십시요.");
+//          errors.put("errUsrMsg", "암호와 암호확인을 일치시켜 주십시요.");
 //      } else if  (target.get("TabCol_NM").length() < 5 || target.get("TabCol_NM").length() > 15) {
-//          errors.put("errUserMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//          errors.put("errUsrMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //      }
         System.out.println("validateSaveTabCol55");
 
@@ -53,14 +54,12 @@ public class TabValidatorSrv {
     }
 
 
-    public Map<String, String> validateDeleteTabCol(Map<String, String> target) {
+    public Map<String, String> validateDeleteTabCol(List<Map<String,String>> target) {
 
         Map<String, String> errors = new HashMap<String, String>();
-//      if (target.get("TabCol_ID").length() < 5 || target.get("TabCol_ID").length() > 15) {
-//          errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
-//      } else if  (TabColDao.selectTabColCnt(target)==0) {
-//          errors.put("errUserMsg", "아이디가 미존재합니다.");
-//      }
+        if (target.size() == 0) {
+            errors.put("errUsrMsg", "삭제 정보가 없습니다.");
+        }    
 
         return errors;
     }
@@ -78,15 +77,15 @@ public class TabValidatorSrv {
 		System.out.println("validateSaveTab11");
 
 //		if (target.get("Tab_ID").length() < 5 || target.get("Tab_ID").length() > 15) {
-//			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		} else if  (target.get("Tab_EMAIL").length() < 5 || target.get("Tab_EMAIL").length() > 15) {
-//			errors.put("errUserMsg", "이메일 형식이 아닙니다.");
+//			errors.put("errUsrMsg", "이메일 형식이 아닙니다.");
 //		} else if  (target.get("Tab_PW").length() < 5 || target.get("Tab_PW").length() > 15) {
-//			errors.put("errUserMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		} else if  (!target.get("Tab_PW").equals(target.get("Tab_PW2"))) {
-//			errors.put("errUserMsg", "암호와 암호확인을 일치시켜 주십시요.");
+//			errors.put("errUsrMsg", "암호와 암호확인을 일치시켜 주십시요.");
 //		} else if  (target.get("Tab_NM").length() < 5 || target.get("Tab_NM").length() > 15) {
-//			errors.put("errUserMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		}
 		System.out.println("validateSaveTab55");
 
@@ -94,14 +93,14 @@ public class TabValidatorSrv {
 	}
 
 
-	public Map<String, String> validateDeleteTab(Map<String, String> target) {
+	public Map<String, String> validateDeleteTab(List<Map<String,String>> target) {
 
 		Map<String, String> errors = new HashMap<String, String>();
-//		if (target.get("Tab_ID").length() < 5 || target.get("Tab_ID").length() > 15) {
-//			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+		if (target.size() == 0) {
+			errors.put("errUsrMsg", "삭제 정보가 없습니다.");
 //		} else if  (TabDao.selectTabCnt(target)==0) {
-//			errors.put("errUserMsg", "아이디가 미존재합니다.");
-//		}
+//			errors.put("errUsrMsg", "아이디가 미존재합니다.");
+		}
 
 		return errors;
 	}

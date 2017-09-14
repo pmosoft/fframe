@@ -30,7 +30,7 @@ public interface TabDao {
     List<Map<String, Object>> selectTabColList(Map<String,String> params);
     int selectTabColCnt(Map<String,String> params);
     void insertTabCol(Map<String,String> params);
-    void deleteTabCol(Map<String,String> params);
+    void deleteTabCol(Map<String, String> params);
     void updateTabCol(Map<String,String> params);
 
 	/**********************************************************************************
@@ -41,7 +41,7 @@ public interface TabDao {
 	List<Map<String, Object>> selectTabList(Map<String,String> params);
 	int selectTabCnt(Map<String,String> params);
 	void insertTab(Map<String,String> params);
-	void deleteTab(Map<String,String> params);
+	void deleteTab(List<Map<String, String>> params);
 	void updateTab(Map<String,String> params);
 
 	

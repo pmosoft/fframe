@@ -31,7 +31,6 @@ Ext.define('fframe.dams.table.TabColListController', {
     ,selBtn : function(btn) {
     	var view = this.getView(); var viewModel = view.getViewModel();
     	var store = viewModel.getStore(view['xtype']);
-
         store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
     	store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
     	store.load({
@@ -48,4 +47,8 @@ Ext.define('fframe.dams.table.TabColListController', {
 		//Ext.Msg.alert("알림","삭제");
     	//click : this.insBtn
      }
+    ,testBtn : function(btn) {
+        Ext.Msg.alert("알림","삭제");
+     }
+    
 });

@@ -86,7 +86,7 @@ public class TabCtrl {
     * deleteTabCol
     */
    @RequestMapping(value = "/dams/table/deleteTabCol")
-   public Map<String, Object> deleteTabCol(@RequestParam Map<String,Object> params) {
+   public Map<String, Object> deleteTabCol(@RequestParam Map<String,String> params) {
        return tabSrv.deleteTabCol(params);
    }
 	

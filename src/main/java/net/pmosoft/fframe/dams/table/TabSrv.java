@@ -1,17 +1,16 @@
 package net.pmosoft.fframe.dams.table;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 @Service
 public class TabSrv {
@@ -39,7 +38,7 @@ public class TabSrv {
            result.put("data", list);
        } catch (Exception e){
            result.put("isSuccess", false);
-           result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+           result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
            result.put("errSysrMsg", e.getMessage());
            e.printStackTrace();
        }
@@ -68,7 +67,7 @@ public class TabSrv {
            result.put("data", list);
        } catch (Exception e){
            result.put("isSuccess", false);
-           result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+           result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
            result.put("errSysrMsg", e.getMessage());
            e.printStackTrace();
        }
@@ -85,7 +84,7 @@ public class TabSrv {
            result.put("data", list);
        } catch (Exception e){
            result.put("isSuccess", false);
-           result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+           result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
            result.put("errSysrMsg", e.getMessage());
            e.printStackTrace();
        }
@@ -102,7 +101,7 @@ public class TabSrv {
            result.put("msg", "입력 되었습니다");
        } catch (Exception e){
            e.printStackTrace();
-           result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+           result.put("errUsrMsg", "시스템 장애가 발생되었습니다.");
            //result.put("errSysMsg", e.toString());
        }
        return result;
@@ -128,7 +127,7 @@ public class TabSrv {
             result.put("data", list);
         } catch (Exception e){
             result.put("isSuccess", false);
-            result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
             result.put("errSysrMsg", e.getMessage());
             e.printStackTrace();
         }
@@ -151,7 +150,7 @@ public class TabSrv {
 //
 //            //model.addAttribute("tbTabCol", tbTabCol);
 //            result.put("isSuccess", false);
-//            result.put("errUserMsg", errors.get("errUserMsg"));
+//            result.put("errUsrMsg", errors.get("errUsrMsg"));
 //            return result;
 //        } else {
 //            System.out.println("33");
@@ -168,7 +167,7 @@ public class TabSrv {
 //                }
 //            } catch (Exception e){
 //                e.printStackTrace();
-//                result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+//                result.put("errUsrMsg", "시스템 장애가 발생되었습니다.");
 //                //result.put("errSysMsg", e.toString());
 //            }
 //            return result;
@@ -178,58 +177,42 @@ public class TabSrv {
         
     }
 
-    public Map<String, Object> deleteTabCol(Map<String,Object> params){
+    public Map<String, Object> deleteTabCol(Map<String,String> params){
 
         System.out.println("params="+params);
         System.out.println("params433355 searchValue="+params.get("data"));
+
+        String data = params.get("data");
         
-        String data = (String )params.get("data");
-        JSONParser jsonParser = null;
-        JSONArray jsonArr = null;
-        JSONObject jsonObj = null;
-        if(data.substring(0,1).equals("[")){
-            try {
-                jsonParser = new JSONParser();
-                jsonArr = (JSONArray) jsonParser.parse(data);
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        } else if(data.substring(0,1).equals("{")){
-            try {
-                jsonParser = new JSONParser();
-                jsonObj = (JSONObject) jsonParser.parse(data);
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        
-        System.out.println("jsonArr"+jsonArr.size());
-        
-        JSONObject jo1 = (JSONObject)jsonArr.get(0);
-        System.out.println("jsonArr"+jo1.get("TAB_NM"));
-        
-        
+        Gson gson = new Gson(); 
+        Type type = new TypeToken<List<Map<String,String>>>() {}.getType();
+
+        List<Map<String,String>> listParams  = gson.fromJson(data, type);
+
+        //System.out.println(listParams);
+        System.out.println("listParams.size()="+listParams.size());
         
         Map<String, Object> result = new HashMap<String, Object>();
 
-//        Map<String, String> errors = new HashMap<String, String>();
-//        errors = tabValidatorSrv.validateDeleteTabCol(params);
-//        if(errors.size()>0){
-//            //model.addAttribute("tbTabCol", tbTabCol);
-//            result.put("isSuccess", false);
-//            result.put("errUserMsg", errors.get("errUserMsg"));
-//            System.out.println(result);
-//            return result;
-//        } else {
-//            tabDao.deleteTabCol(params);
-//            result.put("isSuccess", true);
-//            result.put("msg", "삭제 되었습니다");
-//            return result;
-//        }
-        
-        return result;
+        Map<String, String> errors = new HashMap<String, String>();
+        errors = tabValidatorSrv.validateDeleteTabCol(listParams);
+        if(errors.size()>0){
+            //model.addAttribute("tbTabCol", tbTabCol);
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", errors.get("errUsrMsg"));
+            System.out.println(result);
+            return result;
+        } else {
+            
+            for (int i = 0; i < listParams.size(); i++) {
+                tabDao.deleteTabCol(listParams.get(i));
+            } 
+            
+            
+            result.put("isSuccess", true);
+            result.put("msg", "삭제 되었습니다");
+            return result;
+        }
 
     }
 	
@@ -254,7 +237,7 @@ public class TabSrv {
 			result.put("data", list);
 		} catch (Exception e){
 			result.put("isSuccess", false);
-			result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+			result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
 			result.put("errSysrMsg", e.getMessage());
 			e.printStackTrace();
 		}
@@ -277,7 +260,7 @@ public class TabSrv {
 
 			//model.addAttribute("tbTab", tbTab);
 			result.put("isSuccess", false);
-			result.put("errUserMsg", errors.get("errUserMsg"));
+			result.put("errUsrMsg", errors.get("errUsrMsg"));
 			return result;
 		} else {
 			System.out.println("33");
@@ -294,7 +277,7 @@ public class TabSrv {
 			    }
 			} catch (Exception e){
 				e.printStackTrace();
-				result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+				result.put("errUsrMsg", "시스템 장애가 발생되었습니다.");
 				//result.put("errSysMsg", e.toString());
 			}
 			return result;
@@ -305,20 +288,22 @@ public class TabSrv {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		Map<String, String> errors = new HashMap<String, String>();
-		errors = tabValidatorSrv.validateDeleteTab(params);
-		if(errors.size()>0){
-			//model.addAttribute("tbTab", tbTab);
-			result.put("isSuccess", false);
-			result.put("errUserMsg", errors.get("errUserMsg"));
-			System.out.println(result);
-			return result;
-		} else {
-			tabDao.deleteTab(params);
-			result.put("isSuccess", true);
-			result.put("msg", "삭제 되었습니다");
-			return result;
-		}
+//		Map<String, String> errors = new HashMap<String, String>();
+//		errors = tabValidatorSrv.validateDeleteTab(params);
+//		if(errors.size()>0){
+//			//model.addAttribute("tbTab", tbTab);
+//			result.put("isSuccess", false);
+//			result.put("errUsrMsg", errors.get("errUsrMsg"));
+//			System.out.println(result);
+//			return result;
+//		} else {
+//			tabDao.deleteTab(params);
+//			result.put("isSuccess", true);
+//			result.put("msg", "삭제 되었습니다");
+//			return result;
+//		}
+      return result;
+
 	}
 
 }

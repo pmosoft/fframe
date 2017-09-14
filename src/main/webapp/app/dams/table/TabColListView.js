@@ -4,6 +4,22 @@ Ext.define('fframe.dams.table.TabColListView', {
     ,listeners : { 
         resize : 'setGridHeight'
      }
+    ,uses: [
+        'Ext.ux.exporter.Exporter'
+     ]
+//    ,initComponent: function() {
+//        this.store = "SomeStore";
+//
+//        this.dockedItems = [{
+//            xtype: 'toolbar',
+//            dock: 'top',
+//            items: [{
+//                xtype: 'exporterbutton'
+//            }];
+//        this.columns = [/* YOUR COLUMNS */];
+//        this.callParent(arguments);
+//    }    
+    
     //-------------------------------------------
     // titletoolbar
     //-------------------------------------------
@@ -49,25 +65,36 @@ Ext.define('fframe.dams.table.TabColListView', {
               ,listeners: {
                    specialkey: function(f,e,op) {
                        if (e.getKey() == e.ENTER) {
+                          // var me = this;
                            //Ext.Msg.alert("알림","222");
+                           
+                          //var ControllerRef  =   this.getController('TabColList');
+
+                           
                           // this.up('toolbar').down('button').handler
                          //  var selBtn = field.up('researchLinkForm').down('button#save');
                            
                            //var ctrl = this.getController();
-                           //ctrl.selBtn(this);
+                           //ControllerRef.selBtn();
                        //fframe.app.getController('view.syst.Usr.UsrListController').selBtn(this);
                        //var ctrl = new fframe.syst.usr.UsrListController();
                        //controller.selBtn();
                        //var ControllerRef  =   this.getController('fframe.dams.table.TabColListController');
-                       //ControllerRef.selBtn(this);
+                       //ControllerRef.selBtn();
                            
-                       var button = Ext.getCmp('selBtn'); 
-                       button.fireEvent('click', button,e,op);
+                       //grid.down('[text=Group]').on('click', function() {});
+                       this.up('toolbar').down('button#selBtnId').on('selBtn', function() {});
+                       //me.selBtn();
+                       
+                       //var button = Ext.getCmp('selBtn'); 
+                       //button.fireEvent('click', button,e,op);
                            
                        //f.up('form').getForm().submit();
-                       var selBtn = f.up('toolbar').down('button#selBtn');
+                       //var selBtn = this.up('toolbar').down('button#selBtn');
                        //field.up('form').getForm().submit(); 
-                       selBtn.fireEvent('selBtn', selBtn, e,op);
+                       //Ext.Msg.alert("selBtn",selBtn);
+                       //selBtn.fireEvent('selBtn', selBtn, e,op);
+                       //Ext.getCmp("selBtnId").handler.call(Ext.getCmp("selBtnId").scope);
                            
                        }
                    }
@@ -107,7 +134,7 @@ Ext.define('fframe.dams.table.TabColListView', {
          ,{text:'Cells'   , enableToggle:true , toggleHandler:'toggleCellSelect'   , pressed:true}
          ,{text:'Columns' , enableToggle:true , toggleHandler:'toggleColumnSelect' , pressed:false}          
          ,'->'
-         ,{xtype:'button' , text:'조회' ,id : 'selBtn', handler:'selBtn' , iconCls:'x-fa fa-gift'}
+         ,{xtype:'button' , text:'조회' ,id : 'selBtnId', handler:'selBtn' , iconCls:'x-fa fa-gift'}
         ] 
       }
       
@@ -171,6 +198,6 @@ Ext.define('fframe.dams.table.TabColListView', {
         //    //,plugins : 'ux-slidingpager',
         //    ,display : true
         // }
-    }
-     ]
+     }
+    ]
 });

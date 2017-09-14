@@ -197,13 +197,23 @@
 </insert>
 
 <delete id="deleteTabCol" parameterType="java.util.HashMap">
-    -- TableDao.deleteTabCol
+    
+    
     DELETE FROM TDACM00080
+    WHERE  DB_NM = #{DB_NM}
+    AND    OWNER = #{OWNER}
+    AND    TAB_NM = #{TAB_NM}
+ 
+    
 </delete>
 
 <delete id="deleteTab" parameterType="java.util.HashMap">
     -- TableDao.deleteTab
     DELETE FROM TDACM00070
+    WHERE  DB_NM = #{DB_NM}
+    AND    OWNER = #{OWNER}
+    AND    TAB_NM = #{TAB_NM}
+    
 </delete>
 
 
