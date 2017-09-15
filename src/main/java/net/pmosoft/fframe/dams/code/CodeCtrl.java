@@ -45,4 +45,13 @@ public class CodeCtrl {
 		return codeSrv.deleteCode(params);
 	}
 
+    /**
+     * excelCode
+     */
+    @RequestMapping(value = "/dams/code/excelCode")
+    public Map<String, Object> excelCode(@RequestParam Map<String,String> params) {
+        return codeSrv.excelCode(params);
+    }
+	
+	
 }

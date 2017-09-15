@@ -1,11 +1,19 @@
 package net.pmosoft.fframe.dams.code;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.pmosoft.fframe.util.ExcelUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
 @Service
@@ -104,4 +112,30 @@ public class CodeSrv {
 		}
 	}
 
+    public Map<String, Object> excelCode(Map<String,String> params){
+
+        String data = params.get("data");
+        System.out.println("data="+data);
+        
+        Gson gson = new Gson();
+        
+        Type type = new TypeToken<List<Map<String,String>>>() {}.getType();
+
+        List<Map<String,String>> listParams  = gson.fromJson(data, type);
+        
+        ExcelUtil excelDown = new ExcelUtil();
+        try {
+            excelDown.downListToExcel(listParams,"d:/imsi.xls");
+            Runtime run = Runtime.getRuntime ();
+            run.exec ("c:/Program Files/Microsoft Office/Office16/EXCEL.EXE d:/imsi.xls");
+        } catch (IOException e) {    
+        } catch (SQLException e) { e.printStackTrace(); }
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        
+        result.put("isSuccess", true);
+        return result;
+
+    }
+	
 }

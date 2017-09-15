@@ -97,5 +97,45 @@ Ext.define('fframe.dams.table.CodeListController', {
             }
         });
      }
+
+    ,excelBtn : function(btn) {
+
+        var view = this.getView(); var viewModel = view.getViewModel();
+        var params = viewModel.getData();
+        var grid = btn.up("CodeList").down("grid");
+        
+        var sel = new Array();
+        var records = grid.getSelectionModel().getSelection();
+        //var records = grid.getStrore();
+        console.log(records.length);
+        
+        
+        var datar = new Array();
+        var jsonDataEncode = "";
+        for (var i = 0; i < records.length; i++) {
+            datar.push(records[i].data);
+        }
+        jsonDataEncode = Ext.util.JSON.encode(datar);
+        
+        console.log(jsonDataEncode);
+
+        Ext.Ajax.request({
+             url : '/dams/code/excelCode'
+            ,method : 'post'
+            ,params : { data:jsonDataEncode}
+            ,success : function(res){
+                var result = Ext.decode(res.responseText);
+                if(result['isSuccess']){
+                    Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                } else {
+                    Ext.Msg.alert("알림",result['errUsrMsg']);
+                    return;
+                }
+                
+            }
+        })     
+     }
+    
+        
     
 });

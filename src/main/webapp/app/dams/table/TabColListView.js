@@ -1,6 +1,9 @@
 Ext.define('fframe.dams.table.TabColListView', {
      extend : 'Ext.form.Panel' , xtype : 'TabColList' 
     ,controller : 'TabColList' , viewModel:'TabColList'
+    ,requires: [
+              'Ext.sparkline.Line'
+     ]  
     ,listeners : { 
         resize : 'setGridHeight'
      }
@@ -58,6 +61,7 @@ Ext.define('fframe.dams.table.TabColListView', {
               ,emptyText : '검색어를 입력하세요'
               // ,value : 'aaaa'
               ,bind : { value : '{searchValue}' }
+              ,buttonAlign: 'center'          
               ,enableKeyEvents: true
               ,listeners: {
                       keyup: 'selBtn'
@@ -132,7 +136,7 @@ Ext.define('fframe.dams.table.TabColListView', {
          ,{text:'Cells'   , enableToggle:true , toggleHandler:'toggleCellSelect'   , pressed:true}
          ,{text:'Columns' , enableToggle:true , toggleHandler:'toggleColumnSelect' , pressed:false}          
          ,'->'
-         ,{xtype:'button' , text:'조회' ,id : 'selBtnId', handler:'selBtn' , iconCls:'x-fa fa-gift'}
+         ,{xtype:'button' , text:'조회' ,id : 'selBtnId', handler:'selBtn' , iconCls: 'framing-buttons-add'}
         ] 
       }
       
