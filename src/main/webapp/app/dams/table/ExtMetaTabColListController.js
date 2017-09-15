@@ -108,6 +108,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
                 if(result['isSuccess']){
                     //Ext.Msg.alert("알림",result['msg']);
                     Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    //this.cmpBtn();
                 } else {
                     Ext.Msg.alert("알림",result['errUsrMsg']);
                     //Ext.Msg.alert("알림",result['errSysMsg']);

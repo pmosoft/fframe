@@ -270,6 +270,10 @@ CREATE TABLE TDACM00070 (
 ------------------------------
 DROP TABLE TDACM00080
 ;
+
+SELECT * FROM TDACM00080
+;
+
 CREATE TABLE TDACM00080 (
  DB_NM          VARCHAR(10)  NOT NULL COMMENT 'DB명' 
 ,OWNER          VARCHAR(15)  NOT NULL COMMENT '소유자'
@@ -277,11 +281,13 @@ CREATE TABLE TDACM00080 (
 ,COL_ID         INT          NOT NULL COMMENT '컬럼아이디' 
 ,COL_NM         VARCHAR(20)  NOT NULL COMMENT '컬럼명' 
 ,COL_HNM        VARCHAR(20)      NULL COMMENT '컬럼한글명'
-,COL_DESC       VARCHAR(200)     NULL COMMENT '컬럼설명'
+,DATA_TYPE_DESC VARCHAR(30)      NULL COMMENT '데이터타입설명'
+,NULL_YN        CHAR(1)      NULL COMMENT '데이터타입설명'
+,PK_YN          CHAR(1)      NULL COMMENT '데이터타입설명' 
 ,DATA_TYPE_NM   VARCHAR(20)      NULL COMMENT '데이터타입명' 
 ,LEN            INT              NULL COMMENT '길이'
 ,DECIMAL_CNT    INT              NULL COMMENT '소수점수'
-,DATA_TYPE_DESC VARCHAR(50)      NULL COMMENT '데이터타입설명'
+,COL_DESC       VARCHAR(200)     NULL COMMENT '컬럼설명'
 ,REG_DTM        VARCHAR(14)      NULL COMMENT '등록일시'
 ,REG_USR_ID     VARCHAR(20)      NULL COMMENT '등록자'
 ,UPD_DTM        VARCHAR(14)      NULL COMMENT '변경일시'
@@ -297,11 +303,13 @@ CREATE TABLE TDACM00081 (
 ,COL_ID         INT          NOT NULL COMMENT '컬럼아이디' 
 ,COL_NM         VARCHAR(20)  NOT NULL COMMENT '컬럼명' 
 ,COL_HNM        VARCHAR(20)      NULL COMMENT '컬럼한글명'
-,COL_DESC       VARCHAR(200)     NULL COMMENT '컬럼설명'
+,DATA_TYPE_DESC VARCHAR(30)      NULL COMMENT '데이터타입설명'
+,NULL_YN        CHAR(1)      NULL COMMENT '데이터타입설명'
+,PK_YN          CHAR(1)      NULL COMMENT '데이터타입설명' 
 ,DATA_TYPE_NM   VARCHAR(20)      NULL COMMENT '데이터타입명' 
 ,LEN            INT              NULL COMMENT '길이'
 ,DECIMAL_CNT    INT              NULL COMMENT '소수점수'
-,DATA_TYPE_DESC VARCHAR(50)      NULL COMMENT '데이터타입설명'
+,COL_DESC       VARCHAR(200)     NULL COMMENT '컬럼설명'
 ,REG_DTM        VARCHAR(14)      NULL COMMENT '등록일시'
 ,REG_USR_ID     VARCHAR(20)      NULL COMMENT '등록자'
 ,UPD_DTM        VARCHAR(14)      NULL COMMENT '변경일시'
@@ -316,16 +324,45 @@ CREATE TABLE TDACM00082 (
 ,COL_ID         INT          NOT NULL COMMENT '컬럼아이디' 
 ,COL_NM         VARCHAR(20)  NOT NULL COMMENT '컬럼명' 
 ,COL_HNM        VARCHAR(20)      NULL COMMENT '컬럼한글명'
-,COL_DESC       VARCHAR(200)     NULL COMMENT '컬럼설명'
+,DATA_TYPE_DESC VARCHAR(30)      NULL COMMENT '데이터타입설명'
+,NULL_YN        CHAR(1)      NULL COMMENT '데이터타입설명'
+,PK_YN          CHAR(1)      NULL COMMENT '데이터타입설명' 
 ,DATA_TYPE_NM   VARCHAR(20)      NULL COMMENT '데이터타입명' 
 ,LEN            INT              NULL COMMENT '길이'
 ,DECIMAL_CNT    INT              NULL COMMENT '소수점수'
-,DATA_TYPE_DESC VARCHAR(50)      NULL COMMENT '데이터타입설명'
+,COL_DESC       VARCHAR(200)     NULL COMMENT '컬럼설명'
 ,REG_DTM        VARCHAR(14)      NULL COMMENT '등록일시'
 ,REG_USR_ID     VARCHAR(20)      NULL COMMENT '등록자'
 ,UPD_DTM        VARCHAR(14)      NULL COMMENT '변경일시'
 ,UPD_USR_ID     VARCHAR(20)      NULL COMMENT '변경자'
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8 COMMENT='컬럼추출정보'
+;
+
+    SELECT 
+           'MARIADB'              AS DB_NM
+           ,UPPER(A.TABLE_SCHEMA) AS OWNER
+           ,UPPER(A.TABLE_NAME)   AS TAB_NM
+           ,A.ORDINAL_POSITION    AS COL_ID
+           ,A.COLUMN_NAME         AS COL_NM
+           ,A.COLUMN_COMMENT      AS COL_HNM
+           ,CASE WHEN UPPER(A.DATA_TYPE) = 'INT' THEN UPPER(A.DATA_TYPE)
+                 ELSE UPPER(A.COLUMN_TYPE)
+            END                   AS DATA_TYPE_DESC
+           ,CASE WHEN IS_NULLABLE = 'NO' THEN 'Y' ELSE 'N' END          AS NULL_YN
+           ,''                    AS PK_YN
+           ,UPPER(A.DATA_TYPE)    AS DATA_TYPE_NM
+           ,CASE WHEN UPPER(A.DATA_TYPE) IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH
+                 WHEN UPPER(A.DATA_TYPE) IN ('INT','NUMERIC') THEN A.NUMERIC_PRECISION
+            END                   AS LEN
+           ,A.NUMERIC_SCALE       AS DECIMAL_CNT 
+           ,' '                   AS COL_DESC
+           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS REG_DTM
+           ,''                    AS REG_USR_ID
+           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS UPD_DTM
+           ,''                    AS UPD_USR_ID
+    FROM   INFORMATION_SCHEMA.COLUMNS A 
+    WHERE  1=1
+    AND    TABLE_NAME LIKE 'TD%'
 ;
 
 SELECT '신규' AS STS_NM,A.*

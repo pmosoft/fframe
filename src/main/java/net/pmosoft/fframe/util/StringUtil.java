@@ -11,6 +11,8 @@ import java.text.DecimalFormat;
 
 
 public class StringUtil {
+
+    
     public static final String EMPTY = "";
     private static final String PADDING[];
 
@@ -18,7 +20,7 @@ public class StringUtil {
     {
         PADDING = new String[65535];
         PADDING[32] = "                                                                ";
-    }
+    }    
     
 	public static synchronized String java2Html(Object o) {
 		if (o == null) return "";
@@ -59,22 +61,6 @@ public class StringUtil {
 		return buf.toString();
 	}
 
-	public static String checkNull(Object o) {
-		String str = o != null ? ("null".equals(o.toString().trim()) ? "" : o.toString().trim()) : "";
-		return str;
-	}
-
-	public static String checkNull(Object o, String defaultStr) {
-		String str = checkNull(o);
-		if ("".equals(str)) {
-			str = defaultStr;
-		}
-		return str;
-	}
-
-
-
-/***************************정성현 이하는  추가********************/	
 	
 	/**
      * 
@@ -222,177 +208,6 @@ public class StringUtil {
     	return java.net.URLEncoder.encode(param).replace("+","%20").toString();
     }*/      
     
-    /**
-     * 
-     * 문자를 int 형으로 변환<br>
-     * Exception 발생시 default_num 을 반환
-     * 
-     * @author jung sung hyun
-     * @version 1.0
-     * @modifydate 2002. 5. 19.
-     * 
-     * @param str
-     * @param default_num 에러 발생시 반환할 기본 값
-     * @return
-     */    
-    public static int parseInt(String str, int default_num)
-    {
-        int parseInt = 0;
-        try{
-            parseInt = Integer.parseInt(str);
-        }catch(Exception nf){ 
-            parseInt = default_num; 
-        }
-        return parseInt;
-    }
-
-    /**
-     * 
-     * 문자를 int 형으로 변환<br>
-     * Exception 발생시 0 을 반환
-     * 
-     * @author jung sung hyun
-     * @version 1.0
-     * @modifydate 2002. 5. 19.
-     * 
-     * @param str
-     * @return
-     */    
-    public static int parseInt(String str)
-    {
-        return parseInt(str, 0);
-    }
-    
-    /**
-     * 
-     * 문자를 float 형으로 변환<br>
-     * Exception 발생시 default_num 을 반환
-     * 
-     * @author jung sung hyun
-     * @version 1.0
-     * @modifydate 2002. 5. 19.
-     * 
-     * @param str
-     * @param default_num 에러 발생시 반환할 기본 값
-     * @return
-     */
-    public static float parseFloat(String str, float default_num){
-        float parseFloat = 0.0f;
-        try{
-            parseFloat = Float.parseFloat(str);
-        }catch(Exception nf){
-            parseFloat = default_num;
-        }
-        return parseFloat;
-    }
-    
-    /**
-     * 
-     * 문자를 float 형으로 변환<br>
-     * Exception 발생시 0.0f 을 반환
-     * 
-     * @author jung sung hyun
-     * @version 1.0
-     * @modifydate 2002. 5. 19.
-     * 
-     * @param str
-     * @return
-     */
-    public static float parseFloat(String str) {
-        return parseFloat(str, 0.0f);
-    }
-    
-    /**
-     * 
-     * 문자를 long 형으로 변환<br>
-     * Exception 발생시 0.0f 을 반환
-     * 
-     * @author jung sung hyun
-     * @version 1.0
-     * @modifydate 2002. 5. 19.
-     * 
-     * @param str
-     * @param default_num 에러 발생시 반환할 기본 값
-     * @return
-     */
-    public static long parseLong(String str, long default_num){
-        long parseLong = 0L;
-        try{
-            parseLong = Long.parseLong(str);
-        }catch(Exception nf){ 
-            parseLong = default_num; 
-        }
-        return parseLong;
-    }   
-    
-    /**
-     * 
-     * 문자를 long 형으로 변환<br>
-     * Exception 발생시 0.0f 을 반환
-     * 
-     * @author jung sung hyun
-     * @version 1.0
-     * @modifydate 2002. 5. 19.
-     * 
-     * @param str
-     * @return
-     */
-    public static long parseLong(String str){
-        return parseLong(str, 0L);
-    }
-    
-    /**
-     * 문자를 double 형으로 변환<br>
-     * Exception 발생시 0 을 반환
-     * 
-     * @param str
-     * @param default_num 에러 발생시 반환할 기본 값
-     * @return
-     */
-    public static double parseDouble(String str, double default_num){
-        double parseDouble = 0;
-        try{
-        	parseDouble = Double.parseDouble(str);
-        }catch(Exception nf){ 
-        	parseDouble = default_num; 
-        }
-        return parseDouble;
-    }
-    
-    /**
-     * 문자를 double 형으로 변환<br>
-     * Exception 발생시 0 을 반환
-     * 
-     * @param str
-     * @return
-     */
-    public static double parseDouble(String str){
-        return parseDouble(str, 0);
-    }
-    
-    /**
-     * 
-     * 가격등의 값을 3자리마다 comma(,)로 구분하여 반환<br>
-     * 
-     * @author jung sung hyun
-     * @version 1.0
-     * @modifydate 2002. 5. 19.
-     * 
-     * @param num
-     * @return
-     */
-    public static String parseDecimal(double num)
-    {
-        return parseDecimal(num, "###,###,###,###.##");
-    }
-
-    public static String parseDecimal(String num) {
-    	if (num == null || "".equals(num)) {
-    		return "0";
-    	} else {
-    		return parseDecimal(Double.parseDouble(num));
-    	}
-    }
 
     /**
      * 
@@ -638,38 +453,6 @@ public class StringUtil {
         e.printStackTrace(writer);
         writer.flush();        
         return bos.toString();
-    }
-
-    /**
-     * @author 
-     * @version 1.0
-     * @modifydate 2002. 5. 20.
-     * 
-     * @param e
-     * @return
-     */          
-    public static boolean contains(String str, char searchChar)
-    {
-        if(str == null || str.length() == 0)
-            return false;
-        else
-            return str.indexOf(searchChar) >= 0;
-    }
-    
-    /** 
-     * @author jung sung hyun
-     * @version 1.0
-     * @modifydate 2002. 5. 20.
-     * 
-     * @param e
-     * @return
-     */          
-    public static boolean contains(String str, String searchStr)
-    {
-        if(str == null || searchStr == null)
-            return false;
-        else
-            return str.indexOf(searchStr) >= 0;
     }
 
 	/**
@@ -959,35 +742,4 @@ public class StringUtil {
     private static String hexServerIP = null;
     private static final SecureRandom seeder = new SecureRandom();
     
-    //파일사이즈 String 명칭으로 표시하기
-    public static String getFileSizeText(String size)
-    {        
-		Double	dSize  = StringUtil.parseDouble(size);
-		dSize = MathUtil.round((dSize / 1000),0);
-		if(dSize >= 1000){
-			dSize = MathUtil.round(dSize / 1000,1);
-			return dSize+"MB";
-		}else{
-			return dSize+"KB";
-		}
-    }    
-    
-    //파일사이즈 String 명칭을 숫자로
-    public static String getFileSizeNum(String size)
-    {        
-		if(!"".equals(checkNull(size))){
-			String siz = size.substring(size.length()-2,size.length());
-			String sizNum = size.substring(0,size.length()-2);
-			Double	dSize  = StringUtil.parseDouble(sizNum);
-			dSize = (MathUtil.round(StringUtil.parseDouble(sizNum) * 1000,0));
-			
-			if("MB".equals(siz)){
-				dSize = MathUtil.round(dSize * 1000,1);
-				return ""+dSize;
-			}else if("KB".equals(siz)){
-				return ""+dSize;
-			}
-		}
-		return "";
-    }        
 }
