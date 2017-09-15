@@ -4,9 +4,6 @@ Ext.define('fframe.dams.table.TabColListView', {
     ,listeners : { 
         resize : 'setGridHeight'
      }
-    ,uses: [
-        'Ext.ux.exporter.Exporter'
-     ]
 //    ,initComponent: function() {
 //        this.store = "SomeStore";
 //
@@ -63,41 +60,42 @@ Ext.define('fframe.dams.table.TabColListView', {
               ,bind : { value : '{searchValue}' }
               ,enableKeyEvents: true
               ,listeners: {
-                   specialkey: function(f,e,op) {
-                       if (e.getKey() == e.ENTER) {
-                          // var me = this;
-                           //Ext.Msg.alert("알림","222");
-                           
-                          //var ControllerRef  =   this.getController('TabColList');
-
-                           
-                          // this.up('toolbar').down('button').handler
-                         //  var selBtn = field.up('researchLinkForm').down('button#save');
-                           
-                           //var ctrl = this.getController();
-                           //ControllerRef.selBtn();
-                       //fframe.app.getController('view.syst.Usr.UsrListController').selBtn(this);
-                       //var ctrl = new fframe.syst.usr.UsrListController();
-                       //controller.selBtn();
-                       //var ControllerRef  =   this.getController('fframe.dams.table.TabColListController');
-                       //ControllerRef.selBtn();
-                           
-                       //grid.down('[text=Group]').on('click', function() {});
-                       this.up('toolbar').down('button#selBtnId').on('selBtn', function() {});
-                       //me.selBtn();
-                       
-                       //var button = Ext.getCmp('selBtn'); 
-                       //button.fireEvent('click', button,e,op);
-                           
-                       //f.up('form').getForm().submit();
-                       //var selBtn = this.up('toolbar').down('button#selBtn');
-                       //field.up('form').getForm().submit(); 
-                       //Ext.Msg.alert("selBtn",selBtn);
-                       //selBtn.fireEvent('selBtn', selBtn, e,op);
-                       //Ext.getCmp("selBtnId").handler.call(Ext.getCmp("selBtnId").scope);
-                           
-                       }
-                   }
+                      keyup: 'selBtn'
+//                   specialkey: function(f,e,op) {
+//                       if (e.getKey() == e.ENTER) {
+//                          // var me = this;
+//                           //Ext.Msg.alert("알림","222");
+//                           
+//                          //var ControllerRef  =   this.getController('TabColList');
+//
+//                           
+//                          // this.up('toolbar').down('button').handler
+//                         //  var selBtn = field.up('researchLinkForm').down('button#save');
+//                           
+//                           //var ctrl = this.getController();
+//                           //ControllerRef.selBtn();
+//                       //fframe.app.getController('view.syst.Usr.UsrListController').selBtn(this);
+//                       //var ctrl = new fframe.syst.usr.UsrListController();
+//                       //controller.selBtn();
+//                       //var ControllerRef  =   this.getController('fframe.dams.table.TabColListController');
+//                       //ControllerRef.selBtn();
+//                           
+//                       //grid.down('[text=Group]').on('click', function() {});
+//                       this.up('toolbar').down('button#selBtnId').on('selBtn', function() {});
+//                       //me.selBtn();
+//                       
+//                       //var button = Ext.getCmp('selBtn'); 
+//                       //button.fireEvent('click', button,e,op);
+//                           
+//                       //f.up('form').getForm().submit();
+//                       //var selBtn = this.up('toolbar').down('button#selBtn');
+//                       //field.up('form').getForm().submit(); 
+//                       //Ext.Msg.alert("selBtn",selBtn);
+//                       //selBtn.fireEvent('selBtn', selBtn, e,op);
+//                       //Ext.getCmp("selBtnId").handler.call(Ext.getCmp("selBtnId").scope);
+//                           
+//                       }
+//                   }
                }
            }
           ,{ xtype:'component' , anchor:'100%'
