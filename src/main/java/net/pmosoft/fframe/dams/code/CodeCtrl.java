@@ -1,10 +1,13 @@
 package net.pmosoft.fframe.dams.code;
 
+import java.util.ArrayList;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -68,6 +71,11 @@ public class CodeCtrl {
    public Map<String, Object> selectCodeRegList(@RequestParam Map<String,String> params) {
        return codeSrv.selectCodeRegList(params);
    }
-    
+   
+   @RequestMapping(value = "/dams/code/uploadCodeRegList")
+   public Map<String, Object> uploadCodeRegList(@RequestParam("uploadFile") ArrayList<MultipartFile> files) {
+       return codeSrv.uploadCodeRegList(files);
+   }     
+   
     
 }

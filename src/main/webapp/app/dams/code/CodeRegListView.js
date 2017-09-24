@@ -106,7 +106,46 @@ Ext.define('fframe.dams.code.CodeRegListView', {
             ,{xtype:'button' , text:'저장' , handler:'saveBtn', iconCls:'x-fa fa-gift'}
             ,{xtype:'button' , text:'삭제' , handler:'delBtn', iconCls:'x-fa fa-gift'}
             ,{xtype:'button' , text:'다운' ,id : 'excelDownBtn', handler:'excelDownBtn' , iconCls:'x-fa fa-gift'}
-            ,{xtype :'filefield' ,fieldLabel : '파일첨부',  buttonText  : '업로드', name : 'fileupload'}
+            ,{xtype:'filefield' 
+             ,buttonText:'업로드'
+             ,name:'uploadFile'
+             ,buttonOnly:true
+             ,allowBlank:false
+             ,listeners:{
+                   afterrender:function(fileObj){
+                       //파일태그옵션에 multiple이라는 옵션을 정의
+                        fileObj.fileInputEl.set({
+                           multiple:'multiple'
+                       });
+                   }
+                  ,change:function(btn){
+                       //파일첨부를 다중으로 선택시 열시버튼 누르면
+                       //change 이벤트를 발생시켜 폼 submit!
+                      Ext.Msg.alert("알림","111");                      
+                       var frm = this.up("form").getForm();
+                       if(frm.isValid()) {
+                           Ext.Msg.alert("알림","222");
+                           frm.submit({
+                               url: '/dams/code/uploadCodeRegList',
+                               success : function(fp, res) {
+                                   var result = Ext.decode(res.responseText);
+                                   if(result['isSuccess']){
+                                       Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                                   } else {
+                                       Ext.Msg.alert("알림",result['errUsrMsg']);
+                                       return;
+                                   }
+                                   //한번 submit 처리가 되면 filefield는 초기화 되므로
+                                   //다시 filefield에 multiple 속성 설정
+                                   this.up("form").down("filefield").fileInputEl.set({
+                                       multiple:'multiple'
+                                   });
+                               }
+                           });
+                       }
+                   }
+              }
+            }
             ] 
           }         
          //-------------------------------------------

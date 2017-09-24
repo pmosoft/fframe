@@ -1,16 +1,25 @@
 package net.pmosoft.fframe.dams.code;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.pmosoft.fframe.util.ExcelUtil;
+import net.pmosoft.fframe.util.FileDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -165,6 +174,31 @@ public class CodeSrv {
        return result;
    }
 
+   
+   public Map<String, Object> uploadCodeRegList(ArrayList<MultipartFile> files) {
+        System.out.println("fn="+files.get(0).getOriginalFilename());
+
+        Map<String, Object> result = new HashMap<String, Object>();
+        
+        try {
+            for (int i = 0; i < files.size(); i++) {
+                // Get the file and save it somewhere
+                byte[] bytes = files.get(i).getBytes();
+                Path path = Paths.get("d:/imsi/" + files.get(i).getOriginalFilename());
+                Files.write(path, bytes);
+            } 
+
+            result.put("isSuccess", true);
+            
+        } catch (Exception e) {
+            result.put("isSuccess", false);
+            result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }        
+        return result;
+   }     
+   
     
     
     
