@@ -30,8 +30,8 @@
            ,CASE WHEN UPPER(A.DATA_TYPE) = 'INT' THEN UPPER(A.DATA_TYPE)
                  ELSE UPPER(A.COLUMN_TYPE)
             END                   AS DATA_TYPE_DESC
-           ,CASE WHEN IS_NULLABLE = 'NO' THEN 'Y' ELSE 'N' END AS NULL_YN
-           ,''                    AS PK_YN
+           ,CASE WHEN IS_NULLABLE = 'NO' THEN 'NOT NULL' ELSE 'NULL' END AS NULLABLE
+           ,''                    AS PK
            ,UPPER(A.DATA_TYPE)    AS DATA_TYPE_NM
            ,CASE WHEN UPPER(A.DATA_TYPE) IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH
                  WHEN UPPER(A.DATA_TYPE) IN ('INT','NUMERIC') THEN A.NUMERIC_PRECISION
@@ -127,8 +127,8 @@
             ,A.COL_NM
             ,A.COL_HNM
             ,A.DATA_TYPE_DESC
-            ,A.NULL_YN
-            ,A.PK_YN
+            ,A.NULLABLE
+            ,A.PK
             ,A.DATA_TYPE_NM
             ,A.LEN
             ,A.DECIMAL_CNT
@@ -247,25 +247,27 @@
 <select id="selectTabList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
 	-- TableDao.selectTabList
-	SELECT   PKG_FUL_NM
-			,PKG2_NM
-			,PKG3_NM
-			,PKG4_NM
-			,PKG_HNM
-			,PKG_DESC
-			,USE_YN
-			,date_format(REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
-			,REG_USR_ID
-			,date_format(UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
-			,UPD_USR_ID
-	FROM    TDACM00010
-    WHERE   PKG2_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG3_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG4_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG_FUL_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG_HNM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-    OR      PKG_DESC LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
-	ORDER BY PKG_FUL_NM
+	SELECT  DB_NM
+           ,OWNER
+           ,TAB_NM
+           ,TAB_HNM
+           ,TAB_DESC
+           ,REG_DTM
+           ,REG_USR_ID
+           ,UPD_DTM
+           ,UPD_USR_ID
+	FROM    TDACM00070 
+    WHERE   1=1
+    AND  (
+          (#{searchKeyCombo} = 'DB_NM'        AND DB_NM        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+           OR   
+          (#{searchKeyCombo} = 'OWNER'        AND OWNER        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+           OR   
+          (#{searchKeyCombo} = 'TAB_NM'       AND TAB_NM       LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+           OR   
+          (#{searchKeyCombo} = 'TAB_HNM'      AND TAB_HNM      LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
+         ) 
+    ORDER BY DB_NM,OWNER,TAB_NM
 </select>
 
 <select id="selectTabCnt" parameterType="java.util.HashMap" resultType="int">

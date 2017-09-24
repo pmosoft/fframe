@@ -72,8 +72,8 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
           ,{text:'컬럼명'         , dataIndex:'COL_NM'         , style:'text-align:center' , flex:1}
           ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'        , style:'text-align:center' , flex:1}
           ,{text:'데이터타입설명' , dataIndex:'DATA_TYPE_DESC' , style:'text-align:center' , flex:1}
-          ,{text:'NULL'           , dataIndex:'NULL_YN'        , style:'text-align:center' , flex:1}
-          ,{text:'PK'             , dataIndex:'PK_YN'          , style:'text-align:center' , flex:1}
+          ,{text:'NULL'           , dataIndex:'NULLABLE'       , style:'text-align:center' , flex:1}
+          ,{text:'PK'             , dataIndex:'PK'             , style:'text-align:center' , flex:1}
           ,{text:'데이터타입명'   , dataIndex:'DATA_TYPE_NM'   , style:'text-align:center' , flex:1}
           ,{text:'길이'           , dataIndex:'LEN'            , style:'text-align:center' , flex:1}
           ,{text:'소수점수'       , dataIndex:'DECIMAL_CNT'    , style:'text-align:center' , flex:1}

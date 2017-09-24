@@ -122,12 +122,12 @@ public class CodeSrv {
         Type type = new TypeToken<List<Map<String,String>>>() {}.getType();
 
         List<Map<String,String>> listParams  = gson.fromJson(data, type);
-        
+        System.out.println(listParams);
         ExcelUtil excelDown = new ExcelUtil();
         try {
             excelDown.downListToExcel(listParams,"d:/imsi.xls");
             Runtime run = Runtime.getRuntime ();
-            run.exec ("c:/Program Files/Microsoft Office/Office16/EXCEL.EXE d:/imsi.xls");
+            run.exec ("cmd /c start excel.exe d:/imsi.xls");
         } catch (IOException e) {    
         } catch (SQLException e) { e.printStackTrace(); }
         

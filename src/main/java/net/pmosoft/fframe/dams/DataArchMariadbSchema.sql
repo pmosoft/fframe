@@ -268,7 +268,7 @@ CREATE TABLE TDACM00070 (
 ------------------------------
 -- 컬럼정보
 ------------------------------
-DROP TABLE TDACM00080
+DROP TABLE TDACM00081
 ;
 
 SELECT * FROM TDACM00080
@@ -282,8 +282,8 @@ CREATE TABLE TDACM00080 (
 ,COL_NM         VARCHAR(20)  NOT NULL COMMENT '컬럼명' 
 ,COL_HNM        VARCHAR(20)      NULL COMMENT '컬럼한글명'
 ,DATA_TYPE_DESC VARCHAR(30)      NULL COMMENT '데이터타입설명'
-,NULL_YN        CHAR(1)      NULL COMMENT '데이터타입설명'
-,PK_YN          CHAR(1)      NULL COMMENT '데이터타입설명' 
+,NULLABLE       VARCHAR(10)      NULL COMMENT 'NULL'
+,PK             VARCHAR(10)      NULL COMMENT 'PK' 
 ,DATA_TYPE_NM   VARCHAR(20)      NULL COMMENT '데이터타입명' 
 ,LEN            INT              NULL COMMENT '길이'
 ,DECIMAL_CNT    INT              NULL COMMENT '소수점수'
@@ -304,8 +304,8 @@ CREATE TABLE TDACM00081 (
 ,COL_NM         VARCHAR(20)  NOT NULL COMMENT '컬럼명' 
 ,COL_HNM        VARCHAR(20)      NULL COMMENT '컬럼한글명'
 ,DATA_TYPE_DESC VARCHAR(30)      NULL COMMENT '데이터타입설명'
-,NULL_YN        CHAR(1)      NULL COMMENT '데이터타입설명'
-,PK_YN          CHAR(1)      NULL COMMENT '데이터타입설명' 
+,NULLABLE       VARCHAR(10)      NULL COMMENT 'NULL'
+,PK             VARCHAR(10)      NULL COMMENT 'PK' 
 ,DATA_TYPE_NM   VARCHAR(20)      NULL COMMENT '데이터타입명' 
 ,LEN            INT              NULL COMMENT '길이'
 ,DECIMAL_CNT    INT              NULL COMMENT '소수점수'

@@ -103,6 +103,9 @@ Ext.define('fframe.dams.table.CodeListView', {
       //-------------------------------------------
       ,{
           xtype : 'grid'
+         ,plugins : [{
+               ptype : 'gridexporter'
+             }]              
          ,requires: 
           [
               'Ext.grid.selection.SpreadsheetModel'

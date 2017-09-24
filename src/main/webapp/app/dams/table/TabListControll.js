@@ -9,7 +9,8 @@ Ext.define('fframe.dams.table.TabListController', {
     	var searchValue = viewModel.get("searchValue");
     	var store = viewModel.getStore(view['xtype']);
 
-    	store.getProxy().setExtraParam("searchValue",searchValue);
+        store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
+        store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
     	store.load({
     		callback : function(data){
     			console.log(data);

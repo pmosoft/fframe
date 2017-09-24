@@ -108,6 +108,7 @@ Ext.define('fframe.dams.table.CodeListController', {
         var records = grid.getSelectionModel().getSelection();
         //var records = grid.getStrore();
         console.log(records.length);
+        console.log(records[0].data);
         
         
         var datar = new Array();

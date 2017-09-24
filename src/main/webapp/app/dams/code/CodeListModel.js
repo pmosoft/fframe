@@ -9,19 +9,19 @@ Ext.define('fframe.dams.table.CodeListModel', {
     ,stores : {
         CodeList : {
              fields : [
-                        'CD_ID_NM'
-                       ,'CD_ID_HNM'
-                       ,'CD_ID_GRP_NM'
-                       ,'CD'
-                       ,'CD_NM'
-                       ,'CD_HNM'
-                       ,'CD_DESC'
-                       ,'CD_STS_CD'
+                        'CD_ID_GRP_NM'
+                       ,'CD_ID_NM'    
+                       ,'CD_ID_HNM'   
+                       ,'CD'          
+                       ,'CD_NM'       
+                       ,'CD_HNM'      
+                       ,'CD_DESC'     
+                       ,'CD_STS_CD'   
                        ,'CD_STS_CD_NM'
-                       ,'REG_DTM'
-                       ,'REG_USR_ID'
-                       ,'UPD_DTM'
-                       ,'UPD_USR_ID'
+                       ,'REG_DTM'     
+                       ,'REG_USR_ID'  
+                       ,'UPD_DTM'     
+                       ,'UPD_USR_ID'  
                       ]
             ,proxy : {
                  type : 'ajax'
