@@ -1,6 +1,6 @@
 Ext.define('fframe.dams.table.CodeListController', {
      extend : 'Ext.app.ViewController'
-    ,alias : 'controller.CodeList'
+    ,alias : 'controller.codeList'
         
     ,getSelectionModel: function () {
         var grid = this.getView().down("grid");
@@ -102,7 +102,7 @@ Ext.define('fframe.dams.table.CodeListController', {
 
         var view = this.getView(); var viewModel = view.getViewModel();
         var params = viewModel.getData();
-        var grid = btn.up("CodeList").down("grid");
+        var grid = btn.up("codeList").down("grid");
         
         var sel = new Array();
         var records = grid.getSelectionModel().getSelection();

@@ -115,8 +115,12 @@ Ext.define('fframe.main.MainFrameView', {
 						children : [ 
 			            {
 							text : '코드목록',
-							page : 'CodeList',
+							page : 'codeList',
 							leaf : true
+                        },{
+                            text : '코드등록',
+                            page : 'codeRegList',
+                            leaf : true
 						},{
 							text : '코드그룹목록',
 							page : 'CodeGrpList',

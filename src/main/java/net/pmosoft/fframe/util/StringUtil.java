@@ -434,6 +434,22 @@ public class StringUtil {
     public static String replaceFirstCharUpperCase(String str){
         return str.substring(0, 1).toUpperCase() + str.substring(1, str.length());
     }    
+
+    /**
+     * 
+     * 특정 문자열을 첫문자를 소문자로 대체<br>
+     * 
+     * @author  joseph.pi
+     * @version 1.0
+     * @modifydate 2017.09.09
+     * 
+     * @param str
+     * @return str
+     */    
+    public static String replaceFirstCharLowerCase(String str){
+        return str.substring(0, 1).toLowerCase() + str.substring(1, str.length());
+    }    
+    
     
     /**
      * 

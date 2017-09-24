@@ -1,4 +1,4 @@
-package net.pmosoft.fframe.gens.pgm;
+package net.pmosoft.fframe.gens.pgm.core;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -39,6 +39,10 @@ public class GensPgmMgr {
 
     String tmplCdPathNm = ""; //템플릿타입별경로(예:extjs/grid01, spring/restful)    
     String renameTmplNm = ""; //템플릿파일명중변경되어야할명칭(예:Grid01Controoler.js.tmpl <== Grid01)    
+
+    boolean  isFrontExe = true;
+    boolean  isBackExe = true;
+    
     
     /******************************************
      * 기타 파라미터
@@ -56,6 +60,10 @@ public class GensPgmMgr {
         gensPgmMgr.createPgmFile(params);
     }
 
+
+    /******************************************
+     * 1단계 : 입력파라미터 세팅
+     *****************************************/
     public void createPgmFile(Map<String,String> params){
 
         /******************************************
@@ -75,18 +83,32 @@ public class GensPgmMgr {
         packNm = params.get("packNm");                 //패키지명(예:net.pmosoft.fframe.gens.test)
         genPackNm = packNm.replace(packBascNm+".",""); //회사명이 배제된 패키지명(예:gens.test) 
         genPathNm = genPackNm.replace(".","/");        //회사명이 배제된 폴더명  (예:gens/test) 
-        varNm = params.get("pgmNm");                                       //변수명(예:testTmpl)       
+        varNm = StringUtil.replaceFirstCharLowerCase(params.get("pgmNm")); //변수명(예:testTmpl)       
         pgmNm = StringUtil.replaceFirstCharUpperCase(params.get("pgmNm")); //파일명(예:TestTmpl)       
 
         
-        if(tmplCd.equals("grid01")){
-                    
+        /******************************************
+         * 옵션 파라미터
+         *****************************************/
+        isFrontExe = (params.get("isFrontExe").equals(("true")))?true:false;
+        isBackExe  = (params.get("isBackExe").equals(("true")))?true:false;
+        
+
+        if(isFrontExe) {
+            
+            //System.out.println("create front");
+            
             /******************************************
              * Front-End 파일 생성
              *****************************************/
             setFrontBack("front");
-            tmplCdPathNm = "extjs/grid01"; renameTmplNm = "Grid01";
+            tmplCdPathNm = "extjs/"+tmplCd; renameTmplNm = StringUtil.replaceFirstCharUpperCase(tmplCd);
             createPgmFile(webBasePathNm); 
+        }
+        
+        if(isBackExe) {
+            
+            //System.out.println("create back");
             
             /******************************************
              * Back-End 파일 생성
@@ -97,10 +119,18 @@ public class GensPgmMgr {
         }    
     }
  
+    /******************************************
+     * 프론트 인지 백인지 세팅
+     *****************************************/
     private void setFrontBack(String str){
         if(str.equals("front")) {isFront = true; isBack = false; }
         else { isFront = false; isBack = true; }
     }
+
+
+    /******************************************
+     * 2단계 : 템플릿 파일 로딩 
+     *****************************************/
     public void createPgmFile(String tarBasePathNm){
  
         String tmplPathNm = "";
@@ -130,47 +160,63 @@ public class GensPgmMgr {
             replaceTmplFileToTarPgmFile(tmplPathNm,tmplFileNm,tarPathNm,tarFileNm);
         }
     }
-    
+
+    /******************************************
+     * 3단계 : 프로그램 파일 생성  
+     *****************************************/
     public void replaceTmplFileToTarPgmFile(String inPathNm, String inFileNm, String outPathNm, String outFileNm) {
  
         try {
             
-            FileUtil.makeDir(outPathNm);
-            FileUtil.fileDelete(outPathNm+"/"+outFileNm);
-            
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(inPathNm+"/"+inFileNm)));
-            BufferedWriter bw = new BufferedWriter(new FileWriter(outPathNm+"/"+outFileNm, true));
- 
-            String line = "";
-            while(((line = br.readLine()) != null)) {
-                //System.out.println("line="+line);
-                line = exeReplaceRule(line);
-                bw.write(line+"\n");
-            }
-            bw.flush();
-            bw.close();           
-            br.close();
+            if(!FileUtil.fileIsLive(outPathNm+"/"+outFileNm)) {
+
+                FileUtil.makeDir(outPathNm);
+                FileUtil.fileDelete(outPathNm+"/"+outFileNm);
+                
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(inPathNm+"/"+inFileNm)));
+                BufferedWriter bw = new BufferedWriter(new FileWriter(outPathNm+"/"+outFileNm, true));
+     
+                String line = "";
+                while(((line = br.readLine()) != null)) {
+                    //System.out.println("line="+line);
+                    line = exeReplaceRule(line);
+                    bw.write(line+"\n");
+                }
+                bw.flush();
+                bw.close();           
+                br.close();
+            }    
         } catch (Exception e) {
             System.out.println("e=" + e.getMessage());
         }
     }    
  
+
+    /***********************************************
+     * 템플릿 문자열 변경 : 프론트인지 백인지 선택  
+     ***********************************************/
     public String exeReplaceRule(String line) {
-        if(tmplCd.equals("grid01")){
-            if(isFront) line = exeExtjsReplaceRule(line);
-            if(isBack)  line = exeSpringRestfulReplaceRule(line);
-        }
+        if(isFront) line = exeExtjsReplaceRule(line);
+        if(isBack)  line = exeSpringRestfulReplaceRule(line);
         return line;
     }    
  
+    /******************************************
+     * 템플릿 문자열 변경 : Extjs  
+     *****************************************/
     public String exeExtjsReplaceRule(String line) {
+        
         line = line.replace("$extjsPackNm$",prjNm+"."+genPackNm); //ex:fframe.gens.test.TmplPgmRegView
         line = line.replace("$PgmNm$",pgmNm);                //ex:fframe.gens.test.TmplPgmRegView
+        line = line.replace("$pgmNm$",varNm);                //ex:TmplPgmRegView tmplPgmRegView = ..
         line = line.replace("$restfulPathName$",genPathNm);   //ex:/gens/test 
         
         return line;
     }    
 
+    /******************************************
+     * 템플릿 문자열 변경 : 스프링  
+     *****************************************/
     public String exeSpringRestfulReplaceRule(String line) {
         line = line.replace("$packNm$",packNm);     //ex:fframe.gens.test.TmplPgmRegView
         line = line.replace("$PgmNm$",pgmNm);  //ex:fframe.gens.test.TmplPgmRegView

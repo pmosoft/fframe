@@ -1,8 +1,8 @@
 Ext.define('fframe.dams.table.CodeListView', {
      extend     : 'Ext.form.Panel' 
-    ,xtype      : 'CodeList' 
-    ,controller : 'CodeList' 
-    ,viewModel  : 'CodeList'
+    ,xtype      : 'codeList' 
+    ,controller : 'codeList' 
+    ,viewModel  : 'codeList'
     ,listeners  : { 
          resize : 'setGridHeight'
      }
@@ -151,7 +151,7 @@ Ext.define('fframe.dams.table.CodeListView', {
            ,{text:'변경자'       , dataIndex:'UPD_USR_ID'   , style:'text-align:center' , flex:1, hidden:true}
           ]
          ,forceFit: true           
-         ,bind:{store:'{CodeList}'}
+         ,bind:{store:'{codeList}'}
     }
    ]
 });

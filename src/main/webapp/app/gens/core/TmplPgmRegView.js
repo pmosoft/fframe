@@ -2,7 +2,7 @@
  * @fframe.title  : Register Template Program
  * @fframe.author : joseph.pi 
  */
-Ext.define('fframe.gens.TmplPgmRegView', {
+Ext.define('fframe.gens.core.TmplPgmRegView', {
      extend      : 'Ext.form.Panel'
     ,xtype       : 'TmplPgmReg'
     ,controller  : 'TmplPgmReg'
@@ -20,13 +20,13 @@ Ext.define('fframe.gens.TmplPgmRegView', {
     
     ,items:[{
           xtype      : 'textfield'
-         ,emptyText  : '패키지명을 입력하세요'
+         ,emptyText  : '패키지명을 입력하세요(예:net.pmosoft.fframe.dams.code)'
          ,fieldLabel : '패키지명'
          ,name       : 'packNm'
          ,bind       : {value:'{packNm}'}
       },{
           xtype      : 'textfield' 
-         ,emptyText  : '프로그램명을 입력하세요'
+         ,emptyText  : '프로그램명을 입력하세요(예:CodeList)'
          ,fieldLabel : '프로그램명'
          ,name       : 'pgmNm'
          ,bind       : {value:'{pgmNm}'}             
@@ -74,9 +74,9 @@ Ext.define('fframe.gens.TmplPgmRegView', {
           }      
          ,items: [
               {xtype:'displayfield'  , value:'Front프로그램생성' , width:120}                  
-             ,{xtype:'checkboxfield' , name:'uiPgmYn'  , bind:{value:'{uiPgmYn}'}  , width:50}
+             ,{xtype:'checkboxfield' , name:'isFrontExe' , bind:{value:'{isFrontExe}'}  , width:50}
              ,{xtype:'displayfield'  , value: 'Back프로그램생성' , width:120}                  
-             ,{xtype:'checkboxfield' , name:'uiPgmYn2' , bind:{value:'{uiPgmYn2}'} , width:50}
+             ,{xtype:'checkboxfield' , name:'isBackExe'  , bind:{value:'{isBackExe}'} , width:50}
           ]   
       },{
           xtype      : 'textareafield'

@@ -1,13 +1,13 @@
 Ext.define('fframe.dams.table.CodeListModel', {
      extend: 'Ext.app.ViewModel'
-    ,alias: 'viewmodel.CodeList'
+    ,alias: 'viewmodel.codeList'
     ,data : {
         searchKeyCombo : 'CD_ID_HNM'
        ,searchValue : ''
        ,cdStsCd : '99'    
      }
     ,stores : {
-        CodeList : {
+        codeList : {
              fields : [
                         'CD_ID_GRP_NM'
                        ,'CD_ID_NM'    

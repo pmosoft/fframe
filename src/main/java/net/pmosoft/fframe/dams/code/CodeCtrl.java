@@ -17,7 +17,7 @@ public class CodeCtrl {
 
 	/**********************************************************************************
 	 *
-	 *                                  Code
+	 *                                   Code
 	 *
 	 **********************************************************************************/
 
@@ -53,5 +53,21 @@ public class CodeCtrl {
         return codeSrv.excelCode(params);
     }
 	
-	
+
+    
+    /**********************************************************************************
+    *
+    *                                   CodeReg
+    *
+    **********************************************************************************/
+
+   /**
+    * selectcCodeRegList
+    */
+   @RequestMapping(value = "/dams/code/selectCodeRegList")
+   public Map<String, Object> selectCodeRegList(@RequestParam Map<String,String> params) {
+       return codeSrv.selectCodeRegList(params);
+   }
+    
+    
 }

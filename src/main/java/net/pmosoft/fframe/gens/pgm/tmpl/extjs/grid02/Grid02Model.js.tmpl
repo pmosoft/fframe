@@ -1,15 +1,15 @@
-Ext.define('fframe.gens.test.TestTmplListModel', {
+Ext.define('$extjsPackNm$.$PgmNm$Model', {
      extend: 'Ext.app.ViewModel'
-    ,alias: 'viewmodel.TestTmplList'
+    ,alias: 'viewmodel.$pgmNm$'
     ,data : {
     	searchValue : ''
      }
     ,stores : {
-        TestTmplList : {
+        $pgmNm$ : {
              fields : ['TITLE','CONTENT','REG_DTM','REG_USR_ID','UPD_DTM','UPD_USR_ID']
             ,proxy : {
                  type : 'ajax'              
-                ,url : '/gens/test/selectTestTmplList'
+                ,url : '/$restfulPathName$/select$PgmNm$'
                 ,reader : {
                      type : 'json'
                     ,rootProperty : 'data'  

@@ -20,5 +20,13 @@ public interface CodeDao {
 	void deleteCode(Map<String,String> params);
 	void updateCode(Map<String,String> params);
 
+    /**********************************************************************************
+    *
+    *                                  CodeReg
+    *
+    **********************************************************************************/
+   List<Map<String, Object>> selectCodeRegList(Map<String,String> params);
+	
+	
 }
 

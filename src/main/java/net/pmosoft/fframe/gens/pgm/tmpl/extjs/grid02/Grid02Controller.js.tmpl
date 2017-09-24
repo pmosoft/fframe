@@ -1,6 +1,6 @@
-Ext.define('fframe.gens.test.TestTmplListController', {
+Ext.define('$extjsPackNm$.$PgmNm$Controller', {
      extend : 'Ext.app.ViewController'
-    ,alias : 'controller.TestTmplList'
+    ,alias : 'controller.$pgmNm$'
     ,setGridHeight : function(obj){ 
          obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
      }
@@ -17,7 +17,7 @@ Ext.define('fframe.gens.test.TestTmplListController', {
     	});
      }
     ,insBtn : function(btn) {
-    	var userReg = Ext.create("fframe.gens.test.TestTmplRegView");
+    	var userReg = Ext.create("$extjsPackNm$.$pgmNm$RegView");
     	userReg.show();
      }
     ,delBtn : function(btn) {

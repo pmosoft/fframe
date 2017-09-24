@@ -1,4 +1,4 @@
-package net.pmosoft.fframe.gens.pgm;
+package net.pmosoft.fframe.gens.pgm.core;
 
 import java.util.Map;
 

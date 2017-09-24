@@ -137,5 +137,36 @@ public class CodeSrv {
         return result;
 
     }
+    
+    /**********************************************************************************
+    *
+    *                                  CodeReg
+    *
+    **********************************************************************************/
+
+   public Map<String, Object> selectCodeRegList(Map<String,String> params){
+       System.out.println("start CodeSrv selectCodeRegList");
+
+       System.out.println("params221 searchValue="+params.get("searchValue"));
+
+       Map<String, Object> result = new HashMap<String, Object>();
+
+       List<Map<String,Object>> list = null;
+       try{
+           list = codeDao.selectCodeRegList(params);;
+           result.put("isSuccess", true);
+           result.put("data", list);
+       } catch (Exception e){
+           result.put("isSuccess", false);
+           result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+           result.put("errSysrMsg", e.getMessage());
+           e.printStackTrace();
+       }
+       return result;
+   }
+
+    
+    
+    
 	
 }
