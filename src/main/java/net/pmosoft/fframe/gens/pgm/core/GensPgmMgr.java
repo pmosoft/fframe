@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.pmosoft.fframe.util.FileUtil;
-import net.pmosoft.fframe.util.StringUtil;
+import net.pmosoft.fframe.comm.util.FileUtil;
+import net.pmosoft.fframe.comm.util.StringUtil;
 
 
 public class GensPgmMgr {

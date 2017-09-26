@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.pmosoft.fframe.util.ExcelUtil;
-import net.pmosoft.fframe.util.FileDTO;
+import net.pmosoft.fframe.comm.util.ExcelUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -184,7 +183,7 @@ public class CodeSrv {
             for (int i = 0; i < files.size(); i++) {
                 // Get the file and save it somewhere
                 byte[] bytes = files.get(i).getBytes();
-                Path path = Paths.get("d:/imsi/" + files.get(i).getOriginalFilename());
+                Path path = Paths.get("c:/fframe/upload/" + files.get(i).getOriginalFilename());
                 Files.write(path, bytes);
             } 
 
@@ -195,7 +194,8 @@ public class CodeSrv {
             result.put("errUserMsg", "시스템 장애가 발생하였습니다");
             result.put("errSysrMsg", e.getMessage());
             e.printStackTrace();
-        }        
+        }
+        
         return result;
    }     
    

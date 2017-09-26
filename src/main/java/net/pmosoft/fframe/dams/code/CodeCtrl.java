@@ -1,8 +1,13 @@
 package net.pmosoft.fframe.dams.code;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,8 +78,21 @@ public class CodeCtrl {
    }
    
    @RequestMapping(value = "/dams/code/uploadCodeRegList")
-   public Map<String, Object> uploadCodeRegList(@RequestParam("uploadFile") ArrayList<MultipartFile> files) {
-       return codeSrv.uploadCodeRegList(files);
+   public void uploadCodeRegList(@RequestParam("uploadFile") ArrayList<MultipartFile> files, HttpServletResponse response){
+       codeSrv.uploadCodeRegList(files);
+       JSONObject jsonObj = new JSONObject();
+       jsonObj.put("success", true);
+       jsonObj.put("isSuccess", true);
+       
+        try {
+            response.setContentType("text/plain; charset=UTF-8");
+            PrintWriter pw = response.getWriter();
+            pw.print(jsonObj);
+            pw.flush();
+            pw.close();
+        } catch (IOException e) {}
+      
+           //return codeSrv.uploadCodeRegList(files);
    }     
    
     

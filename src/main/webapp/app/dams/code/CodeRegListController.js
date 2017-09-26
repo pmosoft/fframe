@@ -136,14 +136,30 @@ Ext.define('fframe.dams.code.CodeRegListController', {
             })     
          }
 
-        ,excelUpBtn : function(btn) {
-
-            var view = this.getView(); var viewModel = view.getViewModel();
-            var params = viewModel.getData();
-            var grid = btn.up("codeRegList").down("grid");
-            var store = viewModel.getStore(view['xtype']);
+        ,excelUpload : function(obj) {
+            
+            var frm = obj.up("form").getForm();
+            if(frm.isValid()) {
+                frm.submit({
+                     url: '/dams/code/uploadCodeRegList'
+                    ,success : function(fp, res) {
+                        var result = Ext.JSON.decode(res.response.responseText);
+                        console.log(result);
+                        
+                        if(result['isSuccess']){
+                            Ext.Msg.alert("알림","333");
+                            //Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                        } else {
+                            Ext.Msg.alert("알림",result['errUsrMsg']);
+                            return;
+                        }
+                        //한번 submit 처리가 되면 filefield는 초기화 되므로
+                        //다시 filefield에 multiple 속성 설정
+                        obj.up("form").down("filefield").fileInputEl.set({multiple:'multiple'});
+                    }
+                });
+            }
      
          }
-        
         
     });

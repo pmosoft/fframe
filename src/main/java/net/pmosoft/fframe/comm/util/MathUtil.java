@@ -1,4 +1,4 @@
-package net.pmosoft.fframe.util;
+package net.pmosoft.fframe.comm.util;
 
 import java.text.DecimalFormat;
 
