@@ -110,7 +110,7 @@ Ext.define('fframe.dams.code.CodeRegListController', {
             //console.log(records.length);
             //console.log("records[0].data="+records[0].data);
             
-            var datar = new Array();
+            var datar = new Array(); 
             var jsonDataEncode = "";
             for (var i = 0; i < records.length; i++) {
                 datar.push(records[i].data);
@@ -122,7 +122,7 @@ Ext.define('fframe.dams.code.CodeRegListController', {
             Ext.Ajax.request({
                  url : '/dams/code/excelCode'
                 ,method : 'post'
-                ,params : { data:jsonDataEncode}
+                ,params : { data:jsonDataEncode,fileNm:'code.xls'}
                 ,success : function(res){
                     var result = Ext.decode(res.responseText);
                     if(result['isSuccess']){
@@ -130,7 +130,7 @@ Ext.define('fframe.dams.code.CodeRegListController', {
                         //window.location.assign("http://localhost:8080/files/excel/imsi.xls"));
                         //response.setContentType("Application/Msexcel");
                         //res.setHeader("Content-Disposition","attachment;filename=/files/excel/imsi.xls");
-                        location.href = "http://localhost:8080/files/excel/imsi.xls";
+                        location.href = "http://localhost:8080/files/excel/code.xls";
                         
 
                     } else {

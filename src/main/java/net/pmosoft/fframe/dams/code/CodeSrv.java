@@ -123,25 +123,26 @@ public class CodeSrv {
 
     public Map<String, Object> excelCode(Map<String,String> params){
 
-        String data = params.get("data");
-        System.out.println("data="+data);
-        
-        Gson gson = new Gson();
-        
-        Type type = new TypeToken<List<Map<String,String>>>() {}.getType();
+        Map<String, Object> result = new HashMap<String, Object>();
 
+        
+        String data = params.get("data");
+        //System.out.println("data="+data);
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Map<String,String>>>() {}.getType();
         List<Map<String,String>> listParams  = gson.fromJson(data, type);
-        System.out.println(listParams);
+        //System.out.println(listParams);
         ExcelUtil excelDown = new ExcelUtil();
         try {
-            excelDown.downListToExcel(listParams,App.excelPath+"imsi.xls");
-            Runtime run = Runtime.getRuntime ();
+            excelDown.downListToExcel(listParams,App.excelPath+params.get("fileNm"));
+            //Runtime run = Runtime.getRuntime ();
             //run.exec ("cmd /c start excel.exe "+App.excelPath+"imsi.xls");
+
+            result.put("isSuccess", true);
+            
         } catch (Exception e) { e.printStackTrace(); }
         
-        Map<String, Object> result = new HashMap<String, Object>();
         
-        result.put("isSuccess", true);
         return result;
 
     }
