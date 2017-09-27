@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.pmosoft.fframe.comm.App;
 import net.pmosoft.fframe.comm.util.ExcelUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,11 +134,10 @@ public class CodeSrv {
         System.out.println(listParams);
         ExcelUtil excelDown = new ExcelUtil();
         try {
-            excelDown.downListToExcel(listParams,"d:/imsi.xls");
+            excelDown.downListToExcel(listParams,App.excelPath+"imsi.xls");
             Runtime run = Runtime.getRuntime ();
-            run.exec ("cmd /c start excel.exe d:/imsi.xls");
-        } catch (IOException e) {    
-        } catch (SQLException e) { e.printStackTrace(); }
+            //run.exec ("cmd /c start excel.exe "+App.excelPath+"imsi.xls");
+        } catch (Exception e) { e.printStackTrace(); }
         
         Map<String, Object> result = new HashMap<String, Object>();
         
@@ -183,7 +183,7 @@ public class CodeSrv {
             for (int i = 0; i < files.size(); i++) {
                 // Get the file and save it somewhere
                 byte[] bytes = files.get(i).getBytes();
-                Path path = Paths.get("c:/fframe/upload/" + files.get(i).getOriginalFilename());
+                Path path = Paths.get(App.excelPath + files.get(i).getOriginalFilename());
                 Files.write(path, bytes);
             } 
 

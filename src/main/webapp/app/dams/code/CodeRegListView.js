@@ -102,15 +102,13 @@ Ext.define('fframe.dams.code.CodeRegListView', {
            ,items : 
             [ 
               '->'
+            ,{xtype:'filefield' , buttonText:'업로드' , name:'uploadFile', buttonOnly:true , allowBlank:false
+                    ,listeners:{ afterrender: 'multiple' , change : 'excelUpload'}
+             }
             ,{xtype:'button' , text:'신규' , handler:'initBtn', iconCls:'x-fa fa-gift'}
             ,{xtype:'button' , text:'저장' , handler:'saveBtn', iconCls:'x-fa fa-gift'}
             ,{xtype:'button' , text:'삭제' , handler:'delBtn', iconCls:'x-fa fa-gift'}
             ,{xtype:'button' , text:'다운' ,id : 'excelDownBtn', handler:'excelDownBtn' , iconCls:'x-fa fa-gift'}
-            ,{xtype:'filefield' , buttonText:'업로드' , name:'uploadFile', buttonOnly:true , allowBlank:false
-                    ,listeners:{ afterrender:function(fileObj){ fileObj.fileInputEl.set({multiple:'multiple'});}
-                                ,change : 'excelUpload'
-                               }
-            }
             ] 
           }         
          //-------------------------------------------

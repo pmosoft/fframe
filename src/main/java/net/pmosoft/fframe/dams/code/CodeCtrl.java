@@ -57,7 +57,11 @@ public class CodeCtrl {
      * excelCode
      */
     @RequestMapping(value = "/dams/code/excelCode")
-    public Map<String, Object> excelCode(@RequestParam Map<String,String> params) {
+    public Map<String, Object> excelCode(@RequestParam Map<String,String> params, HttpServletResponse response) {
+        //codeSrv.excelCode(params);
+        
+        //response.setContentType("Application/Msexcel");
+        //response.setHeader("Content-Disposition","attachment;filename=/files/excel/imsi.xls");
         return codeSrv.excelCode(params);
     }
 	

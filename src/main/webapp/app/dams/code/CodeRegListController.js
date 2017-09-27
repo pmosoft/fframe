@@ -96,11 +96,11 @@ Ext.define('fframe.dams.code.CodeRegListController', {
             });
          }
 
-        ,excelDownBtn : function(btn) {
+        ,excelDownBtn : function(viewObj) {
 
             var view = this.getView(); var viewModel = view.getViewModel();
             var params = viewModel.getData();
-            var grid = btn.up("codeRegList").down("grid");
+            var grid = viewObj.up("codeRegList").down("grid");
             var store = viewModel.getStore(view['xtype']);
             
             var sel = new Array();
@@ -127,6 +127,12 @@ Ext.define('fframe.dams.code.CodeRegListController', {
                     var result = Ext.decode(res.responseText);
                     if(result['isSuccess']){
                         Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                        //window.location.assign("http://localhost:8080/files/excel/imsi.xls"));
+                        //response.setContentType("Application/Msexcel");
+                        //res.setHeader("Content-Disposition","attachment;filename=/files/excel/imsi.xls");
+                        location.href = "http://localhost:8080/files/excel/imsi.xls";
+                        
+
                     } else {
                         Ext.Msg.alert("알림",result['errUsrMsg']);
                         return;
@@ -135,9 +141,7 @@ Ext.define('fframe.dams.code.CodeRegListController', {
                 }
             })     
          }
-
         ,excelUpload : function(obj) {
-            
             var frm = obj.up("form").getForm();
             if(frm.isValid()) {
                 frm.submit({
@@ -155,11 +159,13 @@ Ext.define('fframe.dams.code.CodeRegListController', {
                         }
                         //한번 submit 처리가 되면 filefield는 초기화 되므로
                         //다시 filefield에 multiple 속성 설정
-                        obj.up("form").down("filefield").fileInputEl.set({multiple:'multiple'});
+                        this.multiple;
+                        //obj.up("form").down("filefield").fileInputEl.set({multiple:'multiple'});
                     }
                 });
             }
      
          }
+        ,multiple : function(fileObj){ fileObj.fileInputEl.set({multiple:'multiple'});}        
         
     });
