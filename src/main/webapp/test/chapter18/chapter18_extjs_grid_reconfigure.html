@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>ExtJS Chapter 18. GridPanel - Grid Reconfigure</title>
-<link href="./packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css" rel="stylesheet">
-<script type="text/javascript" src="./ext-all.js"></script>
+<link href="../packages/ext-theme-crisp/build/resources/ext-theme-crisp-all.css" rel="stylesheet">
+<script type="text/javascript" src="../ext-all.js"></script>
 <script type="text/javascript">
 Ext.onReady(function(){
 	
@@ -86,7 +86,7 @@ Ext.onReady(function(){
 			xtype : 'button',
 			text : '2_2 JSON Load',
 			handler : function(){
-				Ext.getCmp("grid_frame").reconfigure(store_2_2,column_2_2);
+				Ext. ("grid_frame").reconfigure(store_2_2,column_2_2);
 			}
 		}],
 		renderTo : Ext.getBody(),

@@ -1,6 +1,7 @@
 package net.pmosoft.fframe.dams.code;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,19 @@ public class CodeValidatorSrv {
 
     //CodeDao CodeDao = webContext.getBean("CodeDao",CodeDao.class);
 
-	public Map<String, String> validateSaveCode(Map<String, String> target) {
+    
+    public Map<String, String> validateSaveCode(List<Map<String,String>> target) {
+    
 
 		System.out.println("validateSaveCode");
 
 		Map<String, String> errors = new HashMap<String, String>();
 		System.out.println("validateSaveCode11");
 
+        if (target.size() == 0) {
+            errors.put("errUsrMsg", "저장 정보가 없습니다.");
+        }    		
+		
 //		if (target.get("Code_ID").length() < 5 || target.get("Code_ID").length() > 15) {
 //			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		} else if  (target.get("Code_EMAIL").length() < 5 || target.get("Code_EMAIL").length() > 15) {

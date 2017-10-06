@@ -7,7 +7,7 @@
 
 <select id="selectCodeList" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
 
-    -- TermDao.selectCodeList
+    -- CodeDao.selectCodeList
     SELECT   A.CD_ID_NM    
             ,A.CD_ID_HNM   
             ,A.CD_ID_GRP_NM
@@ -15,6 +15,7 @@
             ,A.CD_NM       
             ,A.CD_HNM      
             ,A.CD_DESC      
+            ,A.CD_TY_CD
             ,A.CD_STS_CD   
             ,B.CD_HNM AS CD_STS_CD_NM   
             ,date_format(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
@@ -36,7 +37,7 @@
 
 <select id="selectCodeRegList" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
 
-    -- TermDao.selectCodeRegList
+    -- CodeDao.selectCodeRegList
     SELECT   A.CD_ID_NM    
             ,A.CD_ID_HNM   
             ,A.CD_ID_GRP_NM
@@ -44,6 +45,7 @@
             ,A.CD_NM       
             ,A.CD_HNM      
             ,A.CD_DESC      
+            ,A.CD_TY_CD
             ,A.CD_STS_CD   
             ,date_format(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
             ,A.REG_USR_ID
@@ -59,57 +61,73 @@
 </select>
 
 
+<select id="selectCodeCnt" parameterType="java.util.HashMap" resultType="int">
+    -- CodeDao.selectCodeCnt
+    SELECT  COUNT(*) CNT
+    FROM    TDACM00060 A
+    WHERE   A.CD_ID_HNM = #{CD_ID_HNM}
+    AND     A.CD        = #{CD}
+</select>
+
+
 <insert id="insertCode" parameterType="java.util.HashMap">
 
-	-- TermDao.insertCode
-	INSERT INTO TDACM00010
+	-- CodeDao.insertCode
+	INSERT INTO TDACM00060
 	(
-	     PKG_FUL_NM
-		,PKG2_NM
-		,PKG3_NM
-		,PKG4_NM
-		,PKG_HNM
-		,PKG_DESC
-		,USE_YN
-		,REG_DTM
-		,REG_USR_ID
-		,UPD_DTM
-		,UPD_USR_ID
+         CD_ID_NM     
+        ,CD_ID_HNM    
+        ,CD_ID_GRP_NM 
+        ,CD           
+        ,CD_NM        
+        ,CD_HNM       
+        ,CD_DESC      
+        ,CD_TY_CD     
+        ,CD_STS_CD    
+        ,REG_DTM      
+        ,REG_USR_ID   
+        ,UPD_DTM      
+        ,UPD_USR_ID   
 	) VALUES (
-         #{PKG_FUL_NM}
-		,#{PKG2_NM}
-		,#{PKG3_NM}
-		,#{PKG4_NM}
-		,#{PKG_HNM}
-		,#{PKG_DESC}
-		,CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
+         #{CD_ID_NM}
+        ,#{CD_ID_HNM}
+        ,#{CD_ID_GRP_NM}
+        ,#{CD}
+        ,#{CD_NM}
+        ,#{CD_HNM}
+        ,#{CD_DESC}
+        ,#{CD_TY_CD}
+        ,#{CD_STS_CD}
 		,curdate()
 		,#{REG_USR_ID}
 		,curdate()
 		,#{UPD_USR_ID}
 	)
-
 </insert>
 
 
 <delete id="deleteCode" parameterType="java.util.HashMap">
-	-- TermDao.deleteCode
+	-- CodeDao.deleteCode
 	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
-</delete>
+</delete> 
 
 <update id="updateCode" parameterType="java.util.HashMap">
 
-	-- TermDao.updateCode
-	UPDATE TDACM00010
-	SET  PKG2_NM      = #{PKG2_NM}
-		,PKG3_NM      = #{PKG3_NM}
-		,PKG4_NM      = #{PKG4_NM}
-		,PKG_HNM      = #{PKG_HNM}
-		,PKG_DESC     = #{PKG_DESC}
-		,USE_YN       = CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
-		,UPD_DTM      = curdate()
-		,UPD_USR_ID  = #{UPD_USR_ID}
-	WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
+	-- CodeDao.updateCode
+	UPDATE TDACM00060
+	SET  CD_ID_NM      = #{CD_ID_NM}
+		,CD_ID_HNM     = #{CD_ID_HNM}
+		,CD_ID_GRP_NM  = #{CD_ID_GRP_NM}
+        ,CD            = #{CD}
+        ,CD_NM         = #{CD_NM}
+        ,CD_HNM        = #{CD_HNM}
+        ,CD_DESC       = #{CD_DESC}
+        ,CD_TY_CD      = #{CD_TY_CD}
+        ,CD_STS_CD     = #{CD_STS_CD}
+		,UPD_DTM       = curdate()
+		,UPD_USR_ID    = #{UPD_USR_ID}
+	WHERE  CD_ID_NM = #{CD_ID_NM}
+	AND    CD       = #{CD}
 
 </update>
 

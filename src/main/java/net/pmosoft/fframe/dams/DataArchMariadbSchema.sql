@@ -206,12 +206,6 @@ CREATE TABLE TDACM00060 (
 ,CD_NM          VARCHAR(20)      NULL COMMENT '코드명'           -- DEPOSIT
 ,CD_HNM         VARCHAR(20)      NULL COMMENT '코드한글명'       -- 수신
 ,CD_DESC        VARCHAR(200)     NULL COMMENT '코드설명'
-,CD_PARAM1      VARCHAR(50)      NULL COMMENT '코드인자1'
-,CD_PARAM1_DESC  VARCHAR(200)     NULL COMMENT '코드인자설명1'
-,CD_PARAM2      VARCHAR(50)      NULL COMMENT '코드인자2'
-,CD_PARAM2_DESC  VARCHAR(200)     NULL COMMENT '코드인자설명2'
-,CD_PARAM3      VARCHAR(50)      NULL COMMENT '코드인자3'
-,CD_PARAM3_DESC  VARCHAR(200)     NULL COMMENT '코드인자설명3'
 ,CD_TY_CD       CHAR(1)          NULL COMMENT '코드유형코드' -- 1:필드 2:화면 3:프로그램
 ,CD_STS_CD      CHAR(2)          NULL COMMENT '코드상태코드'
 ,REG_DTM        VARCHAR(14)      NULL COMMENT '등록일시'
@@ -239,22 +233,17 @@ CREATE TABLE TDACM00061 (
 ;
  
 
-
-
-
-
-
-
-
 SELECT * FROM TDACM00060
 ;
 
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','01','REQUEST','요청','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','02','REQUEST','반려','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','03','REQUEST','승인','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','04','REQUEST','승인취소','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
 
-INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','01','REQUEST','요청','','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
-INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','02','REQUEST','반려','','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
-INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','03','REQUEST','승인','','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
-INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','04','REQUEST','승인취소','','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
-
+INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','1','COLUMN','컬럼','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','2','UI','화면','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','3','PROGRAM','프로그램','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
 
 
  SELECT   A.CD_ID_NM    

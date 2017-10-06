@@ -23,12 +23,6 @@ public class CodeCtrl {
 	@Autowired
 	private CodeSrv codeSrv;
 
-	/**********************************************************************************
-	 *
-	 *                                   Code
-	 *
-	 **********************************************************************************/
-
 	/**
 	 * selectcCodeList
 	 */
@@ -37,6 +31,14 @@ public class CodeCtrl {
 		return codeSrv.selectCodeList(params);
 	}
 
+    /**
+     * selectcCodeRegList
+     */
+    @RequestMapping(value = "/dams/code/selectCodeRegList")
+    public Map<String, Object> selectCodeRegList(@RequestParam Map<String, String> params) {
+        return codeSrv.selectCodeRegList(params);
+    }	
+	
 	/**
 	 * saveCode
 	 */
@@ -52,52 +54,6 @@ public class CodeCtrl {
 	public Map<String, Object> deleteCode(@RequestParam Map<String,String> params) {
 		return codeSrv.deleteCode(params);
 	}
-
-    /**
-     * excelCode
-     */
-    @RequestMapping(value = "/dams/code/excelCode")
-    public Map<String, Object> excelCode(@RequestParam Map<String,String> params, HttpServletResponse response) {
-        //codeSrv.excelCode(params);
-        
-        //response.setContentType("Application/Msexcel");
-        //response.setHeader("Content-Disposition","attachment;filename=/files/excel/imsi.xls");
-        return codeSrv.excelCode(params);
-    }
-	
-
-    
-    /**********************************************************************************
-    *
-    *                                   CodeReg
-    *
-    **********************************************************************************/
-
-   /**
-    * selectcCodeRegList
-    */
-   @RequestMapping(value = "/dams/code/selectCodeRegList")
-   public Map<String, Object> selectCodeRegList(@RequestParam Map<String,String> params) {
-       return codeSrv.selectCodeRegList(params);
-   }
-   
-   @RequestMapping(value = "/dams/code/uploadCodeRegList")
-   public void uploadCodeRegList(@RequestParam("uploadFile") ArrayList<MultipartFile> files, HttpServletResponse response){
-       codeSrv.uploadCodeRegList(files);
-       JSONObject jsonObj = new JSONObject();
-       jsonObj.put("success", true);
-       jsonObj.put("isSuccess", true);
-       
-        try {
-            response.setContentType("text/plain; charset=UTF-8");
-            PrintWriter pw = response.getWriter();
-            pw.print(jsonObj);
-            pw.flush();
-            pw.close();
-        } catch (IOException e) {}
-      
-           //return codeSrv.uploadCodeRegList(files);
-   }     
    
     
 }

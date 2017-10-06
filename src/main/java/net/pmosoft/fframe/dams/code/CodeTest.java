@@ -1,19 +1,17 @@
 package net.pmosoft.fframe.dams.code;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.pmosoft.fframe.AbstractTest;
 import net.pmosoft.fframe.FframeApplication;
+import net.pmosoft.fframe.comm.App;
+import net.pmosoft.fframe.comm.util.ExcelUtil;
 
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -27,7 +25,16 @@ public class CodeTest {
 	@Autowired
 	private CodeDao codeDao;
 
+    @Test
+    public void testExcel() throws IOException {
+        
+        ExcelUtil eu = new ExcelUtil();
+        eu.xlsToList(App.excelPath + "code.xls");
+        
+    }
 
+	
+	
 	@Test @Ignore
 	public void testCodeCnt() {
 		Map<String, String> params = new HashMap<String, String>();
@@ -68,7 +75,7 @@ public class CodeTest {
 		testCodeList();
 	}
 
-	@Test
+	@Test @Ignore
 	public void testDeleteCode() {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("PKG_FUL_NM", "package1");
