@@ -69,7 +69,6 @@
     AND     A.CD        = #{CD}
 </select>
 
-
 <insert id="insertCode" parameterType="java.util.HashMap">
 
 	-- CodeDao.insertCode

@@ -246,6 +246,9 @@ INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','2','UI','
 INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','3','PROGRAM','프로그램','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
 
 
+update TDACM00060 set REG_USR_ID = 'ADMIN'
+;
+
  SELECT   A.CD_ID_NM    
             ,A.CD_ID_HNM   
             ,A.CD_ID_GRP_NM
