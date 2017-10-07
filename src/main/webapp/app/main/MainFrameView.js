@@ -42,7 +42,7 @@ Ext.define('fframe.main.MainFrameView', {
 		items : [ {
 			xtype : 'treelist',
 			listeners : {
-				selectionchange ( obj, record){
+				selectionchange : function ( obj, record){
 					console.log(record.get("page"));
 					var centerPage = obj.up("viewport").down("component[region=center]");
 					console.log("centerPage="+centerPage);
