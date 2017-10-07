@@ -113,7 +113,6 @@ public class CodeSrv {
                 //result.put("errSysMsg", e.toString());
             }            
             
-            
             result.put("isSuccess", true);
             result.put("msg", "저장 되었습니다");
             return result;

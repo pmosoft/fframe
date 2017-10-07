@@ -6,18 +6,10 @@ Ext.define('fframe.dams.table.CodeListController', {
     * Main Event
     *********************************************************/    
    ,selBtn : function(btn) {
-       var view = this.getView(); var viewModel = view.getViewModel();
-       var store = viewModel.getStore(view['xtype']);
-
-       this.excelBtn();
-       
+       var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
        store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
        store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
-       store.load({
-           callback : function(data){
-               console.log(data);
-           }
-       });
+       store.load();
     }
    ,searchBtn : function(f,e,op) {
        if (e.getKey() == e.ENTER) {

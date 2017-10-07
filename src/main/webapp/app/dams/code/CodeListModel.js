@@ -16,6 +16,8 @@ Ext.define('fframe.dams.table.CodeListModel', {
                      ,'CD_NM'       
                      ,'CD_HNM'      
                      ,'CD_DESC'     
+                     ,'CD_TY_CD'   
+                     ,'CD_TY_CD_NM'
                      ,'CD_STS_CD'   
                      ,'CD_STS_CD_NM'
                      ,'REG_DTM'     

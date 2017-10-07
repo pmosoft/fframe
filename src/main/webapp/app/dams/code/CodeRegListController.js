@@ -2,35 +2,11 @@ Ext.define('fframe.dams.code.CodeRegListController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.codeRegList'
         
-    ,getSelectionModel: function () {
-        var grid = this.getView().down("grid");
-        return this.getView().down("grid").getSelectionModel();
-     }
-    ,onRefresh: function () {
-        this.extBtn(this.getView().down("button"));
-     }
-    ,toggleRowSelect: function(button, pressed) {
-        var sel = this.getSelectionModel();
-        console.log(pressed);
-        sel.setRowSelect(pressed);
-     }
-    ,toggleCellSelect: function(button, pressed) {
-        var sel = this.getSelectionModel();
-        sel.setCellSelect(pressed);
-     }
-    ,toggleColumnSelect: function(button, pressed) {
-        var sel = this.getSelectionModel();
-        sel.setColumnSelect(pressed);
-     }    
-    ,setGridHeight : function(obj){
-        obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
-     }
-    
+    /**********************************************************
+     * Main Event
+     *********************************************************/    
     ,initBtn : function(btn) {
-        var view = this.getView(); var viewModel = view.getViewModel();
-        var store = viewModel.getStore(view['xtype']);
-        var gridCnt = store.getCount();
-        console.log("gridCnt=",gridCnt);
+        var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
         
         Ext.toast({  html:"200라인 생성됩니다.",title:'알림',width: 200,align:'t',timeout: 500});
 
@@ -56,7 +32,6 @@ Ext.define('fframe.dams.code.CodeRegListController', {
              ]
             );
             
-            newRecord.set('CD_ID_NM', 'new value');
             //store.insert(0,newRecord);
             store.add(newRecord);
             //Ext.Msg.alert("알림","200라인 생성되었습니다.");
@@ -64,10 +39,10 @@ Ext.define('fframe.dams.code.CodeRegListController', {
      }
     
     ,saveBtn : function(btn) {
-        var view = this.getView();
-        var grid = btn.up(view['xtype']).down("grid");
+        var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
+        
+        var grid = this.lookupReference('codeRegListGrid');
         var records = grid.getSelectionModel().getSelection();
-
         var datar = new Array(); var jsonDataEncode = "";
         for (var i = 0; i < records.length; i++) {
             datar.push(records[i].data);
@@ -82,6 +57,11 @@ Ext.define('fframe.dams.code.CodeRegListController', {
                 var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
                     Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    
+                    store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
+                    store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
+                    store.load();
+                    
                 } else {
                     Ext.Msg.alert("알림",result['errUsrMsg']);
                     //Ext.Msg.alert("알림",result['errSysMsg']);
@@ -98,35 +78,27 @@ Ext.define('fframe.dams.code.CodeRegListController', {
      }
     
     ,selBtn : function(btn) {
-        var view = this.getView(); var viewModel = view.getViewModel();
-        var store = viewModel.getStore(view['xtype']);
-
+        var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
         store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
         store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
-        store.load({
-            callback : function(data){
-                console.log(data);
-            }
-        });
+        store.load();
      }
-
+    ,searchBtn : function(f,e,op) {
+        if (e.getKey() == e.ENTER) {
+            this.selBtn();
+        }
+    }
+    
     ,excelDownBtn : function(viewObj) {
-
-        var view = this.getView(); var viewModel = view.getViewModel();
-        var params = viewModel.getData();
-        var grid = viewObj.up("codeRegList").down("grid");
-        var store = viewModel.getStore(view['xtype']);
+        var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
         
-        var sel = new Array();
         var records = store.getRange();
-        var datar = new Array(); 
-        var jsonDataEncode = "";
+        var datar = new Array(); var jsonDataEncode = "";
         for (var i = 0; i < records.length; i++) {
             datar.push(records[i].data);
         }
         jsonDataEncode = Ext.util.JSON.encode(datar);
-        
-        console.log(jsonDataEncode);
+        //console.log(jsonDataEncode);
 
         Ext.Ajax.request({
              url : '/comm/excel/downloadExcel'
@@ -144,40 +116,18 @@ Ext.define('fframe.dams.code.CodeRegListController', {
         })     
      }
     ,excelUpload : function(obj) {
-        
-
-        //var view = this.lookupReference('codeRegListView'); var viewModel = view.getViewModel();
-        //var store = viewModel.getStore(view['xtype']);
-        
-
         var grid = this.lookupReference('codeRegListGrid');
-        //var sel = new Array();
-        //var records = grid.getSelectionModel().getSelection();
         var store = grid.getStore();
-        //console.log("records.length="+records.length);
         
         var frm = obj.up("form").getForm();
-        console.log("frm.getValues()="+frm.getValues());
-        var aa = "aaa";
+        //console.log("frm.getValues()="+frm.getValues());
         if(frm.isValid()) {
             frm.submit({
                  url: '/comm/excel/uploadExcel'
                 ,success : function(fp, res) {
                     var result = Ext.JSON.decode(res.response.responseText);
+                    console.log("result)="+result);
                     if(result['isSuccess']){
-
-                        //var centerPage = obj.up("viewport").down("component[region=center]");                   
-                        //centerPage.removeAll(true);
-                        //centerPage.add({
-                        //    xtype : 'codeList'
-                        //})                        
-
-                        //console.log("records.length2222="+records.length);
-                        
-                        
-                        //location.href = "http://localhost:8080/";
-                        
-                        
                         store.removeAll();
                         for(var i=0;i<result.data.length;i++){
                             newRecord = Ext.data.Record.create
@@ -212,18 +162,51 @@ Ext.define('fframe.dams.code.CodeRegListController', {
                             newRecord.set('UPD_DTM'     , ''     );
                             newRecord.set('UPD_USR_ID'  , result.data[i].UPD_USR_ID  );
                             store.add(newRecord);
-                            //Ext.Msg.alert("알림","200라인 생성되었습니다.");
                         }    
-          
                     } else {
                         Ext.Msg.alert("알림",result['errUsrMsg']);
                         return;
                     }
                     this.multiple;
                 }
+               ,failure: function(form, res) {
+                    var result = Ext.JSON.decode(res.response.responseText);
+                    Ext.Msg.alert('알림', result['errSysrMsg']);
+                }
             });
         }
      }
     ,multiple : function(fileObj){ fileObj.fileInputEl.set({multiple:'multiple'});}        
         
-});
+    /**********************************************************
+     * Grid
+     *********************************************************/    
+    ,setGridHeight : function(obj){
+        obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
+     }
+    
+    /**********************************************************
+     * Clipboard
+     *********************************************************/    
+ //   ,getSelectionModel: function () {
+//        var grid = this.getView().down("grid");
+//        return this.getView().down("grid").getSelectionModel();
+//     }
+ //   ,onRefresh: function () {
+//        this.extBtn(this.getView().down("button"));
+//     }
+ //   ,toggleRowSelect: function(button, pressed) {
+//        var sel = this.getSelectionModel();
+//        sel.setRowSelect(pressed);
+//     }
+ //   ,toggleCellSelect: function(button, pressed) {
+//        var sel = this.getSelectionModel();
+//        sel.setCellSelect(pressed);
+//     }
+ //   ,toggleColumnSelect: function(button, pressed) {
+//        var sel = this.getSelectionModel();
+//        sel.setColumnSelect(pressed);
+//     }    
+     
+ });
+

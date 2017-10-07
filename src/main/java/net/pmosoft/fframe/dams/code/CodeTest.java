@@ -26,7 +26,7 @@ public class CodeTest {
 	private CodeDao codeDao;
 
     @Test
-    public void testExcel() throws IOException {
+    public void testExcel() throws Exception {
         
         ExcelUtil eu = new ExcelUtil();
         eu.xlsToList(App.excelPath + "code.xls");

@@ -44,12 +44,12 @@ Ext.define('fframe.main.MainFrameView', {
 			listeners : {
 				selectionchange ( obj, record){
 					console.log(record.get("page"));
-					var centerPage = obj.up("viewport").down("component[region=center]");					
+					var centerPage = obj.up("viewport").down("component[region=center]");
+					console.log("centerPage="+centerPage);
 					centerPage.removeAll(true);
 					centerPage.add({
 						xtype : record.get("page")
 					})
-					
 				} 
 			},
 			store : {
@@ -123,7 +123,7 @@ Ext.define('fframe.main.MainFrameView', {
                             leaf : true
 						},{
 							text : '코드그룹목록',
-							page : 'CodeGrpList',
+							page : 'codeGrpList',
 							leaf : true
 						} ]
 					}, {

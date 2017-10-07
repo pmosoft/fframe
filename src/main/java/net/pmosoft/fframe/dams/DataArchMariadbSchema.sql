@@ -236,14 +236,14 @@ CREATE TABLE TDACM00061 (
 SELECT * FROM TDACM00060
 ;
 
-INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','01','REQUEST','요청','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
-INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','02','REQUEST','반려','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
-INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','03','REQUEST','승인','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
-INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','04','REQUEST','승인취소','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','01','REQUEST','요청','','1','03',date_format(now(),'%Y%m%d%H%i'),'admin','','admin');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','02','REQUEST','반려','','1','03',date_format(now(),'%Y%m%d%H%i'),'admin','','admin');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','03','REQUEST','승인','','1','03',date_format(now(),'%Y%m%d%H%i'),'admin','','admin');
+INSERT INTO TDACM00060 VALUES ('CD_STS_CD','코드상태코드','META','04','REQUEST','승인취소','','1','03',date_format(now(),'%Y%m%d%H%i'),'admin','','admin');
 
-INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','1','COLUMN','컬럼','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
-INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','2','UI','화면','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
-INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','3','PROGRAM','프로그램','','1','04','admin',date_format(now(),'%Y%m%d%H%i'),'admin','');
+INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','1','COLUMN','컬럼','','1','03',date_format(now(),'%Y%m%d%H%i'),'admin','','admin');
+INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','2','UI','화면','','1','03',date_format(now(),'%Y%m%d%H%i'),'admin','','admin');
+INSERT INTO TDACM00060 VALUES ('CD_TY_CD','코드유형코드','META','3','PROGRAM','프로그램','','1','03',date_format(now(),'%Y%m%d%H%i'),'admin','','admin');
 
 
 update TDACM00060 set REG_USR_ID = 'ADMIN'
