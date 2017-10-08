@@ -11,6 +11,7 @@ public interface CodeDao {
 
 	List<Map<String, Object>> selectCodeList(Map<String,String> params);
     List<Map<String, Object>> selectCodeRegList(Map<String,String> params);
+    List<Map<String, Object>> selectCodeCombo(Map<String,String> params);
 	int selectCodeCnt(Map<String,String> params);
 	void insertCode(Map<String,String> params);
 	void deleteCode(Map<String,String> params);

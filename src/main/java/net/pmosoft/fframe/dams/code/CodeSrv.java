@@ -76,7 +76,24 @@ public class CodeSrv {
         return result;
     }	
 	
-	public Map<String, Object> saveCode(Map<String,String> params){
+    public Map<String, Object> selectCodeCombo(Map<String, String> params) {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        List<Map<String, Object>> list = null;
+        try {
+            list = codeDao.selectCodeCombo(params);
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e) {
+            result.put("isSuccess", false);
+            result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }   
+    
+    public Map<String, Object> saveCode(Map<String,String> params){
 
         String data = params.get("data");
         Gson gson = new Gson(); 

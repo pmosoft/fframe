@@ -45,7 +45,7 @@
     SELECT   A.CD_ID_NM    
             ,A.CD_ID_HNM   
             ,A.CD_ID_GRP_NM
-            ,A.CD            
+            ,A.CD
             ,A.CD_NM       
             ,A.CD_HNM      
             ,A.CD_DESC      
@@ -61,6 +61,16 @@
     OR      A.CD_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
     OR      A.CD_HNM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
     OR      A.CD_ID_GRP_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    ORDER BY A.CD_TY_CD,A.CD_ID_NM, A.CD
+</select>
+
+<select id="selectCodeCombo" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+
+    -- CodeDao.selectCodeRegList
+    SELECT   A.CD_HNM
+            ,A.CD     
+    FROM    TDACM00060 A
+    WHERE   A.CD_ID_NM = #{CD_ID_NM}
     ORDER BY A.CD_TY_CD,A.CD_ID_NM, A.CD
 </select>
 

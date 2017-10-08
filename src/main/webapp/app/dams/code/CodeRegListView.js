@@ -17,11 +17,12 @@ Ext.define('fframe.dams.code.CodeRegListView', {
          xtype : 'toolbar'
         ,height : 50
         ,items : 
-         [ 
-           {xtype:'combo' , name:'searchCondition' , width:150 , displayField:'key' , valueField:'value' 
-                          , editable:false , queryMode:'local'
-                          , bind:{value:'{searchKeyCombo}' , store:'{searchCombo}'}
-           }
+         [
+           {xtype:'commcombo', value: 'CD_COL_UCD', width:150, addAll: true}
+//           {xtype:'combo' , name:'searchCondition' , width:150 , displayField:'key' , valueField:'value' 
+//                          , editable:false , queryMode:'local'
+//                          , bind:{value:'{searchKeyCombo}' , store:'{searchCombo}'}
+//           }
           ,{xtype:'textfield' , name:'searchValue' , width:200 , emptyText:'검색어를 입력하세요'
                               , bind :{value:'{searchValue}'}  , enableKeyEvents: true 
                               , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}

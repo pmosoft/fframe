@@ -24,7 +24,7 @@ public class CodeCtrl {
 	private CodeSrv codeSrv;
 
 	/**
-	 * selectcCodeList
+	 * 코드목록 조회
 	 */
 	@RequestMapping(value = "/dams/code/selectCodeList")
 	public Map<String, Object> selectCodeList(@RequestParam Map<String,String> params) {
@@ -32,15 +32,24 @@ public class CodeCtrl {
 	}
 
     /**
-     * selectcCodeRegList
+     * 코드등록목록 조회
      */
     @RequestMapping(value = "/dams/code/selectCodeRegList")
     public Map<String, Object> selectCodeRegList(@RequestParam Map<String, String> params) {
         return codeSrv.selectCodeRegList(params);
     }	
-	
+
+    /**
+     * 코드콤보 조회
+     */
+    @RequestMapping(value = "/dams/code/selectCodeCombo")
+    public Map<String, Object> selectCodeCombo(@RequestParam Map<String, String> params) {
+        return codeSrv.selectCodeCombo(params);
+    }   
+    
+    
 	/**
-	 * saveCode
+	 * 코드 저장(Multi:json)
 	 */
 	@RequestMapping(value = "/dams/code/saveCode")
 	public Map<String, Object> saveCode(@RequestParam Map<String,String> params) {
@@ -48,12 +57,11 @@ public class CodeCtrl {
 	}
 
 	/**
-	 * deleteCode
+	 * 코드 삭제(Multi:json)
 	 */
 	@RequestMapping(value = "/dams/code/deleteCode")
 	public Map<String, Object> deleteCode(@RequestParam Map<String,String> params) {
 		return codeSrv.deleteCode(params);
 	}
-   
     
 }
