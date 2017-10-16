@@ -3,9 +3,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
     ,xtype      : 'ExtMetaTabColList'
     ,controller : 'ExtMetaTabColList'
     ,viewModel  : 'ExtMetaTabColList'
-    ,listeners  : {
-         resize : 'setGridHeight'
-    }
+    ,listeners  : { resize : 'setGridHeight' }
     //-------------------------------------------
     // titletoolbar
     //-------------------------------------------
@@ -19,9 +17,13 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
            xtype : 'toolbar'
           ,items :
            [
-             {text:'Rows'    , enableToggle:true , toggleHandler:'toggleRowSelect'    , pressed:false}
-            ,{text:'Cells'   , enableToggle:true , toggleHandler:'toggleCellSelect'   , pressed:true}
-            ,{text:'Columns' , enableToggle:true , toggleHandler:'toggleColumnSelect' , pressed:false}          
+            // {xtype:'displayfield' , value:'DB선택' , width:60}
+             {xtype:'component', html:['&nbsp;','DB선택','&nbsp;&nbsp;']}             
+            ,{xtype:'commCombo', id:'DB_CONN_CD', width:150, value:'FFRAME'}
+//            ,{xtype:'combo' , name:'searchCondition' , width:150 , displayField:'key' , valueField:'value' 
+//                            , editable:false , queryMode:'local'
+//                            , bind:{value:'{searchKeyCombo}' , store:'{searchCombo}'}
+//             }
             ,'->'
             ,{xtype:'button' ,text:'추출'       , handler:'extBtn'}
             ,{xtype:'button' ,text:'비교'       , handler:'cmpBtn'}

@@ -7,12 +7,55 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class FileUtil {
 
+    public static void main(String[] args) {
+        readWebSrcList("c:/fframe/", ".*.java");
+        //ft.readWebSrcList("D:/workspace/", ".*BSCP.*ORA04.*.sh");
+        //ft.readWebSrcList("D:/workspace/", ".*BSCP.*.sh");
+    }
 
+    /*
+     * 해당 파일 경로 밑에 모든 파일 및 경로 정보를 출력한다
+     * */
+    public static List<HashMap<String, String>> readWebSrcList(String filePathName, String fileNm){
+
+        List<HashMap<String, String>> srcInfoList = new ArrayList<HashMap<String, String>>();
+        
+        File dir = new File(filePathName);
+        File[] fileList = dir.listFiles();
+        
+        try {
+            for (int i = 0; i < fileList.length; i++) {
+                File file = fileList[i];
+                if (file.isFile() && file.getName().matches(fileNm)) {
+                    HashMap<String, String> map = new HashMap<String, String>();
+                    map.put("fileName",  file.getName());
+                    map.put("filePathName",  file.getPath().replace('\\', '/'));
+                    
+                    srcInfoList.add(map);
+                    
+                    System.out.println(file.getPath().replace('\\', '/').replace("D:/workspace/", ""));
+                    
+                } else if (file.isDirectory()) {
+                    readWebSrcList(file.getCanonicalPath().toString(),fileNm);
+                }
+                
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        
+        return srcInfoList;
+    } 
+    
+    
     // 파일을 존재여부를 확인하는 메소드
     public static Boolean fileIsLive(String isLivefile) {
         File f1 = new File(isLivefile);
@@ -125,7 +168,9 @@ public class FileUtil {
         return fileNm.exists();
     }
 
-
+    /*
+     * 파일을 읽어서 String으로 변환
+     * */
     public String readFile(String filePathName) {
         BufferedReader br = null;
         String src = "";

@@ -37,7 +37,7 @@ public class MultipartSrv {
             
         } catch (Exception e) {
             result.put("isSuccess", false);
-            result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
             result.put("errSysrMsg", e.getMessage());
             e.printStackTrace();
         }        

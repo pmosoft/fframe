@@ -67,6 +67,22 @@ Ext.define('fframe.gens.core.TmplPgmRegView', {
           xtype : 'fieldcontainer'
          ,combineErrors: true
          ,msgTarget: 'side'
+         ,fieldLabel: '프로그램복사'
+         ,layout: 'hbox'
+         ,defaults: {
+              hideLabel: true
+          }      
+         ,items: [
+              {xtype:'displayfield' , value:'패키지명  ' , width:60}
+             ,{xtype:'textfield'    , name:'packSrcNm' , bind:{value:'{packNm}'} , width:250 , emptyText:'패키지명을 입력하세요(예:net.pmosoft.fframe.dams.code)'}
+             ,{xtype:'displayfield' , value:'  ' , width:20}
+             ,{xtype:'displayfield' , value:'프로그램명', width:70}
+             ,{xtype:'textfield'    , name:'pgmSrcNm' , bind:{value:'{pgmNm}'} , width:250 , emptyText:'프로그램명을 입력하세요(예:CodeList)'}
+          ]    
+      },{
+          xtype : 'fieldcontainer'
+         ,combineErrors: true
+         ,msgTarget: 'side'
          ,fieldLabel: '프로그램생성'
          ,layout: 'hbox'
          ,defaults: {
@@ -85,7 +101,8 @@ Ext.define('fframe.gens.core.TmplPgmRegView', {
          ,height     : 200    
       }]
     ,buttons: [
-       {name:'saveBtn' , text:'생성'  , handler:'saveBtn'}
-     ]
+               {name:'saveBtn' , text:'생성'  , handler:'saveBtn'}
+              ,{name:'copyBtn' , text:'복사'  , handler:'copyBtn'}
+             ]
     
 });

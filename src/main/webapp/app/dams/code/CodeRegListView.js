@@ -1,3 +1,25 @@
+/*******************************************************************************
+@title:코드 등록 목록 
+@description-start
+ 1. 저장기능
+   - 코드를 엑셀을 통해서 업로드후 저장
+   - 신규버튼 클릭후 그리드 입력후 저장
+ 2. 수정기능
+   - 그리드상에서 직접수정후 저장
+   - 엑셀 붙여넣기후 저장
+ 3. 엑셀다운로드 
+@description-end  
+@developer:피승현
+@progress-rate:100%
+@update-history-start
+-------------------------------------------------------------------------------
+|   날짜   |수정자|내용
+-------------------------------------------------------------------------------
+|2017.10.01|피승현|최초개발
+|2017.10.10|피승현|주석정비
+-------------------------------------------------------------------------------
+@update-history-end
+********************************************************************************/    
 Ext.define('fframe.dams.code.CodeRegListView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'codeRegList'
@@ -18,7 +40,7 @@ Ext.define('fframe.dams.code.CodeRegListView', {
         ,height : 50
         ,items : 
          [
-           {xtype:'commcombo', value: 'CD_COL_UCD', width:150, addAll: true}
+           {xtype:'commCombo', id:'CD_COL_UCD', width:150}
 //           {xtype:'combo' , name:'searchCondition' , width:150 , displayField:'key' , valueField:'value' 
 //                          , editable:false , queryMode:'local'
 //                          , bind:{value:'{searchKeyCombo}' , store:'{searchCombo}'}
@@ -28,6 +50,7 @@ Ext.define('fframe.dams.code.CodeRegListView', {
                               , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
            }
           ,{xtype:'component' , anchor:'100%' , html:['&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' , '상태' , '&nbsp;&nbsp;']}
+//          ,{xtype:'commCombo', id:'CD_STS_CD'}
           ,{xtype:'combo' , name:'codeStatus' , width:90 , displayField:'key' , valueField:'value'
                           , editable:false , queryMode:'local'
                           , bind:{value:'{cdStsCd}' , store:'{codeStsCombo}'}
@@ -51,7 +74,6 @@ Ext.define('fframe.dams.code.CodeRegListView', {
      //-------------------------------------------
      ,{
          xtype      : 'grid'
-        ,reference  : 'codeRegListGrid'     
         ,plugins    : [{ptype:'gridexporter'}]              
         ,requires   : ['Ext.grid.selection.SpreadsheetModel' , 'Ext.grid.plugin.Clipboard']
         ,height     : 150 , frame: true , columnLines : true

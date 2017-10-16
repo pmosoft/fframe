@@ -64,14 +64,61 @@
     ORDER BY A.CD_TY_CD,A.CD_ID_NM, A.CD
 </select>
 
-<select id="selectCodeCombo" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
 
-    -- CodeDao.selectCodeRegList
-    SELECT   A.CD_HNM
-            ,A.CD     
-    FROM    TDACM00060 A
-    WHERE   A.CD_ID_NM = #{CD_ID_NM}
-    ORDER BY A.CD_TY_CD,A.CD_ID_NM, A.CD
+<select id="selectCodeExtList" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+
+    -- CodeDao.selectCodeExtList
+    SELECT   A.CD_ID_NM      
+            ,A.CD
+            ,B.CD_NM            
+            ,A.CD_PARAM1_DESC
+            ,A.CD_PARAM1     
+            ,A.CD_PARAM2_DESC
+            ,A.CD_PARAM2     
+            ,A.CD_PARAM3_DESC
+            ,A.CD_PARAM3     
+            ,A.CD_PARAM4_DESC
+            ,A.CD_PARAM4     
+            ,A.CD_PARAM5_DESC
+            ,A.CD_PARAM5     
+            ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00061 A,
+            TDACM00060 B 
+    WHERE   A.CD_ID_NM = B.CD_ID_NM
+    AND     A.CD = B.CD  
+    AND    (   A.CD_ID_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+            OR A.CD LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+           ) 
+    ORDER BY A.CD_ID_NM, A.CD
+</select>
+
+
+<select id="selectCodeExtRegList" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+
+    -- CodeDao.selectCodeExtRegList
+    SELECT   A.CD_ID_NM      
+            ,A.CD            
+            ,A.CD_PARAM1_DESC
+            ,A.CD_PARAM1     
+            ,A.CD_PARAM2_DESC
+            ,A.CD_PARAM2     
+            ,A.CD_PARAM3_DESC
+            ,A.CD_PARAM3     
+            ,A.CD_PARAM4_DESC
+            ,A.CD_PARAM4     
+            ,A.CD_PARAM5_DESC
+            ,A.CD_PARAM5     
+            ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00061 A
+    WHERE   A.CD_ID_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    OR      A.CD LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
+    ORDER BY A.CD_ID_NM, A.CD
 </select>
 
 
@@ -83,11 +130,31 @@
     AND     A.CD        = #{CD}
 </select>
 
+<select id="selectCodeExtCnt" parameterType="java.util.HashMap" resultType="int">
+    -- CodeDao.selectCodeExtCnt
+    SELECT  COUNT(*) CNT
+    FROM    TDACM00061 A
+    WHERE   A.CD_ID_NM = #{CD_ID_NM}
+    AND     A.CD       = #{CD}
+</select>
+
+
+<select id="selectCodeCombo" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+
+    -- CodeDao.selectCodeRegList
+    SELECT   A.CD_HNM
+            ,A.CD_NM     
+    FROM    TDACM00060 A
+    WHERE   A.CD_ID_NM = #{CD_ID_NM}
+    ORDER BY A.CD_TY_CD,A.CD_ID_NM, A.CD
+</select>
+
+
 <insert id="insertCode" parameterType="java.util.HashMap">
 
-	-- CodeDao.insertCode
-	INSERT INTO TDACM00060
-	(
+    -- CodeDao.insertCode
+    INSERT INTO TDACM00060
+    (
          CD_ID_NM     
         ,CD_ID_HNM    
         ,CD_ID_GRP_NM 
@@ -101,7 +168,7 @@
         ,REG_USR_ID   
         ,UPD_DTM      
         ,UPD_USR_ID   
-	) VALUES (
+    ) VALUES (
          #{CD_ID_NM}
         ,#{CD_ID_HNM}
         ,#{CD_ID_GRP_NM}
@@ -111,38 +178,108 @@
         ,#{CD_DESC}
         ,#{CD_TY_CD}
         ,#{CD_STS_CD}
-		,curdate()
-		,#{REG_USR_ID}
-		,curdate()
-		,#{UPD_USR_ID}
-	)
+        ,curdate()
+        ,#{REG_USR_ID}
+        ,curdate()
+        ,#{UPD_USR_ID}
+    )
+</insert>
+
+<insert id="insertCodeExt" parameterType="java.util.HashMap">
+
+    -- CodeDao.insertCodeExt
+    INSERT INTO TDACM00061
+    (
+         CD_ID_NM      
+        ,CD            
+        ,CD_PARAM1_DESC
+        ,CD_PARAM1     
+        ,CD_PARAM2_DESC
+        ,CD_PARAM2     
+        ,CD_PARAM3_DESC
+        ,CD_PARAM3     
+        ,CD_PARAM4_DESC
+        ,CD_PARAM4     
+        ,CD_PARAM5_DESC
+        ,CD_PARAM5     
+        ,REG_DTM      
+        ,REG_USR_ID   
+        ,UPD_DTM      
+        ,UPD_USR_ID   
+    ) VALUES (
+         #{CD_ID_NM}
+        ,#{CD}
+        ,#{CD_PARAM1_DESC}
+        ,#{CD_PARAM1}
+        ,#{CD_PARAM2_DESC}
+        ,#{CD_PARAM2}
+        ,#{CD_PARAM3_DESC}
+        ,#{CD_PARAM3}
+        ,#{CD_PARAM4_DESC}
+        ,#{CD_PARAM4}
+        ,#{CD_PARAM5_DESC}
+        ,#{CD_PARAM5}
+        ,curdate()
+        ,#{REG_USR_ID}
+        ,curdate()
+        ,#{UPD_USR_ID}
+    )
 </insert>
 
 
-<delete id="deleteCode" parameterType="java.util.HashMap">
-	-- CodeDao.deleteCode
-	DELETE FROM TDACM00010 WHERE PKG_FUL_NM = #{PKG_FUL_NM}
-</delete> 
-
 <update id="updateCode" parameterType="java.util.HashMap">
 
-	-- CodeDao.updateCode
-	UPDATE TDACM00060
-	SET  CD_ID_NM      = #{CD_ID_NM}
-		,CD_ID_HNM     = #{CD_ID_HNM}
-		,CD_ID_GRP_NM  = #{CD_ID_GRP_NM}
+    -- CodeDao.updateCode
+    UPDATE TDACM00060
+    SET  CD_ID_NM      = #{CD_ID_NM}
+        ,CD_ID_HNM     = #{CD_ID_HNM}
+        ,CD_ID_GRP_NM  = #{CD_ID_GRP_NM}
         ,CD            = #{CD}
         ,CD_NM         = #{CD_NM}
         ,CD_HNM        = #{CD_HNM}
         ,CD_DESC       = #{CD_DESC}
         ,CD_TY_CD      = #{CD_TY_CD}
         ,CD_STS_CD     = #{CD_STS_CD}
-		,UPD_DTM       = curdate()
-		,UPD_USR_ID    = #{UPD_USR_ID}
-	WHERE  CD_ID_NM = #{CD_ID_NM}
-	AND    CD       = #{CD}
+        ,UPD_DTM       = curdate()
+        ,UPD_USR_ID    = #{UPD_USR_ID}
+    WHERE  CD_ID_NM = #{CD_ID_NM}
+    AND    CD       = #{CD}
 
 </update>
+
+<update id="updateCodeExt" parameterType="java.util.HashMap">
+
+    -- CodeDao.updateExtCode
+    UPDATE TDACM00061
+    SET  CD_ID_NM           = #{CD_ID_NM}      
+        ,CD                 = #{CD}            
+        ,CD_PARAM1_DESC     = #{CD_PARAM1_DESC}
+        ,CD_PARAM1          = #{CD_PARAM1}     
+        ,CD_PARAM2_DESC     = #{CD_PARAM2_DESC}
+        ,CD_PARAM2          = #{CD_PARAM2}     
+        ,CD_PARAM3_DESC     = #{CD_PARAM3_DESC}
+        ,CD_PARAM3          = #{CD_PARAM3}     
+        ,CD_PARAM4_DESC     = #{CD_PARAM4_DESC}
+        ,CD_PARAM4          = #{CD_PARAM4}     
+        ,CD_PARAM5_DESC     = #{CD_PARAM5_DESC}
+        ,CD_PARAM5          = #{CD_PARAM5}     
+        ,UPD_DTM       = curdate()
+        ,UPD_USR_ID    = #{UPD_USR_ID}
+    WHERE  CD_ID_NM = #{CD_ID_NM}
+    AND    CD       = #{CD}
+
+</update>
+
+
+<delete id="deleteCode" parameterType="java.util.HashMap">
+    -- CodeDao.deleteCode
+    DELETE FROM TDACM00060 WHERE CD_ID_NM = #{CD_ID_NM} AND CD = #{CD}
+</delete> 
+
+<delete id="deleteCodeExt" parameterType="java.util.HashMap">
+    -- CodeDao.deleteCodeExt
+    DELETE FROM TDACM00061 WHERE CD_ID_NM = #{CD_ID_NM} AND CD = #{CD}
+</delete> 
 
 
 </mapper>

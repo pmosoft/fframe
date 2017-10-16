@@ -61,10 +61,10 @@ public class UsrSrv {
 				
 			    if  (UsrDao.selectUsrCnt(params)==0) {
 			    	UsrDao.insertUsr(params);
-			    	result.put("msg", "입력 되었습니다");
+			    	result.put("usrMsg", "입력 되었습니다");
 			    } else {
 			    	UsrDao.updateUsr(params);
-			    	result.put("msg", "갱신 되었습니다");
+			    	result.put("usrMsg", "갱신 되었습니다");
 			    }	
 			} catch (Exception e){
 				e.printStackTrace();
@@ -90,7 +90,7 @@ public class UsrSrv {
 		} else {	 
 			UsrDao.deleteUsr(params);
 			result.put("isSuccess", true);
-			result.put("msg", "삭제 되었습니다");
+			result.put("usrMsg", "삭제 되었습니다");
 			return result;			
 		}	
 	}

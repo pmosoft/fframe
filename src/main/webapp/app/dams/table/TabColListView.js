@@ -1,12 +1,25 @@
+/*******************************************************************************
+@title:테이블 컬럼 목록 
+@description-start
+@description-end  
+@developer:피승현
+@progress-rate:100%
+@update-history-start
+-------------------------------------------------------------------------------
+|   날짜   |수정자|내용
+-------------------------------------------------------------------------------
+|2017.10.01|피승현|최초개발
+|2017.10.10|피승현|주석정비
+-------------------------------------------------------------------------------
+@update-history-end
+********************************************************************************/
 Ext.define('fframe.dams.table.TabColListView', {
-     extend : 'Ext.form.Panel' , xtype : 'TabColList' 
-    ,controller : 'TabColList' , viewModel:'TabColList'
-    ,requires: [
-              'Ext.sparkline.Line'
-     ]  
-    ,listeners : { 
-        resize : 'setGridHeight'
-     }
+     extend     : 'Ext.form.Panel' 
+    ,xtype      : 'TabColList' 
+    ,controller : 'TabColList' 
+    ,viewModel  : 'TabColList'
+    ,requires   : [ 'Ext.sparkline.Line' ]  
+    ,listeners  : { resize : 'setGridHeight' }
 //    ,initComponent: function() {
 //        this.store = "SomeStore";
 //
@@ -34,73 +47,11 @@ Ext.define('fframe.dams.table.TabColListView', {
         ,height : 50
         ,items : 
          [ 
-           {
-               xtype : 'combo'
-              ,name : 'searchCondition'
-              ,width : 120     
-              ,editable : false
-              ,displayField : 'key'
-              ,valueField : 'value'
-              ,queryMode : 'local'
-              ,bind : { value : '{searchKeyCombo}'}
-              ,store : {
-                   fields : ['key','value'] 
-                  ,data : 
-                   [
-                     {key : '테이블한글명', value : 'TAB_HNM'}
-                    ,{key : '테이블명'    , value : 'TAB_NM'}
-                    ,{key : '컬럼한글명'  , value : 'COL_HNM'}
-                    ,{key : '컬럼명'      , value : 'COL_NM'}
-                   ]
-               }
-           }
-          ,{
-               xtype : 'textfield'
-              ,name : 'searchValue'
-              ,width : 200     
-              ,emptyText : '검색어를 입력하세요'
-              // ,value : 'aaaa'
-              ,bind : { value : '{searchValue}' }
-              ,buttonAlign: 'center'          
-              ,enableKeyEvents: true
-              ,listeners: {
-                      keyup: 'selBtn'
-//                   specialkey: function(f,e,op) {
-//                       if (e.getKey() == e.ENTER) {
-//                          // var me = this;
-//                           //Ext.Msg.alert("알림","222");
-//                           
-//                          //var ControllerRef  =   this.getController('TabColList');
-//
-//                           
-//                          // this.up('toolbar').down('button').handler
-//                         //  var selBtn = field.up('researchLinkForm').down('button#save');
-//                           
-//                           //var ctrl = this.getController();
-//                           //ControllerRef.selBtn();
-//                       //fframe.app.getController('view.syst.Usr.UsrListController').selBtn(this);
-//                       //var ctrl = new fframe.syst.usr.UsrListController();
-//                       //controller.selBtn();
-//                       //var ControllerRef  =   this.getController('fframe.dams.table.TabColListController');
-//                       //ControllerRef.selBtn();
-//                           
-//                       //grid.down('[text=Group]').on('click', function() {});
-//                       this.up('toolbar').down('button#selBtnId').on('selBtn', function() {});
-//                       //me.selBtn();
-//                       
-//                       //var button = Ext.getCmp('selBtn'); 
-//                       //button.fireEvent('click', button,e,op);
-//                           
-//                       //f.up('form').getForm().submit();
-//                       //var selBtn = this.up('toolbar').down('button#selBtn');
-//                       //field.up('form').getForm().submit(); 
-//                       //Ext.Msg.alert("selBtn",selBtn);
-//                       //selBtn.fireEvent('selBtn', selBtn, e,op);
-//                       //Ext.getCmp("selBtnId").handler.call(Ext.getCmp("selBtnId").scope);
-//                           
-//                       }
-//                   }
-               }
+           //{xtype:'commCombo', id:'CD_COL_UCD', width:150, bind:{store:'{searchCombo}',value:'{searchKeyCombo}'}}
+           {xtype:'commCombo2' , name:'searchCondition' , width:150 , bind:{value:'{searchKeyCombo}' , store:'{searchCombo}'}}
+          ,{xtype:'textfield' , name:'searchValue' , width:200 , emptyText:'검색어를 입력하세요'
+               , bind :{value:'{searchValue}'}  , enableKeyEvents: true 
+               , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
            }
           ,{ xtype:'component' , anchor:'100%'
             //,html:['&nbsp;&nbsp;상태&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;']

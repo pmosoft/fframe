@@ -32,15 +32,15 @@ public class TermValidatorSrv {
 		System.out.println("validateSaveTerm11");
 
 //		if (target.get("Term_ID").length() < 5 || target.get("Term_ID").length() > 15) {
-//			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		} else if  (target.get("Term_EMAIL").length() < 5 || target.get("Term_EMAIL").length() > 15) {
-//			errors.put("errUserMsg", "이메일 형식이 아닙니다.");
+//			errors.put("errUsrMsg", "이메일 형식이 아닙니다.");
 //		} else if  (target.get("Term_PW").length() < 5 || target.get("Term_PW").length() > 15) {
-//			errors.put("errUserMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		} else if  (!target.get("Term_PW").equals(target.get("Term_PW2"))) {
-//			errors.put("errUserMsg", "암호와 암호확인을 일치시켜 주십시요.");
+//			errors.put("errUsrMsg", "암호와 암호확인을 일치시켜 주십시요.");
 //		} else if  (target.get("Term_NM").length() < 5 || target.get("Term_NM").length() > 15) {
-//			errors.put("errUserMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		}
 		System.out.println("validateSaveTerm55");
 
@@ -52,9 +52,9 @@ public class TermValidatorSrv {
 
 		Map<String, String> errors = new HashMap<String, String>();
 //		if (target.get("Term_ID").length() < 5 || target.get("Term_ID").length() > 15) {
-//			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		} else if  (TermDao.selectTermCnt(target)==0) {
-//			errors.put("errUserMsg", "아이디가 미존재합니다.");
+//			errors.put("errUsrMsg", "아이디가 미존재합니다.");
 //		}
 
 		return errors;
@@ -69,15 +69,15 @@ public class TermValidatorSrv {
         System.out.println("validateSavePackInfo11");
         
 //      if (target.get("PackInfo_ID").length() < 5 || target.get("PackInfo_ID").length() > 15) {
-//          errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//          errors.put("errUsrMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //      } else if  (target.get("PackInfo_EMAIL").length() < 5 || target.get("PackInfo_EMAIL").length() > 15) {
-//          errors.put("errUserMsg", "이메일 형식이 아닙니다.");
+//          errors.put("errUsrMsg", "이메일 형식이 아닙니다.");
 //      } else if  (target.get("PackInfo_PW").length() < 5 || target.get("PackInfo_PW").length() > 15) {
-//          errors.put("errUserMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//          errors.put("errUsrMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //      } else if  (!target.get("PackInfo_PW").equals(target.get("PackInfo_PW2"))) {
-//          errors.put("errUserMsg", "암호와 암호확인을 일치시켜 주십시요.");
+//          errors.put("errUsrMsg", "암호와 암호확인을 일치시켜 주십시요.");
 //      } else if  (target.get("PackInfo_NM").length() < 5 || target.get("PackInfo_NM").length() > 15) {
-//          errors.put("errUserMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//          errors.put("errUsrMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //      }
         System.out.println("validateSavePackInfo55");
         
@@ -89,9 +89,9 @@ public class TermValidatorSrv {
         
         Map<String, String> errors = new HashMap<String, String>();
 //      if (target.get("PackInfo_ID").length() < 5 || target.get("PackInfo_ID").length() > 15) {
-//          errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//          errors.put("errUsrMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //      } else if  (PackInfoDao.selectPackInfoCnt(target)==0) {
-//          errors.put("errUserMsg", "아이디가 미존재합니다.");
+//          errors.put("errUsrMsg", "아이디가 미존재합니다.");
 //      }   
             
         return errors;

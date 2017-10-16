@@ -44,7 +44,7 @@
            ,''                    AS UPD_USR_ID
     FROM   INFORMATION_SCHEMA.COLUMNS A 
     WHERE  1=1
-    AND    TABLE_NAME LIKE 'TD%'
+    AND    A.TABLE_NAME LIKE 'T%0%'
     AND    COLUMN_NAME LIKE '%'
     ORDER BY A.TABLE_NAME,A.ORDINAL_POSITION    
 </insert>
@@ -64,11 +64,11 @@
            ,''                    AS UPD_USR_ID
     FROM   INFORMATION_SCHEMA.TABLES A 
     WHERE  1=1
-    AND    TABLE_NAME LIKE 'TD%'
+    AND    A.TABLE_NAME LIKE 'T%0%'
     ORDER BY A.TABLE_SCHEMA, A.TABLE_NAME    
 </insert>
 
-
+ 
 
 <select id="selectMetaTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
     -- TableDao.selectMetaTabColList

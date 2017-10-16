@@ -29,27 +29,27 @@ public class CodeValidatorSrv {
     public Map<String, String> validateSaveCode(List<Map<String,String>> target) {
     
 
-		System.out.println("validateSaveCode");
+		//System.out.println("validateSaveCode");
 
 		Map<String, String> errors = new HashMap<String, String>();
-		System.out.println("validateSaveCode11");
+		//System.out.println("validateSaveCode11");
 
         if (target.size() == 0) {
             errors.put("errUsrMsg", "저장 정보가 없습니다.");
         }    		
 		
 //		if (target.get("Code_ID").length() < 5 || target.get("Code_ID").length() > 15) {
-//			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		} else if  (target.get("Code_EMAIL").length() < 5 || target.get("Code_EMAIL").length() > 15) {
-//			errors.put("errUserMsg", "이메일 형식이 아닙니다.");
+//			errors.put("errUsrMsg", "이메일 형식이 아닙니다.");
 //		} else if  (target.get("Code_PW").length() < 5 || target.get("Code_PW").length() > 15) {
-//			errors.put("errUserMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "유저암호를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		} else if  (!target.get("Code_PW").equals(target.get("Code_PW2"))) {
-//			errors.put("errUserMsg", "암호와 암호확인을 일치시켜 주십시요.");
+//			errors.put("errUsrMsg", "암호와 암호확인을 일치시켜 주십시요.");
 //		} else if  (target.get("Code_NM").length() < 5 || target.get("Code_NM").length() > 15) {
-//			errors.put("errUserMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "성명을 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		}
-		System.out.println("validateSaveCode55");
+		//System.out.println("validateSaveCode55");
 
 		return errors;
 	}
@@ -59,9 +59,9 @@ public class CodeValidatorSrv {
 
 		Map<String, String> errors = new HashMap<String, String>();
 //		if (target.get("Code_ID").length() < 5 || target.get("Code_ID").length() > 15) {
-//			errors.put("errUserMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
+//			errors.put("errUsrMsg", "유저아이디를 5자리에서 14자리로 입력해 주시기 바랍니다.");
 //		} else if  (CodeDao.selectCodeCnt(target)==0) {
-//			errors.put("errUserMsg", "아이디가 미존재합니다.");
+//			errors.put("errUsrMsg", "아이디가 미존재합니다.");
 //		}
 
 		return errors;

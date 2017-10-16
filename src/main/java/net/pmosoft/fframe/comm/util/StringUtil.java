@@ -21,6 +21,60 @@ public class StringUtil {
         PADDING = new String[65535];
         PADDING[32] = "                                                                ";
     }    
+
+    
+    /*
+     *  String이 null일 경우를 check하고 null이면 공백을 리턴한다
+     * */
+    public static String nullTrimZero(String str) {
+        try {
+            if(str==null){
+                return "";
+            } else {
+                return str.trim();
+            }
+        } catch (Exception e) {
+            return "";
+        }
+        
+    }
+
+    /*
+     *  String이 null일 경우를 check하고 null이면 " "를 리턴한다
+     * */
+    public static String nullTrimSpace(String str) {
+        try {
+            if(str==null){
+                return " ";
+            } else {
+                return str.trim();
+            }
+        } catch (Exception e) {
+            return "";
+        }
+        
+    }
+
+    /*
+     *  String이 null일 경우를 check하고 null이면 0를 리턴한다
+     * */
+    public static String nullTrim(String str) {
+        try {
+            if(str==null){
+                return "0";
+            } else {
+                return str.trim();
+            }
+        } catch (Exception e) {
+            return "";
+        }
+        
+    }
+    
+    
+    
+    
+    
     
 	public static synchronized String java2Html(Object o) {
 		if (o == null) return "";

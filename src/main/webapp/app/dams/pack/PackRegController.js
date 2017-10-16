@@ -44,10 +44,10 @@ Ext.define('fframe.dams.pack.PackRegController', {
              success : function(res){
                  var result = Ext.decode(res.responseText);
                  if(result['isSuccess']){
-                     //Ext.Msg.alert("알림",result['msg']);
-                     Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                     //Ext.Msg.alert("알림",result['usrMsg']);
+                     Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
                  } else {
-                     Ext.Msg.alert("알림",result['errUserMsg']);
+                     Ext.Msg.alert("알림",result['errUsrMsg']);
                      //Ext.Msg.alert("알림",result['errSysMsg']);
                      return;
                  }
@@ -64,12 +64,12 @@ Ext.define('fframe.dams.pack.PackRegController', {
             success : function(res){
                 var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
-                    //Ext.Msg.alert("알림",result['msg']);
-                    Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    //Ext.Msg.alert("알림",result['usrMsg']);
+                    Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
 
                     this.getView().close();
                 } else {
-                    Ext.Msg.alert("알림",result['errUserMsg']);
+                    Ext.Msg.alert("알림",result['errUsrMsg']);
                     //Ext.Msg.alert("알림",result['errSysMsg']);
                     return;
                 }

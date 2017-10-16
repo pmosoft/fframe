@@ -40,8 +40,8 @@ Ext.define('fframe.syst.usr.UsrRegController', {
     			var result = Ext.decode(res.responseText);
     			console.log(res.responseText);
     			if(result['isSuccess']){
-    				//Ext.Msg.alert("알림",result['msg']);
-    				Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+    				//Ext.Msg.alert("알림",result['usrMsg']);
+    				Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
     			} else {
     				Ext.Msg.alert("알림",result['errUsrMsg']);
     				//Ext.Msg.alert("알림",result['errSysMsg']);
@@ -64,8 +64,8 @@ Ext.define('fframe.syst.usr.UsrRegController', {
     		success : function(res){
     			var result = Ext.decode(res.responseText);
     			if(result['isSuccess']){
-    				//Ext.Msg.alert("알림",result['msg']);
-    				Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+    				//Ext.Msg.alert("알림",result['usrMsg']);
+    				Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
     				
     				this.getView().close();
     			} else {

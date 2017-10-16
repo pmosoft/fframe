@@ -14,6 +14,9 @@ import java.util.TimeZone;
 
 public class DateUtil {
 	
+    /*
+     * yyyyMMddHHmmss
+     * */
 	public static String getDate(String strFormat) {
 		
 		Calendar cal = Calendar.getInstance();

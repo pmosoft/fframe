@@ -1,6 +1,9 @@
 package net.pmosoft.fframe.dams.table;
 
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -121,4 +124,27 @@ public class TabCtrl {
 		return tabSrv.deleteTab(params);
 	}
 
+ 	
+    /**********************************************************************************
+    *
+    *                                  Meta
+    *
+    **********************************************************************************/
+
+   /**
+    * extLodMetaTabInfoSchema
+    */
+   @RequestMapping(value = "/dams/table/extLodMetaTabInfoSchema")
+   public Map<String, Object> extLodMetaTabInfoSchema(@RequestParam Map<String,String> params) { 
+       return tabSrv.selectTabList(params);
+   }
+
+   /**
+    * createTableScript
+    */
+   @RequestMapping(value = "/dams/table/createTableScript")
+   public Map<String, Object> createTableScript(@RequestParam Map<String,String> params) { 
+       return tabSrv.selectTabList(params);
+   }   
+	
 }

@@ -2,42 +2,30 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.ExtMetaTabColList'
         
-    ,getSelectionModel: function () {
-        var grid = this.getView().down("grid");
-        return this.getView().down("grid").getSelectionModel();
-     }
-    ,onRefresh: function () {
-        this.extBtn(this.getView().down("button"));
-     }
-    ,toggleRowSelect: function(button, pressed) {
-        var sel = this.getSelectionModel();
-        console.log(pressed);
-        sel.setRowSelect(pressed);
-     }
-    ,toggleCellSelect: function(button, pressed) {
-        var sel = this.getSelectionModel();
-        sel.setCellSelect(pressed);
-     }
-    ,toggleColumnSelect: function(button, pressed) {
-        var sel = this.getSelectionModel();
-        sel.setColumnSelect(pressed);
-     }    
-    ,setGridHeight : function(obj){
-        obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
-     }
+    /**********************************************************
+     * Main Event
+     *********************************************************/    
 
+    /*********
+     * 추출
+     *********/    
     ,extBtn : function(btn) {
     	var view = this.getView(); var viewModel = view.getViewModel();
         var store = viewModel.getStore(view['xtype']);
         console.log("view['xtype']="+view['xtype']);
 
     	store.getProxy().setExtraParam("step","1");
+
         store.load({
             callback : function(data){
                 console.log(data);
             }
         });
      }
+
+    /*********
+     * 비교
+     *********/    
     ,cmpBtn : function(btn) {
         var view = this.getView(); 
         var viewModel = view.getViewModel();
@@ -45,6 +33,10 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
         store.getProxy().setExtraParam("step","2");
         store.load();
      }
+
+    /******************
+     * 테이블정보삭제
+     ******************/    
     ,tabDelBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel();
         var params = viewModel.getData();
@@ -106,8 +98,8 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
             ,success : function(res){
                 var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
-                    //Ext.Msg.alert("알림",result['msg']);
-                    Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    //Ext.Msg.alert("알림",result['usrMsg']);
+                    Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
                     //this.cmpBtn();
                 } else {
                     Ext.Msg.alert("알림",result['errUsrMsg']);
@@ -127,6 +119,10 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
 //        store.sync();        
      
      }
+    
+    /*********
+     * 반영
+     ********/    
     ,insBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel();
         var params = viewModel.getData();
@@ -138,8 +134,8 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
             success : function(res){
                 var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
-                    //Ext.Msg.alert("알림",result['msg']);
-                    Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    //Ext.Msg.alert("알림",result['usrMsg']);
+                    Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
                 } else {
                     Ext.Msg.alert("알림",result['errUsrMsg']);
                     //Ext.Msg.alert("알림",result['errSysMsg']);
@@ -149,4 +145,36 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
             }
         })     
      }
-});
+    
+    /**********************************************************
+     * Grid
+     *********************************************************/    
+    ,setGridHeight : function(obj){
+        obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
+     }
+    
+    /**********************************************************
+     * Clipboard
+     *********************************************************/    
+ //   ,getSelectionModel: function () {
+//        var grid = this.getView().down("grid");
+//        return this.getView().down("grid").getSelectionModel();
+//     }
+ //   ,onRefresh: function () {
+//        this.extBtn(this.getView().down("button"));
+//     }
+ //   ,toggleRowSelect: function(button, pressed) {
+//        var sel = this.getSelectionModel();
+//        sel.setRowSelect(pressed);
+//     }
+ //   ,toggleCellSelect: function(button, pressed) {
+//        var sel = this.getSelectionModel();
+//        sel.setCellSelect(pressed);
+//     }
+ //   ,toggleColumnSelect: function(button, pressed) {
+//        var sel = this.getSelectionModel();
+//        sel.setColumnSelect(pressed);
+//     }    
+     
+ });
+

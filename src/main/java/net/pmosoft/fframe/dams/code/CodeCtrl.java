@@ -20,16 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class CodeCtrl {
 
-	@Autowired
-	private CodeSrv codeSrv;
+    @Autowired
+    private CodeSrv codeSrv;
 
-	/**
-	 * 코드목록 조회
-	 */
-	@RequestMapping(value = "/dams/code/selectCodeList")
-	public Map<String, Object> selectCodeList(@RequestParam Map<String,String> params) {
-		return codeSrv.selectCodeList(params);
-	}
+    /**
+     * 코드목록 조회
+     */
+    @RequestMapping(value = "/dams/code/selectCodeList")
+    public Map<String, Object> selectCodeList(@RequestParam Map<String,String> params) {
+        return codeSrv.selectCodeList(params);
+    }
 
     /**
      * 코드등록목록 조회
@@ -37,7 +37,7 @@ public class CodeCtrl {
     @RequestMapping(value = "/dams/code/selectCodeRegList")
     public Map<String, Object> selectCodeRegList(@RequestParam Map<String, String> params) {
         return codeSrv.selectCodeRegList(params);
-    }	
+    }   
 
     /**
      * 코드콤보 조회
@@ -46,22 +46,55 @@ public class CodeCtrl {
     public Map<String, Object> selectCodeCombo(@RequestParam Map<String, String> params) {
         return codeSrv.selectCodeCombo(params);
     }   
-    
-    
-	/**
-	 * 코드 저장(Multi:json)
-	 */
-	@RequestMapping(value = "/dams/code/saveCode")
-	public Map<String, Object> saveCode(@RequestParam Map<String,String> params) {
-		return codeSrv.saveCode(params);
-	}
 
-	/**
-	 * 코드 삭제(Multi:json)
-	 */
-	@RequestMapping(value = "/dams/code/deleteCode")
-	public Map<String, Object> deleteCode(@RequestParam Map<String,String> params) {
-		return codeSrv.deleteCode(params);
-	}
+
+    /**
+     * 코드확장목록 조회
+     */
+    @RequestMapping(value = "/dams/code/selectCodeExtList")
+    public Map<String, Object> selectCodeExtList(@RequestParam Map<String, String> params) {
+        return codeSrv.selectCodeExtList(params);
+    }      
+    
+    /**
+     * 코드확장등록목록 조회
+     */
+    @RequestMapping(value = "/dams/code/selectCodeExtRegList")
+    public Map<String, Object> selectCodeExtRegList(@RequestParam Map<String, String> params) {
+        return codeSrv.selectCodeExtRegList(params);
+    }   
+    
+   
+    /**
+     * 코드 저장(Multi:json)
+     */
+    @RequestMapping(value = "/dams/code/saveCode")
+    public Map<String, Object> saveCode(@RequestParam Map<String,String> params) {
+        return codeSrv.saveCode(params);
+    }
+
+    /**
+     * 코드확장 저장(Multi:json)
+     */
+    @RequestMapping(value = "/dams/code/saveCodeExt")
+    public Map<String, Object> saveCodeExt(@RequestParam Map<String,String> params) {
+        return codeSrv.saveCodeExt(params);
+    }
+    
+    /**
+     * 코드 삭제(Multi:json)
+     */
+    @RequestMapping(value = "/dams/code/deleteCode")
+    public Map<String, Object> deleteCode(@RequestParam Map<String,String> params) {
+        return codeSrv.deleteCode(params);
+    }
+
+    /**
+     * 코드확장 삭제(Multi:json)
+     */
+    @RequestMapping(value = "/dams/code/deleteCodeExt")
+    public Map<String, Object> deleteCodeExt(@RequestParam Map<String,String> params) {
+        return codeSrv.deleteCodeExt(params);
+    }   
     
 }

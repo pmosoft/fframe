@@ -17,5 +17,11 @@ public class GensPgmCtrl {
     public Map<String, Object> genPgm(@RequestParam Map<String,String> params) {
         return gensPgmSrv.genPgm(params);
     }
+
+    @RequestMapping(value = "/gens/pgm/genPgm02")
+    public Map<String, Object> genPgm02(@RequestParam Map<String,String> params) {
+        return gensPgmSrv.genPgm02(params);
+    }
+    
     
 }

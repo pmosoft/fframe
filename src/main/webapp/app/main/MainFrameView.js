@@ -121,11 +121,16 @@ Ext.define('fframe.main.MainFrameView', {
                             text : '코드등록',
                             page : 'codeRegList',
                             leaf : true
-						},{
-							text : '코드그룹목록',
-							page : 'codeGrpList',
-							leaf : true
-						} ]
+                        },{
+                            text : '코드확장목록',
+                            page : 'codeExtList',
+                            leaf : true
+                        },{
+                            text : '코드확장등록',
+                            page : 'codeExtRegList',
+                            leaf : true
+						}
+						]
 					}, {
 						text : '메뉴',
 						iconCls : 'x-fa fa-shopping-cart',

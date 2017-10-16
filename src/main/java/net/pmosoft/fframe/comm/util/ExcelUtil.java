@@ -82,30 +82,36 @@ public class ExcelUtil {
         Sheet sheet1;
         Row row = null;
         Cell cell = null;
+
+        System.out.println("downListToExcel");        
         
         xlsWb = new HSSFWorkbook();
         sheet1 = xlsWb.createSheet("sheet1");
+        
+        System.out.println("list.size()="+list.size());
        
         //---------------------------------------
         // Data
         //---------------------------------------
-        for (int i = 0; i < list.size(); i++) {
-            row = sheet1.createRow(i);
-            int j=0;    
-            for (Map.Entry<String, String> entry : list.get(i).entrySet()) {
+        if(list.size()>0){
+            row = sheet1.createRow(0);
+            int j=0;
+            for (Map.Entry<String, String> entry : list.get(0).entrySet()) {
                 cell = row.createCell(j);
-                if(i==0) {
-                    cell.setCellValue(entry.getKey());
-                    //System.out.println("entry.getKey() : " + entry.getKey());
-                    
-                }  else { 
-                    cell.setCellValue(entry.getValue());
-                    //System.out.println("entry.getValue() : " + entry.getValue());
-                }
+                cell.setCellValue(entry.getKey());
                 j++;
-                //System.out.println("Item : " + entry.getKey() + " Count : " + entry.getValue());
             }        
-            System.out.println("i="+i);
+
+            for (int i = 0; i < list.size(); i++) {
+                row = sheet1.createRow(i+1);
+                j=0;    
+                for (Map.Entry<String, String> entry : list.get(i).entrySet()) {
+                    cell = row.createCell(j);
+                    cell.setCellValue(entry.getValue());
+                    j++;
+                    //System.out.println("Item : " + entry.getKey() + " Count : " + entry.getValue());
+                }        
+            }
         }
     
         //---------------------------------------
@@ -113,14 +119,25 @@ public class ExcelUtil {
         //---------------------------------------
         try {
             File xlsFile = new File(filePathNm);
+            
+            System.out.println(filePathNm);     
+            
+            System.out.println("downListToExcel1");        
+            
             FileOutputStream fileOut = new FileOutputStream(xlsFile);
-            xlsWb.write(fileOut);
-            fileOut.close();
+            System.out.println("downListToExcel2");        
 
-        } catch (FileNotFoundException fe) {
-            System.out.println("FileNotFoundException >> "+ fe.toString());
-        } catch (IOException ie) {
-            System.out.println("IOException >> "+ ie.toString());
+            xlsWb.write(fileOut);
+            System.out.println("downListToExcel3");        
+            
+            fileOut.close();
+            System.out.println("downListToExcel4");        
+
+
+        } catch (Exception e) {
+            System.out.println("downListToExcel5");        
+
+            e.printStackTrace();
         }
     }	
 	

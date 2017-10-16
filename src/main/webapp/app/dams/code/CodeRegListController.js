@@ -4,7 +4,11 @@ Ext.define('fframe.dams.code.CodeRegListController', {
         
     /**********************************************************
      * Main Event
-     *********************************************************/    
+     *********************************************************/
+        
+    /***************
+     * 신규
+     ***************/    
     ,initBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
         
@@ -32,16 +36,18 @@ Ext.define('fframe.dams.code.CodeRegListController', {
              ]
             );
             
-            //store.insert(0,newRecord);
-            store.add(newRecord);
+            store.insert(i,newRecord);
+            //store.add(newRecord);
             //Ext.Msg.alert("알림","200라인 생성되었습니다.");
         }    
      }
-    
+
+    /***************
+     * 저장
+     ***************/    
     ,saveBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
-        
-        var grid = this.lookupReference('codeRegListGrid');
+        var grid = btn.up(view['xtype']).down("grid");        
         var records = grid.getSelectionModel().getSelection();
         var datar = new Array(); var jsonDataEncode = "";
         for (var i = 0; i < records.length; i++) {
@@ -56,7 +62,7 @@ Ext.define('fframe.dams.code.CodeRegListController', {
             ,success : function(res){
                 var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
-                    Ext.toast({  html:result['msg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
                     
                     store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
                     store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
@@ -64,19 +70,60 @@ Ext.define('fframe.dams.code.CodeRegListController', {
                     
                 } else {
                     Ext.Msg.alert("알림",result['errUsrMsg']);
-                    //Ext.Msg.alert("알림",result['errSysMsg']);
+                    console.log("errSysMsg="+result['errSysMsg']);
                     return;
                 }
-                
             }
+            ,failure: function(form, res) {
+                var result = Ext.decode(res.responseText);
+                Ext.Msg.alert('알림', result['errUsrMsg']);
+                console.log("errSysMsg="+result['errSysMsg']);
+            }            
         })     
      }
-    
+
+    /***************
+     * 삭제
+     ***************/    
     ,delBtn : function(btn) {
-        //Ext.Msg.alert("알림","삭제");
-        //click : this.insBtn
+        var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
+        var grid = btn.up(view['xtype']).down("grid");        
+        var records = grid.getSelectionModel().getSelection();
+        var datar = new Array(); var jsonDataEncode = "";
+        for (var i = 0; i < records.length; i++) {
+            datar.push(records[i].data);
+        }
+        jsonDataEncode = Ext.util.JSON.encode(datar);
+
+        Ext.Ajax.request({
+             url : '/dams/code/deleteCode'
+            ,method : 'post'
+            ,params : { data:jsonDataEncode}
+            ,success : function(res){
+                var result = Ext.decode(res.responseText);
+                if(result['isSuccess']){
+                    Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    
+                    store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
+                    store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
+                    store.load();
+                } else {
+                    Ext.Msg.alert("알림",result['errUsrMsg']);
+                    console.log("errSysMsg="+result['errSysMsg']);
+                    return;
+                }
+             }
+            ,failure: function(form, res) {
+                var result = Ext.decode(res.responseText);
+                Ext.Msg.alert('알림', result['errUsrMsg']);
+                console.log("errSysMsg="+result['errSysMsg']);
+            }            
+        })     
      }
-    
+
+    /***************
+     * 조회
+     ***************/    
     ,selBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
         store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
@@ -89,6 +136,9 @@ Ext.define('fframe.dams.code.CodeRegListController', {
         }
     }
     
+    /***************
+     * 엑셀다운로드
+     ***************/    
     ,excelDownBtn : function(viewObj) {
         var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
         
@@ -115,6 +165,10 @@ Ext.define('fframe.dams.code.CodeRegListController', {
             }
         })     
      }
+    
+    /***************
+     * 엑셀업로드
+     ***************/    
     ,excelUpload : function(obj) {
         var grid = this.lookupReference('codeRegListGrid');
         var store = grid.getStore();
@@ -188,7 +242,7 @@ Ext.define('fframe.dams.code.CodeRegListController', {
     /**********************************************************
      * Clipboard
      *********************************************************/    
- //   ,getSelectionModel: function () {
+//    ,getSelectionModel: function () {
 //        var grid = this.getView().down("grid");
 //        return this.getView().down("grid").getSelectionModel();
 //     }

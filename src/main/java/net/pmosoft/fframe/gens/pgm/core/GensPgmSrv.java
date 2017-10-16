@@ -20,10 +20,9 @@ public class GensPgmSrv {
 
 
    public Map<String, Object> genPgm(Map<String,String> params){
-       System.out.println(params);
 
        Map<String, Object> result = new HashMap<String, Object>();
-       List<Map<String,Object>> list = null;
+
        try{
            
            GensPgmMgr gensPgmMgr = new GensPgmMgr();
@@ -32,11 +31,29 @@ public class GensPgmSrv {
            result.put("userMsg", "정상 처리되었습니다.");
        } catch (Exception e){
            result.put("isSuccess", false);
-           result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+           result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
            result.put("errSysrMsg", e.getMessage());
            e.printStackTrace();
        }
        return result;
    }
-	
+
+   public Map<String, Object> genPgm02(Map<String,String> params){
+       //System.out.println(params);
+
+       Map<String, Object> result = new HashMap<String, Object>();
+       try{
+           
+           GensPgmMgr02 gensPgmMgr02 = new GensPgmMgr02();
+           gensPgmMgr02.createPgmFile(params);
+           result.put("isSuccess", true);
+           result.put("userMsg", "정상 처리되었습니다.");
+       } catch (Exception e){
+           result.put("isSuccess", false);
+           result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+           result.put("errSysrMsg", e.getMessage());
+           e.printStackTrace();
+       }
+       return result;
+   }   
 }

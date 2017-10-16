@@ -28,7 +28,7 @@ public class TestTmplSrv {
 			result.put("data", list);
 		} catch (Exception e){
 			result.put("isSuccess", false);
-			result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+			result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
 			result.put("errSysrMsg", e.getMessage());
 			e.printStackTrace();
 		}
@@ -47,7 +47,7 @@ public class TestTmplSrv {
 
 		if(errors.size()>0){
 			result.put("isSuccess", false);
-			result.put("errUserMsg", errors.get("errUserMsg"));
+			result.put("errUsrMsg", errors.get("errUsrMsg"));
 			return result;
 		} else {
 			try{
@@ -55,14 +55,14 @@ public class TestTmplSrv {
 
 			    if  (testTmplDao.selectTestTmplCnt(params)==0) {
 			    	testTmplDao.insertTestTmpl(params);
-			    	result.put("msg", "입력 되었습니다");
+			    	result.put("usrMsg", "입력 되었습니다");
 			    } else {
 			    	testTmplDao.updateTestTmpl(params);
-			    	result.put("msg", "갱신 되었습니다");
+			    	result.put("usrMsg", "갱신 되었습니다");
 			    }
 			} catch (Exception e){
 				e.printStackTrace();
-				result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+				result.put("errUsrMsg", "시스템 장애가 발생되었습니다.");
 			}
 			return result;
 		}
@@ -77,13 +77,13 @@ public class TestTmplSrv {
 		if(errors.size()>0){
 			//model.addAttribute("tbTestTmpl", tbTestTmpl);
 			result.put("isSuccess", false);
-			result.put("errUserMsg", errors.get("errUserMsg"));
+			result.put("errUsrMsg", errors.get("errUsrMsg"));
 			System.out.println(result);
 			return result;
 		} else {
 			testTmplDao.deleteTestTmpl(params);
 			result.put("isSuccess", true);
-			result.put("msg", "삭제 되었습니다");
+			result.put("usrMsg", "삭제 되었습니다");
 			return result;
 		}
 	}

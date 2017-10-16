@@ -34,7 +34,7 @@ public class TermSrv {
             result.put("data", list);
         } catch (Exception e){
             result.put("isSuccess", false);
-            result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
             result.put("errSysrMsg", e.getMessage());
             e.printStackTrace();
         }
@@ -53,7 +53,7 @@ public class TermSrv {
 			result.put("data", list);
 		} catch (Exception e){
 			result.put("isSuccess", false);
-			result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+			result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
 			result.put("errSysrMsg", e.getMessage());
 			e.printStackTrace();
 		}
@@ -76,7 +76,7 @@ public class TermSrv {
 
 			//model.addAttribute("tbTerm", tbTerm);
 			result.put("isSuccess", false);
-			result.put("errUserMsg", errors.get("errUserMsg"));
+			result.put("errUsrMsg", errors.get("errUsrMsg"));
 			return result;
 		} else {
 			System.out.println("33");
@@ -86,14 +86,14 @@ public class TermSrv {
 
 			    if  (termDao.selectTermCnt(params)==0) {
 			    	termDao.insertTerm(params);
-			    	result.put("msg", "입력 되었습니다");
+			    	result.put("usrMsg", "입력 되었습니다");
 			    } else {
 			    	termDao.updateTerm(params);
-			    	result.put("msg", "갱신 되었습니다");
+			    	result.put("usrMsg", "갱신 되었습니다");
 			    }
 			} catch (Exception e){
 				e.printStackTrace();
-				result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+				result.put("errUsrMsg", "시스템 장애가 발생되었습니다.");
 				//result.put("errSysMsg", e.toString());
 			}
 			return result;
@@ -109,13 +109,13 @@ public class TermSrv {
 		if(errors.size()>0){
 			//model.addAttribute("tbTerm", tbTerm);
 			result.put("isSuccess", false);
-			result.put("errUserMsg", errors.get("errUserMsg"));
+			result.put("errUsrMsg", errors.get("errUsrMsg"));
 			System.out.println(result);
 			return result;
 		} else {
 			termDao.deleteTerm(params);
 			result.put("isSuccess", true);
-			result.put("msg", "삭제 되었습니다");
+			result.put("usrMsg", "삭제 되었습니다");
 			return result;
 		}
 	}
@@ -141,7 +141,7 @@ public class TermSrv {
             result.put("data", list);
         } catch (Exception e){
             result.put("isSuccess", false);
-            result.put("errUserMsg", "시스템 장애가 발생하였습니다");
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
             result.put("errSysrMsg", e.getMessage());
             e.printStackTrace();
         }
@@ -164,7 +164,7 @@ public class TermSrv {
             
             //model.addAttribute("tbPackInfo", tbPackInfo);
             result.put("isSuccess", false);
-            result.put("errUserMsg", errors.get("errUserMsg"));
+            result.put("errUsrMsg", errors.get("errUsrMsg"));
             return result;
         } else {
             System.out.println("33");
@@ -174,14 +174,14 @@ public class TermSrv {
                 
                 if  (termDao.selectPackInfoCnt(params)==0) {
                     termDao.insertPackInfo(params);
-                    result.put("msg", "입력 되었습니다");
+                    result.put("usrMsg", "입력 되었습니다");
                 } else {
                     termDao.updatePackInfo(params);
-                    result.put("msg", "갱신 되었습니다");
+                    result.put("usrMsg", "갱신 되었습니다");
                 }   
             } catch (Exception e){
                 e.printStackTrace();
-                result.put("errUserMsg", "시스템 장애가 발생되었습니다.");
+                result.put("errUsrMsg", "시스템 장애가 발생되었습니다.");
                 //result.put("errSysMsg", e.toString());
             }
             return result;
@@ -197,13 +197,13 @@ public class TermSrv {
         if(errors.size()>0){
             //model.addAttribute("tbPackInfo", tbPackInfo);
             result.put("isSuccess", false);
-            result.put("errUserMsg", errors.get("errUserMsg"));
+            result.put("errUsrMsg", errors.get("errUsrMsg"));
             System.out.println(result);
             return result;
         } else {     
             termDao.deletePackInfo(params);
             result.put("isSuccess", true);
-            result.put("msg", "삭제 되었습니다");
+            result.put("usrMsg", "삭제 되었습니다");
             return result;          
         }   
     }
