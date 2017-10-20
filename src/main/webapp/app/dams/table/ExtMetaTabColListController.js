@@ -6,6 +6,44 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
      * Main Event
      *********************************************************/    
 
+    ,comboLoad : function(obj){
+        var view = this.getView(); var viewModel = view.getViewModel();
+        var store = viewModel.getStore(view['xtype']);
+        var combo = view.down("#DB_CONN_CD");
+        combo.store.getProxy().setExtraParam("CD_ID_NM",combo.itemId);
+        combo.getStore().load({
+            callback : function(data,result,success){
+                if(success) {
+                    result = Ext.JSON.decode(result._response.responseText);
+                    data = result['data'];
+                    combo.setValue(data[0].CD_HNM);
+                    viewModel.set("dbInfo",data[0].CD_DESC);
+                }
+            }
+        })
+     }﻿        
+        
+    /****************
+     * 코드확장 조회
+     ****************/    
+    ,codeExt : function(obj) {
+        var view = this.getView(); var viewModel = view.getViewModel();
+        var store = viewModel.getStore(view['xtype']);
+        var combo = view.down("#DB_CONN_CD");
+        var records = combo.store.getRange(); 
+        var j = 0;
+        for (var i = 0; i < records.length; i++) {
+            if(records[i].data.CD == combo.value) {
+                viewModel.set("dbInfo",records[i].data.CD_DESC);
+            }
+        }
+        
+        //console.log("commCombo.store.getAt(0).get('value')"+commCombo.store.getAt(0).get('value'));
+        
+        
+     }
+        
+        
     /*********
      * 추출
      *********/    

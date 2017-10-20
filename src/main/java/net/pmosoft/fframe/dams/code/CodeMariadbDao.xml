@@ -142,9 +142,29 @@
 <select id="selectCodeCombo" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
 
     -- CodeDao.selectCodeRegList
-    SELECT   A.CD_HNM
-            ,A.CD_NM     
+    SELECT   A.CD_ID_NM    
+            ,A.CD_ID_HNM   
+            ,A.CD_ID_GRP_NM
+            ,A.CD
+            ,A.CD_NM       
+            ,A.CD_HNM      
+            ,A.CD_DESC      
+            ,A.CD_TY_CD
+            ,A.CD_STS_CD
+            ,B.CD_PARAM1_DESC
+            ,B.CD_PARAM1     
+            ,B.CD_PARAM2_DESC
+            ,B.CD_PARAM2     
+            ,B.CD_PARAM3_DESC
+            ,B.CD_PARAM3     
+            ,B.CD_PARAM4_DESC
+            ,B.CD_PARAM4     
+            ,B.CD_PARAM5_DESC
+            ,B.CD_PARAM5     
     FROM    TDACM00060 A
+            LEFT JOIN TDACM00061 B
+            ON  A.CD_ID_NM = B.CD_ID_NM
+            AND A.CD       = B.CD
     WHERE   A.CD_ID_NM = #{CD_ID_NM}
     ORDER BY A.CD_TY_CD,A.CD_ID_NM, A.CD
 </select>

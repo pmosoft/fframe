@@ -2,7 +2,8 @@ Ext.define('fframe.dams.table.ExtMetaTabColListModel', {
      extend: 'Ext.app.ViewModel'
     ,alias: 'viewmodel.ExtMetaTabColList'
     ,data : {
-    	searchValue : ''
+        searchValue : ''    	    
+       ,dbInfo : ''	    
      }
     ,stores : {
         ExtMetaTabColList : {
