@@ -5,51 +5,164 @@
 
 <mapper namespace="net.pmosoft.fframe.dams.table.TabDao">
 
+<!--*************************************************************************** 
+**
+**                               MetaTablCol
+**
+****************************************************************************-->
 
-<!--******************************************************** 
-**
-**                      MetaTablCol
-**
-*********************************************************-->
- 
+<!--**********************************
+**              조회
+***********************************-->
+
+
+<select id="selectMetaTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    -- TableDao.selectMetaTabColList
+    SELECT  '추출'                AS STS_NM
+           ,A.*
+    FROM   TDACM00081 A
+    ORDER BY A.TAB_NM,A.COL_ID    
+</select>
+
+
+<select id="selectCmpTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    -- TableDao.selectCmpTabColList
+    SELECT A.*
+    FROM  (
+            SELECT '신규' AS STS_NM,A.*
+            FROM   TDACM00081 A
+                   LEFT OUTER JOIN TDACM00080 B
+                   ON   A.DB_NM = B.DB_NM
+                   AND  A.OWNER = B.OWNER
+                   AND  A.TAB_NM = B.TAB_NM
+                   AND  A.COL_NM = B.COL_NM
+                   AND  A.DB_NM = #{datasource1}
+                   AND  A.OWNER = #{dbOwner}
+            WHERE  B.COL_NM IS NULL
+            UNION ALL
+            SELECT '삭제' AS STS_NM,A.*
+            FROM   TDACM00080 A
+                   LEFT OUTER JOIN TDACM00081 B
+                   ON   A.DB_NM = B.DB_NM
+                   AND  A.OWNER = B.OWNER
+                   AND  A.TAB_NM = B.TAB_NM
+                   AND  A.COL_NM = B.COL_NM
+                   AND  A.DB_NM = #{datasource}
+                   AND  A.OWNER = #{dbOwner}                         
+            WHERE  B.COL_NM IS NULL
+            UNION ALL
+            SELECT '타입변경' AS STS_NM,A.*
+            FROM   TDACM00081 A
+                   INNER JOIN TDACM00080 B
+                   ON   A.DB_NM = B.DB_NM
+                   AND  A.OWNER = B.OWNER
+                   AND  A.TAB_NM = B.TAB_NM
+                   AND  A.COL_NM = B.COL_NM
+                   AND  A.DB_NM = #{datasource}
+                   AND  A.OWNER = #{dbOwner}                         
+            WHERE  A.DATA_TYPE_DESC != B.DATA_TYPE_DESC
+            UNION ALL
+            SELECT '널변경' AS STS_NM,A.*
+            FROM   TDACM00081 A
+                   INNER JOIN TDACM00080 B
+                   ON   A.DB_NM = B.DB_NM
+                   AND  A.OWNER = B.OWNER
+                   AND  A.TAB_NM = B.TAB_NM
+                   AND  A.COL_NM = B.COL_NM
+                   AND  A.DATA_TYPE_DESC = A.DATA_TYPE_DESC
+                   AND  A.DB_NM = #{datasource}
+                   AND  A.OWNER = #{dbOwner}                         
+            WHERE  A.NULLABLE != B.NULLABLE
+          ) A      
+    ORDER BY A.TAB_NM,A.COL_ID    
+</select>
+
+
+<!--**********************************
+**              삽입
+***********************************-->
+
+<insert id="insertMetaTabCol" parameterType="java.util.HashMap">
+
+    -- TableDao.insertMetaTabCol
+    INSERT INTO TDACM00081
+    (
+         DB_NM         
+        ,OWNER         
+        ,TAB_NM        
+        ,COL_ID        
+        ,COL_NM        
+        ,COL_HNM       
+        ,DATA_TYPE_DESC
+        ,NULLABLE      
+        ,PK            
+        ,DATA_TYPE_NM  
+        ,LEN           
+        ,DECIMAL_CNT   
+        ,COL_DESC      
+        ,REG_DTM       
+        ,REG_USR_ID    
+        ,UPD_DTM       
+        ,UPD_USR_ID    
+    ) VALUES (
+         #{DB_NM}
+        ,#{OWNER}
+        ,#{TAB_NM}
+        ,#{COL_ID}
+        ,#{COL_NM}
+        ,#{COL_HNM}
+        ,#{DATA_TYPE_DESC}
+        ,#{NULLABLE}
+        ,#{PK}
+        ,#{DATA_TYPE_NM}
+        ,#{LEN}
+        ,#{DECIMAL_CNT}
+        ,#{COL_DESC}
+        ,curdate()
+        ,#{REG_USR_ID}
+        ,curdate()
+        ,#{UPD_USR_ID}
+    )
+</insert>
+
+<insert id="insertCmpTabCol" parameterType="java.util.HashMap">
+    -- TableDao.insertCmpTabCol
+    INSERT INTO TDACM00080 
+    SELECT A.*
+    FROM   TDACM00081 A
+           LEFT OUTER JOIN TDACM00080 B
+           ON   A.DB_NM = B.DB_NM
+           AND  A.OWNER = B.OWNER
+           AND  A.TAB_NM = B.TAB_NM
+           AND  A.COL_NM = B.COL_NM
+           AND  A.COL_HNM = B.COL_HNM
+           AND  A.DATA_TYPE_DESC = B.DATA_TYPE_DESC
+    WHERE  B.COL_NM IS NULL           
+    ORDER BY A.TAB_NM,A.COL_ID    
+</insert>
+
+<!--**********************************
+**              삭제
+***********************************-->
 <delete id="deleteMetaTabCol" parameterType="java.util.HashMap">
     -- TableDao.deleteMetaTabCol
     DELETE FROM TDACM00081
 </delete>
 
-<insert id="insertMetaTabColList" parameterType="java.util.HashMap">
-    -- TableDao.insertMetaTabCol
-    INSERT INTO TDACM00081 
-    SELECT 
-           'MARIADB'              AS DB_NM
-           ,UPPER(A.TABLE_SCHEMA) AS OWNER
-           ,UPPER(A.TABLE_NAME)   AS TAB_NM
-           ,A.ORDINAL_POSITION    AS COL_ID
-           ,A.COLUMN_NAME         AS COL_NM
-           ,A.COLUMN_COMMENT      AS COL_HNM
-           ,CASE WHEN UPPER(A.DATA_TYPE) = 'INT' THEN UPPER(A.DATA_TYPE)
-                 ELSE UPPER(A.COLUMN_TYPE)
-            END                   AS DATA_TYPE_DESC
-           ,CASE WHEN IS_NULLABLE = 'NO' THEN 'NOT NULL' ELSE 'NULL' END AS NULLABLE
-           ,''                    AS PK
-           ,UPPER(A.DATA_TYPE)    AS DATA_TYPE_NM
-           ,CASE WHEN UPPER(A.DATA_TYPE) IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH
-                 WHEN UPPER(A.DATA_TYPE) IN ('INT','NUMERIC') THEN A.NUMERIC_PRECISION
-            END                   AS LEN
-           ,A.NUMERIC_SCALE       AS DECIMAL_CNT 
-           ,' '                   AS COL_DESC
-           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS REG_DTM
-           ,''                    AS REG_USR_ID
-           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS UPD_DTM
-           ,''                    AS UPD_USR_ID
-    FROM   INFORMATION_SCHEMA.COLUMNS A 
-    WHERE  1=1
-    AND    A.TABLE_NAME LIKE 'T%0%'
-    AND    COLUMN_NAME LIKE '%'
-    ORDER BY A.TABLE_NAME,A.ORDINAL_POSITION    
-</insert>
 
-<insert id="insertMetaTab" parameterType="java.util.HashMap">
+<!--*************************************************************************** 
+**
+**                                MetaTabl
+**
+****************************************************************************-->
+
+<!--**********************************
+**              조회
+***********************************-->
+<!--**********************************
+**              삽입
+***********************************-->
+<insert id="insertMetaTabList" parameterType="java.util.HashMap">
     -- TableDao.insertMetaTab
     INSERT INTO TDACM00070 
     SELECT 
@@ -68,54 +181,22 @@
     ORDER BY A.TABLE_SCHEMA, A.TABLE_NAME    
 </insert>
 
- 
-
-<select id="selectMetaTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    -- TableDao.selectMetaTabColList
-    SELECT  '추출'               AS STS_NM
-           ,A.*
-    FROM TDACM00081 A 
-    ORDER BY A.TAB_NM,A.COL_ID    
-</select>
-
-<select id="selectCmpTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    -- TableDao.selectCmpTabColList
-    SELECT '신규' AS STS_NM,A.*
-    FROM   TDACM00081 A
-           LEFT OUTER JOIN TDACM00080 B
-           ON   A.DB_NM = B.DB_NM
-           AND  A.OWNER = B.OWNER
-           AND  A.TAB_NM = B.TAB_NM
-           AND  A.COL_NM = B.COL_NM
-           AND  A.DATA_TYPE_DESC = B.DATA_TYPE_DESC
-    WHERE  B.COL_NM IS NULL           
-    ORDER BY A.TAB_NM,A.COL_ID    
-</select>
-
-
-<insert id="insertCmpTabColList" parameterType="java.util.HashMap">
-    -- TableDao.insertMetaTabCol
-    INSERT INTO TDACM00080 
-    SELECT A.*
-    FROM   TDACM00081 A
-           LEFT OUTER JOIN TDACM00080 B
-           ON   A.DB_NM = B.DB_NM
-           AND  A.OWNER = B.OWNER
-           AND  A.TAB_NM = B.TAB_NM
-           AND  A.COL_NM = B.COL_NM
-           AND  A.COL_HNM = B.COL_HNM
-           AND  A.DATA_TYPE_DESC = B.DATA_TYPE_DESC
-    WHERE  B.COL_NM IS NULL           
-    ORDER BY A.TAB_NM,A.COL_ID    
-</insert>
+<!--*************************
+**         삭제
+**************************-->
+<delete id="deleteMetaTab" parameterType="java.util.HashMap">
+    -- TableDao.deleteMetaTab
+    DELETE FROM TDACM00071
+</delete>
 
 
  
-<!--******************************************************** 
+<!--*************************************************************************** 
 **
-**                        TablCol
+**                                TablCol
 **
-*********************************************************-->
+****************************************************************************-->
+
 
 <select id="selectTabColList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
     -- TableDao.selectTabColList
@@ -246,8 +327,8 @@
 
 <select id="selectTabList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
-	-- TableDao.selectTabList
-	SELECT  DB_NM
+    -- TableDao.selectTabList
+    SELECT  DB_NM
            ,OWNER
            ,TAB_NM
            ,TAB_HNM
@@ -256,7 +337,7 @@
            ,REG_USR_ID
            ,UPD_DTM
            ,UPD_USR_ID
-	FROM    TDACM00070 
+    FROM    TDACM00070 
     WHERE   1=1
     AND  (
           (#{searchKeyCombo} = 'DB_NM'        AND DB_NM        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
@@ -271,57 +352,57 @@
 </select>
 
 <select id="selectTabCnt" parameterType="java.util.HashMap" resultType="int">
-	-- TableDao.selectTabCnt
-	SELECT COUNT(*) CNT
-	FROM   TDACM00010
+    -- TableDao.selectTabCnt
+    SELECT COUNT(*) CNT
+    FROM   TDACM00010
     WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
 </select>
 
 <insert id="insertTab" parameterType="java.util.HashMap">
 
-	-- TableDao.insertTab
-	INSERT INTO TDACM00010
-	(
-	     PKG_FUL_NM
-		,PKG2_NM
-		,PKG3_NM
-		,PKG4_NM
-		,PKG_HNM
-		,PKG_DESC
-		,USE_YN
-		,REG_DTM
-		,REG_USR_ID
-		,UPD_DTM
-		,UPD_USR_ID
-	) VALUES (
+    -- TableDao.insertTab
+    INSERT INTO TDACM00010
+    (
+         PKG_FUL_NM
+        ,PKG2_NM
+        ,PKG3_NM
+        ,PKG4_NM
+        ,PKG_HNM
+        ,PKG_DESC
+        ,USE_YN
+        ,REG_DTM
+        ,REG_USR_ID
+        ,UPD_DTM
+        ,UPD_USR_ID
+    ) VALUES (
          #{PKG_FUL_NM}
-		,#{PKG2_NM}
-		,#{PKG3_NM}
-		,#{PKG4_NM}
-		,#{PKG_HNM}
-		,#{PKG_DESC}
-		,CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
-		,curdate()
-		,#{REG_USR_ID}
-		,curdate()
-		,#{UPD_USR_ID}
-	)
+        ,#{PKG2_NM}
+        ,#{PKG3_NM}
+        ,#{PKG4_NM}
+        ,#{PKG_HNM}
+        ,#{PKG_DESC}
+        ,CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
+        ,curdate()
+        ,#{REG_USR_ID}
+        ,curdate()
+        ,#{UPD_USR_ID}
+    )
 
 </insert>
 
 <update id="updateTab" parameterType="java.util.HashMap">
 
-	-- TableDao.updateTab
-	UPDATE TDACM00010
-	SET  PKG2_NM      = #{PKG2_NM}
-		,PKG3_NM      = #{PKG3_NM}
-		,PKG4_NM      = #{PKG4_NM}
-		,PKG_HNM      = #{PKG_HNM}
-		,PKG_DESC     = #{PKG_DESC}
-		,USE_YN       = CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
-		,UPD_DTM      = curdate()
-		,UPD_USR_ID  = #{UPD_USR_ID}
-	WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
+    -- TableDao.updateTab
+    UPDATE TDACM00010
+    SET  PKG2_NM      = #{PKG2_NM}
+        ,PKG3_NM      = #{PKG3_NM}
+        ,PKG4_NM      = #{PKG4_NM}
+        ,PKG_HNM      = #{PKG_HNM}
+        ,PKG_DESC     = #{PKG_DESC}
+        ,USE_YN       = CASE WHEN #{USE_YN} = 'true' THEN 'Y' ELSE 'N' END
+        ,UPD_DTM      = curdate()
+        ,UPD_USR_ID  = #{UPD_USR_ID}
+    WHERE  PKG_FUL_NM = #{PKG_FUL_NM}
 
 </update>
 

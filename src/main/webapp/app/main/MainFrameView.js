@@ -104,7 +104,7 @@ Ext.define('fframe.main.MainFrameView', {
                             leaf : true
                         },{
                             text : '테이블정보추출',
-                            page : 'ExtMetaTabColList',
+                            page : 'extMetaTabColList',
                             leaf : true
                         } ]
 					}, {

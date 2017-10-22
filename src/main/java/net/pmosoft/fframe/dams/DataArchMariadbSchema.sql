@@ -54,7 +54,27 @@ INSERT INTO TDACM00010 VALUES('user','ur','usr','user','유저','유저 관리 �
 
 SELECT * FROM TDACM00010
 ;
- 
+
+    SELECT   A.CD_ID_NM      
+            ,A.CD            
+            ,A.CD_PARAM1_DESC
+            ,A.CD_PARAM1     
+            ,A.CD_PARAM2_DESC
+            ,A.CD_PARAM2     
+            ,A.CD_PARAM3_DESC
+            ,A.CD_PARAM3     
+            ,A.CD_PARAM4_DESC
+            ,A.CD_PARAM4     
+            ,A.CD_PARAM5_DESC
+            ,A.CD_PARAM5     
+            ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00061 A
+    ORDER BY A.CD_ID_NM, A.CD
+    ;
+
 ﻿------------------------------
 -- 약어 정보
 ------------------------------
@@ -212,26 +232,79 @@ SELECT * FROM TDACM00060
 ;
 
 
+
+
 INSERT INTO SELECT * TDACM00060 FROM TDACM00060
 ;
 
 DROP TABLE TDACM00061
 ;
 
-CREATE TABLE TDACM00061 (
- CD_ID_NM       VARCHAR(20)  NOT NULL COMMENT '코드아이디명'     -- BIZ_CD
-,CD             VARCHAR(20)  NOT NULL COMMENT '코드'             -- 01
-,CD_PARAM_SEQ   INT          NOT NULL COMMENT '코드인자순번'
-,CD_PARAM       VARCHAR(50)      NULL COMMENT '코드인자'
-,CD_PARAM_DESC  VARCHAR(200)     NULL COMMENT '코드인자설명'
-,REG_DTM        VARCHAR(14)      NULL COMMENT '등록일시'
-,REG_USR_ID     VARCHAR(20)      NULL COMMENT '등록자'
-,UPD_DTM        VARCHAR(14)      NULL COMMENT '변경일시'
-,UPD_USR_ID     VARCHAR(20)      NULL COMMENT '변경자'
-,PRIMARY KEY(CD_ID_NM,CD,CD_PARAM_SEQ)
-) ENGINE=INNODB DEFAULT CHARSET=UTF8 COMMENT='코드확장'
+INSERT INTO TDACM00061 SELECT * FROM TDATM00161;
+
+CREATE TABLE TDATM00161 AS SELECT * FROM TDACM00061
 ;
- 
+
+SELECT * FROM TDATM00161
+;
+
+SELECT * FROM TDACM00061
+;
+
+
+
+    SELECT   A.CD_ID_NM      
+            ,A.CD    
+            ,B.CD_NM       
+            ,B.CD_HNM      
+            ,B.CD_DESC      
+            ,A.CD_PARAM1_DESC
+            ,A.CD_PARAM1     
+            ,A.CD_PARAM2_DESC
+            ,A.CD_PARAM2     
+            ,A.CD_PARAM3_DESC
+            ,A.CD_PARAM3     
+            ,A.CD_PARAM4_DESC
+            ,A.CD_PARAM4     
+            ,A.CD_PARAM5_DESC
+            ,A.CD_PARAM5
+            ,A.CD_PARAM6_DESC
+            ,A.CD_PARAM6     
+            ,A.CD_PARAM7_DESC
+            ,A.CD_PARAM7     
+            ,A.CD_PARAM8_DESC
+            ,A.CD_PARAM8     
+            ,A.CD_PARAM9_DESC
+            ,A.CD_PARAM9     
+            ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00061 A,
+            TDACM00060 B 
+    WHERE   A.CD_ID_NM = B.CD_ID_NM
+    AND     A.CD       = B.CD  
+    AND     A.CD_ID_NM = 'DYN_DAO_CD'
+    AND     A.CD       = (CASE WHEN NULL IS NULL THEN A.CD ELSE NULL END)
+    AND     B.CD_NM    = (CASE WHEN 'MARIADB' IS NULL THEN B.CD_NM ELSE 'MARIADB' END)
+    ORDER BY A.CD_ID_NM, A.CD
+ ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 CREATE TABLE TDACM00061 (
  CD_ID_NM        VARCHAR(20)  NOT NULL COMMENT '코드아이디명'     -- BIZ_CD
@@ -246,6 +319,14 @@ CREATE TABLE TDACM00061 (
 ,CD_PARAM4      VARCHAR(100)      NULL COMMENT '코드인자4'
 ,CD_PARAM5_DESC VARCHAR(200)      NULL COMMENT '코드인자5설명'
 ,CD_PARAM5      VARCHAR(100)      NULL COMMENT '코드인자5'
+,CD_PARAM6_DESC VARCHAR(200)      NULL COMMENT '코드인자6설명'
+,CD_PARAM6      VARCHAR(100)      NULL COMMENT '코드인자6'
+,CD_PARAM7_DESC VARCHAR(200)      NULL COMMENT '코드인자7설명'
+,CD_PARAM7      VARCHAR(100)      NULL COMMENT '코드인자7'
+,CD_PARAM8_DESC VARCHAR(200)      NULL COMMENT '코드인자8설명'
+,CD_PARAM8      VARCHAR(100)      NULL COMMENT '코드인자8'
+,CD_PARAM9_DESC VARCHAR(200)      NULL COMMENT '코드인자9설명'
+,CD_PARAM9      VARCHAR(100)      NULL COMMENT '코드인자9'
 ,REG_DTM         VARCHAR(14)      NULL COMMENT '등록일시'
 ,REG_USR_ID      VARCHAR(20)      NULL COMMENT '등록자'
 ,UPD_DTM         VARCHAR(14)      NULL COMMENT '변경일시'

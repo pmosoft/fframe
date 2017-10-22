@@ -81,6 +81,14 @@
             ,A.CD_PARAM4     
             ,A.CD_PARAM5_DESC
             ,A.CD_PARAM5     
+            ,A.CD_PARAM6_DESC
+            ,A.CD_PARAM6     
+            ,A.CD_PARAM7_DESC
+            ,A.CD_PARAM7     
+            ,A.CD_PARAM8_DESC
+            ,A.CD_PARAM8     
+            ,A.CD_PARAM9_DESC
+            ,A.CD_PARAM9     
             ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
             ,A.REG_USR_ID
             ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
@@ -111,6 +119,14 @@
             ,A.CD_PARAM4     
             ,A.CD_PARAM5_DESC
             ,A.CD_PARAM5     
+            ,A.CD_PARAM6_DESC
+            ,A.CD_PARAM6     
+            ,A.CD_PARAM7_DESC
+            ,A.CD_PARAM7     
+            ,A.CD_PARAM8_DESC
+            ,A.CD_PARAM8     
+            ,A.CD_PARAM9_DESC
+            ,A.CD_PARAM9     
             ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
             ,A.REG_USR_ID
             ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
@@ -121,6 +137,45 @@
     ORDER BY A.CD_ID_NM, A.CD
 </select>
 
+<select id="selectCodeExt" parameterType="java.util.HashMap" resultType="java.util.LinkedHashMap">
+
+    -- CodeDao.selectCodeExt
+    SELECT   A.CD_ID_NM      
+            ,A.CD    
+            ,B.CD_NM       
+            ,B.CD_HNM      
+            ,B.CD_DESC      
+            ,A.CD_PARAM1_DESC
+            ,A.CD_PARAM1     
+            ,A.CD_PARAM2_DESC
+            ,A.CD_PARAM2     
+            ,A.CD_PARAM3_DESC
+            ,A.CD_PARAM3     
+            ,A.CD_PARAM4_DESC
+            ,A.CD_PARAM4     
+            ,A.CD_PARAM5_DESC
+            ,A.CD_PARAM5
+            ,A.CD_PARAM6_DESC
+            ,A.CD_PARAM6     
+            ,A.CD_PARAM7_DESC
+            ,A.CD_PARAM7     
+            ,A.CD_PARAM8_DESC
+            ,A.CD_PARAM8     
+            ,A.CD_PARAM9_DESC
+            ,A.CD_PARAM9     
+            ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00061 A,
+            TDACM00060 B 
+    WHERE   A.CD_ID_NM = B.CD_ID_NM
+    AND     A.CD       = B.CD  
+    AND     A.CD_ID_NM = #{CD_ID_NM}
+    AND     A.CD       = (CASE WHEN #{CD} IS NULL THEN A.CD ELSE #{CD} END)
+    AND     B.CD_NM    = (CASE WHEN #{CD_NM} IS NULL THEN B.CD_NM ELSE #{CD_NM} END)
+    ORDER BY A.CD_ID_NM, A.CD
+</select>
 
 <select id="selectCodeCnt" parameterType="java.util.HashMap" resultType="int">
     -- CodeDao.selectCodeCnt
@@ -160,7 +215,15 @@
             ,B.CD_PARAM4_DESC
             ,B.CD_PARAM4     
             ,B.CD_PARAM5_DESC
-            ,B.CD_PARAM5     
+            ,B.CD_PARAM5
+            ,B.CD_PARAM6_DESC
+            ,B.CD_PARAM6     
+            ,B.CD_PARAM7_DESC
+            ,B.CD_PARAM7     
+            ,B.CD_PARAM8_DESC
+            ,B.CD_PARAM8     
+            ,B.CD_PARAM9_DESC
+            ,B.CD_PARAM9     
     FROM    TDACM00060 A
             LEFT JOIN TDACM00061 B
             ON  A.CD_ID_NM = B.CD_ID_NM
@@ -222,6 +285,14 @@
         ,CD_PARAM4     
         ,CD_PARAM5_DESC
         ,CD_PARAM5     
+        ,CD_PARAM6_DESC
+        ,CD_PARAM6     
+        ,CD_PARAM7_DESC
+        ,CD_PARAM7     
+        ,CD_PARAM8_DESC
+        ,CD_PARAM8     
+        ,CD_PARAM9_DESC
+        ,CD_PARAM9     
         ,REG_DTM      
         ,REG_USR_ID   
         ,UPD_DTM      
@@ -239,6 +310,14 @@
         ,#{CD_PARAM4}
         ,#{CD_PARAM5_DESC}
         ,#{CD_PARAM5}
+        ,#{CD_PARAM6_DESC}
+        ,#{CD_PARAM6}
+        ,#{CD_PARAM7_DESC}
+        ,#{CD_PARAM7}
+        ,#{CD_PARAM8_DESC}
+        ,#{CD_PARAM8}
+        ,#{CD_PARAM9_DESC}
+        ,#{CD_PARAM9}
         ,curdate()
         ,#{REG_USR_ID}
         ,curdate()
@@ -283,6 +362,14 @@
         ,CD_PARAM4          = #{CD_PARAM4}     
         ,CD_PARAM5_DESC     = #{CD_PARAM5_DESC}
         ,CD_PARAM5          = #{CD_PARAM5}     
+        ,CD_PARAM6_DESC     = #{CD_PARAM6_DESC}
+        ,CD_PARAM6          = #{CD_PARAM6}     
+        ,CD_PARAM7_DESC     = #{CD_PARAM7_DESC}
+        ,CD_PARAM7          = #{CD_PARAM7}     
+        ,CD_PARAM8_DESC     = #{CD_PARAM8_DESC}
+        ,CD_PARAM8          = #{CD_PARAM8}     
+        ,CD_PARAM9_DESC     = #{CD_PARAM9_DESC}
+        ,CD_PARAM9          = #{CD_PARAM9}     
         ,UPD_DTM       = curdate()
         ,UPD_USR_ID    = #{UPD_USR_ID}
     WHERE  CD_ID_NM = #{CD_ID_NM}

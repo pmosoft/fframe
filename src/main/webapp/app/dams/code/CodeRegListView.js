@@ -40,7 +40,7 @@ Ext.define('fframe.dams.code.CodeRegListView', {
         ,height : 50
         ,items : 
          [
-           {xtype:'commCombo', id:'CD_COL_UCD', width:150}
+           {xtype:'commCombo', id:'CD_UCD', width:150}
 //           {xtype:'combo' , name:'searchCondition' , width:150 , displayField:'key' , valueField:'value' 
 //                          , editable:false , queryMode:'local'
 //                          , bind:{value:'{searchKeyCombo}' , store:'{searchCombo}'}

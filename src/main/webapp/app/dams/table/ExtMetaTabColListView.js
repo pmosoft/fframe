@@ -24,16 +24,16 @@
 ********************************************************************************/
 Ext.define('fframe.dams.table.ExtMetaTabColListView', {
     extend     : 'Ext.form.Panel'
-   ,xtype      : 'ExtMetaTabColList'
-   ,controller : 'ExtMetaTabColList'
-   ,viewModel  : 'ExtMetaTabColList'
+   ,xtype      : 'extMetaTabColList'
+   ,controller : 'extMetaTabColList'
+   ,viewModel  : 'extMetaTabColList'
    ,listeners  : { resize : 'setGridHeight', boxready:'comboLoad'}
    //-------------------------------------------
    // titletoolbar
    //-------------------------------------------
    ,title : '메타 테이블 정보 추출'
    ,items :
-    [
+    [ 
      //-------------------------------------------
      // toolbar
      //-------------------------------------------
@@ -42,15 +42,14 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
        ,height : 50
        ,items : 
         [
-          {xtype:'component', html:['&nbsp;','DB선택','&nbsp;&nbsp;']}             
-
-         ,{xtype:'commCombo' , itemId:'DB_CONN_CD' ,value : 'FFRAME' , listeners:{select:'codeExt'}}
+          {xtype:'component' , html:['&nbsp;','DB선택','&nbsp;&nbsp;']}             
+         ,{xtype:'commCombo' , itemId:'DB_CONN_CD' , bind :{value:'{CD}'} , listeners:{select:'codeExt'}}
          ,{xtype:'textfield' , name:'DB_INFO' , width:250, bind :{value:'{dbInfo}'}}
          ,'->'
-         ,{xtype:'button' , text:'추출'           , handler:'extBtn'}
-         ,{xtype:'button' , text:'비교'           , handler:'cmpBtn'}
-         ,{xtype:'button' , text:'테이블정보삭제' , handler:'tabDelBtn'}
-         ,{xtype:'button' , text:'반영'           , handler:'insBtn'}
+         ,{xtype:'button' , text:'추출'           , handler:'extBtn' , iconCls:'x-fa fa-gift'}
+         ,{xtype:'button' , text:'비교'           , handler:'cmpBtn' , iconCls:'x-fa fa-check-square'}
+         ,{xtype:'button' , text:'테이블정보삭제' , handler:'tabDelBtn' , iconCls:'x-fa fa-remove'}
+         ,{xtype:'button' , text:'반영'           , handler:'insBtn' , iconCls:'x-fa fa-sign-in'}
         ]
      }
      
@@ -58,36 +57,40 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
    // grid
    //-------------------------------------------
    ,{
-       xtype      : 'grid'
+        xtype      : 'grid'
        ,plugins    : [{ptype:'gridexporter'}]              
        ,requires   : ['Ext.grid.selection.SpreadsheetModel' , 'Ext.grid.plugin.Clipboard']
        ,height     : 150 , frame: true , columnLines : true
        ,selModel   : {type:'spreadsheet' , columnSelect:true , checkboxSelect:true , pruneRemoved:false , extensible:'y'}         
        ,plugins    : ['clipboard' , 'selectionreplicator' , 'cellediting']  //{ptype:'cellediting',clicksToEdit:2}                
        ,viewConfig : {stripeRows:false} //,enableTextSelection: true,markDirty: false
-       ,forceFit: true           
-       ,columns :
-       [
-        {text:'상태'           , dataIndex:'STS_NM'         , style:'text-align:center' , flex:1}
-       ,{text:'DB명'           , dataIndex:'DB_NM'          , style:'text-align:center' , flex:1}
-       ,{text:'소유자'         , dataIndex:'OWNER'          , style:'text-align:center' , flex:1}
-       ,{text:'테이블명'       , dataIndex:'TAB_NM'         , style:'text-align:center' , flex:1}
-       ,{text:'컬럼아이디'     , dataIndex:'COL_ID'         , style:'text-align:center' , flex:1}
-       ,{text:'컬럼명'         , dataIndex:'COL_NM'         , style:'text-align:center' , flex:1}
-       ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'        , style:'text-align:center' , flex:1}
-       ,{text:'데이터타입설명' , dataIndex:'DATA_TYPE_DESC' , style:'text-align:center' , flex:1}
-       ,{text:'NULL'           , dataIndex:'NULLABLE'       , style:'text-align:center' , flex:1}
-       ,{text:'PK'             , dataIndex:'PK'             , style:'text-align:center' , flex:1}
-       ,{text:'데이터타입명'   , dataIndex:'DATA_TYPE_NM'   , style:'text-align:center' , flex:1}
-       ,{text:'길이'           , dataIndex:'LEN'            , style:'text-align:center' , flex:1}
-       ,{text:'소수점수'       , dataIndex:'DECIMAL_CNT'    , style:'text-align:center' , flex:1}
-       ,{text:'컬럼설명'       , dataIndex:'COL_DESC'       , style:'text-align:center' , flex:1}
-       ,{text:'등록일시'       , dataIndex:'REG_DTM'        , style:'text-align:center' , flex:1, hidden:true}
-       ,{text:'등록자'         , dataIndex:'REG_USR_ID'     , style:'text-align:center' , flex:1, hidden:true}
-       ,{text:'변경일시'       , dataIndex:'UPD_DTM'        , style:'text-align:center' , flex:1, hidden:true}
-       ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     , style:'text-align:center' , flex:1, hidden:true}
-       ]
-      ,bind:{store:'{ExtMetaTabColList}'}
+       //,resizable  : true         
+       ,columns    : {
+           defaults: {style:'text-align:center' , align:'left' , editor:{xtype:'textfield'}}             
+          ,items:   
+           [
+             {text:'상태'           , dataIndex:'STS_NM'         }
+            ,{text:'DB명'           , dataIndex:'DB_NM'          }
+            ,{text:'소유자'         , dataIndex:'OWNER'          }
+            ,{text:'테이블명'       , dataIndex:'TAB_NM'         }
+            ,{text:'컬럼아이디'     , dataIndex:'COL_ID'         }
+            ,{text:'컬럼명'         , dataIndex:'COL_NM'         }
+            ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'        }
+            ,{text:'데이터타입설명' , dataIndex:'DATA_TYPE_DESC' }
+            ,{text:'NULL'           , dataIndex:'NULLABLE'       }
+            ,{text:'PK'             , dataIndex:'PK'             }
+            ,{text:'데이터타입명'   , dataIndex:'DATA_TYPE_NM'   }
+            ,{text:'길이'           , dataIndex:'LEN'            }
+            ,{text:'소수점수'       , dataIndex:'DECIMAL_CNT'    }
+            ,{text:'컬럼설명'       , dataIndex:'COL_DESC'       }
+            ,{text:'등록일시'       , dataIndex:'REG_DTM'        }
+            ,{text:'등록자'         , dataIndex:'REG_USR_ID'     }
+            ,{text:'변경일시'       , dataIndex:'UPD_DTM'        }
+            ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     }
+           ]
+       }
+       
+      ,bind:{store:'{extMetaTabColList}'}
       //,bbar : {
       //     xtype : 'pagingtoolbar'
       //    ,plugins : 'ux-progressbarpager'

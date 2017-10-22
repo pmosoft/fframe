@@ -1,14 +1,16 @@
 Ext.define('fframe.dams.table.ExtMetaTabColListController', {
      extend : 'Ext.app.ViewController'
-    ,alias : 'controller.ExtMetaTabColList'
+    ,alias : 'controller.extMetaTabColList'
         
     /**********************************************************
      * Main Event
      *********************************************************/    
 
+    /****************
+     * 코드로드
+     ****************/    
     ,comboLoad : function(obj){
-        var view = this.getView(); var viewModel = view.getViewModel();
-        var store = viewModel.getStore(view['xtype']);
+        var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
         var combo = view.down("#DB_CONN_CD");
         combo.store.getProxy().setExtraParam("CD_ID_NM",combo.itemId);
         combo.getStore().load({
@@ -16,8 +18,21 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
                 if(success) {
                     result = Ext.JSON.decode(result._response.responseText);
                     data = result['data'];
-                    combo.setValue(data[0].CD_HNM);
-                    viewModel.set("dbInfo",data[0].CD_DESC);
+                    //combo.setValue(data[0].CD);                    
+                    for (var i = 0; i < data.length; i++) {
+                        if(data[i].CD == combo.value) {
+                            viewModel.set("CD_ID_NM"  ,data[i].CD_ID_NM);
+                            viewModel.set("CD"        ,data[i].CD);
+                            viewModel.set("dbInfo"    ,data[i].CD_DESC);
+                            viewModel.set("datasource",data[i].CD_PARAM1);
+                            viewModel.set("dbDriver"  ,data[i].CD_PARAM2);
+                            viewModel.set("dbConn"    ,data[i].CD_PARAM3);
+                            viewModel.set("dbUser"    ,data[i].CD_PARAM4);
+                            viewModel.set("dbPassword",data[i].CD_PARAM5);
+                            viewModel.set("dbType"    ,data[i].CD_PARAM6);
+                            viewModel.set("dbOwner"   ,data[i].CD_PARAM7);
+                        }
+                    }                    
                 }
             }
         })
@@ -32,27 +47,42 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
         var combo = view.down("#DB_CONN_CD");
         var records = combo.store.getRange(); 
         var j = 0;
+        console.log("combo.value="+combo.value);
         for (var i = 0; i < records.length; i++) {
             if(records[i].data.CD == combo.value) {
-                viewModel.set("dbInfo",records[i].data.CD_DESC);
+                viewModel.set("CD_ID_NM"  ,records[i].data.CD_ID_NM);
+                viewModel.set("CD"        ,records[i].data.CD);
+                viewModel.set("dbInfo"    ,records[i].data.CD_DESC);
+                viewModel.set("datasource",records[i].data.CD_PARAM1);
+                viewModel.set("dbDriver"  ,records[i].data.CD_PARAM2);
+                viewModel.set("dbConn"    ,records[i].data.CD_PARAM3);
+                viewModel.set("dbUser"    ,records[i].data.CD_PARAM4);
+                viewModel.set("dbPassword",records[i].data.CD_PARAM5);
+                viewModel.set("dbType"    ,records[i].data.CD_PARAM6);
+                viewModel.set("dbOwner"   ,records[i].data.CD_PARAM7);
             }
         }
-        
         //console.log("commCombo.store.getAt(0).get('value')"+commCombo.store.getAt(0).get('value'));
-        
-        
      }
-        
         
     /*********
      * 추출
      *********/    
     ,extBtn : function(btn) {
-    	var view = this.getView(); var viewModel = view.getViewModel();
-        var store = viewModel.getStore(view['xtype']);
+    	var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
         console.log("view['xtype']="+view['xtype']);
-
-    	store.getProxy().setExtraParam("step","1");
+        store.proxy.setUrl("/dams/table/selectMetaTabColList");
+        
+    	store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
+        store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
+        store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );
+        store.getProxy().setExtraParam("datasource",viewModel.data.datasource);
+        store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );
+        store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );
+        store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );
+        store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);
+        store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);
+        store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);
 
         store.load({
             callback : function(data){
@@ -65,10 +95,18 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
      * 비교
      *********/    
     ,cmpBtn : function(btn) {
-        var view = this.getView(); 
-        var viewModel = view.getViewModel();
-        var store = viewModel.getStore(view['xtype']);
-        store.getProxy().setExtraParam("step","2");
+        var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
+        store.proxy.setUrl("/dams/table/selectCmpTabColList");
+        store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
+        store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
+        store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );
+        store.getProxy().setExtraParam("datasource",viewModel.data.datasource);
+        store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );
+        store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );
+        store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );
+        store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);
+        store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);
+        store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);
         store.load();
      }
 
@@ -78,7 +116,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
     ,tabDelBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel();
         var params = viewModel.getData();
-        var grid = btn.up("ExtMetaTabColList").down("grid");
+        var grid = btn.up("extMetaTabColList").down("grid");
         console.log("grid="+grid);
         
         //var record = grid.getSelectionModel().getSelected();        
@@ -152,7 +190,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
 //        var view = this.getView(); 
 //        var viewModel = view.getViewModel();
 //        //var store = viewModel.getStore('DelTabColList');
-//        var store = viewModel.getStore('ExtMetaTabColList');
+//        var store = viewModel.getStore('extMetaTabColList');
 //        //store.load();
 //        store.sync();        
      
@@ -188,7 +226,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
      * Grid
      *********************************************************/    
     ,setGridHeight : function(obj){
-        obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
+        obj.down("grid").setHeight(Ext.Element.getViewportHeight()-180);
      }
     
     /**********************************************************

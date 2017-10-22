@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.pmosoft.fframe.FframeApplication;
+import net.pmosoft.fframe.dams.code.CodeDao;
 import net.pmosoft.fframe.dams.term.TermDao;
 
 import org.junit.Ignore;
@@ -23,7 +24,24 @@ public class TabTest {
 	@Autowired
 	private TabDao tabDao;
 
+    @Autowired
+    private CodeDao codeDao;
+
+	
+	
     @Test
+    public void selectMetaTabColSchema() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("CD_ID_NM", "DB_CONN_CD");        
+        params.put("CD", "01");        
+        tabSrv.selectMetaTabColList(params);
+        //codeDao.selectCodeExt(params);
+        
+        //tableDao.deleteMetaTabCol(params);        
+        //tableDao.insertMetaTabColList(params);        
+        //tableDao.selectMetaTabColList(params);        
+    }	
+    @Test @Ignore
     public void testTabProcess() {
         Map<String, String> params = new HashMap<String, String>();
         //tableDao.deleteMetaTabCol(params);        

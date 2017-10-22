@@ -21,47 +21,51 @@ public class TabCtrl {
 	
     /**********************************************************************************
     *
-    *                                ExtractTab
+    *                                ExtractTabCol
     *
     **********************************************************************************/
-
-   /**
-    * selectMetaTabList
-    */
-   @RequestMapping(value = "/dams/table/selectMetaTabList")
-   public Map<String, Object> selectMetaTabList(@RequestParam Map<String,String> params) {
-       System.out.println("selectMetaTabList");
-       return tabSrv.selectMetaTabList(params);
-   }
 	
-   /**
-    * 메타테이블정보를 읽어서 메타임시테이블에 저장하고 메타임시테이블을 조회한다.
-    * step 1
-    */
-   @RequestMapping(value = "/dams/table/selectMetaTabColList")
-   public Map<String, Object> selectMetaTabColList(@RequestParam Map<String,String> params) { 
-       System.out.println("selectMetaTabColList");
-       return tabSrv.selectMetaTabColList(params);
-   }
+    /**
+     * (추출) 입력 DB정보로 접속하여 메타테이블정보를 읽어서 메타임시테이블 삭제후 저장하고 
+     * 메타임시테이블 정보를 을 조회한다.
+     */
+    @RequestMapping(value = "/dams/table/selectMetaTabColList")
+    public Map<String, Object> selectMetaTabColList(@RequestParam Map<String,String> params) { 
+        System.out.println("selectMetaTabColList");
+        return tabSrv.selectMetaTabColList(params);
+    }
+    
+    /**
+     * (비교) 메타임시테이블과 컬럼정보 테이블과 비교한 정보를 조회한다.
+     */
+    @RequestMapping(value = "/dams/table/selectCmpTabColList")
+    public Map<String, Object> selectCmpTabColList(@RequestParam Map<String,String> params) { 
+        return tabSrv.selectCmpTabColList(params);
+    }
 
-   /**
-    * 메타임시테이블과 컬럼정보 테이블과 비교한 정보를 조회한다.
-    * extjs에서 store분리 방법 미파악으로 selectMetaTabColList으로 임시적으로 처리
-    * step 2
-    */
-   @RequestMapping(value = "/dams/table/selectCmpTabColList")
-   public Map<String, Object> selectCmpTabColList(@RequestParam Map<String,String> params) { 
-       System.out.println("selectMetaTabColList");
-       return tabSrv.selectMetaTabColList(params);
-   }
-   
+    /**
+     * (반영) 신규-변경 테이블정보를 반영한다
+     */
+    @RequestMapping(value = "/dams/table/insertCmpTabColList")
+    public Map<String, Object> insertCmpTabColList(@RequestParam Map<String,String> params) { 
+        return tabSrv.insertCmpTabColList(params);
+    }
 
-   @RequestMapping(value = "/dams/table/insertCmpTabColList")
-   public Map<String, Object> insertCmpTabColList(@RequestParam Map<String,String> params) { 
-       return tabSrv.insertCmpTabColList(params);
-   }
-      
-   
+    /**********************************************************************************
+    *
+    *                                ExtractTabCol
+    *
+    **********************************************************************************/
+     
+//    /**
+//     * selectMetaTabList
+//     */
+//    @RequestMapping(value = "/dams/table/selectMetaTabList")
+//    public Map<String, Object> selectMetaTabList(@RequestParam Map<String,String> params) {
+//        System.out.println("selectMetaTabList");
+//        return tabSrv.selectMetaTabList(params);
+//    }
+     
 	
     /**********************************************************************************
     *
@@ -69,29 +73,29 @@ public class TabCtrl {
     *
     **********************************************************************************/
 
-   /**
-    * selectcTabColList
-    */
-   @RequestMapping(value = "/dams/table/selectTabColList")
-   public Map<String, Object> selectTabColList(@RequestParam Map<String,String> params) { 
-       return tabSrv.selectTabColList(params);
-   }
-
-   /**
-    * saveTabCol
-    */
-   @RequestMapping(value = "/dams/table/saveTabCol")
-   public Map<String, Object> saveTabCol(@RequestParam String params) {
-       return tabSrv.saveTabCol(params);
-   }
-
-   /**
-    * deleteTabCol
-    */
-   @RequestMapping(value = "/dams/table/deleteTabCol")
-   public Map<String, Object> deleteTabCol(@RequestParam Map<String,String> params) {
-       return tabSrv.deleteTabCol(params);
-   }
+    /**
+     * selectcTabColList
+     */
+    @RequestMapping(value = "/dams/table/selectTabColList")
+    public Map<String, Object> selectTabColList(@RequestParam Map<String,String> params) { 
+        return tabSrv.selectTabColList(params);
+    }
+    
+    /**
+     * saveTabCol
+     */
+    @RequestMapping(value = "/dams/table/saveTabCol")
+    public Map<String, Object> saveTabCol(@RequestParam String params) {
+        return tabSrv.saveTabCol(params);
+    }
+    
+    /**
+     * deleteTabCol
+     */
+    @RequestMapping(value = "/dams/table/deleteTabCol")
+    public Map<String, Object> deleteTabCol(@RequestParam Map<String,String> params) {
+        return tabSrv.deleteTabCol(params);
+    }
 	
 	
 	/**********************************************************************************
@@ -131,20 +135,20 @@ public class TabCtrl {
     *
     **********************************************************************************/
 
-   /**
-    * extLodMetaTabInfoSchema
-    */
-   @RequestMapping(value = "/dams/table/extLodMetaTabInfoSchema")
-   public Map<String, Object> extLodMetaTabInfoSchema(@RequestParam Map<String,String> params) { 
-       return tabSrv.selectTabList(params);
-   }
-
-   /**
-    * createTableScript
-    */
-   @RequestMapping(value = "/dams/table/createTableScript")
-   public Map<String, Object> createTableScript(@RequestParam Map<String,String> params) { 
-       return tabSrv.selectTabList(params);
-   }   
+    /**
+     * extLodMetaTabInfoSchema
+     */
+    @RequestMapping(value = "/dams/table/extLodMetaTabInfoSchema")
+    public Map<String, Object> extLodMetaTabInfoSchema(@RequestParam Map<String,String> params) { 
+        return tabSrv.selectTabList(params);
+    }
+ 
+    /**
+     * createTableScript
+     */
+    @RequestMapping(value = "/dams/table/createTableScript")
+    public Map<String, Object> createTableScript(@RequestParam Map<String,String> params) { 
+        return tabSrv.selectTabList(params);
+    }   
 	
 }

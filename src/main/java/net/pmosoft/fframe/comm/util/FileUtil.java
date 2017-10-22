@@ -194,5 +194,33 @@ public class FileUtil {
 
         return src;
     }   
+
+    /*
+     * 파일을 읽어서 리스트로 반환
+     * */
+    public ArrayList<String> readFileList(String file_path) {
+        ArrayList<String> al = new ArrayList<String>();
+        FileInputStream from = null;
+        BufferedReader br = null;
+        File f = new File(file_path);
+        if(!f.exists()) System.out.println("No exists File");
+        if(!f.canRead()) System.out.println("Read protected");
+        
+        try {
+            from = new FileInputStream(f);
+            br = new BufferedReader(new InputStreamReader(from));
+            
+            while( br.ready()) {
+                al.add(br.readLine());
+            }
+            System.out.println("al="+al.get(1));
+        } catch(Exception ex){
+            System.out.println("selectFileResult error: " + ex);
+        } finally {
+            if(from!=null) try{from.close();}catch(IOException e){}
+            if(br!=null) try{br.close();}catch(IOException e){}            
+        }
+        return al;
+    }    
     
 }

@@ -34,7 +34,7 @@ Ext.define('fframe.dams.table.TabListView', {
       ,height : 50
       ,items : 
        [ 
-         //{xtype:'commCombo', id:'CD_COL_UCD', width:150, bind:{store:'{searchCombo}',value:'{searchKeyCombo}'}}
+         //{xtype:'commCombo', id:'CD_UCD', width:150, bind:{store:'{searchCombo}',value:'{searchKeyCombo}'}}
          {xtype:'commCombo2' , name:'searchCondition' , width:150 , bind:{value:'{searchKeyCombo}' , store:'{searchCombo}'}}
         ,{xtype:'textfield' , name:'searchValue' , width:200 , emptyText:'검색어를 입력하세요'
              , bind :{value:'{searchValue}'}  , enableKeyEvents: true 
