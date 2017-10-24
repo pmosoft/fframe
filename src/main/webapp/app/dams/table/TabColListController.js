@@ -43,6 +43,7 @@ Ext.define('fframe.dams.table.TabColListController', {
             if(records[i].data.CD == combo.value) {
                 viewModel.set("CD_ID_NM"  ,records[i].data.CD_ID_NM);
                 viewModel.set("CD"        ,records[i].data.CD);
+                viewModel.set("searchKeyCombo" ,records[i].data.CD_NM);
             }
         }
         //console.log("commCombo.store.getAt(0).get('value')"+commCombo.store.getAt(0).get('value'));

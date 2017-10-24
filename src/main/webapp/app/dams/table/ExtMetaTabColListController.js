@@ -60,6 +60,8 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
                 viewModel.set("dbPassword",records[i].data.CD_PARAM5);
                 viewModel.set("dbType"    ,records[i].data.CD_PARAM6);
                 viewModel.set("dbOwner"   ,records[i].data.CD_PARAM7);
+                viewModel.set("searchKeyCombo" ,records[i].data.CD_NM);
+                
             }
         }
         //console.log("commCombo.store.getAt(0).get('value')"+commCombo.store.getAt(0).get('value'));

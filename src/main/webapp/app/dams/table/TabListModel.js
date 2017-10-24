@@ -1,12 +1,15 @@
 Ext.define('fframe.dams.table.TabListModel', {
      extend: 'Ext.app.ViewModel'
-    ,alias: 'viewmodel.TabList'
+    ,alias: 'viewmodel.tabList'
     ,data : {
-        searchKeyCombo : 'TAB_HNM'
-       ,searchValue : ''    
+        CD_ID_NM   : ''        
+       ,CD         : '04'        
+       ,CD_NM      : 'TAB_HNM'
+       ,searchKeyCombo : 'TAB_HNM'
+       ,searchValue : ''
      }
     ,stores : {
-        TabList : {
+        tabList : {
              fields : [
                         'DB_NM'
                        ,'OWNER'

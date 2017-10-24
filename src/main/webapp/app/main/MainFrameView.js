@@ -100,7 +100,7 @@ Ext.define('fframe.main.MainFrameView', {
                             leaf : true
                         },{
                             text : '테이블목록',
-                            page : 'TabList',
+                            page : 'tabList',
                             leaf : true
                         },{
                             text : '테이블정보추출',
@@ -142,22 +142,18 @@ Ext.define('fframe.main.MainFrameView', {
 							leaf : true
 						} ]
                     }, {
-                        text : '탬플릿',
+                        text : '소스생성',
                         iconCls : 'x-fa fa-shopping-cart',
                         expanded : true,
                         selectable : false,
                         children : [ 
                         {
-                            text : '탬플릿생성',
-                            page : 'TmplPgmReg',
+                            text : '소스복사',
+                            page : 'genPgmByCopy',
                             leaf : true
                         },{
-                            text : '탬플릿결과',
-                            page : 'TmplPgmReg',
-                            leaf : true
-                        },{
-                            text : '테스트탬플릿',
-                            page : 'TestTmplList',
+                            text : '탬플릿이용',
+                            page : 'genPgmByTmpl',
                             leaf : true
                         }]
 					}, {

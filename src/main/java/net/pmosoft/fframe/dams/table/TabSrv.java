@@ -51,20 +51,32 @@ public class TabSrv {
             
             List<Map<String,Object>> list = null;
                 
-            // 1단계 : DB 메타 테이블정보 조회
+            // 1.1단계 : DB 메타 테이블컬럼정보 조회
             //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
-            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();
+            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
             List<Map<String,Object>> listMeta = tabDaoFactory.selectMetaTabColList(params);
 
-            // 2단계 : 메타테이블정보 삭제                
+            // 1.2단계 : 메타테이블컬럼정보 삭제                
             tabDao.deleteMetaTabCol(params);
+
             
-            // 3단계 : 메타테이블정보 삽입                
+            // 1.3단계 : 메타테이블컬럼정보 삽입                
             for (int i = 0; i  < listMeta.size(); i++) {
                 tabDao.insertMetaTabCol(listMeta.get(i));
             }
 
-            // 4단계 : 메타테이블정보 조회                
+            // 2.1단계 : 메타테이블정보 삭제                
+            tabDao.deleteMetaTab(params);
+
+            // 2.2단계 : 메타테이블정보 조회                
+            List<Map<String,Object>> listMeta2 = tabDaoFactory.selectMetaTabList(params);
+
+            // 2.3단계 : 메타테이블정보 삽입                
+            for (int i = 0; i  < listMeta2.size(); i++) {
+                tabDao.insertMetaTab(listMeta2.get(i));
+            }
+            
+            // 3단계 : 메타테이블컬럼정보 조회                
             list = tabDao.selectMetaTabColList(params);
             
             result.put("isSuccess", true);
@@ -141,6 +153,8 @@ public class TabSrv {
         
         try{
             tabDao.insertCmpTabCol(params);
+            tabDao.insertCmpTab(params);
+            
             result.put("isSuccess", true);
             result.put("usrMsg", "입력 되었습니다");
         } catch (Exception e){

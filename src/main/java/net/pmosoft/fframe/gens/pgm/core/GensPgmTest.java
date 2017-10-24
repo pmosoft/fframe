@@ -30,7 +30,7 @@ public class GensPgmTest {
     @Test
     public void testGensPgmProcess() {
         Map<String, String> params = new HashMap<String, String>();
-        gensPgmSrv.genPgm(params);
+        gensPgmSrv.genPgmByTmpl(params);
     }
 
 }

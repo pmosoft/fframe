@@ -13,15 +13,14 @@ public class GensPgmCtrl {
     @Autowired
     private GensPgmSrv gensPgmSrv;
 
-    @RequestMapping(value = "/gens/pgm/genPgm")
-    public Map<String, Object> genPgm(@RequestParam Map<String,String> params) {
-        return gensPgmSrv.genPgm(params);
+    @RequestMapping(value = "/gens/pgm/genPgmByTmpl")
+    public Map<String, Object> genPgmByTmpl(@RequestParam Map<String,String> params) {
+        return gensPgmSrv.genPgmByTmpl(params);
     }
 
-    @RequestMapping(value = "/gens/pgm/genPgm02")
-    public Map<String, Object> genPgm02(@RequestParam Map<String,String> params) {
-        return gensPgmSrv.genPgm02(params);
+    @RequestMapping(value = "/gens/pgm/genPgmByCopy")
+    public Map<String, Object> genPgmByCopy(@RequestParam Map<String,String> params) {
+        return gensPgmSrv.genPgmByCopy(params);
     }
-    
     
 }

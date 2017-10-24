@@ -141,6 +141,20 @@
     ORDER BY A.TAB_NM,A.COL_ID    
 </insert>
 
+<insert id="insertCmpTab" parameterType="java.util.HashMap">
+    -- TableDao.insertCmpTabCol
+    INSERT INTO TDACM00070 
+    SELECT A.*
+    FROM   TDACM00071 A
+           LEFT OUTER JOIN TDACM00070 B
+           ON   A.DB_NM = B.DB_NM
+           AND  A.OWNER = B.OWNER
+           AND  A.TAB_NM = B.TAB_NM
+    WHERE  B.TAB_NM IS NULL           
+    ORDER BY A.TAB_NM    
+</insert>
+
+
 <!--**********************************
 **              삭제
 ***********************************-->
@@ -162,23 +176,31 @@
 <!--**********************************
 **              삽입
 ***********************************-->
-<insert id="insertMetaTabList" parameterType="java.util.HashMap">
+<insert id="insertMetaTab" parameterType="java.util.HashMap">
     -- TableDao.insertMetaTab
-    INSERT INTO TDACM00070 
-    SELECT 
-           'MARIADB'               AS DB_NM
-           ,UPPER(A.TABLE_SCHEMA)  AS OWNER
-           ,UPPER(A.TABLE_NAME)    AS TAB_NM
-           ,UPPER(A.TABLE_COMMENT) AS TAB_HNM
-           ,''                     AS TAB_DESC
-           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS REG_DTM
-           ,''                    AS REG_USR_ID
-           ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS UPD_DTM
-           ,''                    AS UPD_USR_ID
-    FROM   INFORMATION_SCHEMA.TABLES A 
-    WHERE  1=1
-    AND    A.TABLE_NAME LIKE 'T%0%'
-    ORDER BY A.TABLE_SCHEMA, A.TABLE_NAME    
+    INSERT INTO TDACM00071                                                                                                                                                                                             
+    (                                                                                                                                                                                                                  
+         DB_NM                                                                                                                                                                                                         
+        ,OWNER                                                                                                                                                                                                         
+        ,TAB_NM                                                                                                                                                                                                        
+        ,TAB_HNM                                                                                                                                                                                                       
+        ,TAB_DESC                                                                                                                                                                                                      
+        ,REG_DTM                                                                                                                                                                                                       
+        ,REG_USR_ID                                                                                                                                                                                                    
+        ,UPD_DTM                                                                                                                                                                                                       
+        ,UPD_USR_ID                                                                                                                                                                                                    
+    ) VALUES (                                                                                                                                                                                                         
+         #{DB_NM}                                                                                                                                                                                                      
+        ,#{OWNER}                                                                                                                                                                                                      
+        ,#{TAB_NM}                                                                                                                                                                                                     
+        ,#{TAB_HNM}                                                                                                                                                                                                    
+        ,#{TAB_DESC}                                                                                                                                                                                                   
+        ,curdate()                                                                                                                                                                                                     
+        ,#{REG_USR_ID}                                                                                                                                                                                                 
+        ,curdate()                                                                                                                                                                                                     
+        ,#{UPD_USR_ID}                                                                                                                                                                                                 
+    )
+        
 </insert>
 
 <!--*************************
@@ -319,11 +341,11 @@
 </update>
 
 
-<!-- 
-
-                              Table
-
- -->
+<!--*************************************************************************** 
+**
+**                                 Tab
+**
+****************************************************************************-->
 
 <select id="selectTabList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 

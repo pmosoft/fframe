@@ -1,12 +1,14 @@
-Ext.define('fframe.gens.core.TmplPgmRegModel', {
+Ext.define('fframe.gens.GenPgmByCopyModel', {
      extend : 'Ext.app.ViewModel'
-    ,alias  : 'viewmodel.TmplPgmReg'
+    ,alias  : 'viewmodel.genPgmByCopy'
     ,data   : {
-        packNm        : "net.pmosoft.fframe.dams.code"
-       ,pgmNm         : "TestList"
-       ,tmplCd        : "grid01"
-       ,isFrontExe    : true
-       ,isBackExe     : true
+         srcPackNm     : "net.pmosoft.fframe.dams.code"
+        ,srcPgmNm      : "TestList"
+        ,tarPackNm     : "net.pmosoft.fframe.dams.code"
+        ,tarPgmNm      : "TestList"
+        ,tmplCd        : "grid01"
+        ,isFrontExe    : true
+        ,isBackExe     : true
      }
 });
 

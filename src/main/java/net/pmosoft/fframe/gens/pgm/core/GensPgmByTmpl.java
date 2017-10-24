@@ -14,7 +14,7 @@ import net.pmosoft.fframe.comm.util.FileUtil;
 import net.pmosoft.fframe.comm.util.StringUtil;
 
 
-public class GensPgmMgr {
+public class GensPgmByTmpl {
 
     /******************************************
      * 글로벌 프로퍼티
@@ -51,13 +51,13 @@ public class GensPgmMgr {
     boolean isBack = false;
     
     public static void main(String[] args) {
-        GensPgmMgr gensPgmMgr = new GensPgmMgr();
+        GensPgmByTmpl gensPgmByTmpl = new GensPgmByTmpl();
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("tmplCd", "grid01");
         params.put("packNm", "net.pmosoft.fframe.gens.test");
         params.put("pgmNm" , "testTmpl");
-        gensPgmMgr.createPgmFile(params);
+        gensPgmByTmpl.createPgmFile(params);
     }
 
 

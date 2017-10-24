@@ -19,14 +19,14 @@ public class GensPgmSrv {
 //	private GensPgmValidatorSrv gensPgmValidatorSrv;
 
 
-   public Map<String, Object> genPgm(Map<String,String> params){
+   public Map<String, Object> genPgmByTmpl(Map<String,String> params){
 
        Map<String, Object> result = new HashMap<String, Object>();
 
        try{
            
-           GensPgmMgr gensPgmMgr = new GensPgmMgr();
-           gensPgmMgr.createPgmFile(params);
+           GensPgmByTmpl gensPgmByTmpl = new GensPgmByTmpl();
+           gensPgmByTmpl.createPgmFile(params);
            result.put("isSuccess", true);
            result.put("userMsg", "정상 처리되었습니다.");
        } catch (Exception e){
@@ -38,14 +38,14 @@ public class GensPgmSrv {
        return result;
    }
 
-   public Map<String, Object> genPgm02(Map<String,String> params){
+   public Map<String, Object> genPgmByCopy(Map<String,String> params){
        //System.out.println(params);
 
        Map<String, Object> result = new HashMap<String, Object>();
        try{
            
-           GensPgmMgr02 gensPgmMgr02 = new GensPgmMgr02();
-           gensPgmMgr02.createPgmFile(params);
+           GensPgmByCopy gensPgmByCopy = new GensPgmByCopy();
+           gensPgmByCopy.createPgmFile(params);
            result.put("isSuccess", true);
            result.put("userMsg", "정상 처리되었습니다.");
        } catch (Exception e){
