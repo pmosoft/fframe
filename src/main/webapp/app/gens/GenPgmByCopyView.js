@@ -77,7 +77,7 @@ Ext.define('fframe.gens.GenPgmByCopyView', {
          ,name       : 'genResult'
          ,height     : 400    
       }]
-    ,buttons: [
+    ,buttons:[
                {name:'saveBtn' , text:'생성'  , handler:'saveBtn'}
              ]
     
