@@ -38,8 +38,8 @@ Ext.define('fframe.gens.GenPgmByCopyView', {
           [
             {xtype:'displayfield' , value:'프로그램 종류  ', width:100}
            ,{xtype:'commCombo' , itemId:'SRC_COPY_TY_CD' , bind :{value:'{CD}'} , listeners:{select:'codeExt'} , width:150}
-           ,{xtype:'displayfield' , value:'  ' , width:20}
-           ,{xtype:'textfield' , name:'SRC_COPY_TY_DESC' , bind :{value:'{CD_DESC}'} , width:450}
+           ,{xtype:'displayfield' , value:'  ' , width:10}
+           ,{xtype:'textfield' , name:'SRC_COPY_TY_DESC' , bind :{value:'{CD_DESC}'} , width:480}
          ] 
         }      
       ,{
