@@ -23,13 +23,26 @@ Ext.define('fframe.gens.GenPgmByCopyView', {
     ,buttonAlign : 'center'
     ,bodyPadding : 10
     ,defaults    : {anchor:'100%' , labelWidth:100}    
-    ,listeners   : {}
+    ,listeners  : { boxready:'comboLoad'}
     ,items:
      [ 
       //-------------------------------------------
       // toolbar
       //-------------------------------------------
-       {
+      ,{xtype : 'fieldcontainer' , layout: 'hbox' , height : 10}    
+      ,{
+          xtype : 'fieldcontainer'
+         ,layout: 'hbox'             
+         ,height : 50
+         ,items : 
+          [
+            {xtype:'displayfield' , value:'프로그램 종류  ', width:100}
+           ,{xtype:'commCombo' , itemId:'SRC_COPY_TY_CD' , bind :{value:'{CD}'} , listeners:{select:'codeExt'} , width:150}
+           ,{xtype:'displayfield' , value:'  ' , width:20}
+           ,{xtype:'textfield' , name:'SRC_COPY_TY_DESC' , bind :{value:'{CD_DESC}'} , width:450}
+         ] 
+        }      
+      ,{
          xtype : 'fieldcontainer'
         ,layout: 'hbox'             
         ,height : 50
@@ -54,31 +67,16 @@ Ext.define('fframe.gens.GenPgmByCopyView', {
             ,{xtype:'displayfield' , value:'생성 프로그램명', width:120}
             ,{xtype:'textfield'    , name:'tarPgmNm' , bind:{value:'{tarPgmNm}'} , width:250 , emptyText:'프로그램명을 입력하세요(예:CodeList)'}
           ] 
-         }      
-      
+       }
       ,{
-          xtype : 'fieldcontainer'
-         ,combineErrors: true
-         ,msgTarget: 'side'
-         ,fieldLabel: '프로그램생성'
-         ,layout: 'hbox'
-         ,defaults: {
-              hideLabel: true
-          }      
-         ,items: [
-              {xtype:'displayfield'  , value:'Front프로그램생성' , width:120}                  
-             ,{xtype:'checkboxfield' , name:'isFrontExe' , bind:{value:'{isFrontExe}'}  , width:50}
-             ,{xtype:'displayfield'  , value: 'Back프로그램생성' , width:120}                  
-             ,{xtype:'checkboxfield' , name:'isBackExe'  , bind:{value:'{isBackExe}'} , width:50}
-          ]   
-      },{
           xtype      : 'textareafield'
          ,fieldLabel : '생성내역'             
          ,name       : 'genResult'
          ,height     : 400    
+         ,bind       : {value:'{genResult}'}
       }]
     ,buttons:[
-               {name:'saveBtn' , text:'생성'  , handler:'saveBtn'}
+               {name:'copyBtn' , text:'생성'  , handler:'copyBtn'}
              ]
     
 });

@@ -28,7 +28,7 @@ public class GensPgmSrv {
            GensPgmByTmpl gensPgmByTmpl = new GensPgmByTmpl();
            gensPgmByTmpl.createPgmFile(params);
            result.put("isSuccess", true);
-           result.put("userMsg", "정상 처리되었습니다.");
+           result.put("usrMsg", "정상 처리되었습니다.");
        } catch (Exception e){
            result.put("isSuccess", false);
            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
@@ -45,9 +45,13 @@ public class GensPgmSrv {
        try{
            
            GensPgmByCopy gensPgmByCopy = new GensPgmByCopy();
-           gensPgmByCopy.createPgmFile(params);
+           String retMsg = gensPgmByCopy.createPgmFile(params);
+           
+           System.out.println(retMsg);
+           
            result.put("isSuccess", true);
-           result.put("userMsg", "정상 처리되었습니다.");
+           result.put("usrMsg", "정상 처리되었습니다.");
+           result.put("retMsg", retMsg);
        } catch (Exception e){
            result.put("isSuccess", false);
            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");

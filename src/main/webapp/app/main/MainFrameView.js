@@ -45,7 +45,7 @@ Ext.define('fframe.main.MainFrameView', {
 				selectionchange : function ( obj, record){
 					console.log(record.get("page"));
 					var centerPage = obj.up("viewport").down("component[region=center]");
-					console.log("centerPage="+centerPage);
+					//console.log("centerPage="+centerPage);
 					centerPage.removeAll(true);
 					centerPage.add({
 						xtype : record.get("page")
@@ -131,6 +131,30 @@ Ext.define('fframe.main.MainFrameView', {
                             leaf : true
 						}
 						]
+                    }, {
+                        text : 'ETCL',
+                        iconCls : 'x-fa fa-shopping-cart',
+                        expanded : true,
+                        selectable : false,
+                        children : [ 
+                        {
+                            text : '샘파일로딩',
+                            page : 'samfileLod',
+                            leaf : true
+                        },{
+                            text : '테이블로딩',
+                            page : 'tabEtt',
+                            leaf : true
+                        },{
+                            text : '쿼리로딩',
+                            page : 'sqlEtt',
+                            leaf : true
+                        },{
+                            text : '엑셀로딩',
+                            page : 'excelLod',
+                            leaf : true
+                        }
+                        ]
 					}, {
 						text : '메뉴',
 						iconCls : 'x-fa fa-shopping-cart',

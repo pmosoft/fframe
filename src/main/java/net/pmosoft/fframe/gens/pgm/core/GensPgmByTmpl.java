@@ -80,6 +80,7 @@ public class GensPgmByTmpl {
          * 입력 파라미터
          *****************************************/
         tmplCd = params.get("tmplCd");                 //탬플릿유형(예:grid01)
+
         packNm = params.get("packNm");                 //패키지명(예:net.pmosoft.fframe.gens.test)
         genPackNm = packNm.replace(packBascNm+".",""); //회사명이 배제된 패키지명(예:gens.test) 
         genPathNm = genPackNm.replace(".","/");        //회사명이 배제된 폴더명  (예:gens/test) 
