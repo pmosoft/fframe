@@ -100,6 +100,7 @@
     AND    (   A.CD_ID_NM LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
             OR A.CD LIKE CONCAT(CONCAT('%',#{searchValue}),'%')
            ) 
+    AND     B.CD_STS_CD = '03'  
     ORDER BY A.CD_ID_NM, A.CD
 </select>
 
@@ -229,6 +230,7 @@
             ON  A.CD_ID_NM = B.CD_ID_NM
             AND A.CD       = B.CD
     WHERE   A.CD_ID_NM = #{CD_ID_NM}
+    AND     A.CD_STS_CD = '03' -- 승인   
     ORDER BY A.CD_TY_CD,A.CD_ID_NM, A.CD
 </select>
 

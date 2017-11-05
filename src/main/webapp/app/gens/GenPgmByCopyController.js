@@ -20,6 +20,7 @@ Ext.define('fframe.gens.GenPgmByCopyController', {
                             viewModel.set("CD_NM"     ,data[i].CD_NM);
                             viewModel.set("CD_HNM"    ,data[i].CD_HNM);
                             viewModel.set("CD_DESC"   ,data[i].CD_DESC);
+                            viewModel.set("pgmPath"   ,data[i].CD_PARAM1);
                         }
                     }                    
                 }
@@ -43,6 +44,8 @@ Ext.define('fframe.gens.GenPgmByCopyController', {
                  viewModel.set("CD_NM"     ,records[i].data.CD_NM);
                  viewModel.set("CD_HNM"    ,records[i].data.CD_HNM);
                  viewModel.set("CD_DESC"   ,records[i].data.CD_DESC);
+                 viewModel.set("pgmPath"   ,records[i].data.CD_PARAM1);
+                 
              }
          }
          

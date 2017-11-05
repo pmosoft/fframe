@@ -10,7 +10,8 @@ Ext.define('fframe.gens.GenPgmByCopyModel', {
         ,CD            : '01'       
         ,CD_NM         : 'EXTJSP'       
         ,CD_HNM        : 'EXTJSP'       
-        ,CD_DESC       : ''       
+        ,CD_DESC       : ''
+        ,pgmPath       : ''            
      }
 });
 
