@@ -1,18 +1,3 @@
-/*******************************************************************************
-@title:테이블 컨트롤러 
-@description-start
-@description-end  
-@developer:피승현
-@progress-rate:80%
-@update-history-start
--------------------------------------------------------------------------------
-|   날짜   |수정자|내용
--------------------------------------------------------------------------------
-|2017.11.01|피승현|최초개발
--------------------------------------------------------------------------------
-@update-history-end
-********************************************************************************/
-
 package net.pmosoft.fframe.dams.table;
 
 import java.lang.reflect.Type;
@@ -44,7 +29,7 @@ public class TabSrv {
 
     /**********************************************************************************
     *
-    *                                    Meta
+    *                                   MetaTabCol
     *
     **********************************************************************************/
     public Map<String, Object> selectMetaTabColList(Map<String,String> params){
@@ -65,6 +50,11 @@ public class TabSrv {
         return result;
     }
     
+    /**********************************************************************************
+    *
+    *                                   MetaTab
+    *
+    **********************************************************************************/
     public Map<String, Object> selectMetaTabList(Map<String,String> params){
         
         Map<String, Object> result = new HashMap<String, Object>();
@@ -84,49 +74,7 @@ public class TabSrv {
         }
         return result;
     }
-
-
-    public Map<String, Object> selectTabData(Map<String,String> params){
-        
-        Map<String, Object> result = new HashMap<String, Object>();
-        System.out.println("paramsaaaaaaaaaaaaaaaaaaaaaaaaaa="+params);
-        
-        try{
-            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
-            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
-            List<Map<String,Object>> list = tabDaoFactory.selectTabData(params);
-           
-            result.put("isSuccess", true);
-            result.put("data", list);
-        } catch (Exception e){
-            result.put("isSuccess", false);
-            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-            result.put("errSysrMsg", e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public Map<String, Object> selectQryData(Map<String,String> params){
-        
-        Map<String, Object> result = new HashMap<String, Object>();
-        
-        
-        try{
-            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
-            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
-            List<Map<String,Object>> list = tabDaoFactory.selectQryData(params);
-           
-            result.put("isSuccess", true);
-            result.put("data", list);
-        } catch (Exception e){
-            result.put("isSuccess", false);
-            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-            result.put("errSysrMsg", e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
-    }    
+    
     
     /**********************************************************************************
     *
@@ -273,7 +221,7 @@ public class TabSrv {
     
     /**********************************************************************************
     *
-    *                                  Tab
+    *                                  TabCol
     *
     **********************************************************************************/
 

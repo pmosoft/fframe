@@ -1,22 +1,8 @@
-/*******************************************************************************
-@title:테이블 컨트롤러 
-@description-start
-@description-end  
-@developer:피승현
-@progress-rate:80%
-@update-history-start
--------------------------------------------------------------------------------
-|   날짜   |수정자|내용
--------------------------------------------------------------------------------
-|2017.11.01|피승현|최초개발
--------------------------------------------------------------------------------
-@update-history-end
-********************************************************************************/
-
 package net.pmosoft.fframe.dams.table;
 
-import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,57 +20,47 @@ public class TabCtrl {
 
     /**********************************************************************************
     *
-    *                                    Meta
+    *                                MetaTabCol
     *
     **********************************************************************************/
-   
-    /*
-     * 메타정보의 테이블컬럼정보를 리턴
-     * @param DB접속정보 및 DB유저명
-     * */
+    
+    /**
+     * (추출) 입력 DB정보로 접속하여 메타테이블정보를 읽어서 메타임시테이블 삭제후 저장하고 
+     * 메타임시테이블 정보를 을 조회한다.
+     */
     @RequestMapping(value = "/dams/table/selectMetaTabColList")
     public Map<String, Object> selectMetaTabColList(@RequestParam Map<String,String> params) { 
         System.out.println("selectMetaTabColList");
         return tabSrv.selectMetaTabColList(params);
     }
     
-    /*
-     * 메타정보의 테이블정보를 리턴
-     * @param DB접속정보 및 DB유저명
-     * */
+    /**********************************************************************************
+    *
+    *                                 MetaTab
+    *
+    **********************************************************************************/
+     
+    /**
+     * selectMetaTabList
+     */
     @RequestMapping(value = "/dams/table/selectMetaTabList")
     public Map<String, Object> selectMetaTabList(@RequestParam Map<String,String> params) {
         System.out.println("selectMetaTabList");
         return tabSrv.selectMetaTabList(params);
     }
 
-    /*
-     * @param DB접속정보 및 DB유저명
-     * */
-    @RequestMapping(value = "/dams/table/extLodMetaTabInfoSchema")
-    public Map<String, Object> extLodMetaTabInfoSchema(@RequestParam Map<String,String> params) { 
-        return tabSrv.selectTabList(params);
-    }
- 
-    /*
-     * @param DB접속정보 및 DB유저명
-     * */
-    @RequestMapping(value = "/dams/table/createTableScript")
-    public Map<String, Object> createTableScript(@RequestParam Map<String,String> params) { 
-        return tabSrv.selectTabList(params);
-    }   
+    
     
     /**********************************************************************************
     *
-    *                            ExtMetaTabColListView
+    *                                ExtractTabCol
     *
     **********************************************************************************/
 	
-    /*
-     * (추출) 메타테이블컬럼정보 조회후 메타임시테이블 삭제, 저장, 조회후 정보 리턴
-     *   
-     * @param DB접속정보 및 DB유저명
-     * */
+    /**
+     * (추출) 입력 DB정보로 접속하여 메타테이블정보를 읽어서 메타임시테이블 삭제후 저장하고 
+     * 메타임시테이블 정보를 을 조회한다.
+     */
     @RequestMapping(value = "/dams/table/selectExtractMetaTabColList")
     public Map<String, Object> selectExtractMetaTabColList(@RequestParam Map<String,String> params) { 
         System.out.println("selectMetaTabColList");
@@ -111,81 +87,86 @@ public class TabCtrl {
 	
     /**********************************************************************************
     *
-    *                                    Tab
+    *                                  TabCol
     *
     **********************************************************************************/
 
-    /*
-     * 테이블컬럼정보를 리턴
-     * @param 조회 조건값
-     * */
+    /**
+     * selectcTabColList
+     */
     @RequestMapping(value = "/dams/table/selectTabColList")
     public Map<String, Object> selectTabColList(@RequestParam Map<String,String> params) { 
         return tabSrv.selectTabColList(params);
     }
     
-    /*
-     * 테이블컬럼정보를 저장
-     * @param 테이블컬럼정보
-     * */
+    /**
+     * saveTabCol
+     */
     @RequestMapping(value = "/dams/table/saveTabCol")
     public Map<String, Object> saveTabCol(@RequestParam String params) {
         return tabSrv.saveTabCol(params);
     }
     
-    /*
-     * 테이블컬럼정보를 삭제
-     * @param 조회 조건값
-     * */
+    /**
+     * deleteTabCol
+     */
     @RequestMapping(value = "/dams/table/deleteTabCol")
     public Map<String, Object> deleteTabCol(@RequestParam Map<String,String> params) {
         return tabSrv.deleteTabCol(params);
     }
 	
-    /*
-     * 테이블정보를 리턴
-     * @param 조회 조건값
-     * */
+	
+	/**********************************************************************************
+	 *
+	 *                                  Tab
+	 *
+	 **********************************************************************************/
+
+	/**
+	 * selectcTabList
+	 */
 	@RequestMapping(value = "/dams/table/selectTabList")
 	public Map<String, Object> selectTabList(@RequestParam Map<String,String> params) { 
 		return tabSrv.selectTabList(params);
 	}
 
-    /*
-     * 테이블정보를 저장
-     * @param 테이블정보
-     * */
+	/**
+	 * saveTab
+	 */
 	@RequestMapping(value = "/dams/table/saveTab")
 	public Map<String, Object> saveTab(@RequestParam Map<String,String> params) {
 		return tabSrv.saveTab(params);
 	}
 
-    /*
-     * 테이블정보를 삭제
-     * @param 조회 조건값
-     * */
+	/**
+	 * deleteTab
+	 */
 	@RequestMapping(value = "/dams/table/deleteTab")
 	public Map<String, Object> deleteTab(@RequestParam Map<String,String> params) {
 		return tabSrv.deleteTab(params);
 	}
 
-    /*
-     * 입력테이블의 전컬럼 정보를 리턴
-     * @param DB접속정보 및 테이블명 및 rowcnt
-     * */
-    @RequestMapping(value = "/dams/table/selectTabData")
-    public Map<String, Object>  selectTabData(@RequestParam Map<String,String> params){
-        return tabSrv.selectTabData(params);
+ 	
+    /**********************************************************************************
+    *
+    *                                  Meta
+    *
+    **********************************************************************************/
+
+    /**
+     * extLodMetaTabInfoSchema
+     */
+    @RequestMapping(value = "/dams/table/extLodMetaTabInfoSchema")
+    public Map<String, Object> extLodMetaTabInfoSchema(@RequestParam Map<String,String> params) { 
+        return tabSrv.selectTabList(params);
     }
-    
-    /*
-     * 입력쿼리의 기술된 컬럼정보를 리턴
-     * @param DB접속정보 및 쿼리 및 rowcnt
-     * */
-    @RequestMapping(value = "/dams/table/selectQryData")
-    public Map<String, Object>  selectQryData(@RequestParam Map<String,String> params){
-        return tabSrv.selectQryData(params);
-    }
-	
+ 
+    /**
+     * createTableScript
+     */
+    @RequestMapping(value = "/dams/table/createTableScript")
+    public Map<String, Object> createTableScript(@RequestParam Map<String,String> params) { 
+        return tabSrv.selectTabList(params);
+    }   
 	
 }

@@ -85,7 +85,9 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
         store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);
         store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);
         store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);
+        store.getProxy().setExtraParam("TAB_NM"   ,viewModel.data.TAB_NM);
 
+        
         store.load({
             callback : function(data){
                 console.log(data);

@@ -13,6 +13,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListModel', {
        ,dbPassword : ''
        ,dbType     : ''
        ,dbOwner    : ''
+       ,TAB_NM     : '%'
     }
    ,stores : {
         extMetaTabColList : {
