@@ -43,7 +43,7 @@ Ext.define('fframe.main.MainFrameView', {
 			xtype : 'treelist',
 			listeners : {
 				selectionchange : function ( obj, record){
-					console.log(record.get("page"));
+					console.log("record.get page:"+record.get("page"));
 					var centerPage = obj.up("viewport").down("component[region=center]");
 					//console.log("centerPage="+centerPage);
 					centerPage.removeAll(true);
@@ -138,7 +138,7 @@ Ext.define('fframe.main.MainFrameView', {
                         selectable : false,
                         children : [ 
                         {
-                            text : '샘파일로딩',
+                            text : 'CSV로딩',
                             page : 'samfileLod',
                             leaf : true
                         },{

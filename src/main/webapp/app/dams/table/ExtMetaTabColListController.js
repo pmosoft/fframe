@@ -73,7 +73,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListController', {
     ,extBtn : function(btn) {
     	var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
         console.log("view['xtype']="+view['xtype']);
-        store.proxy.setUrl("/dams/table/selectMetaTabColList");
+        store.proxy.setUrl("/dams/table/selectExtractMetaTabColList");
         
     	store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
         store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
