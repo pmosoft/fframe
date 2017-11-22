@@ -56,10 +56,7 @@ Ext.define('fframe.etcl.SamfileLodModel', {
             }
         }
       ,tabLod : {
-          fields : [
-                    'STS_NM'
-                   ]          
-         ,proxy : {
+          proxy : {
               type : 'ajax'
              ,url : ''
              ,reader : {

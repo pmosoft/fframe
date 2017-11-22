@@ -1,9 +1,24 @@
+/*******************************************************************************
+@title:테이블DAO를 마리아DB로 구현 
+@description-start
+@description-end  
+@developer:피승현
+@progress-rate:80%
+@update-history-start
+-------------------------------------------------------------------------------
+|   날짜   |수정자|내용
+-------------------------------------------------------------------------------
+|2017.11.01|피승현|최초개발
+-------------------------------------------------------------------------------
+@update-history-end
+********************************************************************************/
+
 package net.pmosoft.fframe.dams.table.dynamic;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +42,6 @@ public class TabMariadbDao implements TabDaoFactory {
             DbConnection dbConn = new DbConnection();
             conn = dbConn.getConnection(params);
 
-            //원본쿼리 : net.pmosoft.fframe.dams.table.TabMariadbDao.xml - insertMetaTabColList
             qry  = "--                                                                                         \n";
             qry += "SELECT                                                                                     \n";
             qry += "        ?                     AS DB_NM                                                     \n";
@@ -94,16 +108,9 @@ public class TabMariadbDao implements TabDaoFactory {
             
             
         } catch (Exception e) { e.printStackTrace();
-        } finally { if(conn != null) try { conn.close();} catch(Exception ee){}}
+        } finally { if(conn != null) try { pstmt.close(); conn.close();} catch(Exception ee){}}
         
         return listRs;
-    }
-
-
-    @Override
-    public List<Map<String, Object>> selectIsExistTab(Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 
@@ -168,29 +175,69 @@ public class TabMariadbDao implements TabDaoFactory {
             
             
         } catch (Exception e) { e.printStackTrace();
-        } finally { if(conn != null) try { conn.close();} catch(Exception ee){}}
+        } finally { if(conn != null) try { pstmt.close(); conn.close();} catch(Exception ee){}}
         
         return listRs;
     }
 
     @Override
-    public List<Map<String, Object>> selectTabColList(Map<String, String> params) {
+    public List<Map<String, Object>> selectTabData(Map<String, String> params) {
+
+        Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
+        
+        List<Map<String, Object>> listRs = new ArrayList<Map<String, Object>>();
+        
+        try {
+            DbConnection dbConn = new DbConnection();
+            conn = dbConn.getConnection(params);
+
+            qry  = "SELECT  * FROM " + params.get("TAB_NM") + " \n";
+            //qry += "WHERE                                       \n";
+
+            System.out.println(qry);
+
+            pstmt = new LoggableStatement(conn,qry);
+            pstmt.setString(1, params.get("datasource"));
+
+            System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int colCnt = rsmd.getColumnCount();
+            System.out.println("colCnt="+colCnt);
+            for (int i = 0; i < colCnt; i++) {
+                System.out.println(rsmd.getColumnName(i+1));
+            }
+            
+            System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
+            rs = pstmt.executeQuery();
+            
+            while(rs.next()){
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                
+                for (int i = 0; i < colCnt; i++) {
+                    map.put(rsmd.getColumnName(i+1) ,rs.getString(i+1));
+                    if(i==0) System.out.println(rsmd.getColumnName(i+1));
+                }
+                listRs.add(map);
+            }
+            
+        } catch (Exception e) { e.printStackTrace();
+        } finally { if(conn != null) try { pstmt.close(); conn.close();} catch(Exception ee){}}
+        
+        return listRs;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectQryData(Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectTabList(Map<String, String> params) {
+    public List<Map<String, Object>> selectIsExistTab(Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
-
-    public List<Map<String, Object>> selectTab(Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
-    
-
 }
 

@@ -171,6 +171,8 @@ Ext.define('fframe.etcl.SamfileLodView', {
                ,itemId     : 'tabGrid'
                ,height     : 450 , frame: true , columnLines : true
                ,viewConfig : {stripeRows:false} //,enableTextSelection: true,markDirty: false
+               ,bind:{store:'{tabLod}'}
+           
             }
           ]
       }  
