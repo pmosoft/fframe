@@ -1,3 +1,18 @@
+/*******************************************************************************
+@title:테이블 컨트롤러 
+@description-start
+@description-end  
+@developer:피승현
+@progress-rate:80%
+@update-history-start
+-------------------------------------------------------------------------------
+|   날짜   |수정자|내용
+-------------------------------------------------------------------------------
+|2017.11.01|피승현|최초개발
+-------------------------------------------------------------------------------
+@update-history-end
+********************************************************************************/
+
 package net.pmosoft.fframe.dams.table;
 
 import java.lang.reflect.Type;
@@ -29,10 +44,96 @@ public class TabSrv {
 
     /**********************************************************************************
     *
-    *                               ExtractMetaTabCol
+    *                                    Meta
     *
     **********************************************************************************/
     public Map<String, Object> selectMetaTabColList(Map<String,String> params){
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        try{
+            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
+            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
+            List<Map<String,Object>> list = tabDaoFactory.selectMetaTabColList(params);
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public Map<String, Object> selectMetaTabList(Map<String,String> params){
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        
+        try{
+            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
+            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
+            List<Map<String,Object>> list = tabDaoFactory.selectMetaTabList(params);
+           
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    public Map<String, Object> selectTabData(Map<String,String> params){
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        System.out.println("paramsaaaaaaaaaaaaaaaaaaaaaaaaaa="+params);
+        
+        try{
+            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
+            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
+            List<Map<String,Object>> list = tabDaoFactory.selectTabData(params);
+           
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public Map<String, Object> selectQryData(Map<String,String> params){
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        
+        
+        try{
+            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
+            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
+            List<Map<String,Object>> list = tabDaoFactory.selectQryData(params);
+           
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }    
+    
+    /**********************************************************************************
+    *
+    *                               ExtractMetaTabCol
+    *
+    **********************************************************************************/
+    public Map<String, Object> selectExtractMetaTabColList(Map<String,String> params){
 
         // params.put("CD_ID_NM", "DB_CONN_CD");        
         // params.put("CD", "01");        
@@ -167,32 +268,12 @@ public class TabSrv {
     }   
 
     
-    /**********************************************************************************
-    *
-    *                               ExtractMetaTab
-    *
-    **********************************************************************************/
-//    public Map<String, Object> selectMetaTabList(Map<String,String> params){
-// 
-//        Map<String, Object> result = new HashMap<String, Object>();
-//        
-//        try{
-//            List<Map<String,Object>> list = tabDao.selectMetaTabList(params);;
-//            result.put("isSuccess", true);
-//            result.put("data", list);
-//        } catch (Exception e){
-//            result.put("isSuccess", false);
-//            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-//            result.put("errSysrMsg", e.getMessage());
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
+
      
     
     /**********************************************************************************
     *
-    *                                  TabCol
+    *                                  Tab
     *
     **********************************************************************************/
 
