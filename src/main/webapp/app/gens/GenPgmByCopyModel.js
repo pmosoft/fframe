@@ -3,9 +3,9 @@ Ext.define('fframe.gens.GenPgmByCopyModel', {
     ,alias  : 'viewmodel.genPgmByCopy'
     ,data   : {
          srcPackNm     : 'net.pmosoft.fframe.dams.table'
-        ,srcPgmNm      : 'ExtMetaTabColList'
-        ,tarPackNm     : 'net.pmosoft.fframe.etcl'
-        ,tarPgmNm      : 'SamfileLod'
+        ,srcPgmNm      : 'ExtMetaTabColListView'
+        ,tarPackNm     : 'net.pmosoft.fframe.dams.abbr'
+        ,tarPgmNm      : 'AbbrListView'
         ,genResult     : ''
         ,CD            : '01'       
         ,CD_NM         : 'EXTJSP'       

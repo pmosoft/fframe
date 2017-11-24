@@ -1,0 +1,73 @@
+package net.pmosoft.fframe.gens.pgm.copy;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.pmosoft.fframe.comm.util.FileUtil;
+
+
+public class GensExtjsByCopy extends GensCommByCopy {
+
+    public static void main(String[] args) { 
+        GensExtjsByCopy gensExtjsByCopy = new GensExtjsByCopy();
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("srcPackNm", "net.pmosoft.fframe.gens");
+        params.put("srcPgmNm" , "GenPgmByCopy");
+        params.put("tarPackNm", "net.pmosoft.fframe.gens");
+        params.put("tarPgmNm" , "GenPgmByTmpl");
+        
+        gensExtjsByCopy.createPgmFile(params);
+    }
+
+    /******************************************
+     * 2단계 : 복사할 파일들 지정 
+     *****************************************/
+    public void createPgmFiles(){
+
+        srcPgmPathNm = webBasePathNm +"/"+ srcGenPathNm;
+        tarPgmPathNm = webBasePathNm +"/"+ tarGenPathNm;
+
+        System.out.println("srcPgmPathNm = " + srcPgmPathNm );
+        System.out.println("tarPgmPathNm = " + tarPgmPathNm );
+        
+        // View
+        replaceSrcPgmToTarPgm(srcPgmPathNm,srcPgmNm+"View.js"      ,tarPgmPathNm,tarPgmNm+"View.js"      );
+        // Controller
+        replaceSrcPgmToTarPgm(srcPgmPathNm,srcPgmNm+"Controller.js",tarPgmPathNm,tarPgmNm+"Controller.js");
+        // Model        
+        replaceSrcPgmToTarPgm(srcPgmPathNm,srcPgmNm+"Model.js"     ,tarPgmPathNm,tarPgmNm+"Model.js"     );
+
+        retMsg  =  "";
+        retMsg +=  "생성된 프로그램\n";
+        retMsg +=  tarPgmPathNm+"/"+tarPgmNm+"View.js\n";
+        retMsg +=  tarPgmPathNm+"/"+tarPgmNm+"Controller.js\n";
+        retMsg +=  tarPgmPathNm+"/"+tarPgmNm+"Model.js\n";
+        retMsg +=  "\n";        
+        retMsg +=  "소스 프로그램\n";
+        retMsg +=  srcPgmPathNm+"/"+srcPgmNm+"View.js\n";
+        retMsg +=  srcPgmPathNm+"/"+srcPgmNm+"Controller.js\n";
+        retMsg +=  srcPgmPathNm+"/"+srcPgmNm+"Model.js\n";
+        
+        //System.out.println(retMsg);
+    }
+
+    /***********************************************
+     * 4단계 : 리팩토링 룰  
+     ***********************************************/
+    public String replaceRule(String line) {
+        line = line.replace(prjNm+"."+srcGenPackNm,prjNm+"."+tarGenPackNm); //ex:fframe.gens.test.TmplPgmRegView
+        line = line.replace(srcPgmNm,tarPgmNm);                //ex:fframe.gens.test.TmplPgmRegView
+        line = line.replace(srcVarNm,tarVarNm);                //ex:TmplPgmRegView tmplPgmRegView = ..
+        line = line.replace(srcGenPathNm,tarGenPathNm);   //ex:/gens/test 
+        
+        return line;
+    }
+
+    
+}

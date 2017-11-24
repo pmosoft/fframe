@@ -39,7 +39,7 @@ Ext.define('fframe.etcl.SamfileLodController', {
      }﻿        
         
     /****************
-     * 코드확장 조회
+     * 코드확장
      ****************/    
     ,codeExt : function(obj) {
         var view = this.getView(); var viewModel = view.getViewModel();
