@@ -22,7 +22,12 @@ public class GensSpringByCopy extends GensCommByCopy {
         params.put("tarPackNm", "net.pmosoft.fframe.gens");
         params.put("tarPgmNm" , "GenPgmByTmpl");
         
-        gensExtjsByCopy.createPgmFile(params);
+        try {
+            gensExtjsByCopy.createPgmFile(params);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /******************************************

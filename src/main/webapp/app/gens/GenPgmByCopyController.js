@@ -74,6 +74,7 @@ Ext.define('fframe.gens.GenPgmByCopyController', {
                     
                 } else {
                     Ext.Msg.alert("알림",result['errUsrMsg']);
+                    console.log("errSysMsg="+result['errSysMsg']);
                     return;
                 }
             }

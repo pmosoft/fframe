@@ -53,56 +53,72 @@ public class GensCommByCopy implements GensPgmByCopy {
     /******************************************
      * 1단계 : 입력파라미터 세팅
      *****************************************/
-    public String createPgmFile(Map<String,String> params){
+    public String createPgmFile(Map<String,String> params) throws Exception {
 
-        System.out.println("params="+params);
-        
-        /******************************************
-         * 입력 파라미터
-         *****************************************/
-        srcPackNm    = params.get("srcPackNm");              //패키지명(예:net.pmosoft.fframe.gens.test)
-        srcGenPackNm = srcPackNm.replace(packBascNm+".",""); //회사명이 배제된 패키지명(예:gens.test) 
-        srcGenPathNm = srcGenPackNm.replace(".","/");        //회사명이 배제된 폴더명  (예:gens/test) 
-        srcVarNm     = StringUtil.replaceFirstCharLowerCase(params.get("srcPgmNm")); //변수명(예:testTmpl)       
-        srcPgmNm     = StringUtil.replaceFirstCharUpperCase(params.get("srcPgmNm")); //파일명(예:TestTmpl)
+        try {
 
-        tarPackNm    = params.get("tarPackNm");              //패키지명(예:net.pmosoft.fframe.gens.test)
-        tarGenPackNm = tarPackNm.replace(packBascNm+".",""); //회사명이 배제된 패키지명(예:gens.test) 
-        tarGenPathNm = tarGenPackNm.replace(".","/");        //회사명이 배제된 폴더명  (예:gens/test)
-        tarVarNm     = StringUtil.replaceFirstCharLowerCase(params.get("tarPgmNm")); //변수명(예:testTmpl)       
-        tarPgmNm     = StringUtil.replaceFirstCharUpperCase(params.get("tarPgmNm")); //파일명(예:TestTmpl)       
-        
-        System.out.println("srcPackNm    = " + srcPackNm    );
-        System.out.println("srcGenPackNm = " + srcGenPackNm );
-        System.out.println("srcGenPathNm = " + srcGenPathNm );
-        System.out.println("srcVarNm     = " + srcVarNm     );
-        System.out.println("srcPgmNm     = " + srcPgmNm     );
-        System.out.println("tarPackNm    = " + tarPackNm    );
-        System.out.println("tarGenPackNm = " + tarGenPackNm );
-        System.out.println("tarGenPathNm = " + tarGenPathNm );
-        System.out.println("tarVarNm     = " + tarVarNm     );
-        System.out.println("tarPgmNm     = " + tarPgmNm     );
-        
-        createPgmFiles();
-        
-        return retMsg;
+            System.out.println("params="+params);
+            
+            /******************************************
+             * 입력 파라미터
+             *****************************************/
+            srcPackNm    = params.get("srcPackNm");              //패키지명(예:net.pmosoft.fframe.gens.test)
+            srcGenPackNm = srcPackNm.replace(packBascNm+".",""); //회사명이 배제된 패키지명(예:gens.test) 
+            srcGenPathNm = srcGenPackNm.replace(".","/");        //회사명이 배제된 폴더명  (예:gens/test) 
+            srcVarNm     = StringUtil.replaceFirstCharLowerCase(params.get("srcPgmNm")); //변수명(예:testTmpl)       
+            srcPgmNm     = StringUtil.replaceFirstCharUpperCase(params.get("srcPgmNm")); //파일명(예:TestTmpl)
+
+            tarPackNm    = params.get("tarPackNm");              //패키지명(예:net.pmosoft.fframe.gens.test)
+            tarGenPackNm = tarPackNm.replace(packBascNm+".",""); //회사명이 배제된 패키지명(예:gens.test) 
+            tarGenPathNm = tarGenPackNm.replace(".","/");        //회사명이 배제된 폴더명  (예:gens/test)
+            tarVarNm     = StringUtil.replaceFirstCharLowerCase(params.get("tarPgmNm")); //변수명(예:testTmpl)       
+            tarPgmNm     = StringUtil.replaceFirstCharUpperCase(params.get("tarPgmNm")); //파일명(예:TestTmpl)       
+            
+            System.out.println("srcPackNm    = " + srcPackNm    );
+            System.out.println("srcGenPackNm = " + srcGenPackNm );
+            System.out.println("srcGenPathNm = " + srcGenPathNm );
+            System.out.println("srcVarNm     = " + srcVarNm     );
+            System.out.println("srcPgmNm     = " + srcPgmNm     );
+            System.out.println("tarPackNm    = " + tarPackNm    );
+            System.out.println("tarGenPackNm = " + tarGenPackNm );
+            System.out.println("tarGenPathNm = " + tarGenPathNm );
+            System.out.println("tarVarNm     = " + tarVarNm     );
+            System.out.println("tarPgmNm     = " + tarPgmNm     );
+            
+            createPgmFiles();
+            
+            return retMsg;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+
+        }
+
         
     }
  
     /******************************************
      * 2단계 : 복사할 파일들 지정 
+     * @throws Exception 
      *****************************************/
-    public void createPgmFiles(){}
+    public void createPgmFiles() throws Exception{}
 
     /******************************************
      * 3단계 : 타겟 프로그램 리팩토링 생성  
+     * @throws Exception 
      *****************************************/
-    public void replaceSrcPgmToTarPgm(String srcPathNm, String srcFileNm, String tarPathNm, String tarFileNm) {
+    public void replaceSrcPgmToTarPgm(String srcPathNm, String srcFileNm, String tarPathNm, String tarFileNm) throws Exception {
         
         try {
+
+            if(!FileUtil.fileIsLive(srcPathNm+"/"+srcFileNm)) {
+                throw new Exception("소스 파일이 존재하지 않습니다("+srcPathNm+"/"+srcFileNm+")");
+            }    
             
             if(!FileUtil.fileIsLive(tarPathNm+"/"+tarFileNm)) {
 
+                
                 FileUtil.makeDir(tarPathNm);
                 FileUtil.fileDelete(tarPathNm+"/"+tarFileNm);
                 
@@ -120,7 +136,9 @@ public class GensCommByCopy implements GensPgmByCopy {
                 br.close();
             }    
         } catch (Exception e) {
-            System.out.println("e=" + e.getMessage());
+            System.out.println("Exception=" + e.getMessage());
+            e.printStackTrace(); 
+            throw e;
         }
     }      
     

@@ -32,7 +32,7 @@ public class GensPgmSrv {
        } catch (Exception e){
            result.put("isSuccess", false);
            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-           result.put("errSysrMsg", e.getMessage());
+           result.put("errSysMsg", e.getMessage());
            e.printStackTrace();
        }
        return result;
@@ -41,14 +41,14 @@ public class GensPgmSrv {
    public Map<String, Object> genPgmByCopy(Map<String,String> params){
        System.out.println(params);
 
+       String retMsg = "";
+       
        Map<String, Object> result = new HashMap<String, Object>();
        try{
            
            GensPgmByCopy gensPgmByCopy = (GensPgmByCopy) Class.forName(params.get("pgmPath")).newInstance();;
            //GensPgmByCopy gensPgmByCopy = new GensExtjsByCopy();
-           String retMsg = gensPgmByCopy.createPgmFile(params);
-           
-           System.out.println(retMsg);
+           retMsg = gensPgmByCopy.createPgmFile(params);
            
            result.put("isSuccess", true);
            result.put("usrMsg", "정상 처리되었습니다.");
@@ -56,7 +56,8 @@ public class GensPgmSrv {
        } catch (Exception e){
            result.put("isSuccess", false);
            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-           result.put("errSysrMsg", e.getMessage());
+           result.put("errSysMsg", e.getMessage());
+           result.put("retMsg", retMsg);
            e.printStackTrace();
        }
        return result; 

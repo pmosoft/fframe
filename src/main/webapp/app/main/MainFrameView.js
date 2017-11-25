@@ -77,7 +77,7 @@ Ext.define('fframe.main.MainFrameView', {
 							leaf : true
 						},{
 							text : '약어',
-							page : 'AbbrList',
+							page : 'abbrList',
 							leaf : true
 						},{
 							text : '인포타입',

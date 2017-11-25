@@ -137,6 +137,9 @@ CREATE TABLE TDACM00030 (
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8 COMMENT='인포타입';
 ;
 
+SELECT * FROM TDACM00030
+;
+
 
 ------------------------------
 -- 용어사전
