@@ -50,7 +50,7 @@ Ext.define('fframe.dams.table.TabColListView', {
           ,{xtype:'commCombo' , width:170 , itemId:'DB_CONN_CD' , bind :{value:'{DB_CONN_CD}'}, listeners:{select:'dbComboSel'}}
           ,{xtype:'component' , width:65  , html:['&nbsp;&nbsp;&nbsp;','DB유저']}             
           ,{xtype:'commCombo' , width:170 , itemId:'DB_USR_UCD' , bind :{value:'{DB_USR_UCD}'}, listeners:{select:'dbusrComboSel'}}
-          ,{xtype:'commCombo' , width:170 , itemId:'TAB_COL_UCD' , bind :{value:'{TAB_COL_UCD}'} , listeners:{select:'tabCodSel'}}
+          ,{xtype:'commCombo' , width:170 , itemId:'TAB_COL_UCD' , bind :{value:'{TAB_COL_UCD}'} , listeners:{select:'tabComboSel'}}
           ,{xtype:'textfield' , name:'searchValue' , width:200 , emptyText:'검색어를 입력하세요'
                , bind :{value:'{searchValue}'}  , enableKeyEvents: true 
                , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
