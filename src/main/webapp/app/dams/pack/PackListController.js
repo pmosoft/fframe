@@ -1,6 +1,6 @@
 Ext.define('fframe.dams.pack.PackListController', {
      extend : 'Ext.app.ViewController'
-    ,alias : 'controller.PackList'
+    ,alias : 'controller.packList'
     ,setGridHeight : function(obj){ 
          obj.down("grid").setHeight(Ext.Element.getViewportHeight()-150);
      }

@@ -1,6 +1,6 @@
 Ext.define('fframe.dams.pack.PackListModel', {
      extend: 'Ext.app.ViewModel'
-    ,alias: 'viewmodel.PackList'
+    ,alias: 'viewmodel.packList'
     ,data : {
     	searchValue : ''
      }

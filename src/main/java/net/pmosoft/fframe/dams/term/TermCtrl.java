@@ -22,40 +22,48 @@ public class TermCtrl {
 	 *
 	 **********************************************************************************/
 
-    /**
-     * selectExtTermList
-     */
+    /*
+     * 테이블정보에서 표준용어를 추출하여 리턴
+     * @param 
+     * */
     @RequestMapping(value = "/dams/term/selectExtTermList")
     public Map<String, Object> selectExtTermList(@RequestParam Map<String,String> params) {
         return termSrv.selectExtTermList(params);
     }
 	
-	/**
-	 * selectcTermList
-	 */
+    /*
+     * 표준용어를 리턴
+     * @param 검색조건
+     * */
 	@RequestMapping(value = "/dams/term/selectTermList")
 	public Map<String, Object> selectTermList(@RequestParam Map<String,String> params) {
 		return termSrv.selectTermList(params);
 	}
 	
 
-	/**
-	 * saveTerm
-	 */
+    /*
+     * 표준용어를 저장
+     * @param 표준용어 리스트
+     * */
 	@RequestMapping(value = "/dams/term/saveTerm")
 	public Map<String, Object> saveTerm(@RequestParam Map<String,String> params) {
 		return termSrv.saveTerm(params);
 	}
 
-	/**
-	 * deleteTerm
-	 */
+    /*
+     * 표준용어를 삭제
+     * @param 표준용어 리스트
+     * */
 	@RequestMapping(value = "/dams/term/deleteTerm")
 	public Map<String, Object> deleteTerm(@RequestParam Map<String,String> params) {
 		return termSrv.deleteTerm(params);
 	}
 	
-	
+    /**********************************************************************************
+    *
+    *                                   Package
+    *
+    **********************************************************************************/
     /**
      * selectcPackInfoList
      */

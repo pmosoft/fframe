@@ -2,9 +2,12 @@ Ext.define('fframe.dams.table.TabColListModel', {
      extend: 'Ext.app.ViewModel'
     ,alias: 'viewmodel.TabColList'
     ,data : {
-        CD_ID_NM   : ''        
-       ,CD         : '06'        
-       ,CD_NM      : 'COL_HNM'
+        DB_CONN_CD        : '00'        
+       ,DB_CONN_CD_NM     : 'ALL'        
+       ,DB_USR_UCD        : '00'        
+       ,DB_USR_UCD_NM     : 'ALL'        
+       ,TAB_COL_UCD        : '06'        
+       ,TAB_COL_UCD_NM     : ''        
        ,searchKeyCombo : 'COL_HNM'
        ,searchValue : ''
        ,termStsCd : '99'    
@@ -31,14 +34,14 @@ Ext.define('fframe.dams.table.TabColListModel', {
                        ,'UPD_USR_ID'
                       ]
             ,proxy : {
-                 type : 'ajax'
-                ,url : '/dams/table/selectTabColList'
+                 type   : 'ajax'
+                ,url    : ''
                 ,reader : {
                      type : 'json'
                     ,rootProperty : 'data'
                     ,totalProperty : 'total'    
-                }
-            }
+                 }
+             }
         }
      }
 });

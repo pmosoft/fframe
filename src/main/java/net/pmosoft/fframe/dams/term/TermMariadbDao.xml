@@ -6,7 +6,17 @@
 <mapper namespace="net.pmosoft.fframe.dams.term.TermDao">
 
 
+<!--*************************************************************************** 
+**
+**                                 Term
+**
+****************************************************************************-->
 
+
+
+<!--**********************************
+**              추출
+***********************************-->
 
 <select id="selectExtTermList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
@@ -28,6 +38,7 @@
                   ,COL_HNM
                   ,DATA_TYPE_DESC
             FROM   TDACM00080
+            WHERE  COL_HNM > ' '
             GROUP BY COL_NM,COL_HNM
             ) A
             LEFT OUTER JOIN TDACM00040 B

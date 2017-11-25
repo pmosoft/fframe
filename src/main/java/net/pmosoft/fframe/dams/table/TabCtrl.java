@@ -1,21 +1,5 @@
-/*******************************************************************************
-@title:테이블 컨트롤러 
-@description-start
-@description-end  
-@developer:피승현
-@progress-rate:80%
-@update-history-start
--------------------------------------------------------------------------------
-|   날짜   |수정자|내용
--------------------------------------------------------------------------------
-|2017.11.01|피승현|최초개발
--------------------------------------------------------------------------------
-@update-history-end
-********************************************************************************/
-
 package net.pmosoft.fframe.dams.table;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,7 +104,8 @@ public class TabCtrl {
      * @param 조회 조건값
      * */
     @RequestMapping(value = "/dams/table/selectTabColList")
-    public Map<String, Object> selectTabColList(@RequestParam Map<String,String> params) { 
+    public Map<String, Object> selectTabColList(@RequestParam Map<String,String> params) {
+        System.out.println(params);
         return tabSrv.selectTabColList(params);
     }
     

@@ -73,7 +73,7 @@ Ext.define('fframe.main.MainFrameView', {
 						children : [ 
 			            {
 							text : '표준용어',
-							page : 'TermList',
+							page : 'termList',
 							leaf : true
 						},{
 							text : '약어',
@@ -81,11 +81,11 @@ Ext.define('fframe.main.MainFrameView', {
 							leaf : true
 						},{
 							text : '인포타입',
-							page : 'typeList',
+							page : 'infoList',
 							leaf : true
 						},{
 							text : '패키지',
-							page : 'PackList',
+							page : 'packList',
 							leaf : true
 						}]
                     }, {

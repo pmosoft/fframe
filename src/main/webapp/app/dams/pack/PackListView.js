@@ -1,8 +1,8 @@
 Ext.define('fframe.dams.pack.PackListView', {
      extend: 'Ext.form.Panel'
-    ,xtype: 'PackList'
-    ,controller: 'PackList'
-    ,viewModel: 'PackList'
+    ,xtype: 'packList'
+    ,controller: 'packList'
+    ,viewModel: 'packList'
     ,listeners : {
         resize : 'setGridHeight'
     }

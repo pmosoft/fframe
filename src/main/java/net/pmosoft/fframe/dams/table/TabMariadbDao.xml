@@ -246,6 +246,7 @@
             AND A.OWNER = B.OWNER
             AND A.TAB_NM = B.TAB_NM
     WHERE   1=1
+    AND     A.DB_NM        LIKE CONCAT(CONCAT('%',#{DB_CONN_CD_NM}),'%')
     AND  (
           (#{searchKeyCombo} = 'DB_NM'        AND A.DB_NM        LIKE CONCAT(CONCAT('%',#{searchValue}),'%'))
            OR   
