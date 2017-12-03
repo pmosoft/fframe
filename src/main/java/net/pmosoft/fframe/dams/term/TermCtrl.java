@@ -23,14 +23,23 @@ public class TermCtrl {
 	 **********************************************************************************/
 
     /*
-     * 테이블정보에서 표준용어를 추출하여 리턴
+     * (추출) 테이블정보에서 표준용어를 추출하여 임시테이블 삭제, 저장, 조회후 정보 리턴
      * @param 
      * */
     @RequestMapping(value = "/dams/term/selectExtTermList")
     public Map<String, Object> selectExtTermList(@RequestParam Map<String,String> params) {
         return termSrv.selectExtTermList(params);
     }
-	
+
+    /**
+     * (비교) 기등록된 표준용어와 비교한 정보를 조회한다.
+     */
+    @RequestMapping(value = "/dams/table/selectCmpTermList")
+    public Map<String, Object> selectCmpTermList(@RequestParam Map<String,String> params) { 
+        return termSrv.selectCmpTermList(params);
+    }
+    
+    
     /*
      * 표준용어를 리턴
      * @param 검색조건

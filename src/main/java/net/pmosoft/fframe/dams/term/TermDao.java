@@ -15,9 +15,12 @@ public interface TermDao {
 	 *
 	 **********************************************************************************/
     List<Map<String, Object>> selectExtTermList(Map<String,String> params);
+    List<Map<String, Object>> selectCmpTermList(Map<String,String> params);
 	List<Map<String, Object>> selectTermList(Map<String,String> params);
 	int selectTermCnt(Map<String,String> params);
-	void insertTerm(Map<String,String> params);
+	void insertExtTermList(Map<String,Object> params);
+    void insertTerm(Map<String,String> params);
+    void deleteExtTermList(Map<String,String> params);
 	void deleteTerm(Map<String,String> params);
 	void updateTerm(Map<String,String> params);
 	

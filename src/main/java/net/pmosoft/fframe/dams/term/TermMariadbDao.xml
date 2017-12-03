@@ -50,6 +50,56 @@
 
 
 
+<delete id="deleteExtTermList" parameterType="java.util.HashMap">
+    -- TermDao.deleteExtTermList
+    DELETE FROM TDACM00041;
+</delete>
+
+
+<insert id="insertExtTermList" parameterType="java.util.HashMap">
+
+    -- TermDao.insertExtTermList
+    INSERT INTO TDACM00041
+    (
+         COL_NM        
+        ,COL_HNM       
+        ,COL_DESC      
+        ,COL_ABBR_HNM  
+        ,DATA_TYPE_DESC
+        ,COL_STS_CD    
+        ,REG_DTM
+        ,REG_USR_ID
+        ,UPD_DTM
+        ,UPD_USR_ID
+    ) VALUES (
+         #{COL_NM}        
+        ,#{COL_HNM}       
+        ,#{COL_DESC}      
+        ,#{COL_ABBR_HNM}  
+        ,#{DATA_TYPE_DESC}
+        ,'01'    
+        ,curdate()
+        ,#{REG_USR_ID}
+        ,curdate()
+        ,#{UPD_USR_ID}
+    )
+
+</insert>
+
+
+<select id="selectCmpTermList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    -- TermDao.selectCmpTermList
+    SELECT A.*
+    FROM  (
+			SELECT A.*
+			FROM   TDACM00041 A
+			       LEFT OUTER JOIN TDACM00040 B
+			       ON   A.COL_NM = B.COL_NM
+			WHERE  B.COL_NM IS NULL
+          ) A      
+    ORDER BY A.COL_NM  
+</select>
+
 <select id="selectTermList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 
 	-- TermDao.selectTermList

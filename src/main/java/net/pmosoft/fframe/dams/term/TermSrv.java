@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Service
@@ -29,7 +30,18 @@ public class TermSrv {
 
         List<Map<String,Object>> list = null;
         try{
+            
+            // 1.1단계 : 표준용어 조회
             list = termDao.selectExtTermList(params);;
+            
+            // 1.2단계 : 표준용어임시테이블 삭제                
+            termDao.deleteExtTermList(params);
+
+            // 1.3단계 : 표준용어임시테이블 삽입                
+            for (int i = 0; i  < list.size(); i++) {
+                termDao.insertExtTermList(list.get(i));
+            }
+            
             result.put("isSuccess", true);
             result.put("data", list);
         } catch (Exception e){
@@ -40,6 +52,24 @@ public class TermSrv {
         }
         return result;
     }	
+
+    public Map<String, Object> selectCmpTermList(@RequestParam Map<String,String> params) {
+         
+        Map<String, Object> result = new HashMap<String, Object>();
+ 
+        System.out.println("params="+params);
+        try{
+            List<Map<String,Object>> list = termDao.selectCmpTermList(params);;
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }     
     
 	
 	public Map<String, Object> selectTermList(Map<String,String> params){
