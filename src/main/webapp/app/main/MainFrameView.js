@@ -76,6 +76,10 @@ Ext.define('fframe.main.MainFrameView', {
 							page : 'termList',
 							leaf : true
 						},{
+                            text : '표준용어추출',
+                            page : 'extTermList',
+                            leaf : true
+						},{
 							text : '약어',
 							page : 'abbrList',
 							leaf : true

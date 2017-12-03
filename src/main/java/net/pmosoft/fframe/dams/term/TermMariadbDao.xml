@@ -39,6 +39,7 @@
                   ,DATA_TYPE_DESC
             FROM   TDACM00080
             WHERE  COL_HNM > ' '
+            AND    DB_NM  LIKE CONCAT(CONCAT('%',#{DB_CONN_CD_NM}),'%')
             GROUP BY COL_NM,COL_HNM
             ) A
             LEFT OUTER JOIN TDACM00040 B

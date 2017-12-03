@@ -131,7 +131,7 @@ Ext.define('fframe.dams.table.TabColListController', {
           console.log("combo.value="+combo.value);
           for (var i = 0; i < records.length; i++) {
               if(records[i].data.CD == combo.value) {
-                  viewModel.set("TAB_COL_UCD_NM" ,records[i].data.CD_ID_NM);
+                  viewModel.set("TAB_COL_UCD_NM" ,records[i].data.CD_NM);
                   viewModel.set("TAB_COL_UCD"    ,records[i].data.CD);
                   viewModel.set("searchKeyCombo" ,records[i].data.CD_NM);
               }

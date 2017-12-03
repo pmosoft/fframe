@@ -2,7 +2,7 @@ Ext.define('fframe.dams.table.TabColListModel', {
      extend: 'Ext.app.ViewModel'
     ,alias: 'viewmodel.TabColList'
     ,data : {
-        DB_CONN_CD        : '00'        
+        DB_CONN_CD        : '00'
        ,DB_CONN_CD_NM     : 'ALL'        
        ,DB_USR_UCD        : '00'        
        ,DB_USR_UCD_NM     : 'ALL'        

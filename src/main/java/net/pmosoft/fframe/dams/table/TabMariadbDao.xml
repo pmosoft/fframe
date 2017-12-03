@@ -36,9 +36,9 @@
                    AND  A.OWNER = B.OWNER
                    AND  A.TAB_NM = B.TAB_NM
                    AND  A.COL_NM = B.COL_NM
-                   AND  A.DB_NM = #{datasource1}
-                   AND  A.OWNER = #{dbOwner}
-            WHERE  B.COL_NM IS NULL
+            WHERE  A.DB_NM = #{datasource}
+            AND    A.OWNER = #{dbOwner}
+            AND    B.COL_NM IS NULL
             UNION ALL
             SELECT '삭제' AS STS_NM,A.*
             FROM   TDACM00080 A
@@ -47,9 +47,9 @@
                    AND  A.OWNER = B.OWNER
                    AND  A.TAB_NM = B.TAB_NM
                    AND  A.COL_NM = B.COL_NM
-                   AND  A.DB_NM = #{datasource}
-                   AND  A.OWNER = #{dbOwner}                         
-            WHERE  B.COL_NM IS NULL
+            WHERE  A.DB_NM = #{datasource}
+            AND    A.OWNER = #{dbOwner}
+            AND    B.COL_NM IS NULL
             UNION ALL
             SELECT '타입변경' AS STS_NM,A.*
             FROM   TDACM00081 A
@@ -60,7 +60,9 @@
                    AND  A.COL_NM = B.COL_NM
                    AND  A.DB_NM = #{datasource}
                    AND  A.OWNER = #{dbOwner}                         
-            WHERE  A.DATA_TYPE_DESC != B.DATA_TYPE_DESC
+                   AND  B.DB_NM = #{datasource}
+                   AND  B.OWNER = #{dbOwner}
+            WHERE  A.DATA_TYPE_DESC != B.DATA_TYPE_DESC 
             UNION ALL
             SELECT '널변경' AS STS_NM,A.*
             FROM   TDACM00081 A
@@ -72,6 +74,8 @@
                    AND  A.DATA_TYPE_DESC = A.DATA_TYPE_DESC
                    AND  A.DB_NM = #{datasource}
                    AND  A.OWNER = #{dbOwner}                         
+                   AND  B.DB_NM = #{datasource}
+                   AND  B.OWNER = #{dbOwner}
             WHERE  A.NULLABLE != B.NULLABLE
           ) A      
     ORDER BY A.TAB_NM,A.COL_ID    

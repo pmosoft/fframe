@@ -1,14 +1,16 @@
-Ext.define('fframe.dams.term.TermListModel', {
+Ext.define('fframe.dams.term.ExtTermListModel', {
     extend: 'Ext.app.ViewModel'
-   ,alias: 'viewmodel.termList'
+   ,alias: 'viewmodel.extTermList'
    ,data : {
-        TERM_SRCH_UCD : '02'
-       ,TERM_SRCH_UCD_NM : ''
-       ,COL_STS_UCD   : '03'        
-       ,COL_STS_UCD_NM  : ''        
+        DB_CONN_CD        : '00'
+       ,DB_CONN_CD_NM     : 'ALL'        
+       ,DB_USR_UCD        : '00'        
+       ,DB_USR_UCD_NM     : 'ALL'        
+       ,TAB_COL_UCD        : '06'        
+       ,TAB_COL_UCD_NM     : ''        
    }
    ,stores : {
-        termList : {
+        extTermList : {
             fields : [
                       'COL_NM'        
                      ,'COL_HNM'        

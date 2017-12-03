@@ -1,5 +1,5 @@
 /*******************************************************************************
-@title:표준용어 관리 
+@title:표준용어 추출 및 정합성 관리 
 @description-start
  1. 메타테이블 정보 추출
    - 콤보박스에서 DB선택하면 DB접속정보를 코드 및 코드확장에서 가져온다
@@ -17,21 +17,20 @@
 -------------------------------------------------------------------------------
 |   날짜   |수정자|내용
 -------------------------------------------------------------------------------
-|2017.10.01|피승현|최초개발
-|2017.10.10|피승현|주석정비
+|2017.11.30|피승현|최초개발
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.dams.term.TermListView', {
+Ext.define('fframe.dams.term.ExtTermListView', {
     extend     : 'Ext.form.Panel'
-   ,xtype      : 'termList'
-   ,controller : 'termList'
-   ,viewModel  : 'termList'
+   ,xtype      : 'extTermList' 
+   ,controller : 'extTermList'
+   ,viewModel  : 'extTermList'
    ,listeners  : { resize : 'setGridHeight', boxready:'comboLoad'}
    //-------------------------------------------
    // titletoolbar
    //-------------------------------------------
-   ,title : '표준용어 관리'
+   ,title : '표준용어 추출 및 정합성 관리'
    ,items :
     [ 
      //-------------------------------------------
@@ -42,18 +41,25 @@ Ext.define('fframe.dams.term.TermListView', {
        ,height : 50      
        ,items : 
         [
-          {xtype:'component' , width:70 , html:['&nbsp;','검색조건','&nbsp;&nbsp;']}             
-         ,{xtype:'commCombo' , width:200 , itemId:'TERM_SRCH_UCD' , bind :{value:'{TERM_SRCH_UCD}'}}
+          {xtype:'component' , width:40  , html:['&nbsp;','DB명']}             
+         ,{xtype:'commCombo' , width:170 , itemId:'DB_CONN_CD' , bind :{value:'{DB_CONN_CD}'}, listeners:{select:'dbComboSel'}}
+         ,{xtype:'component' , width:65  , html:['&nbsp;&nbsp;&nbsp;','DB유저']}             
+         ,{xtype:'commCombo' , width:170 , itemId:'DB_USR_UCD' , bind :{value:'{DB_USR_UCD}'}, listeners:{select:'dbusrComboSel'}}
+         ,{xtype:'commCombo' , width:170 , itemId:'TAB_COL_UCD' , bind :{value:'{TAB_COL_UCD}'} , listeners:{select:'tabComboSel'}}
          ,{xtype:'textfield' , name:'searchValue' , width:200 , emptyText:'검색어를 입력하세요'
-                , bind :{value:'{searchValue}'}  , enableKeyEvents: true 
-                , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
+              , bind :{value:'{searchValue}'}  , enableKeyEvents: true 
+              , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
           }
-         ,{xtype:'component' , width:80, html:['&nbsp;&nbsp;&nbsp;&nbsp;','승인상태','&nbsp;&nbsp;']}             
-         ,{xtype:'commCombo' , width:200, itemId:'COL_STS_UCD' , bind :{value:'{COL_STS_UCD}'}}
          ,'->'
+         ,{xtype:'button' , text:'추출'           , handler:'extBtn' , iconCls:'x-fa fa-gift'}
+         ,{xtype:'button' , text:'비교'           , handler:'cmpBtn' , iconCls:'x-fa fa-check-square'}
+         ,{xtype:'button' , text:'삭제'           , handler:'tabDelBtn' , iconCls:'x-fa fa-remove'}
+         ,{xtype:'button' , text:'반영'           , handler:'insBtn' , iconCls:'x-fa fa-sign-in'}
          ,{xtype:'button' , text:'조회'           , handler:'selBtn' , iconCls:'x-fa fa-sign-in'}
         ]
      }
+
+     
      
    //-------------------------------------------
    // grid
@@ -83,7 +89,7 @@ Ext.define('fframe.dams.term.TermListView', {
            ]
        }
        
-      ,bind:{store:'{termList}'}
+      ,bind:{store:'{extTermList}'}
     }
    ]
 });
