@@ -27,9 +27,12 @@ public interface TabDao {
     *
     **********************************************************************************/
 
+    int selectMetaTabCnt(Map<String,Object> params);
+    
     //net.pmosoft.fframe.dams.table.dynamic.TabMariadbDao 에서 처리
     //List<Map<String, Object>> selectMetaTabList(Map<String,String> params);
     void insertMetaTab(Map<String,Object> params);
+        
     void deleteMetaTab(Map<String,String> params);
     void insertCmpTab(Map<String,String> params);
 

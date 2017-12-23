@@ -46,6 +46,11 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
          ,{xtype:'commCombo' , itemId:'DB_CONN_CD' , bind :{value:'{CD}'} , listeners:{select:'codeExt'}}
          ,{xtype:'textfield' , name:'DB_INFO' , width:250, bind :{value:'{dbInfo}'}}
          ,'->'
+         ,{xtype:'filefield' , buttonText:'업로드' , name:'uploadFile' , buttonOnly:false , allowBlank:false , buttonConfig:{iconCls:'fa-upload'} 
+                             , listeners:{afterrender:'multiple' , change:'excelUpload'}
+          }                             
+         ,{xtype:'button' , text:'업저장'         , handler:'uploadInsBtn' , iconCls:'x-fa fa-sign-in'}
+         ,{xtype:'button' , text:'다운'           , id:'excelDownBtn', handler:'excelDownBtn' , iconCls:'x-fa fa-download'}
          ,{xtype:'button' , text:'추출'           , handler:'extBtn' , iconCls:'x-fa fa-gift'}
          ,{xtype:'button' , text:'비교'           , handler:'cmpBtn' , iconCls:'x-fa fa-check-square'}
          ,{xtype:'button' , text:'테이블정보삭제' , handler:'tabDelBtn' , iconCls:'x-fa fa-remove'}
@@ -58,6 +63,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
    //-------------------------------------------
    ,{
         xtype      : 'grid'
+       ,reference  : 'extMetaTabColListGrid'        
        ,plugins    : [{ptype:'gridexporter'}]              
        ,requires   : ['Ext.grid.selection.SpreadsheetModel' , 'Ext.grid.plugin.Clipboard']
        ,height     : 150 , frame: true , columnLines : true
@@ -73,6 +79,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
             ,{text:'DB명'           , dataIndex:'DB_NM'          }
             ,{text:'소유자'         , dataIndex:'OWNER'          }
             ,{text:'테이블명'       , dataIndex:'TAB_NM'         }
+            ,{text:'테이블한글명'   , dataIndex:'TAB_HNM'        }
             ,{text:'컬럼아이디'     , dataIndex:'COL_ID'         }
             ,{text:'컬럼명'         , dataIndex:'COL_NM'         }
             ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'        }
@@ -89,7 +96,6 @@ Ext.define('fframe.dams.table.ExtMetaTabColListView', {
             ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     }
            ]
        }
-       
       ,bind:{store:'{extMetaTabColList}'}
       //,bbar : {
       //     xtype : 'pagingtoolbar'

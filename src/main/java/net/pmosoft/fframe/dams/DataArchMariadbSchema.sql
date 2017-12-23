@@ -20,7 +20,248 @@
  * 
  * 정합성 체크
  * */
+;
 
+
+SELECT * FROM TDACM00081
+WHERE 1=1
+AND COL_NM LIKE '%TRADE_EXCPT_RSN_MK_CD%'
+;
+
+
+UPDATE TDACM00081
+SET COL_NM = 'TRADE_EXCPT_RSN_MK_CD_DEL'
+WHERE TAB_NM = 'SUMM_CUST_PYOFF_BFR_IN_FRGN_TRAN'
+AND COL_ID = 30
+;
+
+UPDATE TDACM00081
+SET COL_NM = 'TRADE_EXCPT_RSN_MK_CD_DEL'
+WHERE TAB_NM = 'SUMM_FRGN_EXCH_TRAN'
+AND COL_ID = 30
+;
+
+    SELECT   A.DB_NM
+            ,A.OWNER
+            ,A.TAB_NM
+            ,B.TAB_HNM
+            ,A.COL_ID
+            ,A.COL_NM
+            ,A.COL_HNM
+            ,A.DATA_TYPE_DESC
+            ,A.NULLABLE
+            ,A.PK
+            ,A.DATA_TYPE_NM
+            ,A.LEN
+            ,A.DECIMAL_CNT
+            ,TRIM(A.COL_DESC) AS COL_DESC
+            ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00080 A 
+            LEFT JOIN TDACM00070 B
+            ON  A.DB_NM = B.DB_NM
+            AND A.OWNER = B.OWNER
+            AND A.TAB_NM = B.TAB_NM
+    WHERE   1=1
+    AND     A.DB_NM        LIKE CONCAT(CONCAT('%','SCASIS'),'%')
+    AND  (
+          ('true' = 'false' AND 'COL_NM' = 'DB_NM'        AND A.DB_NM        LIKE CONCAT(CONCAT('%','LOG'),'%'))
+           OR   
+          ('true' = 'false' AND 'COL_NM' = 'OWNER'        AND A.OWNER        LIKE CONCAT(CONCAT('%','LOG'),'%'))
+           OR   
+          ('true' = 'false' AND 'COL_NM' = 'TAB_NM'       AND A.TAB_NM       LIKE CONCAT(CONCAT('%','LOG'),'%'))
+           OR   
+          ('true' = 'false' AND 'COL_NM' = 'TAB_HNM'      AND B.TAB_HNM      LIKE CONCAT(CONCAT('%','LOG'),'%'))
+           OR   
+          ('true' = 'false' AND 'COL_NM' = 'COL_NM'       AND A.COL_NM       LIKE CONCAT(CONCAT('%','LOG'),'%'))
+           OR   
+          ('true' = 'false' AND 'COL_NM' = 'COL_HNM'      AND A.COL_HNM      LIKE CONCAT(CONCAT('%','LOG'),'%'))
+           OR   
+          ('true' = 'false' AND 'COL_NM' = 'DATA_TYPE_NM' AND A.DATA_TYPE_NM LIKE CONCAT(CONCAT('%','LOG'),'%'))
+           OR   
+          ('true' = 'true' AND 'COL_NM' = 'COL_NM' AND A.TAB_NM IN (SELECT TAB_NM FROM TDACM00080 WHERE COL_NM LIKE CONCAT(CONCAT('%','LOG'),'%')))
+         )  
+    ORDER BY A.DB_NM,OWNER,A.TAB_NM,A.COL_ID
+ ;
+
+
+ SELECT TAB_NM FROM TDACM00080 WHERE COL_NM LIKE CONCAT(CONCAT('%','LOG'),'%')
+ ;
+ 
+    SELECT   A.DB_NM
+            ,A.OWNER
+            ,A.TAB_NM
+            ,B.TAB_HNM
+            ,A.COL_ID
+            ,A.COL_NM
+            ,A.COL_HNM
+            ,A.DATA_TYPE_DESC
+            ,A.NULLABLE
+            ,A.PK
+            ,A.DATA_TYPE_NM
+            ,A.LEN
+            ,A.DECIMAL_CNT
+            ,TRIM(A.COL_DESC) AS COL_DESC
+            ,DATE_FORMAT(A.REG_DTM,'%Y.%m.%d %H:%i:%S') AS REG_DTM
+            ,A.REG_USR_ID
+            ,DATE_FORMAT(A.UPD_DTM,'%Y.%m.%d %H:%i:%S') AS UPD_DTM
+            ,A.UPD_USR_ID
+    FROM    TDACM00080 A 
+            LEFT JOIN TDACM00070 B
+            ON  A.DB_NM = B.DB_NM
+            AND A.OWNER = B.OWNER
+            AND A.TAB_NM = B.TAB_NM
+    WHERE   1=1
+    AND     A.DB_NM        LIKE CONCAT(CONCAT('%','SCASIS'),'%')
+    AND  (
+          ('COL_HNM' = 'DB_NM'        AND A.DB_NM        LIKE CONCAT(CONCAT('%',''),'%'))
+           OR   
+          ('COL_HNM' = 'OWNER'        AND A.OWNER        LIKE CONCAT(CONCAT('%',''),'%'))
+           OR   
+          ('COL_HNM' = 'TAB_NM'       AND A.TAB_NM       LIKE CONCAT(CONCAT('%',''),'%'))
+           OR   
+          ('COL_HNM' = 'TAB_HNM'      AND B.TAB_HNM      LIKE CONCAT(CONCAT('%',''),'%'))
+           OR   
+          ('COL_HNM' = 'COL_NM'       AND A.COL_NM       LIKE CONCAT(CONCAT('%',''),'%'))
+           OR   
+          ('COL_HNM' = 'COL_HNM'      AND A.COL_HNM      LIKE CONCAT(CONCAT('%',''),'%'))
+           OR   
+          ('COL_HNM' = 'DATA_TYPE_NM' AND A.DATA_TYPE_NM LIKE CONCAT(CONCAT('%',''),'%'))
+         ) 
+    AND  (
+          ('1' = '1' AND A.TAB_NM IN (SELECT TAB_NM FROM TDACM00080 WHERE COL_NM LIKE CONCAT(CONCAT('%',''),'%') )
+         ) 
+
+         
+    ORDER BY A.DB_NM,OWNER,A.TAB_NM,A.COL_ID
+    ;
+
+SELECT 
+
+            CASE WHEN UPPER(A.DATA_TYPE) IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH \n";
+                 WHEN UPPER(A.DATA_TYPE) IN ('INT','NUMERIC') THEN A.NUMERIC_PRECISION         \n";
+            END
+;
+
+SELECT 
+ CASE WHEN A.DATA_TYPE_NM IN ('CHAR') THEN concat(A.DATA_TYPE_NM,'(',A.LEN,')') 
+      WHEN A.DATA_TYPE_NM IN ('DECIMAL') THEN concat(A.DATA_TYPE_NM,'(',A.LEN,',',A.DECIMAL_CNT,')') 
+      ELSE A.DATA_TYPE_NM END
+,A.*
+FROM TDACM00080 A
+WHERE DB_NM = 'SCASIS'
+;
+
+UPDATE  TDACM00080 A
+SET DATA_TYPE_DESC =
+ CASE WHEN A.DATA_TYPE_NM IN ('CHAR') THEN concat(A.DATA_TYPE_NM,'(',A.LEN,')') 
+      WHEN A.DATA_TYPE_NM IN ('DECIMAL') THEN concat(A.DATA_TYPE_NM,'(',A.LEN,',',A.DECIMAL_CNT,')') 
+      ELSE A.DATA_TYPE_NM END
+WHERE DB_NM = 'SCASIS'
+;
+
+COMMIT
+;
+
+    INSERT INTO TDACM00070 
+    SELECT A.*
+    FROM   TDACM00071 A
+           LEFT OUTER JOIN TDACM00070 B
+           ON   A.DB_NM = B.DB_NM
+           AND  A.OWNER = B.OWNER
+           AND  A.TAB_NM = B.TAB_NM
+    WHERE  B.TAB_NM IS NULL           
+    ORDER BY A.TAB_NM    
+;
+
+COMMIT
+;
+
+Duplicate entry 'SCASIS-AML-SUMM_FRGN_EXCH_TRAN-TRADE_EXCPT_RSN_MK_CD' for key 'PRIMARY'
+
+
+
+    INSERT INTO TDACM00080 
+    SELECT A.*
+    FROM   TDACM00081 A
+           LEFT OUTER JOIN TDACM00080 B
+           ON   A.DB_NM = B.DB_NM
+           AND  A.OWNER = B.OWNER
+           AND  A.TAB_NM = B.TAB_NM
+           AND  A.COL_NM = B.COL_NM
+           AND  A.COL_HNM = B.COL_HNM
+           AND  A.DATA_TYPE_DESC = B.DATA_TYPE_DESC
+    WHERE  B.COL_NM IS NULL           
+    ORDER BY A.TAB_NM,A.COL_ID
+    ;
+
+ INSERT INTO TDACM00081
+    (
+         DB_NM         
+        ,OWNER         
+        ,TAB_NM        
+        ,COL_ID        
+        ,COL_NM        
+        ,COL_HNM       
+        ,DATA_TYPE_DESC
+        ,NULLABLE      
+        ,PK            
+        ,DATA_TYPE_NM  
+        ,LEN           
+        ,DECIMAL_CNT   
+        ,COL_DESC      
+        ,REG_DTM       
+        ,REG_USR_ID    
+        ,UPD_DTM       
+        ,UPD_USR_ID    
+    ) VALUES (
+         'SCASIS'
+        ,'AML'
+        ,'ACCT_PLDG'
+        ,CAST('1.0' AS INT)
+        ,'LOAN_ACCT_NO'
+        ,'여신계좌번호'
+        ,''
+        ,'N'
+        ,'PK'
+        ,'CHAR'
+        ,CAST('13.0' AS INT)
+        ,CAST('' AS INT)
+        ,''
+        ,curdate()
+        ,''
+        ,curdate()
+        ,''
+    )
+;
+﻿
+SELECT CAST(IFNULL('',0) AS INT)
+;
+
+SELECT IFNULL('',0)
+;
+
+SELECT CASE WHEN '' IN ('',NULL) THEN 0 ELSE '' END 
+;
+
+
+SELECT COALESCE('',NULL,0,'AAA')
+;
+
+SELECT CAST('10' as varchar(10))
+;
+
+SELECT '-10'
+;
+
+
+SELECT CHAR_LENGTH('한글')
+;
+
+SELECT CAST('10.0' AS INT)
+;
 
 ﻿------------------------------
 -- 패키지 정보
@@ -420,7 +661,16 @@ CREATE TABLE TDACM00071 (
 DROP TABLE TDACM00080
 ;
 
-SELECT * FROM TDACM00080
+SELECT * FROM TDACM00083
+;
+
+INSERT INTO TDACM00080 SELECT * FROM TDACM00083
+;
+
+CREATE TABLE TDACM00083 AS SELECT * FROM TDACM00080
+;
+
+COMMIT
 ;
 
 CREATE TABLE TDACM00080 (
@@ -436,7 +686,7 @@ CREATE TABLE TDACM00080 (
 ,DATA_TYPE_NM   VARCHAR(20)      NULL COMMENT '데이터타입명' 
 ,LEN            INT              NULL COMMENT '길이'
 ,DECIMAL_CNT    INT              NULL COMMENT '소수점수'
-,COL_DESC       VARCHAR(200)     NULL COMMENT '컬럼설명'
+,COL_DESC       VARCHAR(1000)     NULL COMMENT '컬럼설명'
 ,REG_DTM        VARCHAR(14)      NULL COMMENT '등록일시'
 ,REG_USR_ID     VARCHAR(20)      NULL COMMENT '등록자'
 ,UPD_DTM        VARCHAR(14)      NULL COMMENT '변경일시'
@@ -461,7 +711,7 @@ CREATE TABLE TDACM00081 (
 ,DATA_TYPE_NM   VARCHAR(20)      NULL COMMENT '데이터타입명' 
 ,LEN            INT              NULL COMMENT '길이'
 ,DECIMAL_CNT    INT              NULL COMMENT '소수점수'
-,COL_DESC       VARCHAR(200)     NULL COMMENT '컬럼설명'
+,COL_DESC       VARCHAR(1000)     NULL COMMENT '컬럼설명'
 ,REG_DTM        VARCHAR(14)      NULL COMMENT '등록일시'
 ,REG_USR_ID     VARCHAR(20)      NULL COMMENT '등록자'
 ,UPD_DTM        VARCHAR(14)      NULL COMMENT '변경일시'

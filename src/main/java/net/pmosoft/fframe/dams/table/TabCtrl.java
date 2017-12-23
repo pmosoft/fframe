@@ -16,6 +16,23 @@ public class TabCtrl {
     @Autowired
     private TabSrv tabSrv;
 
+    
+    
+
+    /**********************************************************************************
+    *
+    *                                   Excel Upload
+    *
+    **********************************************************************************/
+    
+    /**
+     * 엑셀 업로드된 테이블정보를 임시 테이블에 저장한다.
+     */
+    @RequestMapping(value = "/dams/table/insertExcelTabColList")
+    public Map<String, Object> insertExcelTabColList(@RequestParam Map<String,String> params) { 
+        return tabSrv.insertExcelTabColList(params);
+    }
+         
     /**********************************************************************************
     *
     *                                    Meta

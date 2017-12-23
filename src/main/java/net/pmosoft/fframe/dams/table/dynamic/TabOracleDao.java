@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -87,7 +88,7 @@ public class TabOracleDao implements TabDaoFactory {
             rs = pstmt.executeQuery();
             
             while(rs.next()){
-                HashMap<String, Object> map = new HashMap<String, Object>();
+                LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
                 //map.put("STS_NM"        ,rs.getString("STS_NM"        )); 
                 map.put("DB_NM"         ,rs.getString("DB_NM"         ));
                 map.put("OWNER"         ,rs.getString("OWNER"         ));
@@ -155,7 +156,7 @@ public class TabOracleDao implements TabDaoFactory {
             rs = pstmt.executeQuery();
             
             while(rs.next()){
-                HashMap<String, Object> map = new HashMap<String, Object>();
+                LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
                 
                 //map.put("STS_NM"        ,rs.getString("STS_NM"        )); 
                 map.put("DB_NM"         ,rs.getString("DB_NM"       )); 

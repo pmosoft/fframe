@@ -18,10 +18,11 @@ Ext.define('fframe.dams.table.ExtMetaTabColListModel', {
    ,stores : {
         extMetaTabColList : {
             fields : [
-                      'STS_NM'
+                      'STS_NM'         
                      ,'DB_NM'
                      ,'OWNER'
                      ,'TAB_NM'
+                     ,'TAB_HNM'
                      ,'COL_ID'
                      ,'COL_NM'
                      ,'COL_HNM'
@@ -39,7 +40,7 @@ Ext.define('fframe.dams.table.ExtMetaTabColListModel', {
                      ]
            ,proxy : {
                 type : 'ajax'
-               ,url : ''
+               ,url : '/dams/table/selectExtractMetaTabColList'
                ,reader : {
                     type : 'json' 
                    ,rootProperty : 'data'

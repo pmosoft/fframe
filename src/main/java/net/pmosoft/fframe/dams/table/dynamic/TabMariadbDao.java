@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public class TabMariadbDao implements TabDaoFactory {
             qry += "       ,CASE WHEN UPPER(A.DATA_TYPE) = 'INT' THEN UPPER(A.DATA_TYPE)                       \n";
             qry += "             ELSE UPPER(A.COLUMN_TYPE)                                                     \n";
             qry += "        END                   AS DATA_TYPE_DESC                                            \n";
-            qry += "       ,CASE WHEN IS_NULLABLE = 'NO' THEN 'NOT NULL' ELSE '' END AS NULLABLE           \n";
+            qry += "       ,CASE WHEN IS_NULLABLE = 'NO' THEN 'NOT NULL' ELSE '' END AS NULLABLE               \n";
             qry += "       ,''                    AS PK                                                        \n";
             qry += "       ,UPPER(A.DATA_TYPE)    AS DATA_TYPE_NM                                              \n";
             qry += "       ,CASE WHEN UPPER(A.DATA_TYPE) IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH \n";
@@ -83,7 +84,7 @@ public class TabMariadbDao implements TabDaoFactory {
             rs = pstmt.executeQuery();
             
             while(rs.next()){
-                HashMap<String, Object> map = new HashMap<String, Object>();
+                LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
                 //map.put("STS_NM"        ,rs.getString("STS_NM"        )); 
                 map.put("DB_NM"         ,rs.getString("DB_NM"         )); 
                 map.put("OWNER"         ,rs.getString("OWNER"         ));
@@ -157,7 +158,7 @@ public class TabMariadbDao implements TabDaoFactory {
             rs = pstmt.executeQuery();
             
             while(rs.next()){
-                HashMap<String, Object> map = new HashMap<String, Object>();
+                LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
                 
                 //map.put("STS_NM"        ,rs.getString("STS_NM"        )); 
                 map.put("DB_NM"         ,rs.getString("DB_NM"       )); 

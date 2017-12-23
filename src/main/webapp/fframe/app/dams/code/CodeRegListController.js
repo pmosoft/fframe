@@ -157,7 +157,7 @@ Ext.define('fframe.dams.code.CodeRegListController', {
             ,success : function(res){
                 var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
-                    location.href = "http://localhost:8080/files/excel/code.xls";
+                    location.href = "/fframe/files/excel/code.xls";
                 } else {
                     Ext.Msg.alert("알림",result['errUsrMsg']);
                     return;

@@ -145,11 +145,14 @@ Ext.define('fframe.dams.table.TabColListController', {
      ***************/    
     ,selBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
+        
+        console.log('value ' + Ext.getCmp('tabChk').getValue());        
         store.proxy.setUrl("/dams/table/selectTabColList");
         store.getProxy().setExtraParam("DB_CONN_CD_NM",viewModel.get("DB_CONN_CD_NM"));
         store.getProxy().setExtraParam("DB_USR_UCD_NM",viewModel.get("DB_USR_UCD_NM"));
         store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
         store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
+        store.getProxy().setExtraParam("tabChk",Ext.getCmp('tabChk').getValue());
         store.load();
      }
     ,searchBtn : function(f,e,op) {

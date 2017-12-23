@@ -35,14 +35,7 @@
 		<nature>org.springframework.ide.eclipse.core.springnature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
-		<nature>org.zeroturnaround.eclipse.jrebelNature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
+		<nature>org.zeroturnaround.eclipse.jrebelNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>sample</name>
-			<type>2</type>
-			<location>C:/fframe/sample</location>
-		</link>
-	</linkedResources>
 </projectDescription>

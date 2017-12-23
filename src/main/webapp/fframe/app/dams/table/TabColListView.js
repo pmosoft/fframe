@@ -55,6 +55,7 @@ Ext.define('fframe.dams.table.TabColListView', {
                , bind :{value:'{searchValue}'}  , enableKeyEvents: true 
                , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
            }
+          ,{xtype:'checkboxfield', id: 'tabChk', boxLabel: '테이블단위'}          
          ,'->'
          ,{xtype:'button' , text:'조회' ,id : 'selBtnId', handler:'selBtn' , iconCls: 'x-fa fa-gift'}
         ] 
@@ -72,25 +73,24 @@ Ext.define('fframe.dams.table.TabColListView', {
           ,plugins    : ['clipboard' , 'selectionreplicator' , 'cellediting']  //{ptype:'cellediting',clicksToEdit:2}                
           ,viewConfig : {stripeRows:false} //,enableTextSelection: true,markDirty: false
           //,resizable  : true
-          ,forceFit: true
           ,columns    : {
               defaults: {style:'text-align:center' , align:'left' , editor:{xtype:'textfield'}}             
              ,items:   
               [
-                {text:'DB명'           , dataIndex:'DB_NM'          , width:50  , align:'center'}
-               ,{text:'소유자'         , dataIndex:'OWNER'          , width:50  , align:'center'}
-               ,{text:'테이블명'       , dataIndex:'TAB_NM'         , width:60  , align:'center'}
-               ,{text:'테이블한글명'   , dataIndex:'TAB_HNM'        }
-               ,{text:'순번'           , dataIndex:'COL_ID'         , width:40  , align:'center'}
-               ,{text:'컬럼명'         , dataIndex:'COL_NM'         }
-               ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'        }
+                {text:'DB명'           , dataIndex:'DB_NM'          , width:80  , align:'center'}
+               ,{text:'소유자'         , dataIndex:'OWNER'          , width:80  , align:'center'}
+               ,{text:'테이블명'       , dataIndex:'TAB_NM'         , width:150}
+               ,{text:'테이블한글명'   , dataIndex:'TAB_HNM'        , width:150}
+               ,{text:'순번'           , dataIndex:'COL_ID'         , width:50  , align:'center'}
+               ,{text:'컬럼명'         , dataIndex:'COL_NM'         , width:150}
+               ,{text:'컬럼한글명'     , dataIndex:'COL_HNM'        , width:150}
                ,{text:'데이터타입설명' , dataIndex:'DATA_TYPE_DESC' }
                ,{text:'NULL'           , dataIndex:'NULLABLE'       , width:50 }
-               ,{text:'PK'             , dataIndex:'PK'             , width:30 }
+               ,{text:'PK'             , dataIndex:'PK'             , width:40 }
                ,{text:'데이터타입명'   , dataIndex:'DATA_TYPE_NM'   , hidden:true}
                ,{text:'길이'           , dataIndex:'LEN'            , hidden:true}
                ,{text:'소수점수'       , dataIndex:'DECIMAL_CNT'    , hidden:true}
-               ,{text:'컬럼설명'       , dataIndex:'COL_DESC'       }
+               ,{text:'컬럼설명'       , dataIndex:'COL_DESC'       , width:400 }
                ,{text:'등록일시'       , dataIndex:'REG_DTM'        , hidden:true}
                ,{text:'등록자'         , dataIndex:'REG_USR_ID'     , hidden:true}
                ,{text:'변경일시'       , dataIndex:'UPD_DTM'        , hidden:true}

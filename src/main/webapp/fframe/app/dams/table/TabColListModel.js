@@ -10,7 +10,8 @@ Ext.define('fframe.dams.table.TabColListModel', {
        ,TAB_COL_UCD_NM     : ''        
        ,searchKeyCombo : 'COL_HNM'
        ,searchValue : ''
-       ,termStsCd : '99'    
+       ,termStsCd : '99'
+       ,tabChk : 'check'
      }
     ,stores : {
          TabColList : {

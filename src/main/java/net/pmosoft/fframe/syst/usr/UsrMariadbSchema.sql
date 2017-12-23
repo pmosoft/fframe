@@ -4,7 +4,7 @@
 CREATE TABLE TSYUR00010 (
  USR_ID      VARCHAR(40)    NOT NULL COMMENT '사용자아이디'    
 ,USR_EMAIL   VARCHAR(40)    NOT NULL comment '사용자이메일'    
-,USR_PW      VARCHAR(20)    NOT NULL comment '사용자암호'      
+,USR_PW      VARCHAR(100)   NOT NULL comment '사용자암호'      
 ,USR_NM      VARCHAR(40)    NOT NULL comment '사용자명'        
 ,USR_AGE     INT                NULL comment '사용자나이'      
 ,USE_YN       CHAR(1)       NOT NULL comment '사용여부'        

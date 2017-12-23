@@ -36,7 +36,7 @@ Ext.define('fframe.dams.code.CodeExtListView', {
       //-------------------------------------------
       ,{
           xtype      : 'grid'
-         ,reference  : 'codeExtListGrid'     
+         ,reference  : 'codeExtListGrid'
          ,plugins    : [{ptype:'gridexporter'}]              
          ,requires   : ['Ext.grid.selection.SpreadsheetModel' , 'Ext.grid.plugin.Clipboard']
          ,height     : 150 , frame: true , columnLines : true

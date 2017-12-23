@@ -66,6 +66,7 @@ Ext.define('fframe.dams.code.CodeExtRegListView', {
       //-------------------------------------------
       ,{
           xtype      : 'grid'
+         ,reference  : 'codeExtRegListGrid'
          ,plugins    : [{ptype:'gridexporter'}]              
          ,requires   : ['Ext.grid.selection.SpreadsheetModel' , 'Ext.grid.plugin.Clipboard']
          ,height     : 150 , frame: true , columnLines : true
