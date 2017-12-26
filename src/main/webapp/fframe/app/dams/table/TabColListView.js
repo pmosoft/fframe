@@ -55,7 +55,7 @@ Ext.define('fframe.dams.table.TabColListView', {
                , bind :{value:'{searchValue}'}  , enableKeyEvents: true 
                , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
            }
-          ,{xtype:'checkboxfield', id: 'tabChk', boxLabel: '테이블단위'}          
+          ,{xtype:'checkboxfield', id: 'tabChk', boxLabel: '테이블단위', listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}}          
          ,'->'
          ,{xtype:'button' , text:'조회' ,id : 'selBtnId', handler:'selBtn' , iconCls: 'x-fa fa-gift'}
         ] 
