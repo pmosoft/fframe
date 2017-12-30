@@ -1,6 +1,6 @@
 Ext.define('fframe.app.dams.table.TabColListModel', {
      extend: 'Ext.app.ViewModel'
-    ,alias: 'viewmodel.TabColList'
+    ,alias: 'viewmodel.tabColList'
     ,data : {
         DB_CONN_CD        : '00'
        ,DB_CONN_CD_NM     : 'ALL'        
@@ -14,7 +14,7 @@ Ext.define('fframe.app.dams.table.TabColListModel', {
        ,tabChk : 'check'
      }
     ,stores : {
-         TabColList : {
+         tabColList : {
              fields : [
                         'DB_NM'
                        ,'OWNER'

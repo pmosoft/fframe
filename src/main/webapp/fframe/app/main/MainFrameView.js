@@ -67,15 +67,19 @@ Ext.define('fframe.app.main.MainFrameView', {
 			    },
 				selectionchange : function ( obj, record){
 				    try {
-    					console.log("record.get page:"+record.get("page"));
-    					var centerPage = obj.up("viewport").down("component[region=center]");
-    					//console.log("centerPage="+centerPage);
-    					centerPage.removeAll(true);
-    					centerPage.add({
-    						xtype : record.get("page")
-    						//xtype : "UsrList"
-    					})
+                        console.log("record.get page:"+record.get("page"));
+                        var centerPage = obj.up("viewport").down("component[region=center]");
+                        //console.log("centerPage="+centerPage);
+                        centerPage.removeAll(true);
+                        var component = Ext.widget(record.get("page"));
+                        centerPage.add(component);
+
+//                        centerPage.add({
+//                        xtype : record.get("page")
+//                        })
+                        
 				    } catch(err) {
+				        return;
 				    }	
 				} 
 			},
@@ -127,7 +131,7 @@ Ext.define('fframe.app.main.MainFrameView', {
                         children : [ 
                         {
                             text : '테이블컬럼목록',
-                            page : 'TabColList',
+                            page : 'tabColList',
                             leaf : true
                         },{
                             text : '테이블목록',
@@ -173,11 +177,15 @@ Ext.define('fframe.app.main.MainFrameView', {
                             page : 'samfileLod',
                             leaf : true
                         },{
-                            text : '테이블로딩',
+                            text : '단일테이블ETT',
                             page : 'tabEtt',
                             leaf : true
                         },{
-                            text : '쿼리로딩',
+                            text : '복수테이블ETT',
+                            page : 'tabsEtt',
+                            leaf : true
+                        },{
+                            text : '쿼리ETT',
                             page : 'sqlEtt',
                             leaf : true
                         },{
@@ -236,8 +244,7 @@ Ext.define('fframe.app.main.MainFrameView', {
         bodyBorder: false,
 		flex : 1,
 		items : {
-			xtype : 'panel',
-			html : "<h2>Main DashBoard</h2>"
+			xtype : "UsrList"
 		}		
 	}]
 });

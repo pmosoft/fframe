@@ -15,9 +15,9 @@
 ********************************************************************************/
 Ext.define('fframe.app.dams.table.TabColListView', {
     extend     : 'Ext.form.Panel' 
-   ,xtype      : 'TabColList' 
-   ,controller : 'TabColList' 
-   ,viewModel  : 'TabColList'
+   ,xtype      : 'tabColList' 
+   ,controller : 'tabColList' 
+   ,viewModel  : 'tabColList'
    ,listeners  : { resize : 'setGridHeight', boxready:'comboLoad'}
 //    ,initComponent: function() {
 //        this.store = "SomeStore";
