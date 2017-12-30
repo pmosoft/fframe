@@ -2,6 +2,14 @@ Ext.define('fframe.app.main.MainFrameView', {
 	extend : 'Ext.container.Viewport',
 	xtype : 'MainFrame',
 	layout : 'border',
+	
+	
+//    defaults: {
+//        //collapsible: true,
+//        split: false,
+//        bodyPadding: 10
+//    },
+	
 	items :
 	//-----------------------------	
 	// top 메뉴	
@@ -10,10 +18,15 @@ Ext.define('fframe.app.main.MainFrameView', {
 		xtype : 'panel',
 		region : 'north',
 		title : 'FFRAME',
-		height : 80,
+		//split: true,
+        //collapsible: true,        
+		bodyBorder: false,
+		//height : 80,
 		header : false,
 		items : [{
 			xtype : 'toolbar',
+			style:'border-color:#99BBE8;background-color:#D3E1F1 !important;',
+			
 			items : [
 			{
 				xtype : 'label',
@@ -35,13 +48,23 @@ Ext.define('fframe.app.main.MainFrameView', {
 	//-----------------------------	
 	{
 		xtype : 'panel',
+		title : 'Menu',
 		region : 'west',
 		split : true,
-		width : 200,
+		collapsible: true,
+		header : false,
+		//width : 200,
 		layout : 'fit',
+
 		items : [ {
 			xtype : 'treelist',
 			listeners : {
+			    boxready : function ( obj, record){
+			        centerPage.removeAll(true);
+			        centerPage.add({
+                        xtype : "UsrList"
+			        })
+			    },
 				selectionchange : function ( obj, record){
 				    try {
     					console.log("record.get page:"+record.get("page"));
@@ -50,6 +73,7 @@ Ext.define('fframe.app.main.MainFrameView', {
     					centerPage.removeAll(true);
     					centerPage.add({
     						xtype : record.get("page")
+    						//xtype : "UsrList"
     					})
 				    } catch(err) {
 				    }	
@@ -208,6 +232,8 @@ Ext.define('fframe.app.main.MainFrameView', {
 	{ 
 		xtype : 'panel',
 		region : 'center',
+        split : false,
+        bodyBorder: false,
 		flex : 1,
 		items : {
 			xtype : 'panel',
