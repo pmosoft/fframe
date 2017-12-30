@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.table.ExtMetaTabColListModel', {
+Ext.define('fframe.app.dams.table.ExtMetaTabColListModel', {
     extend: 'Ext.app.ViewModel'
    ,alias: 'viewmodel.extMetaTabColList'
    ,data : {

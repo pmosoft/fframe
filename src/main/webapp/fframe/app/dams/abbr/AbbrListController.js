@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.abbr.AbbrListController', {
+Ext.define('fframe.app.dams.abbr.AbbrListController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.abbrList'
         

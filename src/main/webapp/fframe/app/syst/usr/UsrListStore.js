@@ -1,4 +1,4 @@
-Ext.define('fframe.syst.usr.UsrListStore', {
+Ext.define('fframe.app.syst.usr.UsrListStore', {
     extend: 'Ext.data.BufferedStore',
     alias: 'store.UsrList',
     storedId : 'UsrList',

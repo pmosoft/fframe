@@ -13,7 +13,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.gens.GenPgmByTmplView', {
+Ext.define('fframe.app.gens.GenPgmByTmplView', {
      extend      : 'Ext.form.Panel'
     ,xtype       : 'genPgmByTmpl'
     ,controller  : 'genPgmByTmpl'

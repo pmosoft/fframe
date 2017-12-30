@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.pack.PackRegController', {
+Ext.define('fframe.app.dams.pack.PackRegController', {
      extend:'Ext.app.ViewController' 
     ,alias:'controller.PackReg'
     ,onLoadData : function(obj){

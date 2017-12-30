@@ -1,4 +1,4 @@
-Ext.define('fframe.etcl.SamfileLodController', {
+Ext.define('fframe.app.etcl.SamfileLodController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.samfileLod'
         

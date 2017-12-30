@@ -1,4 +1,4 @@
-Ext.define('fframe.syst.usr.UsrListView', {
+Ext.define('fframe.app.syst.usr.UsrListView', {
      extend : 'Ext.form.Panel' 
     ,xtype:'UsrList'  
     ,controller: 'UsrList' 

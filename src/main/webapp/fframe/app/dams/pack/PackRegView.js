@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.pack.PackRegView', {
+Ext.define('fframe.app.dams.pack.PackRegView', {
      extend:'Ext.window.Window' 
     ,xtype:'PackReg' 
     ,controller:'PackReg' 

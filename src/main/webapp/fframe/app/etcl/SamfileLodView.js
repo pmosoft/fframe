@@ -22,7 +22,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.etcl.SamfileLodView', {
+Ext.define('fframe.app.etcl.SamfileLodView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'samfileLod'
    ,controller : 'samfileLod'

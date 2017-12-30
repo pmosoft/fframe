@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.code.CodeRegListModel', {
+Ext.define('fframe.app.dams.code.CodeRegListModel', {
     extend : 'Ext.app.ViewModel'
    ,alias  : 'viewmodel.codeRegList'
    ,data   : {

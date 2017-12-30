@@ -4,7 +4,7 @@
  *
  * TODO - Replace this content of this view to suite the needs of your application.
  */
-Ext.define('fframe.main.MainController', {
+Ext.define('fframe.app.main.MainController', {
     extend: 'Ext.app.ViewController',
 
     alias: 'controller.main',

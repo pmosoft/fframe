@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.table.TabColListModel', {
+Ext.define('fframe.app.dams.table.TabColListModel', {
      extend: 'Ext.app.ViewModel'
     ,alias: 'viewmodel.TabColList'
     ,data : {

@@ -1,7 +1,7 @@
 /**
  * This view is an example list of people.
  */
-Ext.define('fframe.view.main.List', {
+Ext.define('fframe.app.view.main.List', {
     extend: 'Ext.grid.Grid',
     xtype: 'mainlist',
 

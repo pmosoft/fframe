@@ -13,7 +13,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.gens.GenPgmByCopyView', {
+Ext.define('fframe.app.gens.GenPgmByCopyView', {
      extend      : 'Ext.form.Panel'
     ,xtype       : 'genPgmByCopy'
     ,controller  : 'genPgmByCopy'

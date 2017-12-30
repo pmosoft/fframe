@@ -1,4 +1,4 @@
-Ext.define('fframe.gens.GenPgmByTmplModel', {
+Ext.define('fframe.app.gens.GenPgmByTmplModel', {
      extend : 'Ext.app.ViewModel'
     ,alias  : 'viewmodel.genPgmByTmpl'
     ,data   : {

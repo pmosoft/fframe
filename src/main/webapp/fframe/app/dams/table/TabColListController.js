@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.table.TabColListController', {
+Ext.define('fframe.app.dams.table.TabColListController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.TabColList'
     /**********************************************************

@@ -13,7 +13,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.dams.table.TabListView', {
+Ext.define('fframe.app.dams.table.TabListView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'tabList'
    ,controller : 'tabList'

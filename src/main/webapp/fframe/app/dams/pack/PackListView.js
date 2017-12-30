@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.pack.PackListView', {
+Ext.define('fframe.app.dams.pack.PackListView', {
      extend: 'Ext.form.Panel'
     ,xtype: 'packList'
     ,controller: 'packList'

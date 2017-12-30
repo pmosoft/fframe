@@ -1,4 +1,4 @@
-Ext.define('fframe.syst.usr.UsrRegController', {
+Ext.define('fframe.app.syst.usr.UsrRegController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.UsrReg',
     onLoadData : function(obj){

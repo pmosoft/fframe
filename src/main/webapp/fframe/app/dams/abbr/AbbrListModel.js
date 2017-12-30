@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.abbr.AbbrListModel', {
+Ext.define('fframe.app.dams.abbr.AbbrListModel', {
     extend: 'Ext.app.ViewModel'
    ,alias: 'viewmodel.abbrList'
    ,data : {

@@ -1,4 +1,4 @@
-Ext.define('fframe.main.Login', {
+Ext.define('fframe.app.main.Login', {
 	extend : 'Ext.window.Window',
 	xtype : 'Login',
 	layout : 'center',

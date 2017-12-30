@@ -22,7 +22,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.dams.table.ExtMetaTabColListView', {
+Ext.define('fframe.app.dams.table.ExtMetaTabColListView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'extMetaTabColList'
    ,controller : 'extMetaTabColList'

@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.pack.PackListController', {
+Ext.define('fframe.app.dams.pack.PackListController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.packList'
     ,setGridHeight : function(obj){ 

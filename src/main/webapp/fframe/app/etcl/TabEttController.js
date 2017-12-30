@@ -1,6 +1,6 @@
-Ext.define('fframe.app.dams.info.InfoListController', {
+Ext.define('fframe.app.etcl.TabEttController', {
      extend : 'Ext.app.ViewController'
-    ,alias : 'controller.infoList'
+    ,alias : 'controller.tabEtt'
         
     /**********************************************************
      * Main Event
@@ -39,7 +39,7 @@ Ext.define('fframe.app.dams.info.InfoListController', {
      }﻿        
         
     /****************
-     * 코드확장 조회
+     * 코드확장
      ****************/    
     ,codeExt : function(obj) {
         var view = this.getView(); var viewModel = view.getViewModel();
@@ -66,16 +66,113 @@ Ext.define('fframe.app.dams.info.InfoListController', {
         }
         //console.log("commCombo.store.getAt(0).get('value')"+commCombo.store.getAt(0).get('value'));
      }
-        
-    /*********
-     * 추출
-     *********/    
-    ,extBtn : function(btn) {
-    	var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
+
+     /****************
+      * 코드확장 조회
+      ****************/    
+     ,tabBtn2 : function(obj) {
+         var view = this.getView(); var viewModel = view.getViewModel();
+         var store = viewModel.getStore(view['xtype']);
+         var combo = view.down("#TAB_LIST");
+         var records = combo.store.getRange(); 
+         var j = 0;
+         console.log("combo.value="+combo.value);
+         console.log("records[i].data.key="+records[0].data.key);
+//         for (var i = 0; i < records.length; i++) {
+//             if(records[i].data.CD == combo.value) {
+//                 viewModel.set("CD_ID_NM"  ,records[i].data.CD_ID_NM);
+//                 viewModel.set("CD"        ,records[i].data.CD);
+//                 
+//             }
+//         }
+         //console.log("commCombo.store.getAt(0).get('value')"+commCombo.store.getAt(0).get('value'));
+      }
+
+     /**********************
+      * 테이블 그리드 조회
+      **********************/    
+     ,srcTabListGridBtn : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+         var view = this.getView(); var viewModel = view.getViewModel();
+         var store = viewModel.getStore('tabEtt');
+         var grid = view.down("#srcTabListGrid");
+         console.log("grid="+grid);
+
+         
+         store.proxy.setUrl("/dams/table/selectMetaTabColList");
+         
+         store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
+         store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
+         store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );
+         store.getProxy().setExtraParam("datasource",viewModel.data.datasource);
+         store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );
+         store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );
+         store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );
+         store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);
+         store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);
+         store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);
+
+         store.getProxy().setExtraParam("TAB_NM"   ,record.get("TAB_NM"));
+         viewModel.set("TAB_NM"  , record.get("TAB_NM"));
+             
+         store.load({
+             
+             callback : function(data,result,success){
+                 if(success) {
+                     result = Ext.JSON.decode(result._response.responseText);
+                     data = result['data'];
+                     //combo.setValue(data[0].CD);
+                     
+                     var model2 = [];
+                     for (var i = 0; i < data.length; i++) {
+                         model2.push({ text: data[i].COL_HNM, dataIndex: data[i].COL_NM } ); 
+                     }
+                     
+                     viewModel.set("colCnt"  , data.length);
+
+                     fields = [];
+
+                     for (var i = 0; i < data.length; i++) {
+                         fields.push({ name: data[i].COL_NM , type : 'string' }); 
+                     }
+                     
+                     //store.setFields(fields);
+                     //console.log("store.getFields()="+store.getFields());
+
+                     //model.setFields(fieldsArray)
+                     
+                     //grid.reconfigure(store2,model2);
+                     grid.reconfigure(model2);         
+                     
+                 }
+             }
+         });
+         
+         
+//         var store2 = Ext.create('Ext.data.Store',{ 
+//                      fields : ['title1','title2','title3',  'title4'  ]
+//             //        , data : [ { title1 : '첫번째 값', title2 : '두번째 값', title3 : '세번째 값', title4 : '네번째 값' } ]
+//                     , proxy : { type : 'memory' } });
+//         var model2 = [];
+//         for(var i=0; i<4; i++) { 
+//             model2.push({ text: 'Title'+(i+1), flex: 1, dataIndex: 'title'+(i+1) } ); 
+//         }
+//         
+//         //grid.reconfigure(store2,model2);
+//         grid.reconfigure(model2);         
+      }
+     
+     
+     
+    /**************
+     * 테이블 검색
+     **************/    
+    ,srcTabListGridBtn2 : function(btn) {
+    	var view = this.getView(); var viewModel = view.getViewModel(); 
+    	var store = viewModel.getStore(view['xtype']);
         console.log("view['xtype']="+view['xtype']);
-        store.proxy.setUrl("/dams/info/selectExtractMetaTabColList");
-        
-    	store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
+        store.proxy.setUrl("/dams/table/selectMetaTabList");
+
+        store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
         store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
         store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );
         store.getProxy().setExtraParam("datasource",viewModel.data.datasource);
@@ -85,9 +182,8 @@ Ext.define('fframe.app.dams.info.InfoListController', {
         store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);
         store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);
         store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);
-        store.getProxy().setExtraParam("TAB_NM"   ,viewModel.data.TAB_NM);
+        store.getProxy().setExtraParam("TAB_NM"    ,viewModel.data.TAB_NM);
 
-        
         store.load({
             callback : function(data){
                 console.log(data);
@@ -95,12 +191,117 @@ Ext.define('fframe.app.dams.info.InfoListController', {
         });
      }
 
+    /**************
+     * 샘플테이블데이터  검색
+     **************/    
+    ,samSelBtn : function(btn) {
+        var view = this.getView(); var viewModel = view.getViewModel(); 
+        var store = viewModel.getStore('tabEtt');
+        var grid = view.down("#tabGrid");
+        var gridStore = grid.getStore();
+        
+        console.log("view['xtype']="+view['xtype']);
+        store.proxy.setUrl("/dams/table/selectTabData");
+
+        console.log("viewModel.data.datasource="+viewModel.data.datasource);
+        
+        store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
+        store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
+        store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );
+        store.getProxy().setExtraParam("datasource",viewModel.data.datasource);
+        store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );
+        store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );
+        store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );
+        store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);
+        store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);
+        store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);
+        store.getProxy().setExtraParam("TAB_NM"    ,viewModel.data.TAB_NM);
+
+        store.load({
+            callback : function(data,result,success){
+
+                result = Ext.JSON.decode(result._response.responseText);
+                data = result['data'];
+
+                console.log(data);
+                
+                console.log(data[0][0]);
+                console.log(data[0][1]);
+                console.log(data[1][1]);
+                console.log(data.keys());
+                
+                var array2 = new Array();
+                for (var key in data[0]) {
+                  array2.push(data[0][value]);
+                }
+                console.log(array2);
+
+//                for (var i = 0; i < data.length; i++) {
+//                    
+//                    model2.push({ text: data[i].COL_HNM, dataIndex: data[i].COL_NM } ); 
+//                    newRecord = Ext.data.Record.create
+//                    (
+//                     [
+//                       {name:'CD_ID_NM'        ,type:'string'}
+//                     ]
+//                    );
+//                    newRecord.set('CD_ID_NM'      , result.data[i].CD_ID_NM      );
+//                    gridStore.add(newRecord);
+//                }
+//                
+            }
+        });
+     }
+    
+        
+    
+    /**************
+     * 테이블 검색
+     **************/    
+    ,tabDataBtn : function(btn) {
+        var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
+        console.log("view['xtype']="+view['xtype']);
+        store.proxy.setUrl("/dams/table/selectMetaTabList");
+
+        store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
+        store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
+        store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );
+        store.getProxy().setExtraParam("datasource",viewModel.data.datasource);
+        store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );
+        store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );
+        store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );
+        store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);
+        store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);
+        store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);
+        store.getProxy().setExtraParam("TAB_NM"    ,viewModel.data.TAB_NM);
+
+        store.load({
+            callback : function(data){
+                console.log(data);
+            }
+        });
+     }
+    
+    
+    
+    ,searchBtn : function(f,e,op) {
+        if (e.getKey() == e.ENTER) {
+            this.tabBtn();
+        }
+     }
+
+    ,excelUpload : function(obj) {
+        var frm = obj.up("form").getForm();
+        console.log("frm.getValues()="+frm.getValues());
+     }
+    ,multiple : function(fileObj){ fileObj.fileInputEl.set({multiple:'multiple'});}        
+    
     /*********
      * 비교
      *********/    
     ,cmpBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
-        store.proxy.setUrl("/dams/info/selectCmpTabColList");
+        store.proxy.setUrl("/etcl/selectCmpTabColList");
         store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
         store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
         store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );
@@ -120,7 +321,7 @@ Ext.define('fframe.app.dams.info.InfoListController', {
     ,tabDelBtn : function(btn) {
         var view = this.getView(); var viewModel = view.getViewModel();
         var params = viewModel.getData();
-        var grid = btn.up("infoList").down("grid");
+        var grid = btn.up("tabEtt").down("grid");
         console.log("grid="+grid);
         
         //var record = grid.getSelectionModel().getSelected();        
@@ -170,7 +371,7 @@ Ext.define('fframe.app.dams.info.InfoListController', {
         //});        
 
         Ext.Ajax.request({
-             url : '/dams/info/deleteTabCol'
+             url : '/etcl/deleteTabCol'
             ,method : 'post'
             //,params : { data:"[{aa:11,bb:22},{aa:1,bb:22}]"}
             ,params : { data:jsonDataEncode}
@@ -194,7 +395,7 @@ Ext.define('fframe.app.dams.info.InfoListController', {
 //        var view = this.getView(); 
 //        var viewModel = view.getViewModel();
 //        //var store = viewModel.getStore('DelTabColList');
-//        var store = viewModel.getStore('infoList');
+//        var store = viewModel.getStore('tabEtt');
 //        //store.load();
 //        store.sync();        
      
@@ -208,7 +409,7 @@ Ext.define('fframe.app.dams.info.InfoListController', {
         var params = viewModel.getData();
         
         Ext.Ajax.request({
-            url : '/dams/info/insertCmpTabColList',
+            url : '/etcl/insertCmpTabColList',
             method : 'post',
             params : params,
             success : function(res){

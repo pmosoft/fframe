@@ -1,10 +1,12 @@
-Ext.define('fframe.app.dams.info.InfoListModel', {
+Ext.define('fframe.app.etcl.TabEttModel', {
     extend: 'Ext.app.ViewModel'
-   ,alias: 'viewmodel.infoList'
+   ,alias: 'viewmodel.tabEtt'
    ,data : {
+       // 콤보 변수    
         CD_ID_NM   : ''        
        ,CD         : '01'        
        ,CD_NM      : 'FFRAME'
+       // DB_CONN_CD 변수    
        ,dbInfo     : ''
        ,datasource : ''
        ,dbDriver   : ''
@@ -13,10 +15,16 @@ Ext.define('fframe.app.dams.info.InfoListModel', {
        ,dbPassword : ''
        ,dbType     : ''
        ,dbOwner    : ''
-       ,TAB_NM     : '%'
+       // 테이블검색 변수    
+       ,TAB_NM     : ''        
+       // 정합성 변수    
+       ,colCnt     : ''        
+       ,delimeterCnt : ''        
+           
+           
     }
    ,stores : {
-        infoList : {
+        tabEtt : {
             fields : [
                       'STS_NM'
                      ,'DB_NM'
@@ -47,5 +55,16 @@ Ext.define('fframe.app.dams.info.InfoListModel', {
                 }
             }
         }
+      ,tabEtt : {
+          proxy : {
+              type : 'ajax'
+             ,url : ''
+             ,reader : {
+                  type : 'json' 
+                 ,rootProperty : 'data'
+              }
+          }
+       }
+
     }
 });

@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.table.CodeListView', {
+Ext.define('fframe.app.dams.table.CodeListView', {
      extend     : 'Ext.form.Panel' 
     ,xtype      : 'codeList' 
     ,controller : 'codeList' 

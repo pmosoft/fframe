@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.table.ExtMetaTabColListController', {
+Ext.define('fframe.app.dams.table.ExtMetaTabColListController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.extMetaTabColList'
         

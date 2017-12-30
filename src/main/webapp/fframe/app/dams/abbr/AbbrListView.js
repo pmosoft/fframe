@@ -22,7 +22,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.dams.abbr.AbbrListView', {
+Ext.define('fframe.app.dams.abbr.AbbrListView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'abbrList'
    ,controller : 'abbrList'

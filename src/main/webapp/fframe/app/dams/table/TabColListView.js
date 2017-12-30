@@ -13,7 +13,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.dams.table.TabColListView', {
+Ext.define('fframe.app.dams.table.TabColListView', {
     extend     : 'Ext.form.Panel' 
    ,xtype      : 'TabColList' 
    ,controller : 'TabColList' 
@@ -47,10 +47,10 @@ Ext.define('fframe.dams.table.TabColListView', {
         ,items : 
          [
            {xtype:'component' , width:40  , html:['&nbsp;','DB명']}             
-          ,{xtype:'commCombo' , width:170 , itemId:'DB_CONN_CD' , bind :{value:'{DB_CONN_CD}'}, listeners:{select:'dbComboSel'}}
+          ,{xtype:'commCombo' , width:170 , itemId:'DB_CONN_CD' , bind :{value:'{DB_CONN_CD}'}, listeners:{select:'dbComboSel',afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}}
           ,{xtype:'component' , width:65  , html:['&nbsp;&nbsp;&nbsp;','DB유저']}             
-          ,{xtype:'commCombo' , width:170 , itemId:'DB_USR_UCD' , bind :{value:'{DB_USR_UCD}'}, listeners:{select:'dbusrComboSel'}}
-          ,{xtype:'commCombo' , width:170 , itemId:'TAB_COL_UCD' , bind :{value:'{TAB_COL_UCD}'} , listeners:{select:'tabComboSel'}}
+          ,{xtype:'commCombo' , width:170 , itemId:'DB_USR_UCD' , bind :{value:'{DB_USR_UCD}'}, listeners:{select:'dbusrComboSel',afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}}
+          ,{xtype:'commCombo' , width:170 , itemId:'TAB_COL_UCD' , bind :{value:'{TAB_COL_UCD}'} , listeners:{select:'tabComboSel',afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}}
           ,{xtype:'textfield' , name:'searchValue' , width:200 , emptyText:'검색어를 입력하세요'
                , bind :{value:'{searchValue}'}  , enableKeyEvents: true 
                , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}

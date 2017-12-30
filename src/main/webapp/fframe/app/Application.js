@@ -3,7 +3,7 @@
  * calls Ext.application(). This is the ideal place to handle application launch and
  * initialization details.
  */
-Ext.define('fframe.Application', {
+Ext.define('fframe.app.Application', {
     extend: 'Ext.app.Application',
 
     name: 'fframe',

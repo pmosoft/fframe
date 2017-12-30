@@ -1,4 +1,4 @@
-Ext.define('fframe.main.MainFrameView', {  
+Ext.define('fframe.app.main.MainFrameView', {  
 	extend : 'Ext.container.Viewport',
 	xtype : 'MainFrame',
 	layout : 'border',

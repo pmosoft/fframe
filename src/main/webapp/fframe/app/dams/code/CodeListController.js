@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.table.CodeListController', {
+Ext.define('fframe.app.dams.table.CodeListController', {
     extend : 'Ext.app.ViewController'
    ,alias  : 'controller.codeList'
        

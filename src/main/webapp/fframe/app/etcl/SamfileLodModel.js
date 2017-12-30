@@ -1,4 +1,4 @@
-Ext.define('fframe.etcl.SamfileLodModel', {
+Ext.define('fframe.app.etcl.SamfileLodModel', {
     extend: 'Ext.app.ViewModel'
    ,alias: 'viewmodel.samfileLod'
    ,data : {

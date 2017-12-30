@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.table.CodeListModel', {
+Ext.define('fframe.app.dams.table.CodeListModel', {
     extend : 'Ext.app.ViewModel'
    ,alias  : 'viewmodel.codeList'
    ,data   : {

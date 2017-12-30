@@ -1,4 +1,4 @@
-Ext.define('fframe.syst.usr.UsrRegModel', {
+Ext.define('fframe.app.syst.usr.UsrRegModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.UsrReg',
     data : {

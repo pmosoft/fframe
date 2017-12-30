@@ -20,7 +20,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/    
-Ext.define('fframe.dams.code.CodeRegListView', {
+Ext.define('fframe.app.dams.code.CodeRegListView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'codeRegList'
    ,controller : 'codeRegList'

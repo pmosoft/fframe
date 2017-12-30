@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.term.TermListModel', {
+Ext.define('fframe.app.dams.term.TermListModel', {
     extend: 'Ext.app.ViewModel'
    ,alias: 'viewmodel.termList'
    ,data : {

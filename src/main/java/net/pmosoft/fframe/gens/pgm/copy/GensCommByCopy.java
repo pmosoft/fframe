@@ -20,10 +20,10 @@ public class GensCommByCopy implements GensPgmByCopy {
     String prjNm          = "fframe";                                //프로젝트명
     String bascPathNm     = "c:/fframe/workspace/fframe/src/main";   //소스기본경로
     String javaBascPathNm = bascPathNm + "/java/net/pmosoft/fframe"; //자바기본경로
-    String webBasePathNm  = bascPathNm + "/webapp/app";              //웹기본경로
+    String webBasePathNm  = bascPathNm + "/webapp";       //웹기본경로
 
     /******************************************
-     * 입력 파라미터
+     * 입력 파라미터 
      *****************************************/
     String srcPackNm          = ""; //패키지명(예:net.pmosoft.fframe.gens.test)
     String srcGenPackNm       = ""; //회사명이 배제된 패키지명(예:gens.test)

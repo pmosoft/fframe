@@ -1,11 +1,11 @@
-Ext.define('fframe.gens.GenPgmByCopyModel', {
+Ext.define('fframe.app.gens.GenPgmByCopyModel', {
      extend : 'Ext.app.ViewModel'
     ,alias  : 'viewmodel.genPgmByCopy'
     ,data   : {
-         srcPackNm     : 'net.pmosoft.fframe.dams.table'
-        ,srcPgmNm      : 'ExtMetaTabColListView'
-        ,tarPackNm     : 'net.pmosoft.fframe.dams.abbr'
-        ,tarPgmNm      : 'AbbrListView'
+         srcPackNm     : 'fframe.app.etcl'
+        ,srcPgmNm      : 'SamfileLod'
+        ,tarPackNm     : 'fframe.app.etcl'
+        ,tarPgmNm      : 'TabEtt'
         ,genResult     : ''
         ,CD            : '01'       
         ,CD_NM         : 'EXTJSP'       

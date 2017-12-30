@@ -1,4 +1,4 @@
-Ext.define('fframe.comm.CommCombo',{
+Ext.define('fframe.app.comm.CommCombo',{
     extend       : 'Ext.form.field.ComboBox'
    ,alias        : 'widget.commCombo'
    ,editable     : false

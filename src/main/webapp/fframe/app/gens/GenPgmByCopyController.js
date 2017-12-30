@@ -1,4 +1,4 @@
-Ext.define('fframe.gens.GenPgmByCopyController', {
+Ext.define('fframe.app.gens.GenPgmByCopyController', {
      extend: 'Ext.app.ViewController'
     ,alias: 'controller.genPgmByCopy'
         

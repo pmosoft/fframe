@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.code.CodeExtRegListController', {
+Ext.define('fframe.app.dams.code.CodeExtRegListController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.codeExtRegList'
         

@@ -22,7 +22,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.dams.info.InfoListView', {
+Ext.define('fframe.app.dams.info.InfoListView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'infoList'
    ,controller : 'infoList'

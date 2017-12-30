@@ -23,7 +23,7 @@ public class GensPgmByTmpl {
     String prjNm = "fframe";                                            //프로젝트명
     String srcBascPathNm = "c:/fframe/workspace/fframe/src/main";       //소스기본경로
     String javaBascPathNm = srcBascPathNm + "/java/net/pmosoft/fframe"; //자바기본경로
-    String webBasePathNm = srcBascPathNm + "/webapp/app";               //웹기본경로
+    String webBasePathNm = srcBascPathNm + "/webapp";                   //웹기본경로
     String tmplBascPathNm = javaBascPathNm + "/gens/pgm/tmpl/sample";   //템플릿기본경로
 
     /******************************************

@@ -1,4 +1,4 @@
-Ext.define('fframe.gens.GenPgmByTmplController', {
+Ext.define('fframe.app.gens.GenPgmByTmplController', {
      extend: 'Ext.app.ViewController'
     ,alias: 'controller.genPgmByTmpl'
     ,saveBtn : function(btn) {

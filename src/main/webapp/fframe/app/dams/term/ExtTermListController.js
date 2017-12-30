@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.term.ExtTermListController', {
+Ext.define('fframe.app.dams.term.ExtTermListController', {
      extend : 'Ext.app.ViewController'
     ,alias : 'controller.extTermList'
         

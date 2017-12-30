@@ -21,7 +21,7 @@
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
-Ext.define('fframe.dams.term.ExtTermListView', {
+Ext.define('fframe.app.dams.term.ExtTermListView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'extTermList' 
    ,controller : 'extTermList'

@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.pack.PackListModel', {
+Ext.define('fframe.app.dams.pack.PackListModel', {
      extend: 'Ext.app.ViewModel'
     ,alias: 'viewmodel.packList'
     ,data : {

@@ -1,4 +1,4 @@
-Ext.define('fframe.dams.pack.PackRegModel', {
+Ext.define('fframe.app.dams.pack.PackRegModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.PackReg',
     data : {

@@ -1,7 +1,7 @@
 /**
  * 사용자 등록, 보기
  */
-Ext.define('fframe.syst.usr.UsrRegView', {
+Ext.define('fframe.app.syst.usr.UsrRegView', {
     extend: 'Ext.window.Window',
     xtype: 'UsrReg',
     controller: 'UsrReg',

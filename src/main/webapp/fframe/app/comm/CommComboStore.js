@@ -1,4 +1,4 @@
-Ext.define('fframe.comm.CommComboStore', {
+Ext.define('fframe.app.comm.CommComboStore', {
     extend : 'Ext.data.Store'
    ,alias  : 'store.commCombo'
    ,storeId  : 'commCombo'
