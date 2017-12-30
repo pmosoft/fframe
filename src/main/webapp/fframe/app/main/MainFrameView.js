@@ -53,7 +53,7 @@ Ext.define('fframe.app.main.MainFrameView', {
 		split : true,
 		collapsible: true,
 		header : false,
-		//width : 200,
+		width : 200,
 		layout : 'fit',
 
 		items : [ {
@@ -242,9 +242,10 @@ Ext.define('fframe.app.main.MainFrameView', {
 		region : 'center',
         split : false,
         bodyBorder: false,
+        //margin: '10 0 10 10',        
 		flex : 1,
 		items : {
-			xtype : "UsrList"
+			xtype : "tabEtt"
 		}		
 	}]
 });

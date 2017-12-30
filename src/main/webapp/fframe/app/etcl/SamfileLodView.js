@@ -52,7 +52,7 @@ Ext.define('fframe.app.etcl.SamfileLodView', {
                 ,items : 
                  [
                    {xtype:'component' , html:['&nbsp;','DB선택','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;']}             
-                  ,{xtype:'commCombo' , itemId:'DB_CONN_CD' , bind :{value:'{CD}'} , listeners:{select:'codeExt'}}
+                  ,{xtype:'commCombo' , itemId:'DB_CONN_CD' , bind :{value:'{CD}'} , listeners:{select:'codeChange'}}
                  ]
              }
             ,{

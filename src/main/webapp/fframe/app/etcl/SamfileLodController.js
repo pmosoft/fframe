@@ -39,9 +39,9 @@ Ext.define('fframe.app.etcl.SamfileLodController', {
      }﻿        
         
     /****************
-     * 코드확장
+     * 코드 콤보 변경
      ****************/    
-    ,codeExt : function(obj) {
+    ,codeChange : function(obj) {
         var view = this.getView(); var viewModel = view.getViewModel();
         var store = viewModel.getStore(view['xtype']);
         var combo = view.down("#DB_CONN_CD");

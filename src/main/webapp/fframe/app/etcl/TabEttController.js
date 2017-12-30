@@ -6,13 +6,18 @@ Ext.define('fframe.app.etcl.TabEttController', {
      * Main Event
      *********************************************************/    
 
-    /****************
-     * 코드로드
-     ****************/    
-    ,comboLoad : function(obj){
+    ,comboLoad : function(obj) {
+         this.srcDbConnCombo(obj);
+         this.tarDbConnCombo(obj);
+     }    
+    
+    /***********************
+     * SRC DB접속콤보 로드
+     ***********************/    
+    ,srcDbConnCombo : function(obj){
         var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
-        var combo = view.down("#DB_CONN_CD");
-        combo.store.getProxy().setExtraParam("CD_ID_NM",combo.itemId);
+        var combo = view.down("#SRC_DB_CONN_CD");
+        combo.store.getProxy().setExtraParam("CD_ID_NM","DB_CONN_CD");
         combo.getStore().load({
             callback : function(data,result,success){
                 if(success) {
@@ -21,16 +26,16 @@ Ext.define('fframe.app.etcl.TabEttController', {
                     //combo.setValue(data[0].CD);                    
                     for (var i = 0; i < data.length; i++) {
                         if(data[i].CD == combo.value) {
-                            viewModel.set("CD_ID_NM"  ,data[i].CD_ID_NM);
-                            viewModel.set("CD"        ,data[i].CD);
-                            viewModel.set("dbInfo"    ,data[i].CD_DESC);
-                            viewModel.set("datasource",data[i].CD_PARAM1);
-                            viewModel.set("dbDriver"  ,data[i].CD_PARAM2);
-                            viewModel.set("dbConn"    ,data[i].CD_PARAM3);
-                            viewModel.set("dbUser"    ,data[i].CD_PARAM4);
-                            viewModel.set("dbPassword",data[i].CD_PARAM5);
-                            viewModel.set("dbType"    ,data[i].CD_PARAM6);
-                            viewModel.set("dbOwner"   ,data[i].CD_PARAM7);
+                            viewModel.set("srcDbConn_CD_ID_NM"       ,data[i].CD_ID_NM);
+                            viewModel.set("srcDbConn_CD" ,data[i].CD);
+                            viewModel.set("srcDbInfo"    ,data[i].CD_DESC);
+                            viewModel.set("srcDatasource",data[i].CD_PARAM1);
+                            viewModel.set("srcDbDriver"  ,data[i].CD_PARAM2);
+                            viewModel.set("srcDbConn"    ,data[i].CD_PARAM3);
+                            viewModel.set("srcDbUser"    ,data[i].CD_PARAM4);
+                            viewModel.set("srcDbPassword",data[i].CD_PARAM5);
+                            viewModel.set("srcDbType"    ,data[i].CD_PARAM6);
+                            viewModel.set("srcDbOwner"   ,data[i].CD_PARAM7);
                         }
                     }                    
                 }
@@ -38,28 +43,29 @@ Ext.define('fframe.app.etcl.TabEttController', {
         })
      }﻿        
         
-    /****************
-     * 코드확장
-     ****************/    
-    ,codeExt : function(obj) {
+    /**********************
+     * SRC DB접속콤보 변경
+     *********************/    
+    ,srcDbConnComboChg : function(obj) {
         var view = this.getView(); var viewModel = view.getViewModel();
         var store = viewModel.getStore(view['xtype']);
-        var combo = view.down("#DB_CONN_CD");
+        var combo = view.down("#SRC_DB_CONN_CD");
         var records = combo.store.getRange(); 
         var j = 0;
         console.log("combo.value="+combo.value);
         for (var i = 0; i < records.length; i++) {
             if(records[i].data.CD == combo.value) {
-                viewModel.set("CD_ID_NM"  ,records[i].data.CD_ID_NM);
-                viewModel.set("CD"        ,records[i].data.CD);
-                viewModel.set("dbInfo"    ,records[i].data.CD_DESC);
-                viewModel.set("datasource",records[i].data.CD_PARAM1);
-                viewModel.set("dbDriver"  ,records[i].data.CD_PARAM2);
-                viewModel.set("dbConn"    ,records[i].data.CD_PARAM3);
-                viewModel.set("dbUser"    ,records[i].data.CD_PARAM4);
-                viewModel.set("dbPassword",records[i].data.CD_PARAM5);
-                viewModel.set("dbType"    ,records[i].data.CD_PARAM6);
-                viewModel.set("dbOwner"   ,records[i].data.CD_PARAM7);
+                console.log("records[i].data.CD="+records[i].data.CD);            
+                viewModel.set("srcDbConn_CD_ID_NM"     ,records[i].data.CD_ID_NM);
+                viewModel.set("srcDbConn_CD" ,records[i].data.CD);
+                viewModel.set("srcDbInfo"    ,records[i].data.CD_DESC);
+                viewModel.set("srcDatasource",records[i].data.CD_PARAM1);
+                viewModel.set("srcDbDriver"  ,records[i].data.CD_PARAM2);
+                viewModel.set("srcDbConn"    ,records[i].data.CD_PARAM3);
+                viewModel.set("srcDbUser"    ,records[i].data.CD_PARAM4);
+                viewModel.set("srcDbPassword",records[i].data.CD_PARAM5);
+                viewModel.set("srcDbType"    ,records[i].data.CD_PARAM6);
+                viewModel.set("srcDbOwner"   ,records[i].data.CD_PARAM7);
                 viewModel.set("searchKeyCombo" ,records[i].data.CD_NM);
                 
             }
@@ -67,33 +73,133 @@ Ext.define('fframe.app.etcl.TabEttController', {
         //console.log("commCombo.store.getAt(0).get('value')"+commCombo.store.getAt(0).get('value'));
      }
 
-     /****************
-      * 코드확장 조회
-      ****************/    
-     ,tabBtn2 : function(obj) {
+     /**********************
+      * SRC 테이블 검색
+      *********************/    
+     ,srcTabListGridBtn : function(btn) {
+         var view = this.getView(); var viewModel = view.getViewModel(); 
+         var store = viewModel.getStore('srcTabList');
+         
+         store.proxy.setUrl("/dams/table/selectMetaTabList");
+
+         store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.srcDbConn_CD_ID_NM  );
+         store.getProxy().setExtraParam("CD"        ,viewModel.data.srcDbConn_CD        );
+         store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.srcDbInfo    );
+         store.getProxy().setExtraParam("datasource",viewModel.data.srcDatasource);
+         store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.srcDbDriver  );
+         store.getProxy().setExtraParam("dbConn"    ,viewModel.data.srcDbConn    );
+         store.getProxy().setExtraParam("dbUser"    ,viewModel.data.srcDbUser    );
+         store.getProxy().setExtraParam("dbPassword",viewModel.data.srcDbPassword);
+         store.getProxy().setExtraParam("dbType"    ,viewModel.data.srcDbType);
+         store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.srcDbOwner);
+         store.getProxy().setExtraParam("TAB_NM"    ,viewModel.data.srcTabNm);
+
+         store.load({
+             callback : function(data){
+                 console.log(data);
+             }
+         });
+      }
+     
+
+     /***********************
+      * TAR DB접속콤보 로드
+      ***********************/    
+     ,tarDbConnCombo : function(obj){
+         var view = this.getView(); var viewModel = view.getViewModel(); var store = viewModel.getStore(view['xtype']);
+         var combo = view.down("#TAR_DB_CONN_CD");
+         combo.store.getProxy().setExtraParam("CD_ID_NM","DB_CONN_CD");
+         combo.getStore().load({
+             callback : function(data,result,success){
+                 if(success) {
+                     result = Ext.JSON.decode(result._response.responseText);
+                     data = result['data'];
+                     //combo.setValue(data[0].CD);                    
+                     for (var i = 0; i < data.length; i++) {
+                         if(data[i].CD == combo.value) {
+                             viewModel.set("tarDbConn_CD_ID_NM"       ,data[i].CD_ID_NM);
+                             viewModel.set("tarDbConn_CD" ,data[i].CD);
+                             viewModel.set("tarDbInfo"    ,data[i].CD_DESC);
+                             viewModel.set("tarDatasource",data[i].CD_PARAM1);
+                             viewModel.set("tarDbDriver"  ,data[i].CD_PARAM2);
+                             viewModel.set("tarDbConn"    ,data[i].CD_PARAM3);
+                             viewModel.set("tarDbUser"    ,data[i].CD_PARAM4);
+                             viewModel.set("tarDbPassword",data[i].CD_PARAM5);
+                             viewModel.set("tarDbType"    ,data[i].CD_PARAM6);
+                             viewModel.set("tarDbOwner"   ,data[i].CD_PARAM7);
+                         }
+                     }                    
+                 }
+             }
+         })
+      }﻿        
+         
+     /**********************
+      * TAR DB접속콤보 변경
+      *********************/    
+     ,tarDbConnComboChg : function(obj) {
          var view = this.getView(); var viewModel = view.getViewModel();
          var store = viewModel.getStore(view['xtype']);
-         var combo = view.down("#TAB_LIST");
+         var combo = view.down("#TAR_DB_CONN_CD");
          var records = combo.store.getRange(); 
          var j = 0;
          console.log("combo.value="+combo.value);
-         console.log("records[i].data.key="+records[0].data.key);
-//         for (var i = 0; i < records.length; i++) {
-//             if(records[i].data.CD == combo.value) {
-//                 viewModel.set("CD_ID_NM"  ,records[i].data.CD_ID_NM);
-//                 viewModel.set("CD"        ,records[i].data.CD);
-//                 
-//             }
-//         }
+         for (var i = 0; i < records.length; i++) {
+             if(records[i].data.CD == combo.value) {
+                 console.log("records[i].data.CD="+records[i].data.CD);            
+                 viewModel.set("tarDbConn_CD_ID_NM"     ,records[i].data.CD_ID_NM);
+                 viewModel.set("tarDbConn_CD" ,records[i].data.CD);
+                 viewModel.set("tarDbInfo"    ,records[i].data.CD_DESC);
+                 viewModel.set("tarDatasource",records[i].data.CD_PARAM1);
+                 viewModel.set("tarDbDriver"  ,records[i].data.CD_PARAM2);
+                 viewModel.set("tarDbConn"    ,records[i].data.CD_PARAM3);
+                 viewModel.set("tarDbUser"    ,records[i].data.CD_PARAM4);
+                 viewModel.set("tarDbPassword",records[i].data.CD_PARAM5);
+                 viewModel.set("tarDbType"    ,records[i].data.CD_PARAM6);
+                 viewModel.set("tarDbOwner"   ,records[i].data.CD_PARAM7);
+                 viewModel.set("searchKeyCombo" ,records[i].data.CD_NM);
+                 
+             }
+         }
          //console.log("commCombo.store.getAt(0).get('value')"+commCombo.store.getAt(0).get('value'));
       }
 
+      /**********************
+       * TAR 테이블 검색
+       *********************/    
+      ,tarTabListGridBtn : function(btn) {
+          var view = this.getView(); var viewModel = view.getViewModel(); 
+          var store = viewModel.getStore('tarTabList');
+          
+          store.proxy.setUrl("/dams/table/selectMetaTabList");
+
+          store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.tarDbConn_CD_ID_NM  );
+          store.getProxy().setExtraParam("CD"        ,viewModel.data.tarDbConn_CD        );
+          store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.tarDbInfo    );
+          store.getProxy().setExtraParam("datasource",viewModel.data.tarDatasource);
+          store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.tarDbDriver  );
+          store.getProxy().setExtraParam("dbConn"    ,viewModel.data.tarDbConn    );
+          store.getProxy().setExtraParam("dbUser"    ,viewModel.data.tarDbUser    );
+          store.getProxy().setExtraParam("dbPassword",viewModel.data.tarDbPassword);
+          store.getProxy().setExtraParam("dbType"    ,viewModel.data.tarDbType);
+          store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.tarDbOwner);
+          store.getProxy().setExtraParam("TAB_NM"    ,viewModel.data.tarTabNm);
+
+          store.load({
+              callback : function(data){
+                  console.log(data);
+              }
+          });
+       }
+           
+     
+
      /**********************
-      * 테이블 그리드 조회
+      * 소스 테이블 그리드 조회
       **********************/    
-     ,srcTabListGridBtn : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+     ,srcTabListGridBtn222 : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts) {
          var view = this.getView(); var viewModel = view.getViewModel();
-         var store = viewModel.getStore('tabEtt');
+         var store = viewModel.getStore('srcTabList');
          var grid = view.down("#srcTabListGrid");
          console.log("grid="+grid);
 
@@ -163,33 +269,6 @@ Ext.define('fframe.app.etcl.TabEttController', {
      
      
      
-    /**************
-     * 테이블 검색
-     **************/    
-    ,srcTabListGridBtn2 : function(btn) {
-    	var view = this.getView(); var viewModel = view.getViewModel(); 
-    	var store = viewModel.getStore(view['xtype']);
-        console.log("view['xtype']="+view['xtype']);
-        store.proxy.setUrl("/dams/table/selectMetaTabList");
-
-        store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
-        store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
-        store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );
-        store.getProxy().setExtraParam("datasource",viewModel.data.datasource);
-        store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );
-        store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );
-        store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );
-        store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);
-        store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);
-        store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);
-        store.getProxy().setExtraParam("TAB_NM"    ,viewModel.data.TAB_NM);
-
-        store.load({
-            callback : function(data){
-                console.log(data);
-            }
-        });
-     }
 
     /**************
      * 샘플테이블데이터  검색
