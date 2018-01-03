@@ -153,7 +153,13 @@ Ext.define('fframe.app.dams.table.TabColListController', {
         store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
         store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
         store.getProxy().setExtraParam("tabChk",Ext.getCmp('tabChk').getValue());
-        store.load();
+        console.log('222222222222222222222222222');        
+        store.load({
+            callback : function(data){
+                console.log(data);
+            }
+        });
+
      }
     ,searchBtn : function(f,e,op) {
         if (e.getKey() == e.ENTER) {

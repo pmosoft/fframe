@@ -97,7 +97,7 @@ Ext.define('fframe.app.dams.table.TabColListView', {
                ,{text:'변경자'         , dataIndex:'UPD_USR_ID'     , hidden:true}
               ]
           }   
-         ,bind:{store:'{TabColList}'}
+         ,bind:{store:'{tabColList}'}
      }
     ]
 });

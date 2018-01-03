@@ -37,8 +37,12 @@ public class DbConnection {
         
         System.out.println("getConnection(params)="+params);
         try {
-            Class.forName(params.get("dbDriver"));
-            conn = DriverManager.getConnection(params.get("dbConn"),params.get("dbUser"),params.get("dbPassword"));
+            if(params.get("dbType").equals("SQLITE")){
+                conn = DriverManager.getConnection(params.get("dbConn"));
+            } else {
+                Class.forName(params.get("dbDriver"));
+                conn = DriverManager.getConnection(params.get("dbConn"),params.get("dbUser"),params.get("dbPassword"));
+            }        
         } catch (Exception e) {
             e.printStackTrace();
         } finally {            

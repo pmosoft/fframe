@@ -56,7 +56,12 @@ Ext.define('fframe.app.dams.table.TabListController', {
         var view = this.getView(); var viewModel = view.getViewModel();  var store = viewModel.getStore(view['xtype']);
         store.getProxy().setExtraParam("searchKeyCombo",viewModel.get("searchKeyCombo"));
         store.getProxy().setExtraParam("searchValue",viewModel.get("searchValue"));
-        store.load();
+        store.load({
+            callback : function(data){
+                console.log(data);
+            }
+        });
+
      }
     ,searchBtn : function(f,e,op) {
         if (e.getKey() == e.ENTER) {
