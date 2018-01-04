@@ -98,7 +98,17 @@ Ext.define('fframe.app.etcl.TabEttModel', {
                    ,totalProperty : 'total'       
                 }   
             }   
-       }   
+       }  
+      ,tabLod : {
+          proxy : {      
+              type : 'ajax'      
+             ,url : ''      
+             ,reader : {      
+                  type : 'json'       
+                 ,rootProperty : 'data'      
+              }      
+          }      
+       }      
       ,srcTabList2 : {
           proxy : {
               type : 'ajax'

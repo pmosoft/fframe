@@ -53,9 +53,12 @@ Ext.define('fframe.app.main.MainFrameView', {
 		split : true,
 		collapsible: true,
 		header : false,
-		width : 200,
+		height: Ext.Element.getViewportHeight()-80,
+		defaults: {
+	       scrollable: true
+	    },		
+		width : 220,
 		layout : 'fit',
-
 		items : [ {
 			xtype : 'treelist',
 			listeners : {
@@ -79,6 +82,7 @@ Ext.define('fframe.app.main.MainFrameView', {
 //                        })
                         
 				    } catch(err) {
+				        console.log("err="+err);
 				        return;
 				    }	
 				} 
@@ -136,6 +140,10 @@ Ext.define('fframe.app.main.MainFrameView', {
                         },{
                             text : '테이블목록',
                             page : 'tabList',
+                            leaf : true
+                        },{
+                            text : '테이블조회',
+                            page : 'tabQry',
                             leaf : true
                         },{
                             text : '테이블정보추출',
@@ -238,11 +246,15 @@ Ext.define('fframe.app.main.MainFrameView', {
 	// center 메뉴	
 	//-----------------------------	
 	{ 
-		xtype : 'panel',
+		xtype : 'panel' ,
 		region : 'center',
         split : false,
-        bodyBorder: false,
-        //margin: '10 0 10 10',        
+        bodyBorder: false,                
+        //margin: '10 0 10 10',
+        height: Ext.Element.getViewportHeight()-80,
+        defaults: {
+           scrollable: true
+        },      
 		flex : 1,
 		items : {
 			xtype : "tabEtt"
