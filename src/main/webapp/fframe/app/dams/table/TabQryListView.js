@@ -23,7 +23,7 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
    //-------------------------------------------
    // titletoolbar
    //-------------------------------------------
-   ,title : '테이블 데이터 조회'
+   ,title : '테이블 조회'
    ,defaults: {
         bodyPadding: 10
         //,scrollable: true
@@ -50,6 +50,8 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
                , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'tabSelBtn'}
             }
            ,'->'
+           ,{xtype:'button' , text:'Insert추출' , handler:'tabSelBtn' , iconCls:'x-fa fa-gift'}
+           ,{xtype:'button' , text:'CSV추출' , handler:'tabSelBtn' , iconCls:'x-fa fa-gift'}
            ,{xtype:'button' , text:'조회' , handler:'tabSelBtn' , iconCls:'x-fa fa-gift'}
           ]
       }
@@ -93,7 +95,7 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
             {xtype:'component' , html:['&nbsp;','쿼리','&nbsp;&nbsp;']}             
            ,{xtype:'textareafield' , name:'qry' ,flex :1 , bind :{value:'{qry}'}}
            ,'->'
-           ,{xtype:'button' , text:'다운' , id:'excelDownBtn', handler:'excelDownBtn' , iconCls:'x-fa fa-download'}
+           ,{xtype:'button' , text:'엑셀다운' , id:'excelDownBtn', handler:'excelDownBtn' , iconCls:'x-fa fa-download'}
            ,{xtype:'button' , text:'조회' , handler:'tabDataBtn' , iconCls:'x-fa fa-gift'}
           ]
       }

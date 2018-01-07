@@ -46,8 +46,8 @@ public interface TabDaoFactory {
     public List<Map<String, Object>> selectQryData(Map<String,String> params) throws Exception;
 
     public List<Map<String, Object>> selectIsExistTab(Map<String,String> params);
-
     
+    public List<Map<String, Object>> downloadCsvData(Map<String,String> params) throws Exception;
     
 }
 

@@ -8,6 +8,8 @@ Ext.define('fframe.app.main.MainFrameView', {
 //        split: false,
 //        bodyPadding: 10
 //    },
+
+
 	
 	items :
 	//-----------------------------	
@@ -60,6 +62,8 @@ Ext.define('fframe.app.main.MainFrameView', {
 		layout : 'fit',
 		items : [ {
 			xtype : 'treelist',
+			
+			
 			listeners : {
 			    boxready : function ( obj, record){
 			        centerPage.removeAll(true);
@@ -86,13 +90,14 @@ Ext.define('fframe.app.main.MainFrameView', {
 				    }	
 				} 
 			},
+			seArrows: true,
 			store : {
 				root : {
 					expanded : true,
 					children : [ {
 						text : '유저',
 						iconCls : 'x-fa fa-gift',
-						expanded : true,
+						expanded : false,
 						selectable : false,
 						children : [ {
 							text : '유저목록',
@@ -102,7 +107,7 @@ Ext.define('fframe.app.main.MainFrameView', {
 					}, {
 						text : '메타',
 						iconCls : 'x-fa fa-gift',
-						expanded : true,
+						expanded : false,
 						selectable : false,
 						children : [ 
 			            {
@@ -142,6 +147,7 @@ Ext.define('fframe.app.main.MainFrameView', {
                             leaf : true
                         },{
                             text : '테이블조회',
+                            selected : true,
                             page : 'tabQryList',
                             leaf : true
                         },{
@@ -152,7 +158,7 @@ Ext.define('fframe.app.main.MainFrameView', {
 					}, {
 						text : '코드',
 						iconCls : 'x-fa fa-gift',
-						expanded : true,
+						expanded : false,
 						selectable : false,
 						children : [ 
 			            {
@@ -173,10 +179,10 @@ Ext.define('fframe.app.main.MainFrameView', {
                             leaf : true
 						}
 						]
-                    }, {
+					}, {
                         text : 'ETCL',
                         iconCls : 'x-fa fa-shopping-cart',
-                        expanded : true,
+                        expanded : false,
                         selectable : false,
                         children : [ 
                         {
@@ -201,20 +207,42 @@ Ext.define('fframe.app.main.MainFrameView', {
                             leaf : true
                         }
                         ]
-					}, {
-						text : '메뉴',
-						iconCls : 'x-fa fa-shopping-cart',
-						expanded : true,
-						selectable : false,
-						children : [ {
-							text : '메뉴목록',
-							page : 'UserRegView',
-							leaf : true
-						} ]
+                    }, {
+                        text : '거버넌스',
+                        iconCls : 'x-fa fa-shopping-cart',
+                        expanded : false,
+                        selectable : false,
+                        children : [ 
+                        {
+                            text : '화면목록정합성',
+                            page : 'samfileLod',
+                            leaf : true
+                        },{
+                            text : '화면주석정합성',
+                            page : 'sqlEtt',
+                            leaf : true
+                        },{
+                            text : '화면소스표준화',
+                            page : 'sqlEtt',
+                            leaf : true
+                        },{
+                            text : '배치목록정합성',
+                            page : 'sqlEtt',
+                            leaf : true
+                        },{
+                            text : '배치주석정합성',
+                            page : 'sqlEtt',
+                            leaf : true
+                        },{
+                            text : '배치소스표준화',
+                            page : 'sqlEtt',
+                            leaf : true
+                        }    
+                        ]
                     }, {
                         text : '소스생성',
                         iconCls : 'x-fa fa-shopping-cart',
-                        expanded : true,
+                        expanded : false,
                         selectable : false,
                         children : [ 
                         {
@@ -226,10 +254,20 @@ Ext.define('fframe.app.main.MainFrameView', {
                             page : 'genPgmByTmpl',
                             leaf : true
                         }]
+                    }, {
+                        text : '메뉴',
+                        iconCls : 'x-fa fa-shopping-cart',
+                        expanded : false,
+                        selectable : false,
+                        children : [ {
+                            text : '메뉴목록',
+                            page : 'UserRegView',
+                            leaf : true
+                        } ]
 					}, {
 						text : '로그',
 						 iconCls : 'x-fa  fa-users',
-						expanded : true,
+						expanded : false,
 						selectable : false,
 						children : [ {
 							text : '로그목록',
@@ -239,6 +277,12 @@ Ext.define('fframe.app.main.MainFrameView', {
 					} ]
 				}
 			}
+            ,viewConfig: {
+                plugins: [{
+                    ptype: 'treeviewdragdrop',
+                    containerScroll: true
+                }]
+            }  			
 		} ]
 	},
 	//-----------------------------	
@@ -249,7 +293,7 @@ Ext.define('fframe.app.main.MainFrameView', {
 		region : 'center',
         split : false,
         bodyBorder: false,                
-        //margin: '10 0 10 10',
+        //margin: '10 0 10 10', 
         height: Ext.Element.getViewportHeight()-80,
         defaults: {
            scrollable: true

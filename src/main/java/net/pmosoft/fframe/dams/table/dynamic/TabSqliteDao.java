@@ -14,7 +14,7 @@ import net.pmosoft.fframe.comm.db.DbConnection;
 import net.pmosoft.fframe.comm.db.LoggableStatement;
 
    
-public class TabSqliteDao implements TabDaoFactory {
+public class TabSqliteDao extends TabCommonDao implements TabDaoFactory {
 
 
 
@@ -175,26 +175,6 @@ public class TabSqliteDao implements TabDaoFactory {
         } finally { if(conn != null) try { conn.close();} catch(Exception ee){}}
         
         return listRs;
-    }
-
-
-    @Override
-    public List<Map<String, Object>> selectTabData(Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-    @Override
-    public List<Map<String, Object>> selectQryData(Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Map<String, Object>> selectIsExistTab(Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     
