@@ -42,53 +42,6 @@ public class TabSrv {
 
     @Autowired
     private TabValidatorSrv tabValidatorSrv;
-
-    /**********************************************************************************
-    *
-    *                                   Excel Upload
-    *
-    **********************************************************************************/
-
-    public Map<String, Object> insertExcelTabColList(Map<String,String> params){
-
-        
-        Map<String, Object> result = new HashMap<String, Object>();
-        
-        try{
-
-            String data = params.get("data");
-            Gson gson = new Gson(); 
-            Type type = new TypeToken<List<Map<String,String>>>() {}.getType();
-            List<Map<String,Object>> listParams  = gson.fromJson(data, type);
-
-            // 1.단계 : 메타테이블컬럼정보 삭제                
-            tabDao.deleteMetaTabCol(params);
-            
-            // 2단계 : 메타테이블컬럼정보 삽입                
-            for (int i = 0; i  < listParams.size(); i++) {
-                tabDao.insertMetaTabCol(listParams.get(i));
-            }
-
-            // 3단계 : 메타테이블정보 삽입
-            tabDao.deleteMetaTab(params);
-            
-            for (int i = 0; i  < listParams.size(); i++) {
-                if  (tabDao.selectMetaTabCnt(listParams.get(i))==0) {
-                    tabDao.insertMetaTab(listParams.get(i));
-                } 
-            }
-            
-            result.put("isSuccess", true);
-            //result.put("data", list);
-        } catch (Exception e){
-            result.put("isSuccess", false);
-            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-            result.put("errSysrMsg", e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
-    }    
-    
     
     
     /**********************************************************************************
@@ -134,48 +87,6 @@ public class TabSrv {
         return result;
     }
 
-
-    public Map<String, Object> selectTabData(Map<String,String> params){
-        
-        Map<String, Object> result = new HashMap<String, Object>();
-        System.out.println("paramsaaaaaaaaaaaaaaaaaaaaaaaaaa="+params);
-        
-        try{
-            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
-            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
-            List<Map<String,Object>> list = tabDaoFactory.selectTabData(params);
-           
-            result.put("isSuccess", true);
-            result.put("data", list);
-        } catch (Exception e){
-            result.put("isSuccess", false);
-            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-            result.put("errSysrMsg", e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    public Map<String, Object> selectQryData(Map<String,String> params){
-        
-        Map<String, Object> result = new HashMap<String, Object>();
-        
-        
-        try{
-            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
-            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
-            List<Map<String,Object>> list = tabDaoFactory.selectQryData(params);
-           
-            result.put("isSuccess", true);
-            result.put("data", list);
-        } catch (Exception e){
-            result.put("isSuccess", false);
-            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-            result.put("errSysrMsg", e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
-    }    
     
     /**********************************************************************************
     *
@@ -316,10 +227,6 @@ public class TabSrv {
         return result;
     }   
 
-    
-
-     
-    
     /**********************************************************************************
     *
     *                                  Tab
@@ -381,13 +288,6 @@ public class TabSrv {
         return result;
     }
     
-    
-    /**********************************************************************************
-    *
-    *                                   Tab
-    *
-    **********************************************************************************/
-
     public Map<String, Object> selectTabList(Map<String,String> params){
 
         Map<String, Object> result = new HashMap<String, Object>();
@@ -445,4 +345,96 @@ public class TabSrv {
         return result;
     }
 
+    public Map<String, Object> selectTabData(Map<String,String> params){
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        System.out.println("paramsaaaaaaaaaaaaaaaaaaaaaaaaaa="+params);
+        
+        try{
+            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
+            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
+            List<Map<String,Object>> list = tabDaoFactory.selectTabData(params);
+           
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public Map<String, Object> selectQryData(Map<String,String> params){
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        
+        
+        try{
+            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
+            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
+            List<Map<String,Object>> list = tabDaoFactory.selectQryData(params);
+           
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }    
+
+    
+
+    /**********************************************************************************
+    *
+    *                                   Excel Upload
+    *
+    **********************************************************************************/
+
+    public Map<String, Object> insertExcelTabColList(Map<String,String> params){
+
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        
+        try{
+
+            String data = params.get("data");
+            Gson gson = new Gson(); 
+            Type type = new TypeToken<List<Map<String,String>>>() {}.getType();
+            List<Map<String,Object>> listParams  = gson.fromJson(data, type);
+
+            // 1.단계 : 메타테이블컬럼정보 삭제                
+            tabDao.deleteMetaTabCol(params);
+            
+            // 2단계 : 메타테이블컬럼정보 삽입                
+            for (int i = 0; i  < listParams.size(); i++) {
+                tabDao.insertMetaTabCol(listParams.get(i));
+            }
+
+            // 3단계 : 메타테이블정보 삽입
+            tabDao.deleteMetaTab(params);
+            
+            for (int i = 0; i  < listParams.size(); i++) {
+                if  (tabDao.selectMetaTabCnt(listParams.get(i))==0) {
+                    tabDao.insertMetaTab(listParams.get(i));
+                } 
+            }
+            
+            result.put("isSuccess", true);
+            //result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysrMsg", e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }    
+    
+    
+    
 }

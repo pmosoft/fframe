@@ -61,7 +61,6 @@ Ext.define('fframe.app.dams.table.TabListController', {
                 console.log(data);
             }
         });
-
      }
     ,searchBtn : function(f,e,op) {
         if (e.getKey() == e.ENTER) {

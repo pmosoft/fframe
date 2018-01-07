@@ -225,16 +225,16 @@ Ext.define('fframe.app.etcl.SamfileLodController', {
 
                 console.log(data);
                 
-                console.log(data[0][0]);
-                console.log(data[0][1]);
-                console.log(data[1][1]);
-                console.log(data.keys());
-                
-                var array2 = new Array();
-                for (var key in data[0]) {
-                  array2.push(data[0][value]);
-                }
-                console.log(array2);
+//                console.log(data[0][0]);
+//                console.log(data[0][1]);
+//                console.log(data[1][1]);
+//                console.log(data.keys());
+//                
+//                var array2 = new Array();
+//                for (var key in data[0]) {
+//                  array2.push(data[0][value]);
+//                }
+//                console.log(array2);
 
 //                for (var i = 0; i < data.length; i++) {
 //                    

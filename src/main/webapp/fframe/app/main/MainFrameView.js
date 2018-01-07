@@ -3,7 +3,6 @@ Ext.define('fframe.app.main.MainFrameView', {
 	xtype : 'MainFrame',
 	layout : 'border',
 	
-	
 //    defaults: {
 //        //collapsible: true,
 //        split: false,
@@ -143,7 +142,7 @@ Ext.define('fframe.app.main.MainFrameView', {
                             leaf : true
                         },{
                             text : '테이블조회',
-                            page : 'tabQry',
+                            page : 'tabQryList',
                             leaf : true
                         },{
                             text : '테이블정보추출',
@@ -257,7 +256,7 @@ Ext.define('fframe.app.main.MainFrameView', {
         },      
 		flex : 1,
 		items : {
-			xtype : "tabEtt"
+			xtype : "tabQryList"
 		}		
 	}]
 });

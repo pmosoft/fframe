@@ -1,24 +1,20 @@
 /*******************************************************************************
-@title:메타 테이블 정보 추출 
+@title:샘파일(CSV) 로드 추출 
 @description-start
- 1. 메타테이블 정보 추출
-   - 콤보박스에서 DB선택하면 DB접속정보를 코드 및 코드확장에서 가져온다
-   - 추출버튼 클릭하면 그리드에 출력
- 2. 비교기능
-   - 추출된 테이블 정보와 현재 저장된 테이블 정보를 비교하여 변경내용을 표시
- 3. 테이블정보삭제
-   - 저장된 테이블 정보를 삭제한다
- 4. 테이블정보 반영
-   - 신규 및 변경 메타테이블정보를 저장한다
+ 1. 타겟테이블 검색
+ 2. 타겟테이블 필드 그리드 생성
+ 3. 타겟테이블 샘플 데이터 출력(존재할 경우)
+ 4. 샘파일 지정 및 샘파일 출력
+ 5. 샘파일과 타켓테이블 스키마 정합성 체크
+ 6. 로딩 수행
 @description-end  
 @developer:피승현
-@progress-rate:100%
+@progress-rate:70%
 @update-history-start
 -------------------------------------------------------------------------------
 |   날짜   |수정자|내용
 -------------------------------------------------------------------------------
-|2017.10.01|피승현|최초개발
-|2017.10.10|피승현|주석정비
+|2017.11.01|피승현|최초개발
 -------------------------------------------------------------------------------
 @update-history-end
 ********************************************************************************/
@@ -37,73 +33,73 @@ Ext.define('fframe.app.etcl.SamfileLodView', {
    ,margin: '0 10 0 0'         
    ,items : 
     [
-     //-------------------------------------------
-     // 왼쪽 패널
-     //-------------------------------------------
-     {
-         width:450
-        ,margin: '0 10 0 0'         
-        ,items : 
-         [
-             {xtype : 'fieldcontainer' , layout: 'hbox' , height : 10}    
-            ,{
-                 xtype : 'toolbar'
-                ,height : 50
-                ,items : 
-                 [
-                   {xtype:'component' , html:['&nbsp;','DB선택','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;']}             
-                  ,{xtype:'commCombo' , itemId:'DB_CONN_CD' , bind :{value:'{CD}'} , listeners:{select:'codeChange'}}
-                 ]
-             }
-            ,{
-                 xtype : 'toolbar'
-                ,height : 50
-                ,items : 
-                 [
-                   {xtype:'component' , html:['&nbsp;','DB설명','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;']}             
-                  ,{xtype:'textfield' , name:'DB_INFO' , width:250, bind :{value:'{dbInfo}'}}
-                 ]
-             }
-            ,{
-                 xtype : 'toolbar'
-                ,height : 50
-                ,items : 
-                 [
-                  ,{xtype:'component' , html:['&nbsp;','테이블검색','&nbsp;&nbsp;']}             
-                  ,{xtype:'textfield' , name:'DB_INFO' , width:250, bind :{value:'{TAB_NM}'}
-                      , emptyText:'검색어를 입력하세요' , enableKeyEvents: true 
-                      ,listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
-                   }
-                  ,{xtype:'button' , text:'검색' , id:'selBtn', handler:'tabBtn' , iconCls:'x-fa fa-gift'}
-                 ]
-             }
-            //-------------------------------------------
-            // grid
-            //-------------------------------------------
-            ,{
-                 xtype      : 'grid'
-                ,margin     : '0 0 0 10'     
-                ,height     : 650 , frame: true , columnLines : true
-                ,viewConfig : {stripeRows:false}
-                ,listeners : {
-                    celldblclick : 'tabGrid'
+      //-------------------------------------------
+      // 왼쪽 패널
+      //-------------------------------------------
+      {
+          width:450
+         ,margin: '0 10 0 0'         
+         ,items : 
+          [
+              {xtype : 'fieldcontainer' , layout: 'hbox' , height : 10}    
+             ,{
+                  xtype : 'toolbar'
+                 ,height : 50
+                 ,items : 
+                  [
+                    {xtype:'component' , html:['&nbsp;','DB선택','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;']}             
+                   ,{xtype:'commCombo' , itemId:'DB_CONN_CD' , bind :{value:'{CD}'} , listeners:{select:'codeChange'}}
+                  ]
+              }
+             ,{
+                  xtype : 'toolbar'
+                 ,height : 50
+                 ,items : 
+                  [
+                    {xtype:'component' , html:['&nbsp;','DB설명','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;']}             
+                   ,{xtype:'textfield' , name:'DB_INFO' , width:250, bind :{value:'{dbInfo}'}}
+                  ]
+              }
+             ,{
+                  xtype : 'toolbar'
+                 ,height : 50
+                 ,items : 
+                  [
+                   ,{xtype:'component' , html:['&nbsp;','테이블검색','&nbsp;&nbsp;']}             
+                   ,{xtype:'textfield' , name:'DB_INFO' , width:250, bind :{value:'{TAB_NM}'}
+                       ,emptyText:'검색어를 입력하세요' , enableKeyEvents: true 
+                       ,listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
+                    }
+                   ,{xtype:'button' , text:'검색' , id:'selBtn', handler:'tabBtn' , iconCls:'x-fa fa-gift'}
+                  ]
+              }
+             //-------------------------------------------
+             // grid
+             //-------------------------------------------
+             ,{
+                  xtype      : 'grid'
+                 ,margin     : '0 0 0 10'     
+                 ,height     : 650 , frame: true , columnLines : true
+                 ,viewConfig : {stripeRows:false}
+                 ,listeners : {
+                     celldblclick : 'tabGrid'
+                  }
+                 ,columns    : {
+                     defaults: {style:'text-align:center' , align:'left'}             
+                    ,items:   
+                     [
+                       {text:'소유자'         , dataIndex:'OWNER'    , width:100 , align:'center' }
+                      ,{text:'테이블명'       , dataIndex:'TAB_NM'   , width:120      }
+                      ,{text:'테이블한글명'   , dataIndex:'TAB_HNM'  , width:200      }
+                     ]
                  }
-                ,columns    : {
-                    defaults: {style:'text-align:center' , align:'left'}             
-                   ,items:   
-                    [
-                      {text:'소유자'         , dataIndex:'OWNER'    , width:100 , align:'center' }
-                     ,{text:'테이블명'       , dataIndex:'TAB_NM'   , width:120      }
-                     ,{text:'테이블한글명'   , dataIndex:'TAB_HNM'  , width:200      }
-                    ]
-                }
-               ,bind:{store:'{samfileLod}'}
-             }
-         ]
+                ,bind:{store:'{samfileLod}'}
+              }
+          ]
       }
-     //-------------------------------------------
-     // 오른쪽 패널
-     //-------------------------------------------
+      //-------------------------------------------
+      // 오른쪽 패널
+      //-------------------------------------------
      ,{
           flex: 1
          ,margin: '0 10 0 0'         

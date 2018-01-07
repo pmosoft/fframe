@@ -16,23 +16,6 @@ public class TabCtrl {
     @Autowired
     private TabSrv tabSrv;
 
-    
-    
-
-    /**********************************************************************************
-    *
-    *                                   Excel Upload
-    *
-    **********************************************************************************/
-    
-    /**
-     * 엑셀 업로드된 테이블정보를 임시 테이블에 저장한다.
-     */
-    @RequestMapping(value = "/dams/table/insertExcelTabColList")
-    public Map<String, Object> insertExcelTabColList(@RequestParam Map<String,String> params) { 
-        return tabSrv.insertExcelTabColList(params);
-    }
-         
     /**********************************************************************************
     *
     *                                    Meta
@@ -179,7 +162,7 @@ public class TabCtrl {
     public Map<String, Object>  selectTabData(@RequestParam Map<String,String> params){
         return tabSrv.selectTabData(params);
     }
-    
+
     /*
      * 입력쿼리의 기술된 컬럼정보를 리턴
      * @param DB접속정보 및 쿼리 및 rowcnt
@@ -188,6 +171,19 @@ public class TabCtrl {
     public Map<String, Object>  selectQryData(@RequestParam Map<String,String> params){
         return tabSrv.selectQryData(params);
     }
+
+    /**********************************************************************************
+    *
+    *                                   Excel Upload
+    *
+    **********************************************************************************/
     
-    
+    /**
+     * 엑셀 업로드된 테이블정보를 임시 테이블에 저장한다.
+     */
+    @RequestMapping(value = "/dams/table/insertExcelTabColList")
+    public Map<String, Object> insertExcelTabColList(@RequestParam Map<String,String> params) { 
+        return tabSrv.insertExcelTabColList(params);
+    }
+
 }
