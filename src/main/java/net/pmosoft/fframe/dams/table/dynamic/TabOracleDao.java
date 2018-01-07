@@ -141,6 +141,7 @@ public class TabOracleDao implements TabDaoFactory {
             qry += "     , UPPER(A.TABLE_NAME)    AS TAB_NM            \n";
             qry += "     , UPPER(B.COMMENTS)      AS TAB_HNM           \n";
             qry += "     , ''                     AS TAB_DESC          \n";
+            qry += "     , NUM_ROWS               AS ROW_CNT          \n";
             qry += "       ,TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF2') AS REG_DTM    \n";
             qry += "       ,''                                          AS REG_USR_ID \n";
             qry += "       ,TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF2') AS UPD_DTM    \n";
@@ -168,6 +169,7 @@ public class TabOracleDao implements TabDaoFactory {
                 map.put("TAB_NM"        ,rs.getString("TAB_NM"      ));
                 map.put("TAB_HNM"       ,rs.getString("TAB_HNM"     ));
                 map.put("TAB_DESC"      ,rs.getString("TAB_DESC"    ));
+                map.put("ROW_CNT"       ,rs.getString("ROW_CNT"     ));
                 map.put("REG_DTM"       ,rs.getString("REG_DTM"     ));
                 map.put("REG_USR_ID"    ,rs.getString("REG_USR_ID"  ));
                 map.put("UPD_DTM"       ,rs.getString("UPD_DTM"     ));

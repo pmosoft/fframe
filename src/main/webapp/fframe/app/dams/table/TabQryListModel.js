@@ -24,6 +24,7 @@ Ext.define('fframe.app.dams.table.TabQryListModel', {
                       ,'OWNER'   
                       ,'TAB_NM'   
                       ,'TAB_HNM'   
+                      ,'ROW_CNT'
                       ,'TAB_DESC'   
                      ]   
            ,proxy : {   

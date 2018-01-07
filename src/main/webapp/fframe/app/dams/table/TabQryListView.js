@@ -72,7 +72,8 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
                ,{text:'소유자'       , dataIndex:'OWNER'     , flex : 1}             
                ,{text:'테이블명'     , dataIndex:'TAB_NM'    , flex : 2}             
                ,{text:'테이블한글명' , dataIndex:'TAB_HNM'   , flex : 3}             
-               ,{text:'테이블설명'   , dataIndex:'TABL_DESC' , flex : 4}             
+               ,{text:'건수'         , dataIndex:'ROW_CNT'   , flex : 1}
+               ,{text:'테이블설명'   , dataIndex:'TABL_DESC' , flex : 4}
               ]
          }
         ,bind:{store:'{tabGrid}'}
