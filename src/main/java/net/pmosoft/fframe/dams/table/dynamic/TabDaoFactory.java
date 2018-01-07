@@ -43,7 +43,7 @@ public interface TabDaoFactory {
      * 입력쿼리의 기술된 컬럼정보를 리턴
      * @param DB접속정보 및 쿼리 및 rowcnt
      * */
-    public List<Map<String, Object>> selectQryData(Map<String,String> params);
+    public List<Map<String, Object>> selectQryData(Map<String,String> params) throws Exception;
 
     public List<Map<String, Object>> selectIsExistTab(Map<String,String> params);
     

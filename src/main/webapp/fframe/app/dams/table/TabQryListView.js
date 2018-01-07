@@ -95,12 +95,21 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
            ,{xtype:'button' , text:'조회'           , handler:'tabDataBtn' , iconCls:'x-fa fa-gift'}
           ]
       }
+
+      //-------------------------------------------
+      // toolbar
+      //-------------------------------------------
+     ,{
+          xtype : 'toolbar'
+         ,height : 30
+         ,bind : '조회건수:{qryCnt}'
+      }     
       //-------------------------------------------  
       // grid  
       //-------------------------------------------  
      ,{  
           xtype      : 'grid'  
-         ,reference  : 'tabQryGridRef'          
+         ,itemId     : 'qryGrid'           
          ,margin     : '0 0 0 1'  
          ,plugins    : [{ptype:'gridexporter'}]                
          ,requires   : ['Ext.grid.selection.SpreadsheetModel' , 'Ext.grid.plugin.Clipboard']  
@@ -109,7 +118,7 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
          ,plugins    : ['clipboard' , 'selectionreplicator' , 'cellediting']  //{ptype:'cellediting',clicksToEdit:2}                  
          ,viewConfig : {stripeRows:true} //,enableTextSelection: true,markDirty: false  
          //,resizable  : true  
-         ,bind:{store:'{tabQryGrid}'}  
+         ,bind:{store:'{qryGrid}'}  
       }  
    ]
 });

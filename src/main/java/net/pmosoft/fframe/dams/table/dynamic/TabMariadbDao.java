@@ -203,22 +203,24 @@ public class TabMariadbDao implements TabDaoFactory {
             qry  = "SELECT  * FROM " + params.get("TAB_NM") + " \n";
             //qry += "WHERE                                       \n";
 
-            System.out.println(qry);
+            //System.out.println(qry);
 
             pstmt = new LoggableStatement(conn,qry);
             pstmt.setString(1, params.get("datasource"));
 
-            System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
+            //System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
             rs = pstmt.executeQuery();
             
             ResultSetMetaData rsmd = rs.getMetaData();
             int colCnt = rsmd.getColumnCount();
-            System.out.println("colCnt=========="+colCnt);
-            for (int i = 0; i < colCnt; i++) {
-                System.out.println(rsmd.getColumnName(i+1));
-            }
             
-            System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
+            System.out.println("colCnt="+colCnt);
+            
+            //for (int i = 0; i < colCnt; i++) {
+            //    System.out.println(rsmd.getColumnName(i+1));
+            //}
+            
+            //System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
             rs = pstmt.executeQuery();
             
             while(rs.next()){
@@ -226,7 +228,7 @@ public class TabMariadbDao implements TabDaoFactory {
                 
                 for (int i = 0; i < colCnt; i++) {
                     map.put(rsmd.getColumnName(i+1) ,rs.getString(i+1));
-                    if(i==0) System.out.println(rsmd.getColumnName(i+1));
+                    //if(i==0) System.out.println(rsmd.getColumnName(i+1));
                 }
                 listRs.add(map);
             }
@@ -238,7 +240,7 @@ public class TabMariadbDao implements TabDaoFactory {
     }
 
     @Override
-    public List<Map<String, Object>> selectQryData(Map<String, String> params) {
+    public List<Map<String, Object>> selectQryData(Map<String, String> params) throws Exception {
         Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
         
         List<Map<String, Object>> listRs = new ArrayList<Map<String, Object>>();
@@ -249,9 +251,6 @@ public class TabMariadbDao implements TabDaoFactory {
             conn = dbConn.getConnection(params);
 
             qry  = params.get("qry");
-
-            System.out.println(qry);
-
             pstmt = new LoggableStatement(conn,qry);
             pstmt.setString(1, params.get("datasource"));
 
@@ -260,7 +259,6 @@ public class TabMariadbDao implements TabDaoFactory {
             
             ResultSetMetaData rsmd = rs.getMetaData();
             int colCnt = rsmd.getColumnCount();
-            System.out.println("colCnt=========="+colCnt);
 
             for (int i = 0; i < colCnt; i++) {
                 System.out.println(rsmd.getColumnName(i+1));
@@ -279,7 +277,9 @@ public class TabMariadbDao implements TabDaoFactory {
                 listRs.add(map);
             }
             
-        } catch (Exception e) { e.printStackTrace();
+        } catch (Exception e) { 
+            e.printStackTrace();
+            throw e;
         } finally { if(conn != null) try { pstmt.close(); conn.close();} catch(Exception ee){}}
         
         return listRs;

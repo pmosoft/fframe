@@ -62,108 +62,123 @@ Ext.define('fframe.app.dams.table.TabQryListController', {
                 viewModel.set("searchKeyCombo" ,records[i].data.CD_NM);
             }
         }
+
+        viewModel.set("TAB_NM"   ,"");
+        
         //console.log("commCombo.store.getAt(0).get('value')"+commCombo.store.getAt(0).get('value'));
     }
 
-    /***************
-     * 테이블 조회
-     ***************/    
-    ,tabSelBtn : function(btn) {
-         var view = this.getView(); var viewModel = view.getViewModel();  
-         var store = viewModel.getStore('tabGrid'); 
+   /***************
+    * 테이블 조회
+    ***************/    
+   ,tabSelBtn : function(btn) {
+        var view = this.getView(); var viewModel = view.getViewModel();  
+        var store = viewModel.getStore('tabGrid'); 
+       
+        store.proxy.setUrl("/dams/table/selectMetaTabList");
         
-         store.proxy.setUrl("/dams/table/selectMetaTabList");
+        store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );         
+        store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );         
+        store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );         
+        store.getProxy().setExtraParam("datasource",viewModel.data.datasource);         
+        store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );         
+        store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );         
+        store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );         
+        store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);         
+        store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);         
+        store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);         
+        store.getProxy().setExtraParam("TAB_NM"    ,viewModel.data.TAB_NM);         
+        store.load({         
+            callback : function(data){         
+                console.log(data);         
+            }         
+        });         
+    }    
+   
+    /*********************************************
+     * 테이블 그리드 더블 클릭 - 그리드 컬럼 세팅
+     *********************************************/    
+   ,tabGridDblClick : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts) {     
+        var view = this.getView(); var viewModel = view.getViewModel();
+        var store = viewModel.getStore('qryGrid');         
+        viewModel.set("qry"  ,"SELECT * FROM "+record.get("OWNER")+"."+record.get("TAB_NM"));
+        
+         var grid = view.down("#qryGrid");
+         console.log("grid="+grid);
          
-   	     store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );         
-         store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );         
-         store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );         
-         store.getProxy().setExtraParam("datasource",viewModel.data.datasource);         
-         store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );         
-         store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );         
-         store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );         
-         store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);         
-         store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);         
-         store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);         
-         store.getProxy().setExtraParam("TAB_NM"   ,viewModel.data.TAB_NM);         
-         store.load({         
-             callback : function(data){         
-                 console.log(data);         
-             }         
-         });         
-     }    
-    
-    /**********************     
-     * 테이블 조회 쿼리 작성     
-     **********************/         
-    ,tabGridDblClick : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts) {     
-         var view = this.getView(); var viewModel = view.getViewModel();
-         console.log("111111111111111111111");
-         viewModel.set("qry"  ,"SELECT * FROM "+record.get("OWNER")+"."+record.get("TAB_NM"));
-     }    
-
-    /**********************     
-     * 쿼리 조회     
-     **********************/         
-    ,tabDataBtn : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts) {     
-         var view = this.getView(); var viewModel = view.getViewModel();     
-         var store = viewModel.getStore('tabQryGrid');     
-         var grid = view.down("#tabQryGridRef");     
-         console.log("grid="+grid);     
-              
-         store.proxy.setUrl("/dams/table/selectQryData");     
-              
-         store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );     
-         store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );     
-         store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );     
-         store.getProxy().setExtraParam("datasource",viewModel.data.datasource);     
-         store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );     
-         store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );     
-         store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );     
-         store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);     
-         store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);     
-         store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);     
-         store.getProxy().setExtraParam("qry"       ,viewModel.data.qry);     
-                  
-         store.load({     
-             callback : function(data,result,success){     
-                 if(success) {     
-                     result = Ext.JSON.decode(result._response.responseText);     
-                     data = result['data'];
-                     console.log("data="+data);     
-                     
-                     //combo.setValue(data[0].CD);     
-                          
-                     var model2 = [];     
-                     for (var i = 0; i < data.length; i++) {     
-                         model2.push({ text: data[i].COL_HNM, dataIndex: data[i].COL_NM } );
-                         console.log("data[i].COL_HNM="+data[i].COL_HNM);
-                     }     
-                          
-                     viewModel.set("colCnt"  , data.length);     
+         store.proxy.setUrl("/dams/table/selectMetaTabColList");
          
-                     fields = [];     
+         store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );
+         store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );
+         store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );
+         store.getProxy().setExtraParam("datasource",viewModel.data.datasource);
+         store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );
+         store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );
+         store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );
+         store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);
+         store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);
+         store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);
          
-                     for (var i = 0; i < data.length; i++) {     
-                         fields.push({ name: data[i].COL_NM , type : 'string' });      
-                     }     
-                          
-                     //store.setFields(fields);     
-                     //console.log("store.getFields()="+store.getFields());     
-         
-                     //model.setFields(fieldsArray)     
-                          
-                     //grid.reconfigure(store2,model2);     
-                     grid.reconfigure(model2);              
-                          
-                 }     
-             }     
-         });     
+         store.getProxy().setExtraParam("TAB_NM"   ,record.get("TAB_NM"));
+         viewModel.set("TAB_NM"  , record.get("TAB_NM"));
              
-//         var store2 = Ext.create('Ext.data.Store',{      
-//                      fields : ['title1','title2','title3',  'title4'  ]     
-//             //        , data : [ { title1 : '첫번째 값', title2 : '두번째 값', title3 : '세번째 값', title4 : '네번째 값' } ]     //                     , proxy : { type : 'memory' } });});
-//         var model2 = [];
-//         for(var i=0; i<4; i++) { //             model2.push({ text: 'Title'+(i+1), flex: 1, dataIndex: 'title'+(i+1) } ); //         }//         //         //grid.reconfigure(store2,model2);//         grid.reconfigure(model2);               }
+         store.load({
+             callback : function(data,result,success){
+                 if(success) {
+                     result = Ext.JSON.decode(result._response.responseText);
+                     data = result['data'];
+                     //combo.setValue(data[0].CD);
+                     viewModel.set("colCnt"  , data.length);
+                     viewModel.set("qryCnt"  , '0');
+                     
+                     var fields = [];
+                     for (var i = 0; i < data.length; i++) {
+                         fields.push({ text: data[i].COL_NM + data[i].COL_HNM, dataIndex: data[i].COL_NM, align:'left' } ); 
+                     }
+                     grid.reconfigure(fields);   
+                     store.removeAll();
+                 }
+             }
+         });         
+    }    
+
+   /**********************     
+    * 쿼리 조회     
+    **********************/         
+   ,tabDataBtn : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts) {     
+        var view = this.getView(); var viewModel = view.getViewModel();     
+        var store = viewModel.getStore('qryGrid');     
+        var grid = view.down("#qryGrid");     
+        console.log("grid="+grid);     
+             
+        store.proxy.setUrl("/dams/table/selectQryData");     
+             
+        store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );     
+        store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );     
+        store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );     
+        store.getProxy().setExtraParam("datasource",viewModel.data.datasource);     
+        store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );     
+        store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );     
+        store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );     
+        store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);     
+        store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);     
+        store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);     
+        store.getProxy().setExtraParam("qry"       ,viewModel.data.qry);     
+       
+        store.load({
+            callback : function(data,result,success){
+                result = Ext.JSON.decode(result._response.responseText);
+                data = result['data'];
+                if(result['isSuccess']){
+                    viewModel.set("qryCnt"  , data.length);
+                    console.log(data);
+                } else {
+                    Ext.Msg.alert("알림",result['errUsrMsg']);
+                    console.log(result['errSysMsg']);
+                    return;
+                }                
+            }
+        });              }
  });     
      
      

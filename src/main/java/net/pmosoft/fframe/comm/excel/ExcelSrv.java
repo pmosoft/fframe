@@ -53,7 +53,7 @@ public class ExcelSrv {
             
             result.put("isSuccess", false);
             result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-            result.put("errSysrMsg", e.getMessage());
+            result.put("errSysMsg", e.getMessage());
             e.printStackTrace();
 
         }
@@ -92,7 +92,7 @@ public class ExcelSrv {
              System.out.println("ExcelSrv asdfasdfasdfasdf");
              jsonObj.put("isSuccess", false);
              jsonObj.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-             jsonObj.put("errSysrMsg", e.getMessage());
+             jsonObj.put("errSysMsg", e.getMessage());
          } finally {
              return jsonObj;
          }

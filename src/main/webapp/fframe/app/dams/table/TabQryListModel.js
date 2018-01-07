@@ -15,6 +15,7 @@ Ext.define('fframe.app.dams.table.TabQryListModel', {
        ,dbOwner    : ''
        ,TAB_NM     : '%'
        ,qry        : ''
+       ,qryCnt     : '0'
     }
    ,stores : { 
         tabGrid : {   
@@ -30,12 +31,12 @@ Ext.define('fframe.app.dams.table.TabQryListModel', {
                ,url : ''   
                ,reader : {   
                     type : 'json'   
-                   ,rootProperty : 'data'   
+                   ,rootProperty : 'data'    
                    ,totalProperty : 'total'       
                 }   
             }   
         }   
-       ,tabQryGrid : {
+       ,qryGrid : {
             proxy : {
                 type : 'ajax'
                ,url : ''

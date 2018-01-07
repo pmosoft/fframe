@@ -3,6 +3,7 @@ package net.pmosoft.fframe.dams.table.dynamic;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +61,7 @@ public class TabOracleDao implements TabDaoFactory {
             qry += "       WHERE  TABLE_OWNER = ?                                                                               \n";
             qry += "       AND    INDEX_NAME IN (SELECT INDEX_NAME FROM SYS.ALL_INDEXES                                         \n";
             qry += "                             WHERE  TABLE_OWNER = ?                                                         \n";
+            qry += "                             AND    TABLE_NAME LIKE '%'||?||'%'                                             \n";
             qry += "                             AND    UNIQUENESS = 'UNIQUE')) C                                               \n";
             qry += "WHERE  A.OWNER = B.OWNER                                                                                    \n";
             qry += "AND    A.TABLE_NAME = B.TABLE_NAME                                                                          \n";
@@ -67,6 +69,7 @@ public class TabOracleDao implements TabDaoFactory {
             qry += "AND    A.TABLE_NAME = C.TABLE_NAME(+)                                                                       \n";
             qry += "AND    A.COLUMN_NAME = C.COLUMN_NAME(+)                                                                     \n";
             qry += "AND    A.OWNER = ?                                                                                          \n";
+            qry += "AND    A.TABLE_NAME LIKE '%'||?||'%'                                                                        \n";
             qry += "ORDER BY A.TABLE_NAME,A.COLUMN_ID                                                                           \n";
             
             //System.out.println(qry);
@@ -79,8 +82,9 @@ public class TabOracleDao implements TabDaoFactory {
             pstmt.setString(1, params.get("datasource"));
             pstmt.setString(2, params.get("dbOwner"));
             pstmt.setString(3, params.get("dbOwner"));
-            pstmt.setString(4, params.get("dbOwner"));
-
+            pstmt.setString(4, params.get("TAB_NM"));
+            pstmt.setString(5, params.get("dbOwner"));
+            pstmt.setString(6, params.get("TAB_NM"));
 
             
             
@@ -182,15 +186,100 @@ public class TabOracleDao implements TabDaoFactory {
 
     @Override
     public List<Map<String, Object>> selectTabData(Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
+
+        Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
+        
+        List<Map<String, Object>> listRs = new ArrayList<Map<String, Object>>();
+        
+        try {
+            DbConnection dbConn = new DbConnection();
+            conn = dbConn.getConnection(params);
+
+            qry  = "SELECT  * FROM " + params.get("TAB_NM") + " \n";
+            //qry += "WHERE                                       \n";
+
+            //System.out.println(qry);
+
+            pstmt = new LoggableStatement(conn,qry);
+            pstmt.setString(1, params.get("datasource"));
+
+            //System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int colCnt = rsmd.getColumnCount();
+            
+            System.out.println("colCnt="+colCnt);
+            
+            //for (int i = 0; i < colCnt; i++) {
+            //    System.out.println(rsmd.getColumnName(i+1));
+            //}
+            
+            //System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
+            rs = pstmt.executeQuery();
+            
+            while(rs.next()){
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                
+                for (int i = 0; i < colCnt; i++) {
+                    map.put(rsmd.getColumnName(i+1) ,rs.getString(i+1));
+                    //if(i==0) System.out.println(rsmd.getColumnName(i+1));
+                }
+                listRs.add(map);
+            }
+            
+        } catch (Exception e) { e.printStackTrace();
+        } finally { if(conn != null) try { pstmt.close(); conn.close();} catch(Exception ee){}}
+        
+        return listRs;
     }
 
-
     @Override
-    public List<Map<String, Object>> selectQryData(Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Map<String, Object>> selectQryData(Map<String, String> params) throws Exception {
+        Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
+        
+        List<Map<String, Object>> listRs = new ArrayList<Map<String, Object>>();
+
+        
+        try {
+            DbConnection dbConn = new DbConnection();
+            conn = dbConn.getConnection(params);
+
+            qry  = params.get("qry");
+            System.out.println(qry);
+            
+            pstmt = new LoggableStatement(conn,qry);
+            //pstmt.setString(1, params.get("datasource"));
+
+            System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int colCnt = rsmd.getColumnCount();
+
+            for (int i = 0; i < colCnt; i++) {
+                System.out.println(rsmd.getColumnName(i+1));
+            }
+            
+            System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
+            rs = pstmt.executeQuery();
+            
+            while(rs.next()){
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                
+                for (int i = 0; i < colCnt; i++) {
+                    map.put(rsmd.getColumnName(i+1) ,rs.getString(i+1));
+                    if(i==0) System.out.println(rsmd.getColumnName(i+1));
+                }
+                listRs.add(map);
+            }
+            
+        } catch (Exception e) { 
+            e.printStackTrace();
+            throw e;
+        } finally { if(conn != null) try { pstmt.close(); conn.close();} catch(Exception ee){}}
+        
+        return listRs;
     }
 
     @Override
@@ -198,7 +287,7 @@ public class TabOracleDao implements TabDaoFactory {
         // TODO Auto-generated method stub
         return null;
     }
-
     
+
 }
 

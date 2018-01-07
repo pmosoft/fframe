@@ -29,7 +29,7 @@ public class EtclSrv {
 		} catch (Exception e){
 			result.put("isSuccess", false);
 			result.put("errUserMsg", "시스템 장애가 발생하였습니다");
-			result.put("errSysrMsg", e.getMessage());
+			result.put("errSysMsg", e.getMessage());
 			e.printStackTrace();
 		}
 		return result;
