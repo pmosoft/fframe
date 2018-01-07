@@ -93,7 +93,8 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
             {xtype:'component' , html:['&nbsp;','쿼리','&nbsp;&nbsp;']}             
            ,{xtype:'textareafield' , name:'qry' ,flex :1 , bind :{value:'{qry}'}}
            ,'->'
-           ,{xtype:'button' , text:'조회'           , handler:'tabDataBtn' , iconCls:'x-fa fa-gift'}
+           ,{xtype:'button' , text:'다운' , id:'excelDownBtn', handler:'excelDownBtn' , iconCls:'x-fa fa-download'}
+           ,{xtype:'button' , text:'조회' , handler:'tabDataBtn' , iconCls:'x-fa fa-gift'}
           ]
       }
 

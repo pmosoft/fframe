@@ -133,7 +133,7 @@ Ext.define('fframe.app.dams.table.TabQryListController', {
                      
                      var fields = [];
                      for (var i = 0; i < data.length; i++) {
-                         fields.push({ text: data[i].COL_NM + data[i].COL_HNM, dataIndex: data[i].COL_NM, align:'left' } ); 
+                         fields.push({ text: data[i].COL_NM + data[i].COL_HNM, dataIndex: data[i].COL_NM, align:'left', flex:1 } ); 
                      }
                      grid.reconfigure(fields);   
                      store.removeAll();
@@ -179,6 +179,44 @@ Ext.define('fframe.app.dams.table.TabQryListController', {
                 }                
             }
         });              }
+   
+    /***************
+     * 엑셀다운로드
+     ***************/    
+    ,excelDownBtn : function(viewObj) {
+        var view = this.getView(); var viewModel = view.getViewModel();  
+        var store = viewModel.getStore('qryGrid');     
+        var grid = view.down("#qryGrid");     
+        var records = store.getRange();
+        
+        var datar = new Array(); var jsonDataEncode = "";
+        var jsonDataEncode = "";
+        for (var i = 0; i < records.length; i++) {
+            datar.push(records[i].data);
+        }
+        
+        jsonDataEncode = Ext.util.JSON.encode(datar);
+        
+        //var jsonData = Ext.encode(Ext.pluck(store.data.items, 'data'));
+        //console.log("jsonData======="+jsonData);
+
+        Ext.Ajax.request({
+             url : '/comm/excel/downloadExcel'
+            ,method : 'post'
+            ,params : { data:jsonDataEncode,fileNm:'tableData.xls'}
+            ,success : function(res){
+                var result = Ext.decode(res.responseText);
+                if(result['isSuccess']){
+                    location.href = "/fframe/files/excel/tableData.xls";
+                } else {
+                    Ext.Msg.alert("알림",result['errUsrMsg']);
+                    return;
+                }
+            }
+        })     
+     }
+    
+   
  });     
      
      
