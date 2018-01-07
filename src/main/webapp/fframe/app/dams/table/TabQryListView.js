@@ -30,9 +30,9 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
     }   
    ,items :
     [ 
-     //------------------------------------------------------------------------
-     //                              테이블 조회
-     //------------------------------------------------------------------------
+      //------------------------------------------------------------------------
+      //                              테이블 조회
+      //------------------------------------------------------------------------
       //--------------------------
       // toolbar
       //--------------------------
@@ -78,38 +78,38 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
         ,bind:{store:'{tabGrid}'}
       }
 
-   //------------------------------------------------------------------------
-   //                       테이블 데이터 조회
-   //------------------------------------------------------------------------
-   //-------------------------------------------
-   // toolbar
-   //-------------------------------------------
-  ,{
-       xtype : 'toolbar'
-      ,height : 100
-      ,items : 
-       [
-         {xtype:'component' , html:['&nbsp;','쿼리','&nbsp;&nbsp;']}             
-        ,{xtype:'textareafield' , name:'qry' ,flex :1 , bind :{value:'{qry}'}}
-        ,'->'
-        ,{xtype:'button' , text:'조회'           , handler:'tabDataBtn' , iconCls:'x-fa fa-gift'}
-       ]
-   }
-   //-------------------------------------------  
-   // grid  
-   //-------------------------------------------  
-   ,{  
-        xtype      : 'grid'  
-       ,reference  : 'tabQryGridRef'          
-       ,margin     : '0 0 0 1'  
-       ,plugins    : [{ptype:'gridexporter'}]                
-       ,requires   : ['Ext.grid.selection.SpreadsheetModel' , 'Ext.grid.plugin.Clipboard']  
-       ,height     : 400 , frame: true , columnLines : false  
-       ,selModel   : {type:'spreadsheet' , columnSelect:true , checkboxSelect:true , pruneRemoved:false , extensible:'y'}           
-       ,plugins    : ['clipboard' , 'selectionreplicator' , 'cellediting']  //{ptype:'cellediting',clicksToEdit:2}                  
-       ,viewConfig : {stripeRows:true} //,enableTextSelection: true,markDirty: false  
-       //,resizable  : true  
-       ,bind:{store:'{tabQryGrid}'}  
-    }  
+     //------------------------------------------------------------------------
+     //                          테이블 데이터 조회
+     //------------------------------------------------------------------------
+      //-------------------------------------------
+      // toolbar
+      //-------------------------------------------
+     ,{
+          xtype : 'toolbar'
+         ,height : 100
+         ,items : 
+          [
+            {xtype:'component' , html:['&nbsp;','쿼리','&nbsp;&nbsp;']}             
+           ,{xtype:'textareafield' , name:'qry' ,flex :1 , bind :{value:'{qry}'}}
+           ,'->'
+           ,{xtype:'button' , text:'조회'           , handler:'tabDataBtn' , iconCls:'x-fa fa-gift'}
+          ]
+      }
+      //-------------------------------------------  
+      // grid  
+      //-------------------------------------------  
+     ,{  
+          xtype      : 'grid'  
+         ,reference  : 'tabQryGridRef'          
+         ,margin     : '0 0 0 1'  
+         ,plugins    : [{ptype:'gridexporter'}]                
+         ,requires   : ['Ext.grid.selection.SpreadsheetModel' , 'Ext.grid.plugin.Clipboard']  
+         ,height     : 400 , frame: true , columnLines : false  
+         ,selModel   : {type:'spreadsheet' , columnSelect:true , checkboxSelect:true , pruneRemoved:false , extensible:'y'}           
+         ,plugins    : ['clipboard' , 'selectionreplicator' , 'cellediting']  //{ptype:'cellediting',clicksToEdit:2}                  
+         ,viewConfig : {stripeRows:true} //,enableTextSelection: true,markDirty: false  
+         //,resizable  : true  
+         ,bind:{store:'{tabQryGrid}'}  
+      }  
    ]
 });

@@ -24,47 +24,34 @@ Ext.define('fframe.app.etcl.SamfileLodModel', {
            
     }
    ,stores : {
-        samfileLod : {
-            fields : [
-                      'STS_NM'
-                     ,'DB_NM'
-                     ,'OWNER'
-                     ,'TAB_NM'
-                     ,'COL_ID'
-                     ,'COL_NM'
-                     ,'COL_HNM'
-                     ,'DATA_TYPE_DESC'
-                     ,'NULLABLE'
-                     ,'PK'
-                     ,'DATA_TYPE_NM'
-                     ,'LEN'
-                     ,'DECIMAL_CNT'
-                     ,'COL_DESC'
-                     ,'REG_DTM'
-                     ,'REG_USR_ID'
-                     ,'UPD_DTM'
-                     ,'UPD_USR_ID'
-                     ]
-           ,proxy : {
-                type : 'ajax'
-               ,url : ''
-               ,reader : {
-                    type : 'json' 
-                   ,rootProperty : 'data'
-                   ,totalProperty : 'total'    
-                }
-            }
+        tabGrid : {   
+            fields : [   
+                       'DB_NM'   
+                      ,'OWNER'   
+                      ,'TAB_NM'   
+                      ,'TAB_HNM'   
+                      ,'TAB_DESC'   
+                     ]   
+           ,proxy : {   
+                type : 'ajax'   
+               ,url : ''   
+               ,reader : {   
+                    type : 'json'   
+                   ,rootProperty : 'data'   
+                   ,totalProperty : 'total'       
+                }   
+            }   
+        }   
+       ,tabDataGrid : {
+           proxy : {
+               type : 'ajax'
+              ,url : ''
+              ,reader : {
+                   type : 'json' 
+                  ,rootProperty : 'data'
+               }
+           }
         }
-      ,tabLod : {
-          proxy : {
-              type : 'ajax'
-             ,url : ''
-             ,reader : {
-                  type : 'json' 
-                 ,rootProperty : 'data'
-              }
-          }
-       }
 
     }
 });

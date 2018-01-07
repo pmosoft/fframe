@@ -24,7 +24,7 @@ Ext.define('fframe.app.etcl.SamfileLodView', {
    ,controller : 'samfileLod'
    ,viewModel  : 'samfileLod'
    //,listeners  : { resize : 'setGridHeight', boxready:'comboLoad'}
-   ,listeners  : { boxready:'comboLoad'}
+   ,listeners  : { boxready:'dbConnCombo'}
    //-------------------------------------------
    // titletoolbar
    //-------------------------------------------
@@ -48,7 +48,7 @@ Ext.define('fframe.app.etcl.SamfileLodView', {
                  ,items : 
                   [
                     {xtype:'component' , html:['&nbsp;','DB선택','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;']}             
-                   ,{xtype:'commCombo' , itemId:'DB_CONN_CD' , bind :{value:'{CD}'} , listeners:{select:'codeChange'}}
+                   ,{xtype:'commCombo' , itemId:'DB_CONN_CD' , bind :{value:'{CD}'} , listeners:{select:'dbConnComboChg'}}
                   ]
               }
              ,{
@@ -65,12 +65,12 @@ Ext.define('fframe.app.etcl.SamfileLodView', {
                  ,height : 50
                  ,items : 
                   [
-                   ,{xtype:'component' , html:['&nbsp;','테이블검색','&nbsp;&nbsp;']}             
+                    {xtype:'component' , html:['&nbsp;','테이블검색','&nbsp;&nbsp;']}             
                    ,{xtype:'textfield' , name:'DB_INFO' , width:250, bind :{value:'{TAB_NM}'}
                        ,emptyText:'검색어를 입력하세요' , enableKeyEvents: true 
                        ,listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
                     }
-                   ,{xtype:'button' , text:'검색' , id:'selBtn', handler:'tabBtn' , iconCls:'x-fa fa-gift'}
+                   ,{xtype:'button' , text:'검색' , id:'tabSelBtn', handler:'tabSelBtn' , iconCls:'x-fa fa-gift'}
                   ]
               }
              //-------------------------------------------
@@ -82,7 +82,7 @@ Ext.define('fframe.app.etcl.SamfileLodView', {
                  ,height     : 650 , frame: true , columnLines : true
                  ,viewConfig : {stripeRows:false}
                  ,listeners : {
-                     celldblclick : 'tabGrid'
+                     celldblclick : 'tabGridDblClick'
                   }
                  ,columns    : {
                      defaults: {style:'text-align:center' , align:'left'}             
@@ -93,7 +93,7 @@ Ext.define('fframe.app.etcl.SamfileLodView', {
                       ,{text:'테이블한글명'   , dataIndex:'TAB_HNM'  , width:200      }
                      ]
                  }
-                ,bind:{store:'{samfileLod}'}
+                ,bind:{store:'{tabGrid}'}
               }
           ]
       }
@@ -164,10 +164,10 @@ Ext.define('fframe.app.etcl.SamfileLodView', {
            //-------------------------------------------
            ,{
                 xtype      : 'grid'
-               ,itemId     : 'tabGrid'
+               ,itemId     : 'tabDataGrid'
                ,height     : 450 , frame: true , columnLines : true
                ,viewConfig : {stripeRows:false} //,enableTextSelection: true,markDirty: false
-               ,bind:{store:'{tabLod}'}
+               ,bind:{store:'{tabDataGrid}'}
            
             }
           ]
