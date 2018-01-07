@@ -100,7 +100,7 @@ public class TabCtrl {
     **********************************************************************************/
 
     /*
-     * 테이블컬럼정보를 리턴
+     * FFRAME 테이블컬럼정보를 리턴
      * @param 조회 조건값
      * */
     @RequestMapping(value = "/dams/table/selectTabColList")
@@ -110,7 +110,7 @@ public class TabCtrl {
     }
     
     /*
-     * 테이블컬럼정보를 저장
+     * FFRAME 테이블컬럼정보를 저장
      * @param 테이블컬럼정보
      * */
     @RequestMapping(value = "/dams/table/saveTabCol")
@@ -119,7 +119,7 @@ public class TabCtrl {
     }
     
     /*
-     * 테이블컬럼정보를 삭제
+     * FFRAME 테이블컬럼정보를 삭제
      * @param 조회 조건값
      * */
     @RequestMapping(value = "/dams/table/deleteTabCol")
@@ -128,7 +128,7 @@ public class TabCtrl {
     }
     
     /*
-     * 테이블정보를 리턴
+     * FFRAME 테이블정보를 리턴
      * @param 조회 조건값
      * */
     @RequestMapping(value = "/dams/table/selectTabList")
@@ -137,7 +137,7 @@ public class TabCtrl {
     }
 
     /*
-     * 테이블정보를 저장
+     * FFRAME 테이블정보를 저장
      * @param 테이블정보
      * */
     @RequestMapping(value = "/dams/table/saveTab")
@@ -146,7 +146,7 @@ public class TabCtrl {
     }
 
     /*
-     * 테이블정보를 삭제
+     * FFRAME 테이블정보를 삭제
      * @param 조회 조건값
      * */
     @RequestMapping(value = "/dams/table/deleteTab")
@@ -155,7 +155,7 @@ public class TabCtrl {
     }
 
     /*
-     * 입력테이블의 전컬럼 정보를 리턴
+     * 테이블 데이터 리턴
      * @param DB접속정보 및 테이블명 및 rowcnt
      * */
     @RequestMapping(value = "/dams/table/selectTabData")
@@ -164,7 +164,7 @@ public class TabCtrl {
     }
 
     /*
-     * 입력쿼리의 기술된 컬럼정보를 리턴
+     * 쿼리 데이터 리턴
      * @param DB접속정보 및 쿼리 및 rowcnt
      * */
     @RequestMapping(value = "/dams/table/selectQryData")
@@ -172,6 +172,16 @@ public class TabCtrl {
         return tabSrv.selectQryData(params);
     }
 
+    /*
+     * CSV 데이터 리턴
+     * @param DB접속정보 및 쿼리 및 rowcnt
+     * */
+    @RequestMapping(value = "/dams/table/downloadCsvData")
+    public Map<String, Object>  downloadCsvData(@RequestParam Map<String,String> params){
+        return tabSrv.downloadCsvData(params);
+    }
+    
+    
     /**********************************************************************************
     *
     *                                   Excel Upload

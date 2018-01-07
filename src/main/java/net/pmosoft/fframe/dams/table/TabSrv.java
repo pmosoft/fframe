@@ -387,7 +387,26 @@ public class TabSrv {
         return result;
     }    
 
-    
+    public Map<String, Object> downloadCsvData(Map<String,String> params){
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        
+        
+        try{
+            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
+            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
+            List<Map<String,Object>> list = tabDaoFactory.selectQryData(params);
+           
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysMsg", e.getMessage());
+            //e.printStackTrace();
+        }
+        return result;
+    }    
 
     /**********************************************************************************
     *
