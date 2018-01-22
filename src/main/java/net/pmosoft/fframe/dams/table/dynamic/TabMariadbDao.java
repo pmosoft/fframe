@@ -191,11 +191,12 @@ public class TabMariadbDao extends TabCommonDao implements TabDaoFactory {
     }
     
     @Override
-    public List<Map<String, Object>> downloadCsvData(Map<String, String> params)
+    public List<Map<String, Object>> selectCsvData(Map<String, String> params)
             throws Exception {
         // TODO Auto-generated method stub
         return null;
     }
+    
     
 }
 

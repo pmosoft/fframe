@@ -54,28 +54,22 @@ Ext.define('fframe.app.main.MainFrameView', {
 		split : true,
 		collapsible: true,
 		header : false,
-		height: Ext.Element.getViewportHeight()-80,
+		height: Ext.Element.getViewportHeight()-80,		
 		defaults: {
 	       scrollable: true
 	    },		
 		width : 220,
-		layout : 'fit',
+		layout : 'border',
 		items : [ {
-			xtype : 'treelist',
-			
-			
+			xtype : 'treepanel',
+			useArrows: true,		
+			rootVisible: false,
 			listeners : {
-			    boxready : function ( obj, record){
-			        centerPage.removeAll(true);
-			        centerPage.add({
-                        xtype : "UsrList"
-			        })
-			    },
-				selectionchange : function ( obj, record){
+				itemclick : function(dataview, record, item, index, e, eOpts){
 				    try {
                         console.log("record.get page:"+record.get("page"));
-                        var centerPage = obj.up("viewport").down("component[region=center]");
-                        //console.log("centerPage="+centerPage);
+                        var centerPage = dataview.up("viewport").down("component[region=center]");
+                        console.log("centerPage="+centerPage);
                         centerPage.removeAll(true);
                         var component = Ext.widget(record.get("page"));
                         centerPage.add(component);

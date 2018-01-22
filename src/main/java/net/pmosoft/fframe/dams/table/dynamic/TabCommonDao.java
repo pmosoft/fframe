@@ -148,14 +148,18 @@ public class TabCommonDao implements TabDaoFactory {
 
     @Override
     public List<Map<String, Object>> selectIsExistTab(Map<String, String> params) {
-        // TODO Auto-generated method stub
         return null;
     }
 
 
     @Override
-    public List<Map<String, Object>> downloadCsvData(Map<String, String> params)
-            throws Exception {
+    public List<Map<String, Object>> selectCsvData(Map<String, String> params) throws Exception {
+        return null;
+    }
+
+
+    @Override
+    public List<Map<String, Object>> selectInsertData(Map<String, String> params) throws Exception {
         // TODO Auto-generated method stub
         return null;
     }

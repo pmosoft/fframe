@@ -177,9 +177,19 @@ public class TabCtrl {
      * @param DB접속정보 및 쿼리 및 rowcnt
      * */
     @RequestMapping(value = "/dams/table/downloadCsvData")
-    public Map<String, Object>  downloadCsvData(@RequestParam Map<String,String> params){
-        return tabSrv.downloadCsvData(params);
+    public Map<String, Object>  selectCsvData(@RequestParam Map<String,String> params){
+        return tabSrv.selectCsvData(params);
     }
+    
+
+//    /*
+//     * Insert 문장 리턴
+//     * @param DB접속정보 및 쿼리 및 rowcnt
+//     * */
+//    @RequestMapping(value = "/dams/table/downloadCsvData")
+//    public Map<String, Object>  selectInsertData(@RequestParam Map<String,String> params){
+//        return tabSrv.selectInsertData(params);
+//    }
     
     
     /**********************************************************************************
