@@ -70,7 +70,7 @@ Ext.define('fframe.app.etcl.SamfileLodView', {
                        ,emptyText:'검색어를 입력하세요' , enableKeyEvents: true 
                        ,listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
                     }
-                   ,{xtype:'button' , text:'검색' , id:'tabSelBtn', handler:'tabSelBtn' , iconCls:'x-fa fa-gift'}
+                   ,{xtype:'button' , text:'검색' ,  handler:'tabSelBtn' , iconCls:'x-fa fa-gift'}
                   ]
               }
              //-------------------------------------------

@@ -50,7 +50,7 @@ Ext.define('fframe.app.etcl.TabEtt01View', {
                             , emptyText:'테이블한글명을 입력하세요' , enableKeyEvents: true 
                             ,listeners:{afterrender:function(field) {field.focus();} , specialkey: 'srcTabListGridBtn'}
                         }                                             
-                       ,{xtype:'button' , text:'검색' , id:'srcTabListGridBtn', handler:'srcTabListGridBtn' , iconCls:'x-fa fa-gift'}
+                       ,{xtype:'button' , text:'검색' , handler:'srcTabListGridBtn' , iconCls:'x-fa fa-gift'}
                     ]  
                 }             
                 
@@ -119,7 +119,7 @@ Ext.define('fframe.app.etcl.TabEtt01View', {
                            , emptyText:'테이블한글명을 입력하세요' , enableKeyEvents: true 
                            ,listeners:{afterrender:function(field) {field.focus();} , specialkey: 'tarTabListGridBtn'}
                        }                                             
-                      ,{xtype:'button' , text:'검색' , id:'tarTabListGridBtn', handler:'tarTabListGridBtn' , iconCls:'x-fa fa-gift'}
+                      ,{xtype:'button' , text:'검색' , handler:'tarTabListGridBtn' , iconCls:'x-fa fa-gift'}
                    ]  
                }             
                

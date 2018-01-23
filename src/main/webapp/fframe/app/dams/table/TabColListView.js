@@ -15,7 +15,8 @@
 ********************************************************************************/
 Ext.define('fframe.app.dams.table.TabColListView', {
     extend     : 'Ext.form.Panel' 
-   ,xtype      : 'tabColList' 
+//   ,xtype      : 'tabColList'
+   ,alias: 'widget.tabColList'   
    ,controller : 'tabColList' 
    ,viewModel  : 'tabColList'
    ,listeners  : { resize : 'setGridHeight', boxready:'comboLoad'}
@@ -57,7 +58,7 @@ Ext.define('fframe.app.dams.table.TabColListView', {
            }
           ,{xtype:'checkboxfield', id: 'tabChk', boxLabel: '테이블단위', listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}}          
          ,'->'
-         ,{xtype:'button' , text:'조회' ,id : 'selBtnId', handler:'selBtn' , iconCls: 'x-fa fa-gift'}
+         ,{xtype:'button' , text:'조회' , handler:'selBtn' , iconCls: 'x-fa fa-gift'}
         ] 
       }
       

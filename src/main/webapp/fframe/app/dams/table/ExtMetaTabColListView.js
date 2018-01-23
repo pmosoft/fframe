@@ -25,6 +25,7 @@
 Ext.define('fframe.app.dams.table.ExtMetaTabColListView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'extMetaTabColList'
+   ,alias: 'widget.extMetaTabColList'
    ,controller : 'extMetaTabColList'
    ,viewModel  : 'extMetaTabColList'
    ,listeners  : { resize : 'setGridHeight', boxready:'comboLoad'}
@@ -50,7 +51,7 @@ Ext.define('fframe.app.dams.table.ExtMetaTabColListView', {
                              , listeners:{afterrender:'multiple' , change:'excelUpload'}
           }                             
          ,{xtype:'button' , text:'업저장'         , handler:'uploadInsBtn' , iconCls:'x-fa fa-sign-in'}
-         ,{xtype:'button' , text:'다운'           , id:'excelDownBtn', handler:'excelDownBtn' , iconCls:'x-fa fa-download'}
+         ,{xtype:'button' , text:'다운'           , handler:'excelDownBtn' , iconCls:'x-fa fa-download'}
          ,{xtype:'button' , text:'추출'           , handler:'extBtn' , iconCls:'x-fa fa-gift'}
          ,{xtype:'button' , text:'비교'           , handler:'cmpBtn' , iconCls:'x-fa fa-check-square'}
          ,{xtype:'button' , text:'테이블정보삭제' , handler:'tabDelBtn' , iconCls:'x-fa fa-remove'}

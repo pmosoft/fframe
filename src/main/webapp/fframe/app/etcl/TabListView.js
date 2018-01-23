@@ -15,7 +15,8 @@
 ********************************************************************************/
 Ext.define('fframe.app.dams.table.TabListView', {
     extend     : 'Ext.form.Panel'
-   ,xtype      : 'tabList'
+//   ,xtype      : 'tabList'
+   ,alias: 'widget.tabList'   
    ,controller : 'tabList'
    ,viewModel  : 'tabList'
    ,listeners  : { resize : 'setGridHeight', boxready:'comboLoad'}
@@ -39,7 +40,7 @@ Ext.define('fframe.app.dams.table.TabListView', {
              , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
          }
         ,'->'
-        ,{xtype:'button' , text:'조회' ,id : 'selBtnId', handler:'selBtn' , iconCls: 'x-fa fa-gift'}
+        ,{xtype:'button' , text:'조회' , handler:'selBtn' , iconCls: 'x-fa fa-gift'}
        ] 
      }
      

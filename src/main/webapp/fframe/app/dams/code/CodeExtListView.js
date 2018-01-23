@@ -28,7 +28,7 @@ Ext.define('fframe.app.dams.code.CodeExtListView', {
                                , listeners:{afterrender:function(field) {field.focus();} , specialkey: 'searchBtn'}
             }
            ,'->'
-           ,{xtype:'button' , text:'조회' , id:'selBtn', handler:'selBtn' , iconCls:'x-fa fa-gift'}
+           ,{xtype:'button' , text:'조회' , handler:'selBtn' , iconCls:'x-fa fa-gift'}
           ] 
       }
       //-------------------------------------------

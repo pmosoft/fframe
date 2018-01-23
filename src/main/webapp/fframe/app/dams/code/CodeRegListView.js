@@ -65,8 +65,8 @@ Ext.define('fframe.app.dams.code.CodeRegListView', {
           ,{xtype:'button' , text:'신규' , handler:'initBtn', iconCls:'x-fa fa-plus-square'}
           ,{xtype:'button' , text:'저장' , handler:'saveBtn', iconCls:'x-fa fa-save'}
           ,{xtype:'button' , text:'삭제' , handler:'delBtn', iconCls:'x-fa fa-remove'}
-          ,{xtype:'button' , text:'다운' , id:'excelDownBtn', handler:'excelDownBtn' , iconCls:'x-fa fa-download'}
-          ,{xtype:'button' , text:'조회' , id:'selBtn', handler:'selBtn' , iconCls:'x-fa fa-gift'}
+          ,{xtype:'button' , text:'다운' , handler:'excelDownBtn' , iconCls:'x-fa fa-download'}
+          ,{xtype:'button' , text:'조회' , handler:'selBtn' , iconCls:'x-fa fa-gift'}
          ] 
      }
      //-------------------------------------------

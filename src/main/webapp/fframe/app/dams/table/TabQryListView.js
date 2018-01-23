@@ -17,6 +17,7 @@
 Ext.define('fframe.app.dams.table.TabQryListView', {
     extend     : 'Ext.form.Panel'
    ,xtype      : 'tabQryList'
+   ,alias: 'widget.tabQryList'   
    ,controller : 'tabQryList'
    ,viewModel  : 'tabQryList'
    ,listeners  : { boxready:'dbConnCombo'}

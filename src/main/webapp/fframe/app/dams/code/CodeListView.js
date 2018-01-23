@@ -1,4 +1,4 @@
-Ext.define('fframe.app.dams.table.CodeListView', {
+Ext.define('fframe.app.dams.code.CodeListView', {
      extend     : 'Ext.form.Panel' 
     ,xtype      : 'codeList' 
     ,controller : 'codeList' 
@@ -35,8 +35,8 @@ Ext.define('fframe.app.dams.table.CodeListView', {
             //,{text:'Cells'   , enableToggle:true , toggleHandler:'toggleCellSelect'   , pressed:true}
             //,{text:'Columns' , enableToggle:true , toggleHandler:'toggleColumnSelect' , pressed:false}          
             ,'->'
-            ,{xtype:'button' , text:'엑셀' ,id : 'excelBtn', handler:'excelBtn' , iconCls:'x-fa fa-gift'}
-            ,{xtype:'button' , text:'조회' ,id : 'selBtn', handler:'selBtn' , iconCls:'x-fa fa-gift'}
+            ,{xtype:'button' , text:'엑셀' , handler:'excelBtn' , iconCls:'x-fa fa-gift'}
+            ,{xtype:'button' , text:'조회' , handler:'selBtn' , iconCls:'x-fa fa-gift'}
            ] 
        }
       //-------------------------------------------
