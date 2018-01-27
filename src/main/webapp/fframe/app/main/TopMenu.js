@@ -1,6 +1,6 @@
 Ext.define('fframe.app.main.TopMenu', {
     extend: 'Ext.panel.Panel',
-    alias: 'widget.topmenu',
+    alias: 'widget.topMenu',
     region : 'north',
     title : 'FFRAME',
     //split: true,

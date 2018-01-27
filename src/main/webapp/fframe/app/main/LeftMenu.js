@@ -1,6 +1,6 @@
 Ext.define('fframe.app.main.LeftMenu', {
     extend: 'Ext.tree.Panel',
-    alias: 'widget.leftmenu',
+    alias: 'widget.leftMenu',
     requires: [
         'fframe.app.main.LeftMenuViewModel',
         'Ext.tree.View'
@@ -237,6 +237,7 @@ Ext.define('fframe.app.main.LeftMenu', {
     },
 
     onTreepanelItemClick: function(dataview, record, item, index, e, eOpts) {
+        console.log("111111");
         if (record.get('leaf') === true) {
             var mainTabObj = Ext.ComponentQuery.query('#maintab');
             // var centerpanel = this.AccountMain().down('maintab');
@@ -253,12 +254,18 @@ Ext.define('fframe.app.main.LeftMenu', {
             }
 
             var tab = mainTabObj[0].down('[itemId=' + pgm.pgmClass + ']');
+
+            
+        console.log("2");
             
             if(!tab){
                 Ext.require(pgm.pgmClass, function () {
                     var className = Ext.ClassManager.getNameByAlias('widget.' + pgm.pgmAlias);
                     var ViewClass = Ext.ClassManager.get(pgm.pgmClass);
+        console.log("3");
+                    
                     tab = new ViewClass();
+        console.log("4");
                     if (Ext.isEmpty(record.get('pgmClass'))) {
                         tab.add({
                             xtype: 'TemplateA'
@@ -267,10 +274,15 @@ Ext.define('fframe.app.main.LeftMenu', {
                     tab.title = record.get('text');
                     tab.itemId = pgm.pgmClass;
                     tab.closable = true;
+        console.log("5");                    
                     mainTabObj[0].add(tab);
+        console.log("6");
+                    mainTabObj[0].setActiveItem(tab);
                 });
             }
+        console.log("7");            
             mainTabObj[0].setActiveItem(tab);
+        console.log("8");            
 
         }
     }
