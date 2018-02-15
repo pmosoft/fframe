@@ -24,7 +24,7 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
    //-------------------------------------------
    // titletoolbar
    //-------------------------------------------
-   ,title : '테이블 조회'
+   ,title : '테이블 데이터 조회'
    //,defaults: {
    //     bodyPadding: 10
    //     //,scrollable: true

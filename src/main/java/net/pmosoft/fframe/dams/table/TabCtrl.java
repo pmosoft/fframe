@@ -182,14 +182,14 @@ public class TabCtrl {
     }
     
 
-//    /*
-//     * Insert 문장 리턴
-//     * @param DB접속정보 및 쿼리 및 rowcnt
-//     * */
-//    @RequestMapping(value = "/dams/table/downloadCsvData")
-//    public Map<String, Object>  selectInsertData(@RequestParam Map<String,String> params){
-//        return tabSrv.selectInsertData(params);
-//    }
+    /*
+     * Insert 문장 리턴
+     * @param DB접속정보 및 쿼리 및 rowcnt
+     * */
+    @RequestMapping(value = "/dams/table/selectInsertData")
+    public Map<String, Object>  selectInsertData(@RequestParam Map<String,String> params){
+        return tabSrv.selectInsertData(params);
+    }
     
     
     /**********************************************************************************
