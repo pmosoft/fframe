@@ -228,6 +228,17 @@ Ext.define('fframe.app.main.LeftMenu', {
                 pgmAlias: 'Test01',
                 leaf : true
             } ]
+        }, {
+            text : '유틸',
+             //iconCls : 'x-fa  fa-users',
+            expanded : false,
+            selectable : false,
+            children : [ {
+                text : '자막합성',
+                pgmClass: 'fframe.app.util.SynSubtitleView',
+                pgmAlias: 'synSubtitleView',
+                leaf : true
+            } ]
         } ]
     },
     rootVisible: false,
