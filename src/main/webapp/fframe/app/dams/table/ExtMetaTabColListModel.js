@@ -10,7 +10,7 @@ Ext.define('fframe.app.dams.table.ExtMetaTabColListModel', {
        ,dbDriver   : ''
        ,dbConn     : ''
        ,dbUser     : ''
-       ,dbPassword : ''
+       ,dbPassword : '' 
        ,dbType     : ''
        ,dbOwner    : ''
        ,TAB_NM     : '%'
