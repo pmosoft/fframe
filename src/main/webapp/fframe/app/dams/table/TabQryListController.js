@@ -133,9 +133,9 @@ Ext.define('fframe.app.dams.table.TabQryListController', {
                      
                      var fields = [];
                      for (var i = 0; i < data.length; i++) {
-                         fields.push({ text: data[i].COL_NM + data[i].COL_HNM, dataIndex: data[i].COL_NM, align:'left', flex:1 } ); 
+                         fields.push({ text: data[i].COL_NM +"<br>"+ data[i].COL_HNM, dataIndex: data[i].COL_NM, align:'left', flex:1 } ); 
                      }
-                     grid.reconfigure(fields);   
+                     grid.reconfigure(fields);    
                      store.removeAll();
                  }
              }
