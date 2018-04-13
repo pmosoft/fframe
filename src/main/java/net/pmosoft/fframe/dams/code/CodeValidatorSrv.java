@@ -3,12 +3,12 @@ package net.pmosoft.fframe.dams.code;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+                                                                                     
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
-
+                     
 //@SpringBootConfiguration
 //(classes=net.pmosoft.fframe.FframeApplication.class)
 @WebAppConfiguration // 웹 컨텍스트 테스트 활성화
