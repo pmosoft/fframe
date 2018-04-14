@@ -145,7 +145,7 @@ Ext.define('fframe.app.dams.table.TabQryListController', {
    /**********************     
     * 쿼리 조회     
     **********************/         
-   ,tabDataBtn : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts) {     
+   ,selectQryDataBtn : function( obj, td, cellIndex, record, tr, rowIndex, e, eOpts) {     
         var view = this.getView(); var viewModel = view.getViewModel();     
         var store = viewModel.getStore('qryGrid');     
         var grid = view.down("#qryGrid");     
@@ -220,41 +220,28 @@ Ext.define('fframe.app.dams.table.TabQryListController', {
     /***************
      * Insert추출
      ***************/    
-    ,InsertQryExtBtn : function(viewObj) {
+    ,selectInsertDataBtn : function(viewObj) {
     
         var view = this.getView(); var viewModel = view.getViewModel();     
-        var store = viewModel.getStore('qryGrid');     
-        var grid = view.down("#qryGrid");     
-        console.log("grid="+grid);     
-             
-        store.proxy.setUrl("/dams/table/selectInsertData");     
-             
-        store.getProxy().setExtraParam("CD_ID_NM"  ,viewModel.data.CD_ID_NM  );     
-        store.getProxy().setExtraParam("CD"        ,viewModel.data.CD        );     
-        store.getProxy().setExtraParam("dbInfo"    ,viewModel.data.dbInfo    );     
-        store.getProxy().setExtraParam("datasource",viewModel.data.datasource);     
-        store.getProxy().setExtraParam("dbDriver"  ,viewModel.data.dbDriver  );     
-        store.getProxy().setExtraParam("dbConn"    ,viewModel.data.dbConn    );     
-        store.getProxy().setExtraParam("dbUser"    ,viewModel.data.dbUser    );     
-        store.getProxy().setExtraParam("dbPassword",viewModel.data.dbPassword);     
-        store.getProxy().setExtraParam("dbType"    ,viewModel.data.dbType);     
-        store.getProxy().setExtraParam("dbOwner"   ,viewModel.data.dbOwner);     
-        store.getProxy().setExtraParam("qry"       ,viewModel.data.qry);     
-       
-        store.load({
-            callback : function(data,result,success){
-                result = Ext.JSON.decode(result._response.responseText);
-                data = result['data'];
+        var params = viewModel.getData();
+        
+        Ext.Ajax.request({
+            url : '/dams/table/selectInsertData',
+            method : 'post',
+            params : params,
+            success : function(res){
+                var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
-                    viewModel.set("qryCnt"  , data.length);
-                    console.log(data);
+                    Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    viewModel.set("info",result['data']);
+                    
                 } else {
                     Ext.Msg.alert("알림",result['errUsrMsg']);
-                    console.log(result['errSysMsg']);
+                    console.log("errSysMsg="+result['errSysMsg']);
                     return;
-                }                
+                }
             }
-        });         
+        })
      }
    
  });     

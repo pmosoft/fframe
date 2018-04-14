@@ -19,37 +19,50 @@ import java.util.Map;
 
 public interface TabDaoFactory {
 
+    /*****************************************************************************
+     *                              테이블 정보
+     *****************************************************************************/
     /*
-     * 메타테이블에서 유저별 테이블컬럼 정보를 리턴
+     * 컬럼 정보 리턴
      * @param DB접속정보 및 DB유저명
      * */
     public List<Map<String, Object>> selectMetaTabColList(Map<String,String> params);
     
-    
     /*
-     * 메타테이블에서 유저별 테이블 정보를 리턴
+     * 테이블 정보 리턴
      * @param DB접속정보 및 DB유저명
      * */
     public List<Map<String, Object>> selectMetaTabList(Map<String,String> params);
 
-
+    /*****************************************************************************
+     *                                 쿼리
+     *****************************************************************************/
     /*
-     * 입력테이블의 전컬럼 정보를 리턴
+     * 테이블 전컬럼 데이터 리턴
      * @param DB접속정보 및 테이블명 및 rowcnt
      * */
     public List<Map<String, Object>> selectTabData(Map<String,String> params);
     
     /*
-     * 입력쿼리의 기술된 컬럼정보를 리턴
+     * 쿼리 데이터 리턴
      * @param DB접속정보 및 쿼리 및 rowcnt
      * */
     public List<Map<String, Object>> selectQryData(Map<String,String> params) throws Exception;
 
-    public List<Map<String, Object>> selectIsExistTab(Map<String,String> params);
+     
     
+    public List<Map<String, Object>> selectIsExistTab(Map<String,String> params);
+
+    /*****************************************************************************
+     *                                 ETT
+     *****************************************************************************/
+    /*
+     * Insert 문장 리턴(모든 컬럼)
+     * @param DB접속정보 및 테이블명
+     * */
     public List<Map<String, Object>> selectCsvData(Map<String,String> params) throws Exception;
     
-    public List<Map<String, Object>> selectInsertData(Map<String,String> params) throws Exception;
+    public String selectInsertData(Map<String,String> params) throws Exception;
 
 }
 

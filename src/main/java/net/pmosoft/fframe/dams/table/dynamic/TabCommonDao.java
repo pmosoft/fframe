@@ -2,7 +2,6 @@
 @title:테이블DAO를 마리아DB로 구현 
 @description-start
 @description-end  
-@developer:피승현
 @progress-rate:80%
 @update-history-start
 -------------------------------------------------------------------------------
@@ -31,13 +30,6 @@ import net.pmosoft.fframe.comm.db.LoggableStatement;
    
 public class TabCommonDao implements TabDaoFactory {
 
-
-    /**********************************************************************************
-    *
-    *                                    Meta
-    *
-    **********************************************************************************/
-    
     @Override
     public List<Map<String, Object>> selectMetaTabColList(Map<String, String> params) {
         return null;
@@ -48,11 +40,9 @@ public class TabCommonDao implements TabDaoFactory {
     public List<Map<String, Object>> selectMetaTabList(Map<String, String> params) {
         return null;
     }
-
     
     @Override
     public List<Map<String, Object>> selectTabData(Map<String, String> params) {
-
         Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
         
         List<Map<String, Object>> listRs = new ArrayList<Map<String, Object>>();
@@ -62,7 +52,7 @@ public class TabCommonDao implements TabDaoFactory {
             conn = dbConn.getConnection(params);
 
             qry  = "SELECT  * FROM " + params.get("TAB_NM") + " \n";
-            //qry += "WHERE                                       \n";
+            //qry += "WHERE                                   \n";
 
             //System.out.println(qry);
 
@@ -159,11 +149,91 @@ public class TabCommonDao implements TabDaoFactory {
 
 
     @Override
-    public List<Map<String, Object>> selectInsertData(Map<String, String> params) throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+    public String selectInsertData(Map<String, String> params) throws Exception {
+        Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
+        //List<String> listRs = new ArrayList<String>();
+        String insertDataList = "";
+        
+        try {
+            DbConnection dbConn = new DbConnection();
+            conn = dbConn.getConnection(params);
+
+            qry  = "SELECT  * FROM " + params.get("TAB_NM") + " \n";
+            //System.out.println(qry);
+
+            pstmt = new LoggableStatement(conn,qry);
+            pstmt.setString(1, params.get("datasource"));
+
+            //System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
+            rs = pstmt.executeQuery();
+            
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int colCnt = rsmd.getColumnCount();
+            System.out.println("colCnt="+colCnt);
+
+            String insertHeader = "INSERT INTO " + params.get("dbOwner") + "." + params.get("TAB_NM") + " VALUES (";
+            String insertData = "";
+
+            String ColumnValue = "";
+            while(rs.next()){
+                //HashMap<String, Object> map = new HashMap<String, Object>();
+                
+                for (int i = 0; i < colCnt; i++) {
+
+                    ColumnValue = rs.getString(i+1);
+                    if (isChar(rsmd.getColumnTypeName(i+1))) {
+                        //ColumnValue = fromRs.getString(i + 1).replace("null", "").replace("NULL", "");
+                        ColumnValue = (ColumnValue != null)?ColumnValue:"";
+                        insertData += "'" + ColumnValue;
+                        insertData += (i < colCnt - 1) ? "'," : "');";
+                        //System.out.println("insertData1="+insertData);
+                    
+                    } else if (isDate(rsmd.getColumnTypeName(i+1))) {
+                        insertData += "SYSDATE";
+                        insertData += (i < colCnt - 1) ? "," : ");";
+                    } else {                        
+                        ColumnValue = (ColumnValue.trim() != null)?ColumnValue:"0";
+                        //System.out.println("333="+ColumnValue);
+
+                        insertData += ColumnValue;
+                        insertData += (i < colCnt - 1) ? "," : ");";
+                        //System.out.printlninsertData"insertData3="+insertData);
+                    }
+                }
+                insertDataList += insertHeader + insertData +"\n"; 
+                insertData = "";
+            }
+            
+        } catch (Exception e) { e.printStackTrace();
+        } finally { if(conn != null) try { pstmt.close(); conn.close();} catch(Exception ee){}}
+        
+        return insertDataList;
     }
-    
+
+
+    public boolean isChar(String dataType) {
+        boolean TF = true;
+        if (dataType.equals("CHAR") || dataType.equals("VARCHAR")
+                || dataType.equals("VARCHAR2"))
+            TF = true;
+        else
+            TF = false;
+        //System.out.println("isChar="+TF+" dataType="+dataType);
+        return TF;
+    }
+
+    public boolean isDate(String dataType) {
+        boolean TF = true;
+        if (dataType.equals("DATE") || dataType.equals("TIMESTAMP"))
+            TF = true;
+        else
+            TF = false;
+        
+        //System.out.println("isDate="+TF+" dataType="+dataType);
+        
+        return TF;
+    }
+       
 
 }
 
