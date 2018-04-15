@@ -113,6 +113,7 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
           },{
               xtype : 'toolbar'
              ,height : 50
+             ,margin: {top:10, left:10, right: 10, bottom:10}
              ,items : 
               [
                 {xtype:'component' ,bind : '조회건수:{qryCnt}'}

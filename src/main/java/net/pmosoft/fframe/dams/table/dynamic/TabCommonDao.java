@@ -40,7 +40,10 @@ public class TabCommonDao implements TabDaoFactory {
     public List<Map<String, Object>> selectMetaTabList(Map<String, String> params) {
         return null;
     }
-    
+
+    /*
+     * 테이블 데이터를 리스트로 리턴
+     * */
     @Override
     public List<Map<String, Object>> selectTabData(Map<String, String> params) {
         Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
@@ -50,21 +53,16 @@ public class TabCommonDao implements TabDaoFactory {
         try {
             DbConnection dbConn = new DbConnection();
             conn = dbConn.getConnection(params);
-
             qry  = "SELECT  * FROM " + params.get("TAB_NM") + " \n";
             //qry += "WHERE                                   \n";
-
             //System.out.println(qry);
-
             pstmt = new LoggableStatement(conn,qry);
             pstmt.setString(1, params.get("datasource"));
-
             //System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
             rs = pstmt.executeQuery();
             
             ResultSetMetaData rsmd = rs.getMetaData();
             int colCnt = rsmd.getColumnCount();
-            
             System.out.println("colCnt="+colCnt);
             
             //for (int i = 0; i < colCnt; i++) {
@@ -74,6 +72,9 @@ public class TabCommonDao implements TabDaoFactory {
             //System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
             rs = pstmt.executeQuery();
             
+            /***********************************************************************************
+             *                            테이블 데이터를 리스트 
+             **********************************************************************************/
             while(rs.next()){
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 
@@ -90,39 +91,48 @@ public class TabCommonDao implements TabDaoFactory {
         return listRs;
     }
 
+    /*
+     * 쿼리 데이터를 리스트로 리턴
+     * */
     @Override
     public List<Map<String, Object>> selectQryData(Map<String, String> params) throws Exception {
         Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
         
         List<Map<String, Object>> listRs = new ArrayList<Map<String, Object>>();
 
-        
         try {
+            
+            /****************************
+             * DB접속하여 RS 수보
+             ****************************/
             DbConnection dbConn = new DbConnection();
             conn = dbConn.getConnection(params);
-
-            qry  = params.get("qry");
+            //qry  = params.get("qry");
+            qry  = "SELECT PKG_FUL_NM FROM FFRAME.TDACM00010 \n";
             pstmt = new LoggableStatement(conn,qry);
             pstmt.setString(1, params.get("datasource"));
-
             System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
             rs = pstmt.executeQuery();
             
+            /****************************
+             * 메타정보 수보
+             ****************************/
             ResultSetMetaData rsmd = rs.getMetaData();
             int colCnt = rsmd.getColumnCount();
-
             for (int i = 0; i < colCnt; i++) {
                 System.out.println(rsmd.getColumnName(i+1));
             }
-            
             System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
             rs = pstmt.executeQuery();
             
+            /***********************************************************************************
+             *                            테이블 데이터를 리스트 
+             **********************************************************************************/
             while(rs.next()){
                 HashMap<String, Object> map = new HashMap<String, Object>();
-                
                 for (int i = 0; i < colCnt; i++) {
-                    map.put(rsmd.getColumnName(i+1) ,rs.getString(i+1));
+                    //map.put(rsmd.getColumnName(i+1) ,rs.getString(i+1));
+                    map.put(rsmd.getColumnLabel(i+1) ,rs.getString(i+1));
                     if(i==0) System.out.println(rsmd.getColumnName(i+1));
                 }
                 listRs.add(map);
@@ -146,31 +156,39 @@ public class TabCommonDao implements TabDaoFactory {
     public List<Map<String, Object>> selectCsvData(Map<String, String> params) throws Exception {
         return null;
     }
-
-
+ 
+    /*
+     * 테이블 데이터를 INSERT문장으로 만들어 String으로 리턴
+     * */
     @Override
     public String selectInsertData(Map<String, String> params) throws Exception {
         Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
-        //List<String> listRs = new ArrayList<String>();
         String insertDataList = "";
         
         try {
+            /****************************
+             * DB접속하여 RS 수보
+             ****************************/
             DbConnection dbConn = new DbConnection();
             conn = dbConn.getConnection(params);
-
             qry  = "SELECT  * FROM " + params.get("TAB_NM") + " \n";
             //System.out.println(qry);
-
             pstmt = new LoggableStatement(conn,qry);
             pstmt.setString(1, params.get("datasource"));
-
             //System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
             rs = pstmt.executeQuery();
             
+            /****************************
+             * 메타정보 수보
+             ****************************/
             ResultSetMetaData rsmd = rs.getMetaData();
             int colCnt = rsmd.getColumnCount();
             System.out.println("colCnt="+colCnt);
 
+            
+            /***********************************************************************************
+             *                              insert 문장 생성
+             **********************************************************************************/
             String insertHeader = "INSERT INTO " + params.get("dbOwner") + "." + params.get("TAB_NM") + " VALUES (";
             String insertData = "";
 
@@ -187,7 +205,9 @@ public class TabCommonDao implements TabDaoFactory {
                         insertData += "'" + ColumnValue;
                         insertData += (i < colCnt - 1) ? "'," : "');";
                         //System.out.println("insertData1="+insertData);
-                    
+                    /********************************************************************************
+                     * [DATE] DBMS 및 site에 따라 date 형식을 처리하는 것이 상이하므로 별도로 처리요 
+                     ********************************************************************************/
                     } else if (isDate(rsmd.getColumnTypeName(i+1))) {
                         insertData += "SYSDATE";
                         insertData += (i < colCnt - 1) ? "," : ");";

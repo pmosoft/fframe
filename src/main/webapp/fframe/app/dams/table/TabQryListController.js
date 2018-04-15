@@ -178,7 +178,7 @@ Ext.define('fframe.app.dams.table.TabQryListController', {
                     return;
                 }                
             }
-        });              }
+        });         k     }
    
     /***************
      * 엑셀다운로드
@@ -232,7 +232,7 @@ Ext.define('fframe.app.dams.table.TabQryListController', {
             success : function(res){
                 var result = Ext.decode(res.responseText);
                 if(result['isSuccess']){
-                    Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
+                    //Ext.toast({  html:result['usrMsg'],title:'알림',width: 200,align:'t',timeout: 500});
                     viewModel.set("info",result['data']);
                     
                 } else {
