@@ -30,12 +30,12 @@ import net.pmosoft.fframe.comm.db.LoggableStatement;
    
 public class TabCommonDao implements TabDaoFactory {
 
+
     @Override
-    public List<Map<String, Object>> selectMetaTabColList(Map<String, String> params) {
+    public List<Map<String, Object>> selectMetaTabKeyList(Map<String, String> params) {
         return null;
     }
-
-
+    
     @Override
     public List<Map<String, Object>> selectMetaTabList(Map<String, String> params) {
         return null;
@@ -62,6 +62,7 @@ public class TabCommonDao implements TabDaoFactory {
             rs = pstmt.executeQuery();
             
             ResultSetMetaData rsmd = rs.getMetaData();
+            
             int colCnt = rsmd.getColumnCount();
             System.out.println("colCnt="+colCnt);
             
@@ -107,8 +108,8 @@ public class TabCommonDao implements TabDaoFactory {
              ****************************/
             DbConnection dbConn = new DbConnection();
             conn = dbConn.getConnection(params);
-            //qry  = params.get("qry");
-            qry  = "SELECT PKG_FUL_NM FROM FFRAME.TDACM00010 \n";
+            qry  = params.get("qry");
+            //qry  = "SELECT PKG_FUL_NM FROM FFRAME.TDACM00010 \n";
             pstmt = new LoggableStatement(conn,qry);
             pstmt.setString(1, params.get("datasource"));
             System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
@@ -253,7 +254,7 @@ public class TabCommonDao implements TabDaoFactory {
         
         return TF;
     }
-       
+
 
 }
 

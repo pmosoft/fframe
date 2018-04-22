@@ -34,6 +34,13 @@ public interface TabDaoFactory {
      * */
     public List<Map<String, Object>> selectMetaTabList(Map<String,String> params);
 
+    /*
+     * 테이블 키정보 리턴
+     * @param DB접속정보 및 DB유저명
+     * */
+    public List<Map<String, Object>> selectMetaTabKeyList(Map<String,String> params);
+    
+    
     /*****************************************************************************
      *                                 쿼리
      *****************************************************************************/
