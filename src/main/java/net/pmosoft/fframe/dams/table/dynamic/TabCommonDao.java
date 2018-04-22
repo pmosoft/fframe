@@ -27,7 +27,7 @@ import java.util.Map;
 import net.pmosoft.fframe.comm.db.DbConnection;
 import net.pmosoft.fframe.comm.db.LoggableStatement;
 
-   
+    
 public class TabCommonDao implements TabDaoFactory {
 
 
@@ -253,6 +253,13 @@ public class TabCommonDao implements TabDaoFactory {
         //System.out.println("isDate="+TF+" dataType="+dataType);
         
         return TF;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectMetaTabColList(
+            Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 
