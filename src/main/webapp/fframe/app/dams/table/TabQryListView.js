@@ -110,18 +110,20 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
                 {xtype:'component' , html:['&nbsp;','쿼리','&nbsp;&nbsp;']}             
                ,{xtype:'textareafield' , name:'qry' ,flex :1 , bind :{value:'{qry}'}}
               ]
-          
           },{
               xtype : 'toolbar'
              ,height : 50
+             ,margin: {top:10, left:10, right: 10, bottom:10}
              ,items : 
               [
                 {xtype:'component' ,bind : '조회건수:{qryCnt}'}
                ,'->'
-               ,{xtype:'button' , text:'Insert추출' , handler:'InsertQryExtBtn' , iconCls:'x-fa fa-gift'}
+               ,{xtype:'button' , text:'Insert추출' , handler:'selectInsertDataBtn' , iconCls:'x-fa fa-gift'}
                ,{xtype:'button' , text:'CSV추출' , handler:'csvExtBtn' , iconCls:'x-fa fa-gift'}
                ,{xtype:'button' , text:'엑셀다운' , handler:'excelDownBtn' , iconCls:'x-fa fa-download'}
-               ,{xtype:'button' , text:'조회' , handler:'tabDataBtn' , iconCls:'x-fa fa-gift'}
+               ,{xtype:'button' , text:'저장' , handler:'saveTabDataBtn' , iconCls:'x-fa fa-gift'}
+               ,{xtype:'button' , text:'삭제' , handler:'deleteTabDataBtn' , iconCls:'x-fa fa-gift'}
+               ,{xtype:'button' , text:'조회' , handler:'selectQryDataBtn' , iconCls:'x-fa fa-gift'}
               ]
              
           },{     
@@ -140,6 +142,16 @@ Ext.define('fframe.app.dams.table.TabQryListView', {
              ,viewConfig : {stripeRows:true} //,enableTextSelection: true,markDirty: false  
              //,resizable  : true  
              ,bind:{store:'{qryGrid}'}  
+          },{     
+              xtype : 'panel'
+             ,height : 100
+             ,margin: {top:10, left:10, right: 10, bottom:10}
+             ,layout: { type: 'vbox', align: 'stretch'}
+             ,items : 
+              [
+                {xtype:'component' , html:['&nbsp;','정보','&nbsp;&nbsp;']}             
+               ,{xtype:'textareafield' , name:'info' ,flex :1 , bind :{value:'{info}'}}
+              ]
           }
          ]
      }    

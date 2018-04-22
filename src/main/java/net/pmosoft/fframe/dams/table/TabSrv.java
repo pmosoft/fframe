@@ -43,6 +43,29 @@ public class TabSrv {
     @Autowired
     private TabValidatorSrv tabValidatorSrv;
     
+
+
+    public Map<String, Object> selectInsertData(Map<String,String> params){
+        
+        Map<String, Object> result = new HashMap<String, Object>();
+        
+        
+        try{
+            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
+            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
+            String list = tabDaoFactory.selectInsertData(params);
+           
+            result.put("isSuccess", true);
+            result.put("data", list);
+        } catch (Exception e){
+            result.put("isSuccess", false);
+            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            result.put("errSysMsg", e.getMessage());
+            //e.printStackTrace();
+        }
+        return result;
+    }     
+ 
     
     /**********************************************************************************
     *
@@ -186,7 +209,7 @@ public class TabSrv {
         params2.put("CD_NM",params.get("dbType"));
         List<Map<String,Object>> codeList = codeDao.selectCodeExt(params2);            
         daoClassPath = (String) codeList.get(0).get("CD_PARAM1");
-         
+          
         return daoClassPath;
     }
     
@@ -370,7 +393,6 @@ public class TabSrv {
         
         Map<String, Object> result = new HashMap<String, Object>();
         
-        
         try{
             //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
             TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
@@ -408,28 +430,7 @@ public class TabSrv {
         return result;
     }    
  
-
-    public Map<String, Object> selectInsertData(Map<String,String> params){
-        
-        Map<String, Object> result = new HashMap<String, Object>();
-        
-        
-        try{
-            //TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariaDbDao").newInstance();
-            TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName( findDao(params) ).newInstance();            
-            List<Map<String,Object>> list = tabDaoFactory.selectCsvData(params);
-           
-            result.put("isSuccess", true);
-            result.put("data", list);
-        } catch (Exception e){
-            result.put("isSuccess", false);
-            result.put("errUsrMsg", "시스템 장애가 발생하였습니다");
-            result.put("errSysMsg", e.getMessage());
-            //e.printStackTrace();
-        }
-        return result;
-    }     
-    
+   
     /**********************************************************************************
     *
     *                                   Excel Upload

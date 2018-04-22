@@ -5,7 +5,6 @@ import java.util.Map;
 
 import net.pmosoft.fframe.FframeApplication;
 import net.pmosoft.fframe.dams.code.CodeDao;
-import net.pmosoft.fframe.dams.term.TermDao;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -27,9 +26,36 @@ public class TabTest {
     @Autowired
     private CodeDao codeDao;
 
-	
-	
     @Test
+    public void selectInsertData() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("dbDriver"  , "org.hsqldb.jdbcDriver");        
+        params.put("dbConn"    , "jdbc:log4jdbc:mariadb://pmosoft.net:3306/fframe");        
+        params.put("dbUser"    , "fframe");        
+        params.put("dbPassword", "f1234");        
+        params.put("dbType"    , "MARIADB");        
+        params.put("dbOwner"   , "FFRAME");        
+        params.put("TAB_NM"    , "TDACM00060");        
+        
+        System.out.println(tabSrv.selectInsertData(params));
+    }    
+    
+    @Test @Ignore
+    public void selectQryData() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("dbDriver"  , "org.hsqldb.jdbcDriver");        
+        params.put("dbConn"    , "jdbc:log4jdbc:mariadb://pmosoft.net:3306/fframe");        
+        params.put("dbUser"    , "fframe");        
+        params.put("dbPassword", "f1234");        
+        params.put("dbType"    , "MARIADB");        
+        params.put("dbOwner"   , "FFRAME");        
+        params.put("TAB_NM"    , "TDACM00060");        
+        params.put("qry"       , "SELECT * FROM FFRAME.TDACM00060");        
+        
+        tabSrv.selectQryData(params);
+    }	
+	
+    @Test @Ignore
     public void selectMetaTabColSchema() {
         Map<String, String> params = new HashMap<String, String>();
         params.put("CD_ID_NM", "DB_CONN_CD");        

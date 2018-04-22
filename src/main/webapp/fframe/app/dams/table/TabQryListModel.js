@@ -16,6 +16,7 @@ Ext.define('fframe.app.dams.table.TabQryListModel', {
        ,TAB_NM     : '%'
        ,qry        : ''
        ,qryCnt     : '0'
+       ,info       : ''
     }
    ,stores : { 
         tabGrid : {   
