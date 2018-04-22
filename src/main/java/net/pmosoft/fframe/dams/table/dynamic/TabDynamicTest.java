@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-
+ 
 public class TabDynamicTest {
 
     @Test
@@ -18,6 +18,7 @@ public class TabDynamicTest {
         params.put("dbType"    , "MARIADB");        
         params.put("dbOwner"   , "FFRAME");        
         params.put("TAB_NM"    , "TDACM00060");   
+        params.put("qry"       , "SELECT * FROM TDACM00060");   
         
         TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariadbDao").newInstance();            
         List<Map<String,Object>> listMeta = tabDaoFactory.selectQryData(params);

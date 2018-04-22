@@ -178,7 +178,7 @@ Ext.define('fframe.app.dams.table.TabQryListController', {
                     return;
                 }                
             }
-        });         k     }
+        });              }
    
     /***************
      * 엑셀다운로드
