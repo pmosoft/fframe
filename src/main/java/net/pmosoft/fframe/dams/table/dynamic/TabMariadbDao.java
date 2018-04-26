@@ -94,7 +94,7 @@ SELECT * FROM DUAL
             while(rs.next()){
                 LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
                 for (int i = 0; i < rsmd.getColumnCount(); i++) 
-                    map.put(rsmd.getColumnName(i+1) ,rs.getString(i+1)); 
+                    map.put(rsmd.getColumnLabel(i+1) ,rs.getString(i+1)); 
                 listRs.add(map);
             }
         } catch (Exception e) { e.printStackTrace();
@@ -215,46 +215,57 @@ SELECT * FROM DUAL
             }
         } catch (Exception e) { e.printStackTrace();
         } finally { if(conn != null) try { pstmt.close(); conn.close();} catch(Exception ee){}}
-        
+
         return listRs;
+         
     }
 
     @Override
-    public List<Map<String, Object>> selectCreateTabScript(Map<String, String> params) {
-        // TODO Auto-generated method stub
+    public String selectDropTabScript(Map<String, String> params) {
+        return "DROP TABLE "+params.get("dbOwner")+"."+params.get("TAB_NM")+";";
+    }
+    
+    @Override
+    public String selectCreateTabScript(Map<String, String> params) {
+         
+        List<Map<String, Object>> list = selectMetaTabColList(params);
+        
+        String c01 = "CREATE TABLE "+params.get("dbOwner")+"."+params.get("TAB_NM")+"(";
+ 
+        String c02 = "";
+        for (int i = 0; i < list.size(); i++) {
+            c02 += list.get(i).get("COL_NM")+"\n";
+        }
+        
+        System.out.println( c02 );
+        String s1 = "";
+        
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectDropTabScript(
+    public String selectTabCommentScript(
             Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectTabCommentScript(
+    public String selectColCommentScript(
             Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectColCommentScript(
+    public String selectGrantUsrScript(
             Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectGrantUsrScript(
-            Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Map<String, Object>> selectIndexScript(
+    public String selectIndexScript(
             Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;

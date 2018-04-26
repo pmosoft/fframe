@@ -44,37 +44,37 @@ public interface TabDaoFactory {
      * CREATE TABLE 스크립트 리턴
      * @param DB접속정보 및 테이블명
      * */
-    public List<Map<String, Object>> selectCreateTabScript(Map<String,String> params);
+    public String selectCreateTabScript(Map<String,String> params);
     
     /*
      * DROP TABLE 스크립트 리턴
      * @param DB접속정보 및 테이블명
      * */
-    public List<Map<String, Object>> selectDropTabScript(Map<String,String> params);
+    public String selectDropTabScript(Map<String,String> params);
 
     /*
      * TABLE COMMENT 스크립트 리턴
      * @param DB접속정보 및 테이블명
      * */
-    public List<Map<String, Object>> selectTabCommentScript(Map<String,String> params);
+    public String selectTabCommentScript(Map<String,String> params);
 
     /*
      * COLUMN COMMENT 스크립트 리턴
      * @param DB접속정보 및 테이블명
      * */
-    public List<Map<String, Object>> selectColCommentScript(Map<String,String> params);
+    public String selectColCommentScript(Map<String,String> params);
 
     /*
      * GRANT 스크립트 리턴
      * @param DB접속정보 및 테이블명,TO유저명
      * */
-    public List<Map<String, Object>> selectGrantUsrScript(Map<String,String> params);
+    public String selectGrantUsrScript(Map<String,String> params);
     
     /*
      * INDEX 스크립트 리턴
      * @param DB접속정보 및 테이블명 
      * */
-    public List<Map<String, Object>> selectIndexScript(Map<String,String> params);
+    public String selectIndexScript(Map<String,String> params);
     
     
     /*****************************************************************************

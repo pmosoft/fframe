@@ -60,41 +60,41 @@ public class TabCommonDao implements TabDaoFactory {
     }
 
     @Override
-    public List<Map<String, Object>> selectCreateTabScript(Map<String, String> params) {
+    public String selectCreateTabScript(Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectDropTabScript(
+    public String selectDropTabScript(
             Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectTabCommentScript(
+    public String selectTabCommentScript(
             Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectColCommentScript(
+    public String selectColCommentScript(
             Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectGrantUsrScript(
+    public String selectGrantUsrScript(
             Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<Map<String, Object>> selectIndexScript(
+    public String selectIndexScript(
             Map<String, String> params) {
         // TODO Auto-generated method stub
         return null;
