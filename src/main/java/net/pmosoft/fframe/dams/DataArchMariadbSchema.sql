@@ -40,6 +40,35 @@ WHERE 1=1
 --AND COL_NM LIKE '%TRADE_EXCPT_RSN_MK_CD%'
 ;
 
+SELECT                                                                                     
+        NULL                     AS DB_NM                                                     
+       ,UPPER(A.TABLE_SCHEMA) AS OWNER                                                     
+       ,UPPER(A.TABLE_NAME)   AS TAB_NM                                                    
+       ,A.ORDINAL_POSITION    AS COL_ID                                                    
+       ,A.COLUMN_NAME         AS COL_NM                                                    
+       ,A.COLUMN_COMMENT      AS COL_HNM                                                   
+       ,CASE WHEN UPPER(A.DATA_TYPE) = 'INT' THEN UPPER(A.DATA_TYPE)                       
+             ELSE UPPER(A.COLUMN_TYPE)                                                     
+        END                   AS DATA_TYPE_DESC                                            
+       ,CASE WHEN IS_NULLABLE = 'NO' THEN 'NOT NULL' ELSE '' END AS NULLABLE               
+       ,CASE WHEN A.COLUMN_KEY = 'PRI' THEN 'Y' ELSE '' END    AS PK                                                        
+       ,UPPER(A.DATA_TYPE)    AS DATA_TYPE_NM                                              
+       ,CASE WHEN UPPER(A.DATA_TYPE) IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH 
+             WHEN UPPER(A.DATA_TYPE) IN ('INT','NUMERIC') THEN A.NUMERIC_PRECISION         
+        END                   AS LEN                                                       
+       ,A.NUMERIC_SCALE       AS DECIMAL_CNT                                               
+       ,' '                   AS COL_DESC                                                  
+       ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS REG_DTM                                         
+       ,''                    AS REG_USR_ID                                                
+       ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS UPD_DTM                                         
+       ,''                    AS UPD_USR_ID                                                
+FROM   INFORMATION_SCHEMA.COLUMNS A                                                        
+WHERE  1=1                                                                                 
+AND    A.TABLE_SCHEMA = 'FFRAME'                                                                  
+AND    A.TABLE_NAME LIKE CONCAT(CONCAT('%','TDACM00060'),'%')                                         
+ORDER BY A.TABLE_NAME,A.ORDINAL_POSITION
+ 
+
 
 update `tdacm00060` set `CD_DESC`='메타정보 관리2' where `CD_ID_NM`='CD_GRP_CD' and `CD_ID_HNM`='코드그룹코드' and `CD_ID_GRP_NM`='META' and `CD`='001' and `CD_NM`='META' and `CD_HNM`='메타' and `CD_DESC`='메타정보 관리' and `CD_TY_CD`='1' and `CD_STS_CD`='03' and `REG_DTM`='2017-10-11' and `REG_USR_ID`='ADMIN' and `UPD_DTM`='2017-12-23' and `UPD_USR_ID`='ADMIN'
 
