@@ -20,7 +20,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,21 +29,83 @@ import net.pmosoft.fframe.comm.db.LoggableStatement;
     
 public class TabCommonDao implements TabDaoFactory {
 
+    /*****************************************************************************
+     *                              테이블 정보
+     *****************************************************************************/
+    @Override
+    public List<Map<String, Object>> selectMetaTabColList(
+            Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     @Override
-    public List<Map<String, Object>> selectMetaTabKeyList(Map<String, String> params) {
+    public List<Map<String, Object>> selectMetaTabList(
+            Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectMetaTabKeyList(
+            Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Map<String, Object>> selectQryColInfo(Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String selectCreateTabScript(Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String selectDropTabScript(
+            Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String selectTabCommentScript(
+            Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String selectColCommentScript(
+            Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String selectGrantUsrScript(
+            Map<String, String> params) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String selectIndexScript(
+            Map<String, String> params) {
+        // TODO Auto-generated method stub
         return null;
     }
     
-    @Override
-    public List<Map<String, Object>> selectMetaTabList(Map<String, String> params) {
-        return null;
-    }
-
+    /*****************************************************************************
+     *                                 쿼리
+     *****************************************************************************/
     /*
      * 테이블 데이터를 리스트로 리턴
      * */
-    @Override
     public List<Map<String, Object>> selectTabData(Map<String, String> params) {
         Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
         
@@ -95,7 +156,6 @@ public class TabCommonDao implements TabDaoFactory {
     /*
      * 쿼리 데이터를 리스트로 리턴
      * */
-    @Override
     public List<Map<String, Object>> selectQryData(Map<String, String> params) throws Exception {
         Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
         
@@ -147,21 +207,22 @@ public class TabCommonDao implements TabDaoFactory {
         return listRs;
     }
 
+    /*****************************************************************************
+     *                                 ETT
+     *****************************************************************************/
+    
+    
     @Override
-    public List<Map<String, Object>> selectIsExistTab(Map<String, String> params) {
+    public List<Map<String, Object>> selectCsvData(Map<String, String> params)
+            throws Exception {
+        // TODO Auto-generated method stub
         return null;
     }
 
-
-    @Override
-    public List<Map<String, Object>> selectCsvData(Map<String, String> params) throws Exception {
-        return null;
-    }
  
     /*
      * 테이블 데이터를 INSERT문장으로 만들어 String으로 리턴
      * */
-    @Override
     public String selectInsertData(Map<String, String> params) throws Exception {
         Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
         String insertDataList = "";
@@ -255,12 +316,6 @@ public class TabCommonDao implements TabDaoFactory {
         return TF;
     }
 
-    @Override
-    public List<Map<String, Object>> selectMetaTabColList(
-            Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
 
 }
