@@ -161,19 +161,25 @@ SELECT * FROM DUAL
 
     @Override
     public String selectDropTabScript(Map<String, String> params) {
-        return "DROP TABLE "+params.get("dbOwner")+"."+params.get("TAB_NM")+";";
+        return "DROP TABLE "+params.get("dbOwner")+"."+params.get("TAB_NM")+";\n";
     }
     
     @Override
     public String selectCreateTabScript(Map<String, String> params) {
         
        List<Map<String, Object>> list = selectMetaTabColList(params);
-       
+       String c01 = "";
        String c03 = "";
-       String c01 = "CREATE TABLE "+params.get("dbOwner")+"."+params.get("TAB_NM")+"( \n";
-       c03 = c01;
-       String pkStr = "";
-       List<String> pkList = new ArrayList<String>();
+
+       //----------------------------------
+       // DROP TABLE 스크립트 생성
+       //----------------------------------       
+       c03 += selectDropTabScript(params);
+       //----------------------------------
+       // CREATE TABLE 스크립트 생성
+       //----------------------------------       
+       c01 += "CREATE TABLE "+params.get("dbOwner")+"."+params.get("TAB_NM")+"( \n";
+       c03 += c01;
        
        for (int i = 0; i < list.size(); i++) {
        //for (int i = 0; i < 1; i++) {
@@ -181,22 +187,31 @@ SELECT * FROM DUAL
            c02 += StringUtil.rightPad((String)list.get(i).get("COL_NM"), 25);
            c02 += StringUtil.rightPad((String)list.get(i).get("DATA_TYPE_DESC"), 15);
            c02 += StringUtil.rightPad((String)list.get(i).get("NULLABLE"), 10);
-           c02 += "\n";
+           c02 += ",\n";
            c03 += c02;
-           
-           if((String)list.get(i).get("PK") == "Y"){
-               pkStr += list.get(i).get("COL_NM")+",";
-           }
-
        }
-       c03 += pkStr;
+       //----------------------------------
+       // PRIMARY KEYE 스크립트 생성
+       //----------------------------------       
+       c03 += selectPkScript(list);
+       c03 += ");\n";
        
-       System.out.println( c03 );
-       String s1 = "";
-       
-       return null;
+       return c03;
     }
 
+
+    public String selectPkScript(List<Map<String, Object>> list) {
+        String pkStr = "PRIMARY KEY(";
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).get("PK").equals("Y")){
+                pkStr += list.get(i).get("COL_NM")+",";
+            }
+
+        }
+        return pkStr.substring(0,pkStr.length()-1)+")\n";
+    }
+    
+    
     @Override
     public String selectTabCommentScript(
             Map<String, String> params) {

@@ -28,7 +28,7 @@ import java.util.Map;
 import net.pmosoft.fframe.comm.db.DbConnection;
 import net.pmosoft.fframe.comm.db.LoggableStatement;
 
-   
+    
 public class TabDb2Dao extends TabCommonDao implements TabDaoFactory {
 
 /*
@@ -340,68 +340,6 @@ SELECT * FROM TEMP16
     }
 
     @Override
-    public List<Map<String, Object>> selectMetaTabKeyList(Map<String, String> params) {
-        Connection conn=null; PreparedStatement pstmt=null; ResultSet rs=null; String qry="";
-        
-        List<Map<String, Object>> listRs = new ArrayList<Map<String, Object>>();
-        
-        try {
-            DbConnection dbConn = new DbConnection();
-            conn = dbConn.getConnection(params);
-
-            qry  = "--                                                                                         \n";
-            qry += "SELECT                                                                                     \n";
-            qry += "        ?                     AS DB_NM                                                     \n";
-            qry += "       ,UPPER(A.TABLE_SCHEMA) AS OWNER                                                     \n";
-            qry += "       ,UPPER(A.TABLE_NAME)   AS TAB_NM                                                    \n";
-            qry += "       ,A.ORDINAL_POSITION    AS COL_ID                                                    \n";
-            qry += "       ,A.COLUMN_NAME         AS COL_NM                                                    \n";
-            qry += "       ,A.COLUMN_COMMENT      AS COL_HNM                                                   \n";
-            qry += "       ,CASE WHEN UPPER(A.DATA_TYPE) = 'INT' THEN UPPER(A.DATA_TYPE)                       \n";
-            qry += "             ELSE UPPER(A.COLUMN_TYPE)                                                     \n";
-            qry += "        END                   AS DATA_TYPE_DESC                                            \n";
-            qry += "       ,CASE WHEN IS_NULLABLE = 'NO' THEN 'NOT NULL' ELSE '' END AS NULLABLE               \n";
-            qry += "       ,CASE WHEN A.COLUMN_KEY = 'PRI' THEN 'Y' ELSE 'N' END    AS PK                      \n";
-            qry += "       ,UPPER(A.DATA_TYPE)    AS DATA_TYPE_NM                                              \n";
-            qry += "       ,CASE WHEN UPPER(A.DATA_TYPE) IN ('CHAR','VARCHAR') THEN A.CHARACTER_MAXIMUM_LENGTH \n";
-            qry += "             WHEN UPPER(A.DATA_TYPE) IN ('INT','NUMERIC') THEN A.NUMERIC_PRECISION         \n";
-            qry += "        END                   AS LEN                                                       \n";
-            qry += "       ,A.NUMERIC_SCALE       AS DECIMAL_CNT                                               \n";
-            qry += "       ,' '                   AS COL_DESC                                                  \n";
-            qry += "       ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS REG_DTM                                         \n";
-            qry += "       ,''                    AS REG_USR_ID                                                \n";
-            qry += "       ,DATE_FORMAT(NOW(),'%Y%m%d%H%i') AS UPD_DTM                                         \n";
-            qry += "       ,''                    AS UPD_USR_ID                                                \n";
-            qry += "FROM   INFORMATION_SCHEMA.COLUMNS A                                                        \n";
-            qry += "WHERE  1=1                                                                                 \n";
-            qry += "AND    A.TABLE_SCHEMA = ?                                                                  \n";
-            qry += "AND    A.TABLE_NAME LIKE CONCAT(CONCAT('%',?),'%')                                         \n";
-            //qry += "AND    A.COLUMN_NAME LIKE '%'                                                              \n";
-            qry += "ORDER BY A.TABLE_NAME,A.ORDINAL_POSITION                                                   \n";
-
-            //System.out.println(qry);
-
-            pstmt = new LoggableStatement(conn,qry);
-            pstmt.setString(1, params.get("datasource"));
-            pstmt.setString(2, params.get("dbOwner"));
-            pstmt.setString(3, params.get("TAB_NM"));
-            
-            System.out.println(((LoggableStatement)pstmt).getQueryString() + "\n");
-            rs = pstmt.executeQuery(); ResultSetMetaData rsmd = rs.getMetaData();
-            while(rs.next()){
-                LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
-                for (int i = 0; i < rsmd.getColumnCount(); i++) 
-                    map.put(rsmd.getColumnName(i+1) ,rs.getString(i+1)); 
-                listRs.add(map);
-            }
-        } catch (Exception e) { e.printStackTrace();
-        } finally { if(conn != null) try { pstmt.close(); conn.close();} catch(Exception ee){}}
-
-        return listRs;
-         
-    }
-
-    @Override
     public String selectDropTabScript(Map<String, String> params) {
         return "DROP TABLE "+params.get("dbOwner")+"."+params.get("TAB_NM")+";";
     }
@@ -410,7 +348,7 @@ SELECT * FROM TEMP16
     public String selectCreateTabScript(Map<String, String> params) {
          
         List<Map<String, Object>> list = selectMetaTabColList(params);
-        
+         
         String c01 = "CREATE TABLE "+params.get("dbOwner")+"."+params.get("TAB_NM")+"(";
  
         String c02 = "";

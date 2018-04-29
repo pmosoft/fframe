@@ -21,7 +21,6 @@ public class TabDynamicTest {
 
     }    
     
-    
     @Test
     public void selectCreateTabScript() throws Exception {
         Map<String, String> params = new HashMap<String, String>();
@@ -33,11 +32,15 @@ public class TabDynamicTest {
         params.put("dbType"    , "MARIADB");        
         params.put("dbOwner"   , "FFRAME");        
         params.put("TAB_NM"    , "TDACM00060");   
-        params.put("qry"       , "SELECT * FROM TDACM00060");   
+//        params.put("qry"       , "SELECT * FROM TDACM00060");   
         
-        TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariadbDao").newInstance();            
-        System.out.println( tabDaoFactory.selectDropTabScript(params) );
-        System.out.println( tabDaoFactory.selectCreateTabScript(params) );
+        String result = "";
+        
+        TabDaoFactory tabDaoFactory = (TabDaoFactory) Class.forName("net.pmosoft.fframe.dams.table.dynamic.TabMariadbDao").newInstance();
+        //result += tabDaoFactory.selectDropTabScript(params);
+        result += tabDaoFactory.selectCreateTabScript(params);
+        
+        System.out.println( result );
 
         //System.out.println("listMeta="+listMeta); 
     }    
