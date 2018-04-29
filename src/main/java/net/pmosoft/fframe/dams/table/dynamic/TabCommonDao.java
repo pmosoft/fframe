@@ -46,12 +46,6 @@ public class TabCommonDao implements TabDaoFactory {
         return null;
     }
 
-    @Override
-    public List<Map<String, Object>> selectMetaTabKeyList(
-            Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     @Override
     public List<Map<String, Object>> selectQryColInfo(Map<String, String> params) {

@@ -3,13 +3,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.pmosoft.fframe.comm.util.StringUtil;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
  
 public class TabDynamicTest {
 
-    
+    @Test @Ignore
+    public void rightPad() throws Exception {
+         
+        String c02 = "CD_NM";
+        c02= StringUtil.rightPad(c02, 25);        
+        System.out.println("StringUtil.rightPad(c02, 25)="+StringUtil.rightPad(c02, 25));
+        System.out.println("c02="+c02);
+
+    }    
     
     
     @Test
