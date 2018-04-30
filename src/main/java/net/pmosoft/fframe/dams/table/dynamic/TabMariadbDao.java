@@ -119,6 +119,7 @@ SELECT * FROM DUAL
             qry += "SELECT                                                              \n";
             qry += "       ?                      AS DB_NM                              \n";
             qry += "     , UPPER(A.TABLE_SCHEMA)  AS OWNER                              \n";
+            //qry += "     , UPPER(A.TABLE_SCHEMA)||'.'||UPPER(A.TABLE_NAME) AS OWNER_TAB_NM   \n";
             qry += "     , UPPER(A.TABLE_NAME)    AS TAB_NM                             \n";
             qry += "     , UPPER(A.TABLE_COMMENT) AS TAB_HNM                            \n";
             qry += "     , ''                     AS TAB_DESC                           \n";
@@ -164,7 +165,6 @@ SELECT * FROM DUAL
         return "DROP TABLE "+params.get("dbOwner")+"."+params.get("TAB_NM")+";\n";
     }
     
-    @Override
     public String selectCreateTabScript(Map<String, String> params) {
         
        List<Map<String, Object>> list = selectMetaTabColList(params);
@@ -191,14 +191,23 @@ SELECT * FROM DUAL
            c03 += c02;
        }
        //----------------------------------
-       // PRIMARY KEYE 스크립트 생성
+       // PRIMARY KEY 스크립트 생성
        //----------------------------------       
        c03 += selectPkScript(list);
        c03 += ");\n";
        
+       //----------------------------------
+       // TABLE COMMENT 스크립트 생성
+       //----------------------------------       
+       c03 += selectTabCommentScript(params);
+       
+       //----------------------------------
+       // COLUMN COMMENT 스크립트 생성
+       //----------------------------------       
+       c03 += selectColCommentScript(list);    
+       
        return c03;
-    }
-
+    }   
 
     public String selectPkScript(List<Map<String, Object>> list) {
         String pkStr = "PRIMARY KEY(";
@@ -211,20 +220,27 @@ SELECT * FROM DUAL
         return pkStr.substring(0,pkStr.length()-1)+")\n";
     }
     
-    
-    @Override
-    public String selectTabCommentScript(
-            Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
+    public String selectTabCommentScript(Map<String, String> params) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        list = selectMetaTabList(params);
+        
+        String tabCmmtStr = "";
+        for (int i = 0; i < list.size(); i++) {
+            tabCmmtStr += "COMMENT ON TABLE "+list.get(i).get("OWNER")+"."+list.get(i).get("TAB_NM")+ " IS '"+list.get(i).get("TAB_HNM")+"'; \n";         
+        }
+       
+        return tabCmmtStr;
     }
 
-    @Override
-    public String selectColCommentScript(
-            Map<String, String> params) {
-        // TODO Auto-generated method stub
-        return null;
+ 
+    public String selectColCommentScript(List<Map<String, Object>> list) {
+        String colCmmt = "";
+        for (int i = 0; i < list.size(); i++) {
+            colCmmt += "COMMENT ON COLUMN "+list.get(i).get("OWNER")+"."+list.get(i).get("TAB_NM")+"."+list.get(i).get("COL_NM")+ " IS '"+list.get(i).get("COL_HNM")+"'; \n";         
+        }
+        return colCmmt;
     }
+
 
     @Override
     public String selectGrantUsrScript(
