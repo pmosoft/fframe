@@ -1,12 +1,13 @@
 package net.pmosoft.fframe.comm.util;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -169,9 +170,9 @@ public class FileUtil {
     }
 
     /*
-     * 파일을 읽어서 String으로 변환
+     * 파일을 읽어서 String으로 변환(UTF-8)
      * */
-    public String readFile(String filePathName) {
+    public static String readFile(String filePathName) {
         BufferedReader br = null;
         String src = "";
         try {
@@ -195,6 +196,35 @@ public class FileUtil {
         return src;
     }   
 
+    /*
+     * 파일을 읽어서 String으로 변환(EUC-KR)
+     * */
+    public static String readFileEucKr(String filePathName) {
+        BufferedReader br = null;
+        String src = "";
+        try {
+
+            File file = new File(filePathName);
+            if (file.isFile()) {
+                br = new BufferedReader(new InputStreamReader(new FileInputStream(filePathName),"EUC-KR"));
+                while (true) {
+                    String str = br.readLine();
+                    if (str != null)
+                        src += str + "\n";
+                    else
+                        break;
+                }
+                br.close();
+            }
+        } catch (Exception e) {
+            System.out.println("e=" + e.getMessage());
+        }
+
+        return src;
+    }   
+    
+    
+    
     /*
      * 파일을 읽어서 리스트로 반환
      * */

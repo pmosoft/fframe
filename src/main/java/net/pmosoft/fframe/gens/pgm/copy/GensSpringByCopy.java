@@ -14,8 +14,10 @@ import net.pmosoft.fframe.comm.util.FileUtil;
 public class GensSpringByCopy extends GensCommByCopy {
 
     public static void main(String[] args) { 
-        GensSpringByCopy gensExtjsByCopy = new GensSpringByCopy();
-
+        GensSpringByCopy gensSpringByCopy = new GensSpringByCopy();
+        gensSpringByCopy.prjNm = "fframe"; //프로젝트명
+        
+        
         Map<String, String> params = new HashMap<String, String>();
         params.put("srcPackNm", "net.pmosoft.fframe.gens");
         params.put("srcPgmNm" , "GenPgmByCopy");
@@ -23,7 +25,7 @@ public class GensSpringByCopy extends GensCommByCopy {
         params.put("tarPgmNm" , "GenPgmByTmpl");
         
         try {
-            gensExtjsByCopy.createPgmFile(params);
+            gensSpringByCopy.createPgmFile(params);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -32,14 +34,22 @@ public class GensSpringByCopy extends GensCommByCopy {
 
     /******************************************
      * 2단계 : 복사할 파일들 지정 
+     * @throws Exception 
      *****************************************/
-    public void createPgmFiles(){
+    public void createPgmFiles() throws Exception{
 
-        srcPgmPathNm = javaBascPathNm +"/"+ srcGenPathNm;
-        tarPgmPathNm = javaBascPathNm +"/"+ tarGenPathNm;
-
+        srcPgmPathNm = javaPackBascPathNm +"/"+ srcGenPathNm;
+        tarPgmPathNm = javaPackBascPathNm +"/"+ tarGenPathNm;
+        System.out.println("srcGenPathNm = " + srcGenPathNm );
+        System.out.println("tarGenPathNm = " + tarGenPathNm );
         System.out.println("srcPgmPathNm = " + srcPgmPathNm );
         System.out.println("tarPgmPathNm = " + tarPgmPathNm );
+
+        replaceSrcPgmToTarPgm(srcPgmPathNm,srcPgmNm+"Ctrl.java"         ,tarPgmPathNm,tarPgmNm+"Ctrl.java"      );
+        replaceSrcPgmToTarPgm(srcPgmPathNm,srcPgmNm+"Srv.java"          ,tarPgmPathNm,tarPgmNm+"Srv.java"      );
+        replaceSrcPgmToTarPgm(srcPgmPathNm,srcPgmNm+"Dao.java"          ,tarPgmPathNm,tarPgmNm+"Dao.java"      );
+        replaceSrcPgmToTarPgm(srcPgmPathNm,srcPgmNm+"ValidatorSrv.java" ,tarPgmPathNm,tarPgmNm+"ValidatorSrv.java"      );
+        replaceSrcPgmToTarPgm(srcPgmPathNm,srcPgmNm+"MariadbDao.xml"    ,tarPgmPathNm,tarPgmNm+"MariadbDao.xml"      );
         
     }
 
@@ -47,10 +57,10 @@ public class GensSpringByCopy extends GensCommByCopy {
      * 4단계 : 리팩토링 룰  
      ***********************************************/
     public String replaceRule(String line) {
-//      line = line.replace("$tarPackNm$",tarPackNm);     //ex:fframe.gens.test.TmplPgmRegView
-//      line = line.replace("$tarPgmNm$",tarPgmNm);  //ex:fframe.gens.test.TmplPgmRegView
-//      line = line.replace("$tarPgmNm$",tarVarNm);  //ex:TmplPgmRegView tmplPgmRegView = ..
-//      line = line.replace("$tarGenPathNm$",tarGenPathNm); //ex:fframe.gens.test.TmplPgmRegView
+        line = line.replace("$tarPackNm$",tarPackNm);     //ex:fframe.gens.test.TmplPgmRegView
+        line = line.replace("$tarPgmNm$",tarPgmNm);  //ex:fframe.gens.test.TmplPgmRegView
+        line = line.replace("$tarPgmNm$",tarVarNm);  //ex:TmplPgmRegView tmplPgmRegView = ..
+        line = line.replace("$tarGenPathNm$",tarGenPathNm); //ex:fframe.gens.test.TmplPgmRegView
         
         return line;
     }

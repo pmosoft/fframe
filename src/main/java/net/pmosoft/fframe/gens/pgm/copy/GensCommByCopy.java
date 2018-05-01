@@ -16,11 +16,12 @@ public class GensCommByCopy implements GensPgmByCopy {
     /******************************************
      * 글로벌 프로퍼티
      *****************************************/
-    String packBascNm     = "net.pmosoft.fframe";                    //회사명
-    String prjNm          = "fframe";                                //프로젝트명
-    String bascPathNm     = "c:/fframe/workspace/fframe/src/main";   //소스기본경로
-    String javaBascPathNm = bascPathNm + "/java/net/pmosoft/fframe"; //자바기본경로
-    String webBasePathNm  = bascPathNm + "/webapp";       //웹기본경로
+    public String prjNm           = "fframe";                                    //프로젝트명
+    String bascPathNm             = "c:/fframe/workspace";                       //소스기본경로
+    String packBascNm             = "net.pmosoft."+prjNm;                        //회사명
+    String javaBascPathNm         = bascPathNm+"/"+prjNm+"/src/main";            //소스기본경로
+    String javaPackBascPathNm     = javaBascPathNm + "/java/net/pmosoft/"+prjNm; //자바기본경로
+    String webBasePathNm          = javaBascPathNm + "/webapp";                  //웹기본경로
 
     /******************************************
      * 입력 파라미터 
@@ -146,6 +147,8 @@ public class GensCommByCopy implements GensPgmByCopy {
      * 4단계 : 리팩토링 룰  
      *****************************************/
      public String replaceRule(String line) { return null;}
+
+
     
 //
 //    /******************************************
