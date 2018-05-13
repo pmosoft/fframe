@@ -13,16 +13,27 @@ import net.pmosoft.fframe.comm.util.StringUtil;
 
 public class GensCommByCopy implements GensPgmByCopy {
 
+    
+
     /******************************************
      * 글로벌 프로퍼티
      *****************************************/
-    public String prjNm           = "fframe";                                    //프로젝트명
+    public String prjNm           = "";                                    //프로젝트명
     String bascPathNm             = "c:/fframe/workspace";                       //소스기본경로
-    String packBascNm             = "net.pmosoft."+prjNm;                        //회사명
-    String javaBascPathNm         = bascPathNm+"/"+prjNm+"/src/main";            //소스기본경로
-    String javaPackBascPathNm     = javaBascPathNm + "/java/net/pmosoft/"+prjNm; //자바기본경로
-    String webBasePathNm          = javaBascPathNm + "/webapp";                  //웹기본경로
+    String packBascNm             = ""; //회사명
+    String javaBascPathNm         = ""; //소스기본경로
+    String javaPackBascPathNm     = ""; //자바기본경로
+    String webBasePathNm          = "";                  //웹기본경로
 
+    public void setPrjNm(String prjNm) {
+        this.prjNm                  = prjNm;
+        this.packBascNm             = "net.pmosoft."+prjNm;                        //회사명
+        this.javaBascPathNm         = bascPathNm+"/"+prjNm+"/src/main";            //소스기본경로
+        this.javaPackBascPathNm     = javaBascPathNm + "/java/net/pmosoft/"+prjNm; //자바기본경로
+        this.webBasePathNm          = javaBascPathNm + "/webapp";                  //웹기본경로
+    }
+
+    
     /******************************************
      * 입력 파라미터 
      *****************************************/

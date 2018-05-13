@@ -15,7 +15,7 @@ public class GensSpringByCopy extends GensCommByCopy {
 
     public static void main(String[] args) { 
         GensSpringByCopy gensSpringByCopy = new GensSpringByCopy();
-        gensSpringByCopy.prjNm = "fframe"; //프로젝트명
+        gensSpringByCopy.setPrjNm("fframe"); //프로젝트명
         
         
         Map<String, String> params = new HashMap<String, String>();
@@ -57,10 +57,10 @@ public class GensSpringByCopy extends GensCommByCopy {
      * 4단계 : 리팩토링 룰  
      ***********************************************/
     public String replaceRule(String line) {
-        line = line.replace("$tarPackNm$",tarPackNm);     //ex:fframe.gens.test.TmplPgmRegView
-        line = line.replace("$tarPgmNm$",tarPgmNm);  //ex:fframe.gens.test.TmplPgmRegView
-        line = line.replace("$tarPgmNm$",tarVarNm);  //ex:TmplPgmRegView tmplPgmRegView = ..
-        line = line.replace("$tarGenPathNm$",tarGenPathNm); //ex:fframe.gens.test.TmplPgmRegView
+        line = line.replace(prjNm+"."+srcGenPackNm,prjNm+"."+tarGenPackNm); //ex:fframe.gens.test.TmplPgmRegView
+        line = line.replace(srcPgmNm,tarPgmNm);                //ex:fframe.gens.test.TmplPgmRegView
+        line = line.replace(srcVarNm,tarVarNm);                //ex:TmplPgmRegView tmplPgmRegView = ..
+        line = line.replace(srcGenPathNm,tarGenPathNm);   //ex:/gens/test 
         
         return line;
     }
