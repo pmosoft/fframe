@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,5 +64,21 @@ public class ExcelCtrl {
        
        
    }     
-	
+
+
+   // angular
+   @RequestMapping(value = "/comm/excel/uploadExcel2")
+   public void uploadExcel2(@RequestPart("uploadFile") MultipartFile files, HttpServletResponse response){
+       System.out.println("11111111111111111111111111111111111111111111");
+       try {
+            JSONObject jsonObj = excelSrv.uploadExcel2(files);
+            response.setContentType("text/plain; charset=UTF-8");
+            PrintWriter pw = response.getWriter();
+            pw.print(jsonObj);
+            pw.flush();
+            pw.close();
+       } catch (IOException e) {}
+           //return codeSrv.uploadCodeRegList(files);
+   }   
+   
 }

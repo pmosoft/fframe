@@ -98,5 +98,44 @@ public class ExcelSrv {
          }
          
 
-    }     
+    }
+    
+    public JSONObject  uploadExcel2(MultipartFile files) {
+        String fileNm = files.getOriginalFilename();
+        //System.out.println("fileNm="+fileNm);
+        
+        JSONObject jsonObj = new JSONObject();
+        
+        try {
+//            for (int i = 0; i < files.size(); i++) {
+//                byte[] bytes = files.get(i).getBytes();
+//                Path path = Paths.get(App.excelPath + fileNm);
+//                Files.write(path, bytes);
+//            } 
+            byte[] bytes = files.getBytes();
+            Path path = Paths.get(App.excelPath + fileNm);
+            System.out.println(App.excelPath + fileNm);
+            Files.write(path, bytes);
+             
+            List<Map<String,String>> list = null; 
+
+            jsonObj.put("success", true);
+            jsonObj.put("isSuccess", true);
+            jsonObj.put("successMsg", "업로드 되었습니다");
+            jsonObj.put("data", list);
+            
+        } catch (Exception e) {
+            //e.printStackTrace();
+           
+            System.out.println("ExcelSrv asdfasdfasdfasdf");
+            jsonObj.put("isSuccess", false);
+            jsonObj.put("errUsrMsg", "시스템 장애가 발생하였습니다");
+            jsonObj.put("errSysMsg", e.getMessage());
+        } finally {
+            return jsonObj;
+        }
+        
+
+   }     
+    
 }
