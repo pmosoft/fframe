@@ -243,7 +243,7 @@ public class FileUtil {
             while( br.ready()) {
                 al.add(br.readLine());
             }
-            System.out.println("al="+al.get(1));
+            //System.out.println("al="+al.get(1));
         } catch(Exception ex){
             System.out.println("selectFileResult error: " + ex);
         } finally {
