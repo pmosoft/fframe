@@ -1,27 +1,22 @@
-# mysql -uroot -plife200727 < backup.sql
+###############
+## user
+###############
+root/life200727
+
+#####################################################
+## MariaDB 설치
+#####################################################
+yum -y install http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+yum -y install mysql-community-server
+systemctl start mysqld
+systemctl enable mysqld
+
+mysql -u root -plife200727
 
 
-
----------------------------------
--- database 생성
----------------------------------
-create database sttl;
-
----------------------------------
--- 유저 생성
----------------------------------
-
--- 모든 ip 허용
-create user 'sttl'@'%' identified by 'f1234';
-grant all privileges on sttl.* to 'sttl'@'%';
-
-create user 'sttl'@'localhost' identified by 'f1234';
-create user 'sttl'@'pmosoft.net' identified by 'f1234';
-create user 'sttl'@'182.228.242.133' identified by 'f1234'; -- cafe24 보안서버
-
-grant all privileges on sttl.* to sttl@localhost;
-grant all privileges on sttl.* to sttl@pmosoft.net;
-grant all privileges on sttl.* to sttl@182.228.242.133;
+#####################################################
+## MariaDB 설정
+#####################################################
 
 ---------------------------------
 -- utf8
@@ -47,7 +42,7 @@ show variables like 'lower_case_table_names'
 ;
 
 vi /etc/my.cnf
-
+vi /etc/my.cnf.d
 ---------------------------------
 -- 복원
 ---------------------------------
@@ -94,4 +89,13 @@ vi /etc/my.cnf
 [mysqld]
 wait_timeout=31536000
 
- 
+-----------------------------------
+-- /etc/my.cnf
+-----------------------------------
+[client]
+port=3306
+[mysqld]
+port=3306
+lower_case_table_names=1
+wait_timeout=31536000
+

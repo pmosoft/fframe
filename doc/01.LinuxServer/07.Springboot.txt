@@ -1,0 +1,10 @@
+######################
+## fframe springboot
+######################
+cd /home/fframe/webapp
+nohup java -jar  fframe-0.0.1-SNAPSHOT.war &
+tail -f /home/fframe/webapp/nohup.out
+ps -ef | grep fframe
+kill
+
+==> springboot는 톰캣이 내장되었으므로 별도의 톰캣서버가 필요없다.

@@ -1,3 +1,12 @@
+###############
+## user
+###############
+root/life200727
+fframe/life200727
+
+mysql -u root -plife200727
+
+
 ######################
 ## fframe springboot
 ######################
@@ -45,13 +54,6 @@ vi /etc/gdm/custom.conf 에서 설정
 AutomaticLoginEnable=true
 AutomaticLogin=root
 
-###############
-## user
-###############
-root/life200727
-fframe/life200727
-
-mysql -u root -plife200727
 
 
 #####################################################
