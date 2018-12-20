@@ -4,6 +4,7 @@
 yum install vsftpd -y
 vi /etc/vsftpd/vsftpd.conf
 service vsftpd start
+service vsftpd restart
 chkconfig vsftpd on
 chkconfig --list | grep vsftpd
 

@@ -26,15 +26,31 @@ export PS1="[\[\e[36;1m\]\u@\[\e[31;1m\]\w]$ "
 export PS1="[\[\e[36;1m\]\u@\[\e[32;1m\]\h:\[\e[31;1m\]\w]$ "
 
 # alias
-alias webapp='cd /usr/local/server/tomcat/webapps'
-alias startup='/usr/local/server/tomcat/bin/startup.sh'
+alias fup='nohup java -jar  fframe-0.0.1-SNAPSHOT.war &'
+alias flog='tail -f /home/fframe/webapp/nohup.out'
+alias fdown='pkill -9 -ef fframe'
+alias sup='nohup java -jar subtitlestudy-0.0.1-SNAPSHOT.war &'
+alias slog='tail -f /home/subtitle/nohup.out'
+alias sdown='pkill -9 -ef subtitlestudy'
+alias pup='nohup java -jar pushup-0.0.1-SNAPSHOT.war &'
+alias plog='tail -f /home/pushup/webapp/nohup.out'
+alias pdown='pkill -9 -ef pushup'
+alias pmoup='nohup java -jar pmosoft-0.0.1-SNAPSHOT.war &'
+alias pmolog='tail -f /home/pmosoft/webapp/nohup.out'
+alias pmodown='pkill -9 -ef pmosoft'
+alias tup='nohup java -jar teambuilder-0.0.1-SNAPSHOT.war &'
+alias tlog='tail -f /home/teambuilder/webapp/nohup.out'
+alias tdown='pkill -9 -ef teambuilder'
+
 alias shutdown='/usr/local/server/tomcat/bin/shutdown.sh'
-alias fhome='cd /home/fframe'
-alias logh1='tail -f /usr/local/hadoop/logs/hadoop-hadoop-namenode-h001.log'
-alias logh2='tail -f /usr/local/hadoop/logs/hadoop-hadoop-datanode-h002.log'
-alias logh3='tail -f /usr/local/hadoop/logs/hadoop-hadoop-datanode-h003.log'
-alias userlist='grep /bin/bash /etc/passwd | cut -f1 -d:'
-alias grouplist='tail -f /etc/group'
+alias startup='/usr/local/server/tomcat/bin/startup.sh'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias l.='ls -d .* --color=auto'
+alias ll='ls -l --color=auto'
+alias ls='ls --color=auto'
+alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 
 # java path
 export JAVA_HOME=/usr/local/java
